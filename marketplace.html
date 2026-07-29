@@ -1,90 +1,80 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
 
-<title>Imperial Marketplace | Luxemneaux Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="style.css">
 
-<link rel="stylesheet"
-href="sidebar.css">
+<title>
 
-<link rel="stylesheet"
-href="dashboard.css">
+Luxemneaux Imperial Marketplace
+
+</title>
+
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
 
+
+
 <body>
+
+
+
+
 
 <div class="dashboard-layout">
 
-<!-- ==========================================
-SIDEBAR
-========================================== -->
+
+
+
+
+<!-- =====================================
+     SIDEBAR
+===================================== -->
+
 
 <aside class="sidebar">
 
+
 <div class="sidebar-logo">
 
-🏛️
-
-<h2>
-
-Imperial Marketplace
-
-</h2>
-
-<p>
-
-Trade Across The Empire
-
-</p>
+Luxemneaux
 
 </div>
 
-<div class="sidebar-profile">
 
-<h3
-id="playerName">
-
-Loading...
-
-</h3>
-
-<p
-id="playerKingdom">
-
-Kingdom
-
-</p>
-
-</div>
 
 <ul class="sidebar-menu">
 
+
+
 <li>
 
-<a
-href="member-dashboard.html">
+<a href="member-dashboard.html">
 
-🏠 Dashboard
+🏰 Dashboard
 
 </a>
 
 </li>
 
+
+
+
 <li>
 
-<a
-href="marketplace.html"
-class="active">
+<a href="marketplace.html">
 
 🛒 Marketplace
 
@@ -92,691 +82,1120 @@ class="active">
 
 </li>
 
+
+
+
 <li>
 
-<a
-href="auction.html">
+<a href="#" onclick="logout()">
 
-⚔ Auction Hall
+🚪 Logout
 
 </a>
 
 </li>
 
+
+
 </ul>
 
-<div class="logout-btn">
-
-<a
-href="#"
-id="logoutBtn">
-
-Logout
-
-</a>
-
-</div>
 
 </aside>
 
-<!-- ==========================================
-CONTENT
-========================================== -->
 
-<main class="dashboard-content">
 
-<header class="dashboard-header">
 
-<div>
 
-<h1>
 
-Imperial Marketplace
+
+
+<!-- =====================================
+     MAIN MARKET AREA
+===================================== -->
+
+
+<main class="main-content">
+
+
+
+
+
+<header class="header">
+
+
+<h1 class="imperial-title">
+
+🛒 Imperial Marketplace
 
 </h1>
 
-<p>
 
-Purchase goods from approved merchants.
 
-</p>
+<div class="user-badge">
+
+🏪 Merchant District
 
 </div>
+
+
 
 </header>
 
-<!-- ==========================================
-SEARCH
-========================================== -->
+
+
+
+
+
+
+
+<!-- =====================================
+     SEARCH
+===================================== -->
+
 
 <section class="card">
 
-<h2>
 
-Search Marketplace
+<h2 class="title">
+
+🔍 Search Marketplace
 
 </h2>
 
-<br>
 
-<div class="dashboard-grid">
 
-<div>
+<div class="form-group">
+
 
 <input
-type="text"
-id="searchProduct"
-placeholder="Search products...">
+
+id="searchBox"
+
+placeholder="Search goods, merchants, items..."
+
+>
+
 
 </div>
 
-<div>
 
-<select
-id="filterCurrency">
 
-<option value="">
-
-All Currencies
-
-</option>
-
-<option>
-
-Lumen
-
-</option>
-
-<option>
-
-Aurel
-
-</option>
-
-<option>
-
-Virel
-
-</option>
-
-<option>
-
-Sylem
-
-</option>
-
-<option>
-
-Bront
-
-</option>
-
-</select>
-
-</div>
-
-<div>
 
 <button
-id="searchButton">
 
-Search
+class="btn"
+
+onclick="searchMarket()"
+
+>
+
+🔎 Search
 
 </button>
 
-</div>
 
-</div>
 
 </section>
 
-<br>
 
-<!-- ==========================================
-MARKET PRODUCTS
-========================================== -->
+
+
+
+
+
+
+
+<!-- =====================================
+     PRODUCTS
+===================================== -->
+
 
 <section class="card">
 
-<h2>
 
-Available Products
+<h2 class="title">
+
+📦 Available Goods
 
 </h2>
 
-<br>
+
+
+
 
 <div
-class="product-grid"
-id="marketContainer">
+
+id="productContainer"
+
+class="grid"
+
+>
+
+
+<div class="empty-state">
+
+Loading marketplace...
+
+</div>
+
+
+
+</div>
+
+
+
+
+</section>
+<!-- =====================================
+     AUCTION SECTION
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+⚔️ Imperial Auctions
+
+</h2>
+
+
+
+
+<div
+
+id="auctionContainer"
+
+class="grid"
+
+>
+
+
+<div class="empty-state">
+
+Loading auctions...
+
+</div>
+
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+     PRODUCT TEMPLATE AREA
+===================================== -->
+
+
+<template id="productTemplate">
+
 
 <div class="product-card">
 
-<h3>
 
-Loading Marketplace...
+
+<h3 class="product-name">
+
+Product Name
 
 </h3>
 
-</div>
 
-</div>
 
-</section>
-
-<br>
-
-<!-- ==========================================
-PURCHASE HISTORY
-========================================== -->
-
-<section class="card">
-
-<h2>
-
-Recent Purchases
-
-</h2>
-
-<br>
-
-<div class="table-container">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-
-Item
-
-</th>
-
-<th>
-
-Seller
-
-</th>
-
-<th>
-
-Price
-
-</th>
-
-<th>
-
-Currency
-
-</th>
-
-<th>
-
-Date
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="purchaseHistory">
-
-<tr>
-
-<td colspan="5">
-
-No purchases.
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<br>
-
-<footer
-style="text-align:center;padding:30px;">
-
-<hr>
-
-<br>
 
 <p>
 
-Luxemneaux Imperial Marketplace
+🏪 Seller:
+
+<span class="seller-name">
+
+Merchant
+
+</span>
 
 </p>
+
+
+
+
+
+<p class="product-description">
+
+Description
+
+</p>
+
+
+
+
+
+<div class="product-price">
+
+0
+
+</div>
+
+
+
+
+
+<p class="stock">
+
+📦 Stock:
+
+<span>
+
+0
+
+</span>
+
+</p>
+
+
+
+
+
+<button
+
+class="btn"
+
+>
+
+🪙 Purchase
+
+</button>
+
+
+
+</div>
+
+
+</template>
+
+
+
+
+
+
+
+<!-- =====================================
+     AUCTION TEMPLATE
+===================================== -->
+
+
+<template id="auctionTemplate">
+
+
+<div class="auction-card">
+
+
+
+<h3>
+
+Auction Item
+
+</h3>
+
+
+
+
 
 <p>
 
-Buy safely through the Imperial Banking Network.
+📜 Description
 
 </p>
 
-</footer>
 
-</main>
+
+
+
+<div class="bid-value">
+
+0
 
 </div>
+
+
+
+
+
+<p>
+
+⏳ Remaining:
+
+<span class="auction-time">
+
+-
+
+</span>
+
+</p>
+
+
+
+
+
+
+<input
+
+type="number"
+
+class="bid-input"
+
+placeholder="Your bid amount"
+
+>
+
+
+
+
+
+
+<button
+
+class="btn"
+
+>
+
+⚔️ Place Bid
+
+</button>
+
+
+
+
+</div>
+
+
+</template>
+<!-- =====================================
+     SCRIPTS
+===================================== -->
+
 
 <script src="api.js"></script>
 
+
+
 <script>
 
-const CURRENT_USER =
-JSON.parse(
-localStorage.getItem(
-"CURRENT_USER"
-)
+
+/* =====================================
+   LOAD PRODUCTS
+===================================== */
+
+
+async function loadProducts(){
+
+
+
+const result =
+
+await getProducts();
+
+
+
+
+const container =
+
+document
+.getElementById(
+"productContainer"
 );
 
-if(!CURRENT_USER){
 
-location.href="index.html";
+
+
+
+if(
+!result.success
+){
+
+
+container.innerHTML =
+
+`
+
+<div class="empty-state">
+
+❌ Unable to load marketplace.
+
+</div>
+
+`;
+
+return;
+
 
 }
 
-document.getElementById(
-"logoutBtn"
-).onclick=function(){
 
-localStorage.removeItem(
-"CURRENT_USER"
+
+
+
+
+container.innerHTML = "";
+
+
+
+
+
+
+result.data.forEach(
+
+product=>{
+
+
+
+
+
+container.innerHTML +=
+
+
+
+`
+
+<div class="product-card">
+
+
+
+<h3>
+
+📦 ${product.productName}
+
+</h3>
+
+
+
+
+<p>
+
+🏪 Seller:
+
+${product.businessName || "Unknown"}
+
+</p>
+
+
+
+
+<p>
+
+${product.description}
+
+</p>
+
+
+
+
+<div class="product-price">
+
+${product.price}
+
+${product.currency}
+
+</div>
+
+
+
+
+
+<p class="stock">
+
+📦 Stock:
+
+${product.stock}
+
+</p>
+
+
+
+
+
+<button
+
+class="btn"
+
+onclick="buyProduct('${product.productId}')"
+
+>
+
+🪙 Purchase
+
+</button>
+
+
+
+
+</div>
+
+
+`;
+
+
+
+
+
+}
+
 );
 
-location.href="index.html";
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   SEARCH MARKET
+===================================== */
+
+
+async function searchMarket(){
+
+
+
+const keyword =
+
+document
+.getElementById(
+"searchBox"
+)
+.value;
+
+
+
+
+
+const result =
+
+await searchProducts(
+
+keyword
+
+);
+
+
+
+
+
+const container =
+
+document
+.getElementById(
+"productContainer"
+);
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+container.innerHTML = "";
+
+
+
+
+result.data.forEach(
+
+product=>{
+
+
+
+container.innerHTML +=
+
+
+
+`
+
+<div class="product-card">
+
+
+<h3>
+
+📦 ${product.productName}
+
+</h3>
+
+
+
+<p>
+
+🏪 ${product.businessName}
+
+</p>
+
+
+
+<p>
+
+${product.description}
+
+</p>
+
+
+
+<div class="product-price">
+
+${product.price}
+
+${product.currency}
+
+</div>
+
+
+
+<button
+
+class="btn"
+
+onclick="buyProduct('${product.productId}')"
+
+>
+
+🪙 Buy
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   BUY PRODUCT
+===================================== */
+
+
+async function buyProduct(
+
+productId
+
+){
+
+
+
+const result =
+
+await purchaseProduct(
+
+productId
+
+);
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+alert(
+
+"✅ Purchase completed."
+
+);
+
+
+
+loadProducts();
+
+
+
+}
+
+else{
+
+
+
+alert(
+
+"❌ " +
+
+result.message
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   LOAD AUCTIONS
+===================================== */
+
+
+async function loadAuctions(){
+
+
+
+const result =
+
+await getAuctions();
+
+
+
+
+
+const container =
+
+document
+.getElementById(
+"auctionContainer"
+);
+
+
+
+
+
+if(
+!result.success
+){
+
+
+
+container.innerHTML =
+
+`
+
+<div class="empty-state">
+
+No auctions available.
+
+</div>
+
+`;
+
+return;
+
+
+}
+
+
+
+
+
+container.innerHTML = "";
+
+
+
+
+
+
+result.data.forEach(
+
+auction=>{
+
+
+
+
+
+container.innerHTML +=
+
+
+
+`
+
+<div class="auction-card">
+
+
+
+<h3>
+
+⚔️ ${auction.itemName}
+
+</h3>
+
+
+
+<p>
+
+${auction.description}
+
+</p>
+
+
+
+
+
+<div class="bid-value">
+
+${auction.currentBid || auction.startingPrice}
+
+${auction.currency}
+
+</div>
+
+
+
+
+
+<input
+
+type="number"
+
+id="bid-${auction.auctionId}"
+
+placeholder="Enter bid"
+
+>
+
+
+
+
+
+
+<button
+
+class="btn"
+
+onclick="placeAuctionBid('${auction.auctionId}')"
+
+>
+
+⚔️ Bid
+
+</button>
+
+
+
+
+</div>
+
+
+`;
+
+
+
+
+}
+
+);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   PLACE BID
+===================================== */
+
+
+async function placeAuctionBid(
+
+auctionId
+
+){
+
+
+
+const amount =
+
+document
+.getElementById(
+
+"bid-" +
+
+auctionId
+
+)
+.value;
+
+
+
+
+
+
+const result =
+
+await placeBid(
+
+auctionId,
+
+amount
+
+);
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+alert(
+
+"⚔️ Bid submitted."
+
+);
+
+
+
+loadAuctions();
+
+
+
+}
+
+else{
+
+
+
+alert(
+
+"❌ " +
+
+result.message
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   INITIALIZE MARKET
+===================================== */
+
+
+window.onload = function(){
+
+
+
+loadProducts();
+
+
+loadAuctions();
+
+
 
 };
 
-document.getElementById(
-"playerName"
-).textContent=
-CURRENT_USER.roleplayName;
 
-document.getElementById(
-"playerKingdom"
-).textContent=
-CURRENT_USER.kingdom;
-async function loadMarketplace(){
-
-    const result =
-    await getMarketplace();
-
-    const container =
-    document.getElementById(
-        "marketContainer"
-    );
-
-    container.innerHTML="";
-
-    if(
-        !result.success ||
-        result.data.length===0
-    ){
-
-        container.innerHTML=`
-
-        <div class="product-card">
-
-            <h3>
-
-                No Products Available
-
-            </h3>
-
-            <br>
-
-            <p>
-
-                There are currently no approved products.
-
-            </p>
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-    result.data.forEach(product=>{
-
-        createProductCard(product);
-
-    });
-
-}
-
-
-
-
-
-
-
-
-
-
-function createProductCard(product){
-
-    const container =
-    document.getElementById(
-        "marketContainer"
-    );
-
-    container.innerHTML+=`
-
-    <div class="product-card">
-
-        <h3>
-
-            ${product.productName}
-
-        </h3>
-
-        <br>
-
-        <p>
-
-            <strong>Seller:</strong>
-
-            ${product.businessName}
-
-        </p>
-
-        <p>
-
-            <strong>Category:</strong>
-
-            ${product.category}
-
-        </p>
-
-        <p>
-
-            ${product.description}
-
-        </p>
-
-        <br>
-
-        <div class="product-price">
-
-            ${product.price}
-
-            ${product.currency}
-
-        </div>
-
-        <p>
-
-            Stock:
-
-            ${product.stock}
-
-        </p>
-
-        <br>
-
-        <button
-
-        onclick="buyProduct('${product.productId}')">
-
-        Purchase
-
-        </button>
-
-    </div>
-
-    `;
-
-}
-
-
-
-
-
-
-
-
-
-
-async function buyProduct(productId){
-
-    const confirmed =
-
-    confirm(
-
-    "Purchase this product?"
-
-    );
-
-    if(!confirmed){
-
-        return;
-
-    }
-
-    const result =
-    await purchaseProduct({
-
-        buyerId:
-        CURRENT_USER.userId,
-
-        productId:
-        productId
-
-    });
-
-    alert(
-        result.message
-    );
-
-    if(result.success){
-
-        loadMarketplace();
-
-        loadPurchaseHistory();
-
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-function filterMarketplace(){
-
-    const search =
-
-    document
-    .getElementById(
-        "searchProduct"
-    )
-    .value
-    .toLowerCase();
-
-    const currency =
-
-    document
-    .getElementById(
-        "filterCurrency"
-    )
-    .value;
-
-    getMarketplace()
-
-    .then(result=>{
-
-        const container =
-
-        document.getElementById(
-            "marketContainer"
-        );
-
-        container.innerHTML="";
-
-        if(!result.success){
-
-            return;
-
-        }
-
-        let found=false;
-
-        result.data.forEach(product=>{
-
-            const matchName =
-
-            product.productName
-
-            .toLowerCase()
-
-            .includes(search);
-
-            const matchCurrency =
-
-            currency===""
-
-            ||
-
-            product.currency===currency;
-
-            if(
-
-                matchName
-
-                &&
-
-                matchCurrency
-
-            ){
-
-                found=true;
-
-                createProductCard(product);
-
-            }
-
-        });
-
-        if(!found){
-
-            container.innerHTML=`
-
-            <div class="product-card">
-
-                <h3>
-
-                    No Matching Products
-
-                </h3>
-
-            </div>
-
-            `;
-
-        }
-
-    });
-
-}
-
-
-
-
-
-
-
-
-
-
-document
-.getElementById(
-"searchButton"
-)
-.onclick=
-filterMarketplace;
-
-document
-.getElementById(
-"filterCurrency"
-)
-.onchange=
-filterMarketplace;
-
-document
-.getElementById(
-"searchProduct"
-)
-.onkeyup=
-filterMarketplace;
-async function loadPurchaseHistory(){
-
-    const table =
-    document.getElementById(
-        "purchaseHistory"
-    );
-
-    table.innerHTML = "";
-
-    // Placeholder until transaction endpoint is connected
-    table.innerHTML = `
-    <tr>
-        <td colspan="5">
-            Purchase history will appear here.
-        </td>
-    </tr>
-    `;
-
-}
-
-
-
-
-
-
-
-async function refreshAfterPurchase(){
-
-    await loadMarketplace();
-
-    await loadPurchaseHistory();
-
-}
-
-
-
-
-
-
-
-window.onload = async function(){
-
-    await loadMarketplace();
-
-    await loadPurchaseHistory();
-
-};
 
 </script>
 
+
+
+
+
+<footer class="footer">
+
+
+<p>
+
+⚜️ Luxemneaux Imperial Marketplace ⚜️
+
+</p>
+
+
+<p>
+
+🛒 Trade • Purchase • Auction • Prosper
+
+</p>
+
+
+</footer>
+
+
+
+
+
+</main>
+
+
+
+</div>
+
+
+
+
+
 </body>
+
+
 </html>
