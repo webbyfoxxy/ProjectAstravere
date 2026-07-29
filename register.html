@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Roleplay Bank | Register</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="auth-container">
+
+
+<div class="auth-box">
+
+
+<h1>
+Create Account
+</h1>
+
+
+<p>
+Join the Aurelic Banking System
+</p>
+
+
+
+<input
+id="username"
+type="text"
+placeholder="Username">
+
+
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+
+
+<input
+id="roleplayName"
+type="text"
+placeholder="Roleplay Name">
+
+
+
+<button onclick="register()">
+
+Register
+
+</button>
+
+
+
+<div class="auth-links">
+
+<a href="index.html">
+
+Already have an account?
+
+</a>
+
+</div>
+
+
+
+<div id="message"></div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script src="api.js"></script>
+
+
+
+<script>
+
+
+async function register(){
+
+
+const username =
+document.getElementById("username").value;
+
+
+
+const password =
+document.getElementById("password").value;
+
+
+
+const roleplayName =
+document.getElementById("roleplayName").value;
+
+
+
+const message =
+document.getElementById("message");
+
+
+
+message.innerHTML =
+"Creating account...";
+
+
+
+const result =
+await registerUser({
+
+
+username:username,
+
+
+password:password,
+
+
+roleplayName:roleplayName
+
+
+});
+
+
+
+if(!result.success){
+
+
+message.innerHTML =
+result.message;
+
+
+return;
+
+
+}
+
+
+
+message.innerHTML =
+"Registration successful. Redirecting...";
+
+
+
+setTimeout(()=>{
+
+
+window.location.href =
+"index.html";
+
+
+},1500);
+
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
