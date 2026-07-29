@@ -1,18 +1,24 @@
-/*******************************************************
- ROLEPLAY BANK
- DARK IMPERIAL GOLD THEME
- GLOBAL STYLE
-*******************************************************/
+/* =====================================================
+   LUXEMNEAUX ROLEPLAY BANK
+   IMPERIAL DARK GOLD THEME
+===================================================== */
 
+
+/* RESET */
 
 *{
+
+    margin:0;
+    padding:0;
 
     box-sizing:border-box;
 
     font-family:
-    "Cinzel",
     "Segoe UI",
-    serif;
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 
 }
 
@@ -21,8 +27,6 @@
 body{
 
 
-    margin:0;
-
     min-height:100vh;
 
 
@@ -30,19 +34,85 @@ body{
 
     radial-gradient(
         circle at top,
-        #2b2108,
-        #090909 65%
+        #29200b,
+        #050505 70%
     );
 
 
-    color:#f5e6b3;
+    color:#f4e6b2;
 
 
-    display:flex;
+}
 
-    justify-content:center;
 
-    align-items:center;
+
+
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+
+a{
+
+    text-decoration:none;
+
+    color:#ffd966;
+
+}
+
+
+
+h1,h2,h3,h4{
+
+
+    color:#ffd700;
+
+
+    text-shadow:
+
+    0 0 12px
+
+    rgba(
+        255,
+        215,
+        0,
+        .35
+    );
+
+
+}
+
+
+
+p{
+
+    color:#d8d8d8;
+
+    line-height:1.6;
+
+}
+
+
+
+
+
+
+
+.container{
+
+
+    width:90%;
+
+
+    max-width:1300px;
+
+
+    margin:auto;
+
+
+    padding:40px;
 
 
 }
@@ -53,46 +123,41 @@ body{
 
 
 
-/*
-=========================
- LOGIN / REGISTER
-=========================
-*/
 
 
-.login-container{
+/* =====================================================
+   CARD SYSTEM
+===================================================== */
 
 
-    width:420px;
-
-
-    padding:40px;
+.card{
 
 
     background:
 
 
-    linear-gradient(
-
-        145deg,
-
-        rgba(25,25,25,0.95),
-
-        rgba(10,10,10,0.95)
-
+    rgba(
+        12,
+        12,
+        12,
+        .95
     );
 
 
 
     border:
 
-    2px solid
+    1px solid
 
     #c9a227;
 
 
 
-    border-radius:18px;
+    border-radius:16px;
+
+
+
+    padding:25px;
 
 
 
@@ -102,20 +167,33 @@ body{
     0 0 25px
 
     rgba(
-
         201,
-
         162,
-
         39,
-
-        .35
-
+        .18
     );
 
 
+}
 
-    text-align:center;
+
+
+
+
+.card:hover{
+
+
+    box-shadow:
+
+
+    0 0 35px
+
+    rgba(
+        255,
+        215,
+        0,
+        .35
+    );
 
 
 }
@@ -126,30 +204,72 @@ body{
 
 
 
-.login-container h1{
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+
+.navbar{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+
+    padding:20px 40px;
+
+
+
+    background:#080808;
+
+
+
+    border-bottom:
+
+    1px solid
+
+    #c9a227;
+
+
+
+}
+
+
+
+
+
+.navbar .logo{
+
+
+    font-size:28px;
+
+
+    font-weight:bold;
 
 
     color:#ffd700;
 
 
-    letter-spacing:2px;
+
+}
 
 
-    text-shadow:
 
-    0 0 10px
 
-    rgba(
 
-        255,
 
-        215,
+.navbar a{
 
-        0,
 
-        .5
-
-    );
+    margin-left:20px;
 
 
 }
@@ -160,14 +280,58 @@ body{
 
 
 
-.login-container p{
 
 
-    color:#d6c58a;
+/* =====================================================
+   FORMS
+===================================================== */
+
+
+.form-container{
+
+
+    width:420px;
+
+
+    max-width:90%;
+
+
+    margin:
+
+    70px auto;
+
 
 
 }
 
+
+
+
+.form-group{
+
+
+    margin-bottom:18px;
+
+
+}
+
+
+
+
+
+label{
+
+
+    display:block;
+
+
+    margin-bottom:8px;
+
+
+    color:#e5c75f;
+
+
+}
 
 
 
@@ -175,36 +339,33 @@ body{
 
 
 input,
-textarea,
-select{
+select,
+textarea{
 
 
     width:100%;
 
 
-    padding:14px;
+    padding:13px;
 
-
-    margin:
-
-    10px 0;
 
 
     background:#111;
 
 
-    color:#f5e6b3;
+    color:white;
 
 
     border:
 
+
     1px solid
 
-    #8b6f1d;
+    #806000;
 
 
 
-    border-radius:8px;
+    border-radius:10px;
 
 
     outline:none;
@@ -216,29 +377,25 @@ select{
 
 
 
-
 input:focus,
-textarea:focus,
-select:focus{
+select:focus,
+textarea:focus{
 
 
     border-color:#ffd700;
 
 
+
     box-shadow:
 
-    0 0 8px
+
+    0 0 12px
 
     rgba(
-
         255,
-
         215,
-
         0,
-
-        .5
-
+        .4
     );
 
 
@@ -250,16 +407,20 @@ select:focus{
 
 
 
-button{
 
 
-    width:100%;
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 
-    padding:14px;
+button,
+.btn{
 
 
-    margin-top:12px;
+    padding:
+
+    12px 25px;
 
 
 
@@ -270,30 +431,32 @@ button{
 
         135deg,
 
-        #b8860b,
+        #ffd700,
 
-        #ffd700
+        #9c7612
 
     );
 
 
 
-    color:#161616;
+    color:#111;
 
-
-    font-weight:bold;
 
 
     border:none;
 
 
+
     border-radius:10px;
+
+
+
+    font-weight:bold;
+
 
 
     cursor:pointer;
 
-
-    letter-spacing:1px;
 
 
     transition:.3s;
@@ -305,31 +468,26 @@ button{
 
 
 
-
-
-button:hover{
+button:hover,
+.btn:hover{
 
 
     transform:
 
-    translateY(-2px);
+    translateY(-3px);
+
 
 
     box-shadow:
 
 
-    0 0 15px
+    0 0 20px
 
     rgba(
-
         255,
-
         215,
-
         0,
-
-        .7
-
+        .5
     );
 
 
@@ -341,13 +499,138 @@ button:hover{
 
 
 
-a{
+
+
+/* =====================================================
+   DASHBOARD GRID
+===================================================== */
+
+
+.dashboard-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+    repeat(
+
+        auto-fit,
+
+        minmax(
+            260px,
+            1fr
+        )
+
+    );
+
+
+
+    gap:25px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   WALLET / CURRENCY
+===================================================== */
+
+
+.wallet{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+    repeat(
+
+        auto-fit,
+
+        minmax(
+            150px,
+            1fr
+        )
+
+    );
+
+
+
+    gap:20px;
+
+
+}
+
+
+
+
+.currency-card{
+
+
+    background:#111;
+
+
+    border:
+
+
+    1px solid
+
+    #c9a227;
+
+
+
+    padding:20px;
+
+
+
+    text-align:center;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+.currency-name{
 
 
     color:#ffd700;
 
 
-    text-decoration:none;
+    font-weight:bold;
+
+
+}
+
+
+
+.currency-value{
+
+
+    font-size:30px;
+
+
+    margin-top:10px;
+
+
+    color:white;
 
 
 }
@@ -357,14 +640,85 @@ a{
 
 
 
-a:hover{
 
 
-    text-shadow:
 
-    0 0 10px
+/* =====================================================
+   TABLE
+===================================================== */
 
-    gold;
+
+.table-container{
+
+
+    overflow-x:auto;
+
+
+}
+
+
+
+
+
+table{
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
+    margin-top:20px;
+
+
+}
+
+
+
+
+
+th{
+
+
+    background:#17120a;
+
+
+    color:#ffd700;
+
+
+    padding:15px;
+
+
+}
+
+
+
+td{
+
+
+    padding:13px;
+
+
+    border-bottom:
+
+
+    1px solid
+
+    #333;
+
+
+
+}
+
+
+
+
+
+tr:hover{
+
+
+    background:#191307;
 
 
 }
@@ -375,13 +729,96 @@ a:hover{
 
 
 
-#message{
 
 
-    color:#ffcc66;
+/* =====================================================
+   MARKETPLACE
+===================================================== */
 
 
-    margin-top:15px;
+.product-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+    repeat(
+
+        auto-fit,
+
+        minmax(
+            250px,
+            1fr
+        )
+
+    );
+
+
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+.product-card{
+
+
+    background:#101010;
+
+
+    border:
+
+
+    1px solid
+
+    #c9a227;
+
+
+
+    padding:20px;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+.product-title{
+
+
+    color:#ffd700;
+
+
+    font-size:20px;
+
+
+}
+
+
+
+
+
+.product-price{
+
+
+    color:#9cff9c;
+
+
+    margin:
+
+    15px 0;
+
 
 
 }
@@ -391,40 +828,163 @@ a:hover{
 
 
 
-/*
-=========================
- SCROLLBAR
-=========================
-*/
 
 
-::-webkit-scrollbar{
+
+/* =====================================================
+   ALERTS
+===================================================== */
 
 
-    width:10px;
+.alert{
+
+
+    padding:15px;
+
+
+    border-radius:10px;
+
+
+    margin-bottom:20px;
 
 
 }
 
 
 
-::-webkit-scrollbar-track{
+
+.success{
+
+
+    background:#102b14;
+
+
+    border:
+
+    1px solid
+
+    #3cff5b;
+
+
+}
+
+
+
+
+.error{
+
+
+    background:#2b1010;
+
+
+    border:
+
+    1px solid
+
+    #ff4444;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   SIDEBAR SUPPORT
+===================================================== */
+
+
+.sidebar{
 
 
     background:#080808;
 
 
+    border-right:
+
+
+    1px solid
+
+    #c9a227;
+
+
+
 }
 
 
 
-::-webkit-scrollbar-thumb{
+
+.sidebar a{
 
 
-    background:#b8860b;
+    display:block;
 
 
-    border-radius:10px;
+    padding:15px;
+
+
+    color:#e5c75f;
+
+
+}
+
+
+
+
+
+.sidebar a:hover{
+
+
+    background:#201707;
+
+
+    color:#ffd700;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+
+@media(max-width:700px){
+
+
+    .container{
+
+
+        padding:20px;
+
+
+    }
+
+
+
+    .navbar{
+
+
+        flex-direction:column;
+
+
+        gap:15px;
+
+
+    }
+
 
 
 }
