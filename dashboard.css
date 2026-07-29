@@ -1,0 +1,1080 @@
+/* ==========================================================
+   ROLEPLAY BANK
+   Dashboard Stylesheet
+   Version: 1.0
+==========================================================*/
+
+/* ==========================================================
+   DASHBOARD
+==========================================================*/
+
+.dashboard{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.dashboard-header{
+
+    margin-bottom:35px;
+
+}
+
+.dashboard-header h1{
+
+    font-size:34px;
+
+    color:var(--gold);
+
+    margin-bottom:8px;
+
+}
+
+.dashboard-header p{
+
+    color:var(--text-muted);
+
+}
+
+/* ==========================================================
+   DASHBOARD GRID
+==========================================================*/
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+
+}
+
+/* ==========================================================
+   STAT CARDS
+==========================================================*/
+
+.stat-card{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:var(--radius);
+
+    padding:24px;
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    min-height:170px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+.stat-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.stat-title{
+
+    color:var(--text-muted);
+
+    font-size:14px;
+
+    font-weight:500;
+
+}
+
+.stat-icon{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:var(--border);
+
+    background:#161616;
+
+}
+
+.stat-icon i{
+
+    color:var(--gold);
+
+    font-size:22px;
+
+}
+
+.stat-value{
+
+    margin-top:25px;
+
+    font-size:32px;
+
+    color:var(--gold);
+
+    font-family:"Cinzel",serif;
+
+}
+
+.stat-sub{
+
+    margin-top:10px;
+
+    color:var(--text-muted);
+
+    font-size:13px;
+
+}
+
+/* ==========================================================
+   SECTION
+==========================================================*/
+
+.dashboard-section{
+
+    margin-top:40px;
+
+}
+
+.dashboard-section h2{
+
+    margin-bottom:20px;
+
+    border-left:4px solid var(--gold);
+
+    padding-left:12px;
+
+}
+
+/* ==========================================================
+   WALLET CARD
+==========================================================*/
+
+.wallet-card{
+
+    background:linear-gradient(
+        180deg,
+        #1b1b1b,
+        #151515
+    );
+
+    border:var(--border);
+
+    border-radius:var(--radius);
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.wallet-title{
+
+    color:var(--gold);
+
+    font-size:24px;
+
+}
+
+.wallet-balance{
+
+    margin-top:20px;
+
+    font-size:44px;
+
+    font-family:"Cinzel",serif;
+
+    color:white;
+
+}
+
+.wallet-currency{
+
+    color:var(--gold);
+
+    font-size:18px;
+
+}
+
+.wallet-actions{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:30px;
+
+    flex-wrap:wrap;
+
+}
+
+/* ==========================================================
+   QUICK ACTIONS
+==========================================================*/
+
+.quick-actions{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+
+    gap:20px;
+
+}
+
+.quick-card{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:12px;
+
+    padding:20px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.quick-card:hover{
+
+    background:#232323;
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+.quick-card i{
+
+    font-size:26px;
+
+    color:var(--gold);
+
+    margin-bottom:15px;
+
+}
+
+.quick-card h4{
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+/* ==========================================================
+   INFO PANEL
+==========================================================*/
+
+.info-panel{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:12px;
+
+    padding:22px;
+
+}
+
+.info-panel h3{
+
+    margin-bottom:18px;
+
+}
+
+.info-list{
+
+    list-style:none;
+
+}
+
+.info-list li{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.info-list li:last-child{
+
+    border:none;
+
+}
+
+/* ==========================================================
+   TRANSACTION PREVIEW
+==========================================================*/
+
+.transaction-preview{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+.transaction-row{
+
+    display:grid;
+
+    grid-template-columns:
+    180px
+    1fr
+    160px
+    140px;
+
+    gap:15px;
+
+    align-items:center;
+
+    padding:16px 20px;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.transaction-row:last-child{
+
+    border:none;
+
+}
+
+.transaction-row:hover{
+
+    background:#232323;
+
+}
+
+.transaction-date{
+
+    color:var(--text-muted);
+
+}
+
+.transaction-type{
+
+    color:white;
+
+}
+
+.transaction-amount{
+
+    color:var(--gold);
+
+    font-weight:600;
+
+}
+
+.transaction-status{
+
+    text-align:right;
+
+}
+
+/* ==========================================================
+   INVENTORY PREVIEW
+==========================================================*/
+
+.inventory-preview{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.inventory-card{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:12px;
+
+    padding:22px;
+
+    transition:.25s;
+
+}
+
+.inventory-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+.inventory-name{
+
+    color:var(--gold);
+
+    font-size:20px;
+
+}
+
+.inventory-category{
+
+    color:var(--text-muted);
+
+    margin:12px 0;
+
+}
+
+.inventory-quantity{
+
+    font-size:30px;
+
+    color:white;
+
+    font-family:"Cinzel",serif;
+
+}
+/* ==========================================================
+   MARKETPLACE PREVIEW
+==========================================================*/
+
+.marketplace-preview{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+.market-card{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:var(--radius);
+
+    padding:22px;
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.market-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+.market-category{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    background:rgba(212,175,55,.15);
+
+    color:var(--gold);
+
+    border-radius:30px;
+
+    width:max-content;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.market-title{
+
+    font-size:22px;
+
+    color:var(--gold);
+
+}
+
+.market-description{
+
+    color:var(--text-light);
+
+    min-height:70px;
+
+}
+
+.market-details{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin-top:10px;
+
+}
+
+.market-details div{
+
+    background:#181818;
+
+    border:var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+}
+
+.market-details small{
+
+    display:block;
+
+    margin-bottom:6px;
+
+}
+
+.market-price{
+
+    color:var(--gold);
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   AUCTION CARDS
+==========================================================*/
+
+.auction-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+
+}
+
+.auction-card{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:var(--radius);
+
+    padding:24px;
+
+    transition:.25s;
+
+}
+
+.auction-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+.auction-card h3{
+
+    margin-bottom:15px;
+
+}
+
+.auction-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin:20px 0;
+
+}
+
+.auction-box{
+
+    background:#171717;
+
+    border:var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+}
+
+.auction-box span{
+
+    display:block;
+
+    color:var(--text-muted);
+
+    margin-bottom:6px;
+
+}
+
+.auction-box strong{
+
+    color:white;
+
+}
+
+.current-bid{
+
+    color:var(--gold);
+
+    font-size:24px;
+
+}
+
+.ends-in{
+
+    color:var(--warning);
+
+}
+
+/* ==========================================================
+   CREATOR WIDGETS
+==========================================================*/
+
+.creator-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:20px;
+
+}
+
+.creator-widget{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:var(--radius);
+
+    padding:22px;
+
+    text-align:center;
+
+    transition:.25s;
+
+}
+
+.creator-widget:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+.creator-widget i{
+
+    font-size:34px;
+
+    color:var(--gold);
+
+    margin-bottom:18px;
+
+}
+
+.creator-widget h4{
+
+    color:white;
+
+    margin-bottom:8px;
+
+}
+
+.creator-widget p{
+
+    font-size:14px;
+
+}
+
+/* ==========================================================
+   NOTIFICATIONS
+==========================================================*/
+
+.notification-panel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.notification{
+
+    background:var(--card);
+
+    border-left:4px solid var(--gold);
+
+    border-radius:10px;
+
+    padding:18px 20px;
+
+    transition:.25s;
+
+}
+
+.notification:hover{
+
+    background:#232323;
+
+}
+
+.notification-title{
+
+    color:var(--gold);
+
+    font-weight:600;
+
+    margin-bottom:6px;
+
+}
+
+.notification-message{
+
+    color:var(--text-light);
+
+    margin-bottom:8px;
+
+}
+
+.notification-time{
+
+    color:var(--text-muted);
+
+    font-size:13px;
+
+}
+
+/* ==========================================================
+   EMPTY STATE
+==========================================================*/
+
+.empty-state{
+
+    background:var(--card);
+
+    border:2px dashed rgba(212,175,55,.25);
+
+    border-radius:var(--radius);
+
+    text-align:center;
+
+    padding:70px 25px;
+
+}
+
+.empty-state i{
+
+    font-size:56px;
+
+    color:var(--gold);
+
+    margin-bottom:20px;
+
+}
+
+.empty-state h3{
+
+    margin-bottom:12px;
+
+}
+
+.empty-state p{
+
+    color:var(--text-muted);
+
+    max-width:500px;
+
+    margin:auto;
+
+}
+
+/* ==========================================================
+   SEARCH BAR
+==========================================================*/
+
+.search-box{
+
+    position:relative;
+
+    margin-bottom:25px;
+
+}
+
+.search-box input{
+
+    padding-left:48px;
+
+}
+
+.search-box i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--gold);
+
+}
+
+/* ==========================================================
+   FILTER BAR
+==========================================================*/
+
+.filter-bar{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
+
+}
+
+.filter-bar select{
+
+    width:auto;
+
+    min-width:180px;
+
+}
+
+/* ==========================================================
+   LOADING SKELETON
+==========================================================*/
+
+.skeleton{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#1d1d1d;
+
+    border-radius:10px;
+
+}
+
+.skeleton::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-150%;
+
+    width:120%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+    animation:skeleton-loading 1.2s infinite;
+
+}
+
+@keyframes skeleton-loading{
+
+    100%{
+
+        left:150%;
+
+    }
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+==========================================================*/
+
+@media(max-width:1200px){
+
+    .dashboard-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    .dashboard-grid,
+
+    .marketplace-preview,
+
+    .auction-grid,
+
+    .inventory-preview,
+
+    .creator-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .wallet-actions{
+
+        flex-direction:column;
+
+    }
+
+    .transaction-row{
+
+        grid-template-columns:1fr;
+
+        gap:8px;
+
+    }
+
+    .market-details{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .auction-info{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .dashboard-header h1{
+
+        font-size:28px;
+
+    }
+
+    .wallet-balance{
+
+        font-size:34px;
+
+    }
+
+    .stat-value{
+
+        font-size:28px;
+
+    }
+
+    .content{
+
+        padding:18px;
+
+    }
+
+    .filter-bar{
+
+        flex-direction:column;
+
+    }
+
+    .filter-bar select{
+
+        width:100%;
+
+    }
+
+}
