@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Roleplay Bank | Creator Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+
+<div class="sidebar">
+
+
+<h2>
+Roleplay Bank
+</h2>
+
+
+
+<a href="creator-dashboard.html">
+Dashboard
+</a>
+
+
+<a href="#">
+Users
+</a>
+
+
+<a href="#">
+Kingdoms
+</a>
+
+
+<a href="#">
+Seller Applications
+</a>
+
+
+<a href="#">
+Product Approval
+</a>
+
+
+<a href="#">
+Auction Approval
+</a>
+
+
+<a href="#">
+Currency Management
+</a>
+
+
+<a href="#">
+Announcements
+</a>
+
+
+<a href="index.html" onclick="logout()">
+Logout
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="dashboard-content">
+
+
+<h1>
+Creator Administration
+</h1>
+
+
+
+
+<!-- USERS -->
+
+
+<div class="card">
+
+
+<h2>
+Users
+</h2>
+
+
+<div id="users">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- KINGDOM CREATION -->
+
+
+<div class="card">
+
+
+<h2>
+Create Kingdom / Empire
+</h2>
+
+
+
+<input
+id="kingdomName"
+placeholder="Kingdom or Empire Name">
+
+
+
+<textarea
+id="kingdomDescription"
+placeholder="Description">
+</textarea>
+
+
+
+<button onclick="addNewKingdom()">
+
+Create Kingdom
+
+</button>
+
+
+
+<div id="kingdomMessage"></div>
+
+
+</div>
+
+
+
+
+
+
+<!-- SELLER APPLICATIONS -->
+
+
+<div class="card">
+
+
+<h2>
+Seller Applications
+</h2>
+
+
+<div id="sellerApplications">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- PRODUCT APPROVAL -->
+
+
+<div class="card">
+
+
+<h2>
+Product Approval
+
+</h2>
+
+
+<div id="products">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- AUCTION APPROVAL -->
+
+
+<div class="card">
+
+
+<h2>
+Auction Approval
+
+</h2>
+
+
+<div id="auctions">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- CURRENCY -->
+
+
+<div class="card">
+
+
+<h2>
+Currency Management
+</h2>
+
+
+
+<input
+id="currencyUser"
+placeholder="User ID">
+
+
+
+<select id="currencyType">
+
+
+<option>
+Lumen
+</option>
+
+
+<option>
+Aurel
+</option>
+
+
+<option>
+Virel
+</option>
+
+
+<option>
+Sylem
+</option>
+
+
+<option>
+Bront
+</option>
+
+
+</select>
+
+
+
+
+<input
+id="currencyAmount"
+type="number"
+placeholder="Amount">
+
+
+
+<button onclick="giveCurrency()">
+
+Add Currency
+
+</button>
+
+
+
+<button onclick="takeCurrency()">
+
+Remove Currency
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ANNOUNCEMENTS -->
+
+
+<div class="card">
+
+
+<h2>
+Announcement
+</h2>
+
+
+
+<input
+id="announcementTitle"
+placeholder="Title">
+
+
+
+<textarea
+id="announcementMessage"
+placeholder="Message">
+</textarea>
+
+
+
+<button onclick="createAnnouncementPost()">
+
+Publish
+
+</button>
+
+
+</div>
+
+
+
+
+
+<!-- TRANSACTIONS -->
+
+
+<div class="card">
+
+
+<h2>
+Transactions
+
+</h2>
+
+
+<div id="transactions">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script src="api.js"></script>
+
+
+
+<script>
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem(
+
+"currentUser"
+
+)
+
+);
+
+
+
+if(!user ||
+
+user.role !== "Creator"){
+
+
+window.location.href =
+"index.html";
+
+
+}
+
+
+
+
+
+async function loadCreator(){
+
+
+
+const result =
+
+await creatorDashboard();
+
+
+
+if(!result.success){
+
+return;
+
+}
+
+
+
+
+
+let userHTML="";
+
+
+
+result.data.users.forEach(u=>{
+
+
+userHTML += `
+
+
+<div>
+
+
+<p>
+
+<b>${u.roleplayName}</b>
+
+</p>
+
+
+<p>
+
+Role:
+
+${u.role}
+
+</p>
+
+
+<p>
+
+Status:
+
+${u.status}
+
+</p>
+
+
+<button onclick="suspend('${u.userId}')">
+
+Suspend
+
+</button>
+
+
+<button onclick="restore('${u.userId}')">
+
+Restore
+
+</button>
+
+
+</div>
+
+
+<hr>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+
+"users"
+
+).innerHTML =
+
+userHTML || "No users";
+
+
+
+
+
+let transactionHTML="";
+
+
+
+result.data.transactions.forEach(t=>{
+
+
+transactionHTML += `
+
+
+<p>
+
+${t.type}
+
+-
+
+${t.amount}
+
+${t.currency}
+
+</p>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+
+"transactions"
+
+).innerHTML =
+
+transactionHTML || "No transactions";
+
+
+
+}
+
+
+
+
+
+
+
+async function addNewKingdom(){
+
+
+
+const result =
+
+await createKingdom({
+
+
+name:
+
+document.getElementById(
+
+"kingdomName"
+
+).value,
+
+
+description:
+
+document.getElementById(
+
+"kingdomDescription"
+
+).value
+
+
+});
+
+
+
+document.getElementById(
+
+"kingdomMessage"
+
+).innerHTML =
+
+result.message ||
+
+"Kingdom created.";
+
+
+}
+
+
+
+
+
+
+
+async function giveCurrency(){
+
+
+await addCurrency({
+
+
+userId:
+
+document.getElementById(
+
+"currencyUser"
+
+).value,
+
+
+currency:
+
+document.getElementById(
+
+"currencyType"
+
+).value,
+
+
+amount:
+
+document.getElementById(
+
+"currencyAmount"
+
+).value
+
+
+});
+
+
+}
+
+
+
+
+
+
+async function takeCurrency(){
+
+
+await removeCurrency({
+
+
+userId:
+
+document.getElementById(
+
+"currencyUser"
+
+).value,
+
+
+currency:
+
+document.getElementById(
+
+"currencyType"
+
+).value,
+
+
+amount:
+
+document.getElementById(
+
+"currencyAmount"
+
+).value
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+async function createAnnouncementPost(){
+
+
+await apiRequest(
+
+"createAnnouncement",
+
+{
+
+
+title:
+
+document.getElementById(
+
+"announcementTitle"
+
+).value,
+
+
+message:
+
+document.getElementById(
+
+"announcementMessage"
+
+).value,
+
+
+author:user.roleplayName
+
+
+}
+
+);
+
+
+}
+
+
+
+
+
+
+
+function suspend(id){
+
+
+apiRequest(
+
+"suspendUser",
+
+{
+
+userId:id
+
+}
+
+);
+
+
+}
+
+
+
+
+
+function restore(id){
+
+
+apiRequest(
+
+"restoreUser",
+
+{
+
+userId:id
+
+}
+
+);
+
+
+}
+
+
+
+
+
+function logout(){
+
+
+localStorage.removeItem(
+
+"currentUser"
+
+);
+
+
+}
+
+
+
+
+
+loadCreator();
+
+
+
+</script>
+
+
+</body>
+
+</html>
