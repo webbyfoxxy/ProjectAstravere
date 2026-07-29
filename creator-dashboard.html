@@ -1,394 +1,598 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
 
-<title>Creator Dashboard | Luxemneaux Roleplay Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="style.css">
 
-<link rel="stylesheet"
-href="sidebar.css">
+<title>
 
-<link rel="stylesheet"
-href="dashboard.css">
+Luxemneaux Creator Control Center
+
+</title>
+
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
 
+
+
 <body>
+
+
+
+
 
 <div class="dashboard-layout">
 
-<!-- ==========================================
-SIDEBAR
-========================================== -->
+
+
+
+
+<!-- =====================================
+     SIDEBAR
+===================================== -->
+
 
 <aside class="sidebar">
 
+
 <div class="sidebar-logo">
-
-🏛️
-
-<h2>
 
 Luxemneaux
 
-</h2>
-
-<p>
-
-Creator Control Panel
-
-</p>
-
 </div>
 
-<div class="sidebar-profile">
 
-<h3
+
+<ul class="sidebar-menu">
+
+
+
+<li>
+
+<a href="creator-dashboard.html">
+
+👑 Creator Hall
+
+</a>
+
+</li>
+
+
+
+
+<li>
+
+<a href="marketplace.html">
+
+🛒 Marketplace
+
+</a>
+
+</li>
+
+
+
+
+<li>
+
+<a href="#" onclick="logout()">
+
+🚪 Logout
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+
+
+</aside>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     MAIN CONTENT
+===================================== -->
+
+
+<main class="main-content">
+
+
+
+
+
+<header class="header">
+
+
+<h1 class="imperial-title">
+
+👑 Imperial Creator Hall
+
+</h1>
+
+
+
+<div class="user-badge"
+
 id="creatorName">
 
 Creator
 
-</h3>
-
-<p>
-
-Imperial Administrator
-
-</p>
-
-<p
-id="creatorKingdom">
-
-Empire
-
-</p>
-
 </div>
 
-<ul class="sidebar-menu">
 
-<li>
-
-<a
-href="#dashboard"
-class="active">
-
-🏠 Dashboard
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#users">
-
-👥 Users
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#currencies">
-
-💰 Currency
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#sellerApplications">
-
-🏪 Seller Applications
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#products">
-
-📦 Products
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#auctions">
-
-⚔ Auctions
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#kingdoms">
-
-👑 Kingdoms
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#announcements">
-
-📢 Announcements
-
-</a>
-
-</li>
-
-</ul>
-
-<div class="logout-btn">
-
-<a
-href="#"
-id="logoutBtn">
-
-Logout
-
-</a>
-
-</div>
-
-</aside>
-
-<!-- ==========================================
-CONTENT
-========================================== -->
-
-<main class="dashboard-content">
-
-<header class="dashboard-header">
-
-<div>
-
-<h1>
-
-Creator Administration
-
-</h1>
-
-<p>
-
-Manage the entire Luxemneaux banking system.
-
-</p>
-
-</div>
 
 </header>
 
-<!-- ==========================================
-SYSTEM OVERVIEW
-========================================== -->
 
-<section
-class="card"
-id="dashboard">
+
+
+
+
+
+
+<!-- =====================================
+     CREATOR PROFILE
+===================================== -->
+
+
+<section class="creator-panel">
+
+
 
 <h2>
 
-Empire Overview
+⚜️ Supreme Administration
 
 </h2>
 
-<br>
 
-<div class="dashboard-grid">
 
-<div class="currency-card">
 
-<div class="currency-name">
+<div class="profile-panel">
 
-Members
+
+<div class="profile-avatar">
 
 </div>
 
-<div
-class="currency-value"
-id="memberCount">
 
-0
 
-</div>
 
-</div>
+<div>
 
-<div class="currency-card">
 
-<div class="currency-name">
+<h3 id="creatorUsername">
 
-Sellers
+Loading...
 
-</div>
+</h3>
 
-<div
-class="currency-value"
-id="sellerCount">
 
-0
 
-</div>
+<p>
 
-</div>
+Role:
 
-<div class="currency-card">
+<span class="badge badge-creator">
 
-<div class="currency-name">
+Creator
 
-Products
+</span>
 
-</div>
+</p>
 
-<div
-class="currency-value"
-id="productCount">
 
-0
+
+<p>
+
+Access:
+
+Full Imperial Control
+
+</p>
+
+
+
 
 </div>
 
-</div>
 
-<div class="currency-card">
-
-<div class="currency-name">
-
-Auctions
 
 </div>
 
-<div
-class="currency-value"
-id="auctionCount">
 
-0
-
-</div>
-
-</div>
-
-</div>
 
 </section>
 
-<br>
 
-<!-- ==========================================
-USER MANAGEMENT
-========================================== -->
 
-<section
-class="card"
-id="users">
 
-<h2>
 
-User Management
+
+
+
+
+<!-- =====================================
+     SYSTEM STATISTICS
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📊 Kingdom Statistics
 
 </h2>
 
-<br>
+
+
+
+
+<div class="grid">
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+👥 Citizens
+
+</h3>
+
+
+<span id="totalUsers">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+🏪 Merchants
+
+</h3>
+
+
+<span id="totalSellers">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+🪙 Treasury
+
+</h3>
+
+
+<span id="totalCurrency">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+⚔️ Auctions
+
+</h3>
+
+
+<span id="totalAuctions">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+     CREATOR ACTION MENU
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+⚔️ Imperial Commands
+
+</h2>
+
+
+
+
+<div class="creator-action">
+
+
+
+
+
+<button
+
+onclick="showUsers()"
+
+>
+
+👥 Manage Citizens
+
+</button>
+
+
+
+
+
+
+<button
+
+onclick="showSellers()"
+
+>
+
+🏪 Seller Approval
+
+</button>
+
+
+
+
+
+
+
+<button
+
+onclick="showProducts()"
+
+>
+
+📦 Product Approval
+
+</button>
+
+
+
+
+
+
+
+<button
+
+onclick="showAuctions()"
+
+>
+
+⚔️ Auction Approval
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+
+</section>
+<!-- =====================================
+     USER MANAGEMENT
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+👥 Citizen Management
+
+</h2>
+
+
+
+
 
 <div class="table-container">
 
+
 <table>
+
+
 
 <thead>
 
+
 <tr>
 
-<th>User ID</th>
 
-<th>Username</th>
+<th>
 
-<th>Roleplay Name</th>
+User ID
 
-<th>Role</th>
+</th>
 
-<th>Kingdom</th>
 
-<th>Status</th>
+<th>
 
-<th>Action</th>
+Username
+
+</th>
+
+
+<th>
+
+Role
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Actions
+
+</th>
+
 
 </tr>
+
 
 </thead>
 
-<tbody
-id="usersTable">
+
+
+
+<tbody id="userTable">
+
 
 <tr>
 
-<td colspan="7">
 
-Loading users...
+<td colspan="5">
+
+Loading citizens...
 
 </td>
 
+
 </tr>
+
 
 </tbody>
 
+
+
 </table>
+
 
 </div>
 
+
+
 </section>
 
-<br>
 
-<!-- ==========================================
-CURRENCY MANAGEMENT
-========================================== -->
 
-<section
-class="card"
-id="currencies">
 
-<h2>
 
-Currency Administration
+
+
+
+
+<!-- =====================================
+     CURRENCY MANAGEMENT
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+🪙 Imperial Treasury Control
 
 </h2>
 
-<br>
 
-<form
-id="currencyForm">
 
-<div class="dashboard-grid">
 
-<div>
+
+<div class="grid">
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
@@ -396,14 +600,26 @@ User ID
 
 </label>
 
+
+
 <input
-type="text"
+
 id="currencyUserId"
-required>
+
+placeholder="Target user ID"
+
+>
+
 
 </div>
 
-<div>
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
@@ -411,24 +627,66 @@ Currency
 
 </label>
 
-<select
-id="currencyType">
 
-<option>Lumen</option>
 
-<option>Aurel</option>
+<select id="currencyType">
 
-<option>Virel</option>
 
-<option>Sylem</option>
 
-<option>Bront</option>
+<option value="Lumen">
+
+✨ Lumen
+
+</option>
+
+
+
+<option value="Aurel">
+
+🏆 Aurel
+
+</option>
+
+
+
+<option value="Virel">
+
+💎 Virel
+
+</option>
+
+
+
+<option value="Sylem">
+
+🔷 Sylem
+
+</option>
+
+
+
+<option value="Bront">
+
+🟤 Bront
+
+</option>
+
+
 
 </select>
 
+
 </div>
 
-<div>
+
+
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
@@ -436,260 +694,129 @@ Amount
 
 </label>
 
+
+
 <input
+
 type="number"
+
 id="currencyAmount"
-required>
+
+placeholder="Amount"
+
+>
+
 
 </div>
 
+
+
+
+
 </div>
 
-<br>
+
+
+
+
+
 
 <button
-type="button"
-id="addCurrencyBtn">
 
-Add Currency
+class="btn"
+
+onclick="addCurrency()"
+
+>
+
+➕ Add Currency
 
 </button>
 
-<button
-type="button"
-id="removeCurrencyBtn">
 
-Remove Currency
+
+
+
+
+<button
+
+class="btn-danger"
+
+onclick="removeCurrency()"
+
+>
+
+➖ Remove Currency
 
 </button>
 
-</form>
+
+
+
+
+<div id="currencyMessage"></div>
+
+
 
 </section>
 
-<br>
 
-<!-- ==========================================
-SELLER APPLICATIONS
-========================================== -->
 
-<section
-class="card"
-id="sellerApplications">
 
-<h2>
 
-Seller Applications
 
-</h2>
 
-<br>
 
-<div class="table-container">
 
-<table>
+<!-- =====================================
+     TRANSACTION MONITOR
+===================================== -->
 
-<thead>
 
-<tr>
+<section class="card">
 
-<th>
 
-Application ID
+<h2 class="title">
 
-</th>
-
-<th>
-
-User ID
-
-</th>
-
-<th>
-
-Business Name
-
-</th>
-
-<th>
-
-Description
-
-</th>
-
-<th>
-
-Status
-
-</th>
-
-<th>
-
-Action
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="sellerApplicationTable">
-
-<tr>
-
-<td colspan="6">
-
-Loading...
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-PRODUCT APPROVAL
-========================================== -->
-
-<section
-class="card"
-id="products">
-
-<h2>
-
-Product Approval
+📜 Imperial Transaction Records
 
 </h2>
 
-<br>
+
+
 
 <div class="table-container">
 
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-
-Product
-
-</th>
-
-<th>
-
-Seller
-
-</th>
-
-<th>
-
-Category
-
-</th>
-
-<th>
-
-Price
-
-</th>
-
-<th>
-
-Stock
-
-</th>
-
-<th>
-
-Status
-
-</th>
-
-<th>
-
-Action
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="productApprovalTable">
-
-<tr>
-
-<td colspan="7">
-
-Loading...
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-AUCTION APPROVAL
-========================================== -->
-
-<section
-class="card"
-id="auctions">
-
-<h2>
-
-Auction Approval
-
-</h2>
-
-<br>
-
-<div class="table-container">
 
 <table>
 
+
 <thead>
+
 
 <tr>
 
-<th>
-
-Item
-
-</th>
 
 <th>
 
-Owner
+ID
 
 </th>
+
 
 <th>
 
-Starting Price
+Type
 
 </th>
+
+
+<th>
+
+Amount
+
+</th>
+
 
 <th>
 
@@ -697,185 +824,78 @@ Currency
 
 </th>
 
-<th>
-
-Current Bid
-
-</th>
 
 <th>
 
-Status
+Date
 
 </th>
 
-<th>
-
-Action
-
-</th>
 
 </tr>
+
 
 </thead>
 
-<tbody
-id="auctionApprovalTable">
+
+
+
+<tbody id="transactionLogs">
+
 
 <tr>
 
-<td colspan="7">
 
-Loading...
+<td colspan="5">
+
+Loading records...
 
 </td>
 
+
 </tr>
+
 
 </tbody>
 
-</table>
 
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-KINGDOM MANAGEMENT
-========================================== -->
-
-<section
-class="card"
-id="kingdoms">
-
-<h2>
-
-Kingdom Management
-
-</h2>
-
-<br>
-
-<form
-id="kingdomForm">
-
-<div class="form-group">
-
-<label>
-
-Kingdom Name
-
-</label>
-
-<input
-type="text"
-id="kingdomName"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Description
-
-</label>
-
-<textarea
-id="kingdomDescription"
-rows="4"
-required>
-
-</textarea>
-
-</div>
-
-<button>
-
-Create Kingdom
-
-</button>
-
-</form>
-
-<br>
-
-<div class="table-container">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-
-Kingdom
-
-</th>
-
-<th>
-
-Description
-
-</th>
-
-<th>
-
-Status
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="kingdomTable">
-
-<tr>
-
-<td colspan="3">
-
-No Kingdoms
-
-</td>
-
-</tr>
-
-</tbody>
 
 </table>
 
+
 </div>
+
+
 
 </section>
 
-<br>
 
-<!-- ==========================================
-ANNOUNCEMENTS
-========================================== -->
 
-<section
-class="card"
-id="announcements">
 
-<h2>
 
-Create Announcement
+
+
+
+
+<!-- =====================================
+     SYSTEM ANNOUNCEMENT
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📢 Royal Announcement
 
 </h2>
 
-<br>
 
-<form
-id="announcementForm">
+
 
 <div class="form-group">
+
 
 <label>
 
@@ -883,14 +903,25 @@ Title
 
 </label>
 
+
 <input
-type="text"
+
 id="announcementTitle"
-required>
+
+placeholder="Announcement title"
+
+>
+
 
 </div>
 
+
+
+
+
+
 <div class="form-group">
+
 
 <label>
 
@@ -898,567 +929,901 @@ Message
 
 </label>
 
-<textarea
-id="announcementMessage"
-rows="6"
-required>
 
-</textarea>
+<textarea
+
+id="announcementContent"
+
+placeholder="Write announcement..."
+
+></textarea>
+
 
 </div>
 
-<button>
 
-Publish Announcement
+
+
+
+
+<button
+
+class="btn"
+
+onclick="createRoyalAnnouncement()"
+
+>
+
+📜 Publish
 
 </button>
 
-</form>
+
+
+<div id="announcementMessage"></div>
+
+
 
 </section>
+<!-- =====================================
+     SELLER APPROVAL
+===================================== -->
 
-<br>
 
-<!-- ==========================================
-SYSTEM STATISTICS
-========================================== -->
+<section class="card">
 
-<section
-class="card">
 
-<h2>
+<h2 class="title">
 
-System Statistics
+🏪 Merchant Applications
 
 </h2>
 
-<br>
 
-<div class="dashboard-grid">
 
-<div class="currency-card">
-
-<div class="currency-name">
-
-Transactions
-
-</div>
-
-<div
-class="currency-value"
-id="transactionCount">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Kingdoms
-
-</div>
-
-<div
-class="currency-value"
-id="kingdomCount">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Announcements
-
-</div>
-
-<div
-class="currency-value"
-id="announcementCount">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Total Inventory
-
-</div>
-
-<div
-class="currency-value"
-id="inventoryCount">
-
-0
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<br>
-<!-- ==========================================
-TRANSACTION MONITOR
-========================================== -->
-
-<section
-class="card"
-id="transactions">
-
-<h2>
-
-Transaction Monitor
-
-</h2>
-
-<br>
 
 <div class="table-container">
 
+
 <table>
+
 
 <thead>
 
+
 <tr>
 
-<th>Transaction ID</th>
 
-<th>Sender</th>
+<th>
 
-<th>Receiver</th>
+Applicant
 
-<th>Currency</th>
+</th>
 
-<th>Amount</th>
 
-<th>Type</th>
+<th>
 
-<th>Date</th>
+Business
+
+</th>
+
+
+<th>
+
+Kingdom
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Action
+
+</th>
+
 
 </tr>
+
 
 </thead>
 
-<tbody
-id="transactionTable">
+
+
+
+<tbody id="sellerApprovalTable">
+
 
 <tr>
 
-<td colspan="7">
 
-Loading Transactions...
+<td colspan="5">
+
+Loading applications...
 
 </td>
 
+
 </tr>
+
 
 </tbody>
 
+
+
 </table>
 
+
 </div>
+
+
 
 </section>
 
-<br>
 
-<!-- ==========================================
-USER WALLET MANAGER
-========================================== -->
 
-<section
-class="card">
 
-<h2>
 
-User Wallet Manager
+
+
+
+<!-- =====================================
+     PRODUCT APPROVAL
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📦 Product Review
 
 </h2>
 
-<br>
 
-<form
-id="walletEditorForm">
 
-<div class="dashboard-grid">
 
-<div>
+<div class="table-container">
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+Product
+
+</th>
+
+
+<th>
+
+Seller
+
+</th>
+
+
+<th>
+
+Price
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Action
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="productApprovalTable">
+
+
+<tr>
+
+
+<td colspan="5">
+
+Loading products...
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     AUCTION APPROVAL
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+⚔️ Auction Administration
+
+</h2>
+
+
+
+
+<div class="table-container">
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+Item
+
+</th>
+
+
+<th>
+
+Owner
+
+</th>
+
+
+<th>
+
+Starting Bid
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Action
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="auctionApprovalTable">
+
+
+<tr>
+
+
+<td colspan="5">
+
+Loading auctions...
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     KINGDOM CREATION
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+🏰 Create New Kingdom
+
+</h2>
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
-User ID
+Kingdom Name
 
 </label>
+
+
 
 <input
-type="text"
-id="walletUserId">
+
+id="newKingdomName"
+
+placeholder="Kingdom name"
+
+>
+
 
 </div>
 
-<div>
+
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
-Currency
+Ruler Name
 
 </label>
 
-<select
-id="walletCurrency">
 
-<option>Lumen</option>
-<option>Aurel</option>
-<option>Virel</option>
-<option>Sylem</option>
-<option>Bront</option>
-
-</select>
-
-</div>
-
-<div>
-
-<label>
-
-Amount
-
-</label>
 
 <input
-type="number"
-id="walletAmount">
+
+id="newKingdomRuler"
+
+placeholder="Ruler"
+
+>
+
 
 </div>
 
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Description
+
+</label>
+
+
+
+<textarea
+
+id="newKingdomDescription"
+
+placeholder="Kingdom history..."
+
+></textarea>
+
+
 </div>
 
-<br>
+
+
+
+
 
 <button
-type="button"
-id="walletAdd">
 
-Add</button>
+class="btn"
 
-<button
-type="button"
-id="walletRemove">
+onclick="createNewKingdom()"
 
-Remove</button>
+>
 
-</form>
+🏰 Establish Kingdom
+
+</button>
+
+
+
+
+<div id="kingdomMessage"></div>
+
+
 
 </section>
 
-<br>
 
-<!-- ==========================================
-SYSTEM TOOLS
-========================================== -->
 
-<section
-class="card">
 
-<h2>
 
-Creator Tools
+
+
+
+
+<!-- =====================================
+     SYSTEM CONTROL
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+🔥 System Control
 
 </h2>
 
-<br>
 
-<div class="dashboard-grid">
 
-<div class="card">
 
-<h3>
 
-👥 Refresh Users
+<div class="creator-action">
 
-</h3>
 
-<br>
+
+
 
 <button
-id="refreshUsers">
 
-Refresh
+class="btn-dark"
+
+onclick="refreshSystem()"
+
+>
+
+🔄 Refresh Data
 
 </button>
 
-</div>
 
-<div class="card">
 
-<h3>
 
-📦 Refresh Products
 
-</h3>
-
-<br>
 
 <button
-id="refreshProducts">
 
-Refresh
+class="btn-danger"
+
+onclick="systemReset()"
+
+>
+
+⚠️ Reset System
 
 </button>
 
-</div>
 
-<div class="card">
 
-<h3>
 
-⚔ Refresh Auctions
 
-</h3>
-
-<br>
 
 <button
-id="refreshAuctions">
 
-Refresh
+class="btn-dark"
+
+onclick="viewLogs()"
+
+>
+
+📜 View Logs
 
 </button>
 
-</div>
 
-<div class="card">
 
-<h3>
 
-📢 Refresh Announcements
-
-</h3>
-
-<br>
-
-<button
-id="refreshAnnouncements">
-
-Refresh
-
-</button>
 
 </div>
 
-</div>
+
 
 </section>
+<!-- =====================================
+     CREATOR SCRIPT
+===================================== -->
 
-<br>
-
-<!-- ==========================================
-SYSTEM LOG
-========================================== -->
-
-<section
-class="card">
-
-<h2>
-
-System Log
-
-</h2>
-
-<br>
-
-<div
-id="systemLog"
-style="height:250px;
-overflow:auto;
-background:#111;
-padding:15px;
-border-radius:10px;">
-
-<p>
-
-Creator dashboard initialized...
-
-</p>
-
-</div>
-
-</section>
-
-<br>
-
-<footer
-style="text-align:center;padding:30px;">
-
-<hr>
-
-<br>
-
-<p>
-
-Luxemneaux Empire Administration Panel
-
-</p>
-
-<p>
-
-Creator Access Only
-
-</p>
-
-</footer>
-
-</main>
-
-</div>
 
 <script src="api.js"></script>
 
+
+
 <script>
 
-const CURRENT_USER=
 
-JSON.parse(
+/* =====================================
+   LOAD CREATOR DASHBOARD
+===================================== */
 
-localStorage.getItem(
 
-"CURRENT_USER"
+async function loadCreatorDashboard(){
 
-)
+
+
+const user =
+
+currentUser();
+
+
+
+
+
+if(!user){
+
+
+
+window.location.href =
+
+"index.html";
+
+
+
+return;
+
+
+}
+
+
+
+
+
+if(
+user.role !== "Creator"
+){
+
+
+
+alert(
+
+"⚠️ Creator access only."
 
 );
 
-if(!CURRENT_USER){
 
-location.href="index.html";
+
+window.location.href =
+
+"index.html";
+
+
+
+return;
+
 
 }
+
+
+
+
 
 document
 .getElementById(
-"logoutBtn"
+"creatorName"
 )
-.onclick=function(){
+.innerText =
 
-localStorage.removeItem(
-"CURRENT_USER"
-);
 
-location.href="index.html";
+user.username;
 
-};
 
-function log(message){
 
-const logBox=
-document.getElementById(
-"systemLog"
-);
 
-logBox.innerHTML+=
-"<p>"+message+"</p>";
 
-logBox.scrollTop=
-logBox.scrollHeight;
+document
+.getElementById(
+"creatorUsername"
+)
+.innerText =
+
+
+user.roleplayName;
+
+
+
+
+
+
+await loadCreatorStats();
+
+
+
+await loadUsers();
+
+
+
+await loadSellerApplications();
+
+
+
+await loadProducts();
+
+
+
+await loadAuctions();
+
+
 
 }
+
+
+
+
+
+
+
+
+
+/* =====================================
+   STATISTICS
+===================================== */
+
+
+async function loadCreatorStats(){
+
+
+
+const result =
+
+await getSystemStats();
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+document
+.getElementById(
+"totalUsers"
+)
+.innerText =
+
+result.users;
+
+
+
+document
+.getElementById(
+"totalSellers"
+)
+.innerText =
+
+result.sellers;
+
+
+
+document
+.getElementById(
+"totalCurrency"
+)
+.innerText =
+
+result.currency;
+
+
+
+document
+.getElementById(
+"totalAuctions"
+)
+.innerText =
+
+result.auctions;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   USER MANAGEMENT
+===================================== */
+
+
 async function loadUsers(){
 
-    const result =
-    await getAllUsers();
 
-    const table =
-    document.getElementById(
-        "usersTable"
-    );
 
-    table.innerHTML="";
+const result =
 
-    if(!result.success){
+await getUsers();
 
-        table.innerHTML=
-        `<tr>
-            <td colspan="7">
-                Unable to load users.
-            </td>
-        </tr>`;
 
-        return;
-    }
 
-    let members=0;
-    let sellers=0;
 
-    result.data.forEach(user=>{
 
-        if(user.role==="Seller") sellers++;
-        else if(user.role!=="Creator") members++;
+const table =
 
-        table.innerHTML+=`
+document
+.getElementById(
+"userTable"
+);
 
-        <tr>
 
-            <td>${user.userId}</td>
 
-            <td>${user.username}</td>
 
-            <td>${user.roleplayName}</td>
 
-            <td>${user.role}</td>
+table.innerHTML = "";
 
-            <td>${user.kingdom}</td>
 
-            <td>${user.status}</td>
 
-            <td>
 
-                <button
-                onclick="changeStatus('${user.userId}','Active')">
 
-                Activate
+result.data.forEach(
 
-                </button>
+user=>{
 
-                <button
-                onclick="changeStatus('${user.userId}','Suspended')">
 
-                Suspend
 
-                </button>
+table.innerHTML +=
 
-            </td>
 
-        </tr>
+`
 
-        `;
+<tr>
 
-    });
 
-    document.getElementById(
-        "memberCount"
-    ).textContent=members;
+<td>
 
-    document.getElementById(
-        "sellerCount"
-    ).textContent=sellers;
+${user.userId}
 
-    log("Users loaded.");
+</td>
+
+
+
+<td>
+
+${user.username}
+
+</td>
+
+
+
+<td>
+
+${user.role}
+
+</td>
+
+
+
+<td>
+
+${user.status}
+
+</td>
+
+
+
+<td>
+
+
+<button
+
+class="btn-danger"
+
+onclick="deleteUser('${user.userId}')"
+
+>
+
+🗑️ Delete
+
+</button>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+}
+
+);
+
+
 
 }
 
@@ -1469,26 +1834,29 @@ async function loadUsers(){
 
 
 
+async function deleteUser(id){
 
 
-async function changeStatus(userId,status){
 
-    const result=
-    await updateUserStatus({
+if(
+!confirm(
+"Delete user?"
+)
 
-        userId,
+)
+return;
 
-        status
 
-    });
 
-    alert(result.message);
 
-    if(result.success){
 
-        loadUsers();
+await removeUser(id);
 
-    }
+
+
+loadUsers();
+
+
 
 }
 
@@ -1499,63 +1867,272 @@ async function changeStatus(userId,status){
 
 
 
+/* =====================================
+   CURRENCY CONTROL
+===================================== */
+
+
+async function addCurrency(){
+
+
+
+const result =
+
+await modifyCurrency(
+
+document
+.getElementById(
+"currencyUserId"
+)
+.value,
+
+
+document
+.getElementById(
+"currencyType"
+)
+.value,
+
+
+document
+.getElementById(
+"currencyAmount"
+)
+.value,
+
+
+"ADD"
+
+);
+
+
+
+
+showCurrencyMessage(result);
+
+
+
+}
+
+
+
+
+
+
+
+async function removeCurrency(){
+
+
+
+const result =
+
+await modifyCurrency(
+
+document
+.getElementById(
+"currencyUserId"
+)
+.value,
+
+
+document
+.getElementById(
+"currencyType"
+)
+.value,
+
+
+document
+.getElementById(
+"currencyAmount"
+)
+.value,
+
+
+"REMOVE"
+
+);
+
+
+
+showCurrencyMessage(result);
+
+
+
+}
+
+
+
+
+
+
+
+
+function showCurrencyMessage(result){
+
+
+
+document
+.getElementById(
+"currencyMessage"
+)
+.innerHTML =
+
+
+
+`
+
+<div class="alert">
+
+${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   SELLER APPROVAL
+===================================== */
 
 
 async function loadSellerApplications(){
 
-    const result=
-    await getSellerApplications();
 
-    const table=
-    document.getElementById(
-        "sellerApplicationTable"
-    );
 
-    table.innerHTML="";
+const result =
 
-    if(!result.success){
+await getSellerApplications();
 
-        table.innerHTML=
-        `<tr><td colspan="6">
-        Unable to load.
-        </td></tr>`;
 
-        return;
 
-    }
 
-    result.data.forEach(app=>{
 
-        table.innerHTML+=`
+const table =
 
-        <tr>
+document
+.getElementById(
+"sellerApprovalTable"
+);
 
-            <td>${app.applicationId}</td>
 
-            <td>${app.userId}</td>
 
-            <td>${app.businessName}</td>
 
-            <td>${app.description}</td>
 
-            <td>${app.status}</td>
+table.innerHTML="";
 
-            <td>
 
-                <button
-                onclick="approveSellerAction('${app.applicationId}')">
 
-                Approve
 
-                </button>
 
-            </td>
+result.data.forEach(
 
-        </tr>
+seller=>{
 
-        `;
 
-    });
+
+table.innerHTML +=
+
+
+
+`
+
+<tr>
+
+
+<td>
+
+${seller.owner}
+
+</td>
+
+
+
+<td>
+
+${seller.businessName}
+
+</td>
+
+
+
+<td>
+
+${seller.kingdom}
+
+</td>
+
+
+
+<td>
+
+${seller.status}
+
+</td>
+
+
+
+<td>
+
+
+<button
+
+class="btn"
+
+onclick="approveSeller('${seller.id}')"
+
+>
+
+✅ Approve
+
+</button>
+
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+}
+
+);
+
+
+
+}
+
+
+
+
+
+
+async function approveSeller(id){
+
+
+
+await approveSellerRequest(id);
+
+
+
+loadSellerApplications();
+
+
 
 }
 
@@ -1566,91 +2143,140 @@ async function loadSellerApplications(){
 
 
 
-
-
-async function approveSellerAction(id){
-
-    const result=
-    await approveSeller({
-
-        applicationId:id
-
-    });
-
-    alert(result.message);
-
-    loadSellerApplications();
-
-    loadUsers();
-
-}
-
-
-
-
-
-
-
-
+/* =====================================
+   PRODUCTS
+===================================== */
 
 
 async function loadProducts(){
 
-    const result=
-    await getMarketplace();
 
-    const table=
-    document.getElementById(
-        "productApprovalTable"
-    );
 
-    table.innerHTML="";
+const result =
 
-    if(!result.success){
+await getPendingProducts();
 
-        return;
 
-    }
 
-    document.getElementById(
-        "productCount"
-    ).textContent=
-    result.data.length;
 
-    result.data.forEach(product=>{
 
-        table.innerHTML+=`
+const table =
 
-        <tr>
+document
+.getElementById(
+"productApprovalTable"
+);
 
-        <td>${product.productName}</td>
 
-        <td>${product.businessName}</td>
 
-        <td>${product.category}</td>
 
-        <td>${product.price}</td>
 
-        <td>${product.stock}</td>
+table.innerHTML="";
 
-        <td>${product.status}</td>
 
-        <td>
 
-        <button
-        onclick="approveProductAction('${product.productId}')">
 
-        Approve
 
-        </button>
+result.data.forEach(
 
-        </td>
+product=>{
 
-        </tr>
 
-        `;
 
-    });
+table.innerHTML +=
+
+
+
+`
+
+<tr>
+
+
+<td>
+
+${product.productName}
+
+</td>
+
+
+
+<td>
+
+${product.seller}
+
+</td>
+
+
+
+<td>
+
+${product.price}
+
+</td>
+
+
+
+<td>
+
+${product.status}
+
+</td>
+
+
+
+<td>
+
+
+<button
+
+class="btn"
+
+onclick="approveProduct('${product.id}')"
+
+>
+
+✅ Approve
+
+</button>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+}
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+async function approveProduct(id){
+
+
+
+await approveProductRequest(id);
+
+
+
+loadProducts();
+
+
 
 }
 
@@ -1661,89 +2287,138 @@ async function loadProducts(){
 
 
 
-
-
-async function approveProductAction(id){
-
-    const result=
-    await approveProduct({
-
-        productId:id
-
-    });
-
-    alert(result.message);
-
-    loadProducts();
-
-}
-
-
-
-
-
-
-
-
+/* =====================================
+   AUCTIONS
+===================================== */
 
 
 async function loadAuctions(){
 
-    const result=
-    await getAuctions();
 
-    const table=
-    document.getElementById(
-        "auctionApprovalTable"
-    );
 
-    table.innerHTML="";
+const result =
 
-    if(!result.success){
+await getPendingAuctions();
 
-        return;
 
-    }
 
-    document.getElementById(
-        "auctionCount"
-    ).textContent=
-    result.data.length;
 
-    result.data.forEach(item=>{
 
-        table.innerHTML+=`
+const table =
 
-        <tr>
+document
+.getElementById(
+"auctionApprovalTable"
+);
 
-        <td>${item.itemName}</td>
 
-        <td>${item.ownerName}</td>
 
-        <td>${item.startingPrice}</td>
 
-        <td>${item.currency}</td>
 
-        <td>${item.currentBid}</td>
+table.innerHTML="";
 
-        <td>Pending</td>
 
-        <td>
 
-        <button
-        onclick="approveAuctionAction('${item.auctionId}')">
 
-        Approve
 
-        </button>
+result.data.forEach(
 
-        </td>
+auction=>{
 
-        </tr>
 
-        `;
 
-    });
+table.innerHTML +=
+
+
+
+`
+
+<tr>
+
+
+<td>
+
+${auction.itemName}
+
+</td>
+
+
+
+<td>
+
+${auction.owner}
+
+</td>
+
+
+
+<td>
+
+${auction.startingBid}
+
+</td>
+
+
+
+<td>
+
+${auction.status}
+
+</td>
+
+
+
+<td>
+
+
+<button
+
+class="btn"
+
+onclick="approveAuction('${auction.id}')"
+
+>
+
+⚔️ Approve
+
+</button>
+
+
+
+</td>
+
+
+</tr>
+
+
+`;
+
+
+
+}
+
+);
+
+
+
+}
+
+
+
+
+
+
+async function approveAuction(id){
+
+
+
+await approveAuctionRequest(id);
+
+
+
+loadAuctions();
+
+
 
 }
 
@@ -1755,19 +2430,136 @@ async function loadAuctions(){
 
 
 
+/* =====================================
+   KINGDOM CREATION
+===================================== */
 
-async function approveAuctionAction(id){
 
-    const result=
-    await approveAuction({
+async function createNewKingdom(){
 
-        auctionId:id
 
-    });
 
-    alert(result.message);
+const result =
 
-    loadAuctions();
+await createKingdom({
+
+
+name:
+
+document
+.getElementById(
+"newKingdomName"
+)
+.value,
+
+
+ruler:
+
+document
+.getElementById(
+"newKingdomRuler"
+)
+.value,
+
+
+description:
+
+document
+.getElementById(
+"newKingdomDescription"
+)
+.value
+
+
+
+});
+
+
+
+
+
+document
+.getElementById(
+"kingdomMessage"
+)
+.innerHTML =
+
+
+`
+
+<div class="alert">
+
+${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   SYSTEM TOOLS
+===================================== */
+
+
+function refreshSystem(){
+
+
+location.reload();
+
+
+}
+
+
+
+
+
+function systemReset(){
+
+
+
+if(
+confirm(
+"⚠️ Reset entire system?"
+)
+
+){
+
+
+
+resetSystem();
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+function viewLogs(){
+
+
+
+alert(
+
+"📜 Imperial logs opened."
+
+);
+
+
 
 }
 
@@ -1778,147 +2570,61 @@ async function approveAuctionAction(id){
 
 
 
+/* =====================================
+   START
+===================================== */
 
 
-document.getElementById(
-"addCurrencyBtn"
-).onclick=async()=>{
+window.onload = function(){
 
-    const result=
-    await addCurrency({
 
-        userId:
-        currencyUserId.value,
 
-        currency:
-        currencyType.value,
+loadCreatorDashboard();
 
-        amount:
-        Number(currencyAmount.value)
 
-    });
-
-    alert(result.message);
-
-};
-
-document.getElementById(
-"removeCurrencyBtn"
-).onclick=async()=>{
-
-    const result=
-    await removeCurrency({
-
-        userId:
-        currencyUserId.value,
-
-        currency:
-        currencyType.value,
-
-        amount:
-        Number(currencyAmount.value)
-
-    });
-
-    alert(result.message);
 
 };
 
 
-
-
-
-
-
-
-
-
-document.getElementById(
-"kingdomForm"
-).addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-    const result=
-    await createKingdom({
-
-        kingdomName:
-        kingdomName.value,
-
-        description:
-        kingdomDescription.value
-
-    });
-
-    alert(result.message);
-
-    this.reset();
-
-});
-
-
-
-
-
-
-
-
-
-
-document.getElementById(
-"announcementForm"
-).addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-    const result=
-    await createAnnouncement({
-
-        title:
-        announcementTitle.value,
-
-        message:
-        announcementMessage.value
-
-    });
-
-    alert(result.message);
-
-    this.reset();
-
-});
-
-
-
-
-
-
-
-
-
-
-window.onload=async()=>{
-
-    log("Loading dashboard...");
-
-    await loadUsers();
-
-    await loadSellerApplications();
-
-    await loadProducts();
-
-    await loadAuctions();
-
-    log("Creator dashboard ready.");
-
-};
 
 </script>
 
+
+
+
+
+<footer class="footer">
+
+
+<p>
+
+⚜️ Luxemneaux Imperial Creator Authority ⚜️
+
+</p>
+
+
+<p>
+
+👑 Protect • Manage • Expand the Empire
+
+</p>
+
+
+</footer>
+
+
+
+
+
+</main>
+
+
+</div>
+
+
+
+
 </body>
+
 
 </html>
