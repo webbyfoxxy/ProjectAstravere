@@ -7,9 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roleplay Bank | Seller Dashboard</title>
-
-<link rel="stylesheet" href="style.css">
+<title>Seller Dashboard - Roleplay Bank</title>
 
 <link rel="stylesheet" href="dashboard.css">
 
@@ -19,54 +17,7 @@
 <body>
 
 
-<div class="dashboard-layout">
-
-
-
-<div class="sidebar">
-
-
-<h2>
-Roleplay Bank
-</h2>
-
-
-<a href="seller-dashboard.html">
-Dashboard
-</a>
-
-
-<a href="marketplace.html">
-Marketplace
-</a>
-
-
-<a href="auction.html">
-Auctions
-</a>
-
-
-<a href="#">
-Inventory
-</a>
-
-
-<a href="#">
-Transactions
-</a>
-
-
-<a href="index.html" onclick="logout()">
-Logout
-</a>
-
-
-</div>
-
-
-
-
-<div class="dashboard-content">
+<div class="dashboard">
 
 
 <h1>
@@ -76,7 +27,44 @@ Seller Dashboard
 
 
 
-<div class="card">
+<div id="profile">
+
+Loading...
+
+</div>
+
+
+
+
+
+<h2>
+Seller Application
+</h2>
+
+
+<input
+id="shopName"
+placeholder="Shop Name"
+>
+
+
+<textarea
+id="shopDescription"
+placeholder="Shop Description">
+</textarea>
+
+
+
+<button onclick="applyForSeller()">
+
+Apply Seller
+
+</button>
+
+
+
+
+
 
 
 <h2>
@@ -87,45 +75,45 @@ Create Product
 
 <input
 id="productName"
-placeholder="Product Name">
+placeholder="Product Name"
+>
 
 
 
 <input
 id="category"
-placeholder="Category">
+placeholder="Category"
+>
 
 
 
 <textarea
 id="description"
-placeholder="Product Description">
+placeholder="Description">
 </textarea>
+
 
 
 
 <input
 id="price"
 type="number"
-placeholder="Price">
+placeholder="Price"
+>
+
 
 
 
 <input
 id="stock"
 type="number"
-placeholder="Stock Quantity">
+placeholder="Stock"
+>
 
 
 
-<input
-id="tax"
-type="number"
-placeholder="Tax">
 
-
-
-<button onclick="createNewProduct()">
+<button onclick="submitProduct()">
 
 Submit Product
 
@@ -133,59 +121,40 @@ Submit Product
 
 
 
-<div id="productMessage"></div>
-
-
-</div>
 
 
 
 
-
-<div class="card">
-
-
-<h2>
-My Products
-</h2>
+<br><br>
 
 
-<div id="products">
 
-Loading...
+<button onclick="goMarketplace()">
 
-</div>
+Marketplace
 
-
-</div>
+</button>
 
 
 
 
+<button onclick="logout()">
 
-<div class="card">
+Logout
 
-
-<h2>
-Inventory
-</h2>
+</button>
 
 
-<div id="inventory">
 
-Loading...
-
-</div>
-
-
-</div>
+<p id="message"></p>
 
 
 
 </div>
 
 
-</div>
+
+
 
 
 
@@ -197,16 +166,7 @@ Loading...
 
 
 const user =
-
-JSON.parse(
-
-localStorage.getItem(
-
-"currentUser"
-
-)
-
-);
+getSession();
 
 
 
@@ -223,137 +183,42 @@ window.location.href =
 
 
 
-async function loadSellerDashboard(){
+
+async function loadSeller(){
 
 
 
-const result =
-
-await apiRequest(
-
-"sellerDashboard",
-
-{
-
-userId:user.userId
-
-}
-
+const profile =
+await getProfile(
+user.userId
 );
 
 
 
-if(!result.success){
 
-return;
-
-}
+if(profile.success){
 
 
 
-
-let productHTML = "";
-
-
-
-result.data.products.forEach(product=>{
-
-
-productHTML += `
-
-
-<div class="product-card">
+document.getElementById(
+"profile"
+).innerHTML = `
 
 
 <h3>
-
-${product.name}
-
+${profile.data.roleplayName}
 </h3>
 
 
 <p>
-
-Category:
-
-${product.category}
-
+Role:
+${profile.data.role}
 </p>
 
 
 <p>
-
-Price:
-
-${product.price}
-
-</p>
-
-
-<p>
-
-Stock:
-
-${product.stock}
-
-</p>
-
-
-<p>
-
-Status:
-
-${product.status}
-
-</p>
-
-
-</div>
-
-
-`;
-
-
-
-});
-
-
-
-document.getElementById(
-
-"products"
-
-).innerHTML =
-
-productHTML ||
-
-"No products yet.";
-
-
-
-
-
-
-let inventoryHTML = "";
-
-
-
-result.data.inventory.forEach(item=>{
-
-
-inventoryHTML += `
-
-
-<p>
-
-${item.itemName}
-
-x
-
-${item.quantity}
-
-(${item.category})
-
+User ID:
+${profile.data.userId}
 </p>
 
 
@@ -361,21 +226,7 @@ ${item.quantity}
 
 
 
-});
-
-
-
-document.getElementById(
-
-"inventory"
-
-).innerHTML =
-
-inventoryHTML ||
-
-"No inventory items.";
-
-
+}
 
 
 
@@ -384,78 +235,32 @@ inventoryHTML ||
 
 
 
-async function createNewProduct(){
+
+
+
+
+
+async function applyForSeller(){
 
 
 
 const result =
-
-await createProduct({
-
+await applySeller({
 
 
-sellerId:user.userId,
+userId:
+user.userId,
 
 
-sellerName:user.roleplayName,
-
-
-productName:
-
+shopName:
 document.getElementById(
-
-"productName"
-
+"shopName"
 ).value,
-
-
-
-category:
-
-document.getElementById(
-
-"category"
-
-).value,
-
 
 
 description:
-
 document.getElementById(
-
-"description"
-
-).value,
-
-
-
-price:
-
-document.getElementById(
-
-"price"
-
-).value,
-
-
-
-stock:
-
-document.getElementById(
-
-"stock"
-
-).value,
-
-
-
-tax:
-
-document.getElementById(
-
-"tax"
-
+"shopDescription"
 ).value
 
 
@@ -464,20 +269,12 @@ document.getElementById(
 
 
 
+
+
 document.getElementById(
-
-"productMessage"
-
+"message"
 ).innerHTML =
-
-
-result.message ||
-
-"Product submitted.";
-
-
-
-loadSellerDashboard();
+result.message;
 
 
 
@@ -487,27 +284,107 @@ loadSellerDashboard();
 
 
 
-function logout(){
 
 
-localStorage.removeItem(
 
-"currentUser"
 
+async function submitProduct(){
+
+
+
+const profile =
+await getProfile(
+user.userId
 );
 
 
+
+
+
+const result =
+await createProduct({
+
+
+sellerId:
+user.userId,
+
+
+sellerName:
+profile.data.roleplayName,
+
+
+productName:
+document.getElementById(
+"productName"
+).value,
+
+
+category:
+document.getElementById(
+"category"
+).value,
+
+
+description:
+document.getElementById(
+"description"
+).value,
+
+
+price:
+document.getElementById(
+"price"
+).value,
+
+
+stock:
+document.getElementById(
+"stock"
+).value
+
+
+
+});
+
+
+
+
+
+document.getElementById(
+"message"
+).innerHTML =
+result.message;
+
+
+
 }
 
 
 
 
-loadSellerDashboard();
+
+
+
+
+function goMarketplace(){
+
+
+window.location.href =
+"marketplace.html";
+
+
+}
+
+
+
+
+
+
+loadSeller();
 
 
 
 </script>
-
 
 
 </body>
