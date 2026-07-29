@@ -7,9 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roleplay Bank | Auctions</title>
-
-<link rel="stylesheet" href="style.css">
+<title>Auction - Roleplay Bank</title>
 
 <link rel="stylesheet" href="dashboard.css">
 
@@ -19,136 +17,19 @@
 <body>
 
 
-<div class="dashboard-layout">
-
-
-
-<div class="sidebar">
-
-
-<h2>
-Roleplay Bank
-</h2>
-
-
-
-<a href="member-dashboard.html">
-Dashboard
-</a>
-
-
-<a href="marketplace.html">
-Marketplace
-</a>
-
-
-<a href="auction.html">
-Auctions
-</a>
-
-
-<a href="#">
-Inventory
-</a>
-
-
-<a href="#">
-Transactions
-</a>
-
-
-
-<a href="index.html" onclick="logout()">
-
-Logout
-
-</a>
-
-
-</div>
-
-
-
-
-
-<div class="dashboard-content">
-
+<div class="dashboard">
 
 
 <h1>
-Auction Hall
+Adonia Auction Hall
 </h1>
 
 
+<p>
+Bid on rare items from other members
+</p>
 
 
-
-<div class="card">
-
-
-<h2>
-Create Auction
-</h2>
-
-
-
-<input
-id="itemName"
-placeholder="Item Name">
-
-
-
-<input
-id="category"
-placeholder="Category">
-
-
-
-<textarea
-id="description"
-placeholder="Item Description">
-</textarea>
-
-
-
-<input
-id="startingPrice"
-type="number"
-placeholder="Starting Price (Lumen)">
-
-
-
-<input
-id="endDate"
-type="date">
-
-
-
-<button onclick="submitAuction()">
-
-Create Auction
-
-</button>
-
-
-
-<div id="auctionMessage"></div>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h2>
-Active Auctions
-</h2>
 
 
 
@@ -160,16 +41,33 @@ Loading auctions...
 
 
 
+
+
+<button onclick="goDashboard()">
+
+Back Dashboard
+
+</button>
+
+
+
+
+<button onclick="logout()">
+
+Logout
+
+</button>
+
+
+
+
+<p id="message"></p>
+
+
+
 </div>
 
 
-
-
-
-</div>
-
-
-</div>
 
 
 
@@ -183,16 +81,8 @@ Loading auctions...
 
 
 const user =
+getSession();
 
-JSON.parse(
-
-localStorage.getItem(
-
-"currentUser"
-
-)
-
-);
 
 
 
@@ -210,27 +100,15 @@ window.location.href =
 
 
 
-async function loadAuctionsPage(){
+
+
+async function loadAuctions(){
 
 
 
 const result =
+await getAuctions();
 
-await apiRequest(
-
-"getAuctions"
-
-);
-
-
-
-if(!result.success){
-
-
-return;
-
-
-}
 
 
 
@@ -238,28 +116,34 @@ let html = "";
 
 
 
-result.data.forEach(auction=>{
+
+
+if(result.success){
+
+
+
+result.data.forEach(item=>{
+
 
 
 html += `
 
 
-<div class="auction-card">
+<div class="card">
 
 
-<h2>
+<h3>
 
-${auction.itemName}
+${item[3]}
 
-</h2>
+</h3>
 
 
 
 <p>
 
-Category:
-
-${auction.category}
+Owner:
+${item[2]}
 
 </p>
 
@@ -267,9 +151,8 @@ ${auction.category}
 
 <p>
 
-Owner:
-
-${auction.ownerName}
+Category:
+${item[4]}
 
 </p>
 
@@ -278,8 +161,7 @@ ${auction.ownerName}
 <p>
 
 Description:
-
-${auction.description}
+${item[5]}
 
 </p>
 
@@ -287,10 +169,8 @@ ${auction.description}
 
 <p>
 
-Current Bid:
-
-${auction.highestBid}
-
+Starting Price:
+${item[6]}
 Lumen
 
 </p>
@@ -299,25 +179,37 @@ Lumen
 
 <p>
 
-End Date:
-
-${auction.endDate}
+Current Bid:
+${item[7]}
+Lumen
 
 </p>
 
 
 
+<p>
+
+Highest Bidder:
+${item[8] || "None"}
+
+</p>
+
+
+
+
 <input
 
-id="bid-${auction.auctionId}"
+id="bid-${item[0]}"
 
 type="number"
 
-placeholder="Your Bid">
+placeholder="Enter bid amount"
+
+>
 
 
 
-<button onclick="placeAuctionBid('${auction.auctionId}')">
+<button onclick="placeBid('${item[0]}')">
 
 Bid
 
@@ -339,103 +231,16 @@ Bid
 
 
 
-document.getElementById(
+}
 
+
+
+
+
+document.getElementById(
 "auctions"
-
 ).innerHTML =
-
-
-html ||
-
-"No active auctions.";
-
-}
-
-
-
-
-
-async function submitAuction(){
-
-
-
-const result =
-
-await createAuction({
-
-
-
-userId:user.userId,
-
-
-ownerName:user.roleplayName,
-
-
-itemName:
-
-document.getElementById(
-
-"itemName"
-
-).value,
-
-
-
-category:
-
-document.getElementById(
-
-"category"
-
-).value,
-
-
-
-description:
-
-document.getElementById(
-
-"description"
-
-).value,
-
-
-
-startingPrice:
-
-document.getElementById(
-
-"startingPrice"
-
-).value,
-
-
-
-endDate:
-
-document.getElementById(
-
-"endDate"
-
-).value
-
-
-
-});
-
-
-
-document.getElementById(
-
-"auctionMessage"
-
-).innerHTML =
-
-
-result.message ||
-
-"Auction submitted for approval.";
+html || "No auctions available.";
 
 
 
@@ -445,34 +250,36 @@ result.message ||
 
 
 
-async function placeAuctionBid(id){
+
+
+
+
+async function placeBid(auctionId){
 
 
 
 const amount =
-
 document.getElementById(
-
-"bid-" + id
-
+"bid-" + auctionId
 ).value;
 
 
 
 
+
+
 const result =
-
-await placeBid({
-
+await bidAuction({
 
 
-auctionId:id,
+
+auctionId:auctionId,
 
 
 userId:user.userId,
 
 
-bidAmount:amount
+amount:amount
 
 
 
@@ -480,17 +287,18 @@ bidAmount:amount
 
 
 
-alert(
-
-result.message ||
-
-"Bid placed."
-
-);
 
 
+document.getElementById(
+"message"
+).innerHTML =
+result.message;
 
-loadAuctionsPage();
+
+
+
+
+loadAuctions();
 
 
 
@@ -500,14 +308,41 @@ loadAuctionsPage();
 
 
 
-function logout(){
 
 
-localStorage.removeItem(
 
-"currentUser"
 
-);
+function goDashboard(){
+
+
+
+if(user.role === "Creator"){
+
+
+window.location.href =
+"creator-dashboard.html";
+
+
+}
+
+else if(user.role === "Seller"){
+
+
+window.location.href =
+"seller-dashboard.html";
+
+
+}
+
+else{
+
+
+window.location.href =
+"member-dashboard.html";
+
+
+}
+
 
 
 }
@@ -515,12 +350,13 @@ localStorage.removeItem(
 
 
 
-loadAuctionsPage();
+
+
+loadAuctions();
 
 
 
 </script>
-
 
 
 </body>
