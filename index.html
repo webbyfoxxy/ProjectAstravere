@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roleplay Bank | Login</title>
+<title>Roleplay Bank - Login</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,75 +17,60 @@
 <body>
 
 
-<div class="auth-container">
+<div class="login-container">
 
 
-    <div class="auth-box">
+    <h1>
+        Roleplay Bank
+    </h1>
 
 
-        <h1>
-            Roleplay Bank
-        </h1>
-
-
-        <p>
-            Aurelic Standard Banking System
-        </p>
+    <p>
+        Enter the world of Adonia
+    </p>
 
 
 
-        <input 
+    <input
         id="username"
         type="text"
-        placeholder="Username">
+        placeholder="Username"
+    >
 
 
 
-        <input 
+    <input
         id="password"
         type="password"
-        placeholder="Password">
+        placeholder="Password"
+    >
 
 
 
-        <button onclick="login()">
+    <button onclick="loginAccount()">
 
-            Enter Bank
+        Login
 
-        </button>
-
-
-
-        <div class="auth-links">
+    </button>
 
 
-            <a href="register.html">
-
-                Create Member Account
-
-            </a>
 
 
-            <br>
+    <p id="message"></p>
 
 
-            <a href="creator-register.html">
-
-                Creator Registration
-
-            </a>
 
 
-        </div>
+    <a href="register.html">
 
+        Create Account
 
-        <div id="message"></div>
-
-
-    </div>
+    </a>
 
 
 </div>
+
+
 
 
 
@@ -95,102 +80,106 @@
 <script>
 
 
-async function login(){
+async function loginAccount(){
+
 
 
     const username =
-    document.getElementById("username").value;
+    document.getElementById(
+        "username"
+    ).value;
 
 
 
     const password =
-    document.getElementById("password").value;
+    document.getElementById(
+        "password"
+    ).value;
 
 
-
-    const message =
-    document.getElementById("message");
-
-
-
-    message.innerHTML =
-    "Checking account...";
 
 
 
     const result =
-    await loginUser({
-
-        username:username,
-
-        password:password
-
-    });
+    await login(
+        username,
+        password
+    );
 
 
 
-    if(!result.success){
+
+
+    const message =
+    document.getElementById(
+        "message"
+    );
+
+
+
+
+    if(result.success){
+
+
+
+        saveSession(
+            result.data
+        );
+
+
+
+
+
+        if(result.data.role === "Creator"){
+
+
+            window.location.href =
+            "creator-dashboard.html";
+
+
+        }
+
+
+        else if(result.data.role === "Seller"){
+
+
+            window.location.href =
+            "seller-dashboard.html";
+
+
+        }
+
+
+        else{
+
+
+            window.location.href =
+            "member-dashboard.html";
+
+
+        }
+
+
+
+    }
+
+    else{
 
 
         message.innerHTML =
         result.message;
 
 
-        return;
-
     }
 
-
-
-    localStorage.setItem(
-
-        "currentUser",
-
-        JSON.stringify(result.data)
-
-    );
-
-
-
-    if(result.data.role === "Creator"){
-
-
-        window.location.href =
-        "creator-dashboard.html";
-
-
-    }
-
-
-    else if(result.data.role === "Seller"){
-
-
-        window.location.href =
-        "seller-dashboard.html";
-
-
-    }
-
-
-    else{
-
-
-        window.location.href =
-        "member-dashboard.html";
-
-
-    }
 
 
 }
-
 
 
 </script>
 
 
 </body>
-
-</html>
 
 </html>
