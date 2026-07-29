@@ -7,9 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roleplay Bank | Marketplace</title>
-
-<link rel="stylesheet" href="style.css">
+<title>Marketplace - Roleplay Bank</title>
 
 <link rel="stylesheet" href="dashboard.css">
 
@@ -19,69 +17,20 @@
 <body>
 
 
-<div class="dashboard-layout">
-
-
-
-<div class="sidebar">
-
-
-<h2>
-Roleplay Bank
-</h2>
-
-
-
-<a href="member-dashboard.html">
-Dashboard
-</a>
-
-
-<a href="marketplace.html">
-Marketplace
-</a>
-
-
-<a href="auction.html">
-Auctions
-</a>
-
-
-<a href="#">
-Inventory
-</a>
-
-
-
-<a href="index.html" onclick="logout()">
-Logout
-</a>
-
-
-
-</div>
-
-
-
-
-
-<div class="dashboard-content">
-
+<div class="dashboard">
 
 
 <h1>
-Marketplace
+Adonia Marketplace
 </h1>
 
 
+<p>
+Buy items from approved sellers
+</p>
 
 
-<div class="card">
 
-
-<h2>
-Available Products
-</h2>
 
 
 <div id="products">
@@ -91,15 +40,32 @@ Loading marketplace...
 </div>
 
 
+
+
+
+<button onclick="goDashboard()">
+
+Back Dashboard
+
+</button>
+
+
+
+
+<button onclick="logout()">
+
+Logout
+
+</button>
+
+
+
+<p id="message"></p>
+
+
 </div>
 
 
-
-</div>
-
-
-
-</div>
 
 
 
@@ -112,17 +78,11 @@ Loading marketplace...
 <script>
 
 
+
 const user =
+getSession();
 
-JSON.parse(
 
-localStorage.getItem(
-
-"currentUser"
-
-)
-
-);
 
 
 
@@ -138,52 +98,15 @@ window.location.href =
 
 
 
+
+
+
 async function loadMarketplace(){
 
 
 
 const result =
-
-await loadMarketplace();
-
-
-
-}
-
-
-
-
-
-async function displayProducts(){
-
-
-
-const result =
-
-await apiRequest(
-
-"getMarketplace"
-
-);
-
-
-
-if(!result.success){
-
-
-document.getElementById(
-
-"products"
-
-).innerHTML =
-
-"Unable to load marketplace.";
-
-
-return;
-
-
-}
+await getMarketplace();
 
 
 
@@ -193,28 +116,34 @@ let html = "";
 
 
 
+
+
+if(result.success){
+
+
+
 result.data.forEach(product=>{
+
 
 
 html += `
 
 
-<div class="product-card">
+<div class="card">
 
 
-<h2>
+<h3>
 
-${product.productName}
+${product[3]}
 
-</h2>
+</h3>
 
 
 
 <p>
 
-Category:
-
-${product.category}
+Seller:
+${product[2]}
 
 </p>
 
@@ -222,9 +151,16 @@ ${product.category}
 
 <p>
 
-Seller:
+Category:
+${product[4]}
 
-${product.sellerName}
+</p>
+
+
+
+<p>
+
+${product[5]}
 
 </p>
 
@@ -233,9 +169,7 @@ ${product.sellerName}
 <p>
 
 Price:
-
-${product.price}
-
+${product[6]}
 Lumen
 
 </p>
@@ -245,29 +179,23 @@ Lumen
 <p>
 
 Stock:
-
-${product.stock}
-
-</p>
-
-
-
-<p>
-
-${product.description}
+${product[7]}
 
 </p>
 
 
 
-<button onclick="buy('${product.productId}')">
 
-Purchase
+<button onclick="buy('${product[0]}')">
+
+Buy
 
 </button>
 
 
+
 </div>
+
 
 
 <hr>
@@ -281,22 +209,27 @@ Purchase
 
 
 
+}
+
+
+
 
 
 document.getElementById(
-
 "products"
-
 ).innerHTML =
-
-
 html || "No products available.";
 
 
 
 
 
+
 }
+
+
+
+
 
 
 
@@ -307,9 +240,7 @@ async function buy(productId){
 
 
 const result =
-
 await buyProduct({
-
 
 productId:productId,
 
@@ -317,21 +248,22 @@ productId:productId,
 userId:user.userId
 
 
+
 });
 
 
 
-alert(
-
-result.message ||
-
-"Purchase completed."
-
-);
 
 
+document.getElementById(
+"message"
+).innerHTML =
+result.message;
 
-displayProducts();
+
+
+
+loadMarketplace();
 
 
 
@@ -341,14 +273,39 @@ displayProducts();
 
 
 
-function logout(){
 
 
-localStorage.removeItem(
+function goDashboard(){
 
-"currentUser"
 
-);
+
+if(user.role === "Creator"){
+
+
+window.location.href =
+"creator-dashboard.html";
+
+
+}
+
+else if(user.role === "Seller"){
+
+
+window.location.href =
+"seller-dashboard.html";
+
+
+}
+
+else{
+
+
+window.location.href =
+"member-dashboard.html";
+
+
+}
+
 
 
 }
@@ -356,12 +313,13 @@ localStorage.removeItem(
 
 
 
-displayProducts();
+
+
+loadMarketplace();
 
 
 
 </script>
-
 
 
 </body>
