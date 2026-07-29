@@ -5,267 +5,457 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Marketplace - Roleplay Bank</title>
+<title>Imperial Marketplace | Luxemneaux Bank</title>
 
-<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="stylesheet"
+href="sidebar.css">
+
+<link rel="stylesheet"
+href="dashboard.css">
 
 </head>
 
-
 <body>
 
+<div class="dashboard-layout">
 
-<div class="dashboard">
+<!-- ==========================================
+SIDEBAR
+========================================== -->
 
+<aside class="sidebar">
 
-<h1>
-Adonia Marketplace
-</h1>
+<div class="sidebar-logo">
 
+🏛️
+
+<h2>
+
+Imperial Marketplace
+
+</h2>
 
 <p>
-Buy items from approved sellers
+
+Trade Across The Empire
+
 </p>
 
-
-
-
-
-<div id="products">
-
-Loading marketplace...
-
 </div>
 
+<div class="sidebar-profile">
 
+<h3
+id="playerName">
 
-
-
-<button onclick="goDashboard()">
-
-Back Dashboard
-
-</button>
-
-
-
-
-<button onclick="logout()">
-
-Logout
-
-</button>
-
-
-
-<p id="message"></p>
-
-
-</div>
-
-
-
-
-
-
-
-<script src="api.js"></script>
-
-
-
-<script>
-
-
-
-const user =
-getSession();
-
-
-
-
-
-if(!user){
-
-
-window.location.href =
-"index.html";
-
-
-}
-
-
-
-
-
-
-
-async function loadMarketplace(){
-
-
-
-const result =
-await getMarketplace();
-
-
-
-
-
-let html = "";
-
-
-
-
-
-if(result.success){
-
-
-
-result.data.forEach(product=>{
-
-
-
-html += `
-
-
-<div class="card">
-
-
-<h3>
-
-${product[3]}
+Loading...
 
 </h3>
 
+<p
+id="playerKingdom">
 
-
-<p>
-
-Seller:
-${product[2]}
+Kingdom
 
 </p>
-
-
-
-<p>
-
-Category:
-${product[4]}
-
-</p>
-
-
-
-<p>
-
-${product[5]}
-
-</p>
-
-
-
-<p>
-
-Price:
-${product[6]}
-Lumen
-
-</p>
-
-
-
-<p>
-
-Stock:
-${product[7]}
-
-</p>
-
-
-
-
-<button onclick="buy('${product[0]}')">
-
-Buy
-
-</button>
-
-
 
 </div>
 
+<ul class="sidebar-menu">
 
+<li>
+
+<a
+href="member-dashboard.html">
+
+🏠 Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="marketplace.html"
+class="active">
+
+🛒 Marketplace
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="auction.html">
+
+⚔ Auction Hall
+
+</a>
+
+</li>
+
+</ul>
+
+<div class="logout-btn">
+
+<a
+href="#"
+id="logoutBtn">
+
+Logout
+
+</a>
+
+</div>
+
+</aside>
+
+<!-- ==========================================
+CONTENT
+========================================== -->
+
+<main class="dashboard-content">
+
+<header class="dashboard-header">
+
+<div>
+
+<h1>
+
+Imperial Marketplace
+
+</h1>
+
+<p>
+
+Purchase goods from approved merchants.
+
+</p>
+
+</div>
+
+</header>
+
+<!-- ==========================================
+SEARCH
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Search Marketplace
+
+</h2>
+
+<br>
+
+<div class="dashboard-grid">
+
+<div>
+
+<input
+type="text"
+id="searchProduct"
+placeholder="Search products...">
+
+</div>
+
+<div>
+
+<select
+id="filterCurrency">
+
+<option value="">
+
+All Currencies
+
+</option>
+
+<option>
+
+Lumen
+
+</option>
+
+<option>
+
+Aurel
+
+</option>
+
+<option>
+
+Virel
+
+</option>
+
+<option>
+
+Sylem
+
+</option>
+
+<option>
+
+Bront
+
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<button
+id="searchButton">
+
+Search
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+MARKET PRODUCTS
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Available Products
+
+</h2>
+
+<br>
+
+<div
+class="product-grid"
+id="marketContainer">
+
+<div class="product-card">
+
+<h3>
+
+Loading Marketplace...
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+PURCHASE HISTORY
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Recent Purchases
+
+</h2>
+
+<br>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Item
+
+</th>
+
+<th>
+
+Seller
+
+</th>
+
+<th>
+
+Price
+
+</th>
+
+<th>
+
+Currency
+
+</th>
+
+<th>
+
+Date
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="purchaseHistory">
+
+<tr>
+
+<td colspan="5">
+
+No purchases.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<br>
+
+<footer
+style="text-align:center;padding:30px;">
 
 <hr>
 
+<br>
 
-`;
+<p>
 
+Luxemneaux Imperial Marketplace
 
+</p>
 
-});
+<p>
 
+Buy safely through the Imperial Banking Network.
 
+</p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="api.js"></script>
+
+<script>
+
+const CURRENT_USER =
+JSON.parse(
+localStorage.getItem(
+"CURRENT_USER"
+)
+);
+
+if(!CURRENT_USER){
+
+location.href="index.html";
 
 }
-
-
-
-
 
 document.getElementById(
-"products"
-).innerHTML =
-html || "No products available.";
+"logoutBtn"
+).onclick=function(){
 
+localStorage.removeItem(
+"CURRENT_USER"
+);
 
+location.href="index.html";
 
-
-
-
-}
-
-
-
-
-
-
-
-
-
-async function buy(productId){
-
-
-
-const result =
-await buyProduct({
-
-productId:productId,
-
-
-userId:user.userId
-
-
-
-});
-
-
-
-
+};
 
 document.getElementById(
-"message"
-).innerHTML =
-result.message;
+"playerName"
+).textContent=
+CURRENT_USER.roleplayName;
 
+document.getElementById(
+"playerKingdom"
+).textContent=
+CURRENT_USER.kingdom;
+async function loadMarketplace(){
 
+    const result =
+    await getMarketplace();
 
+    const container =
+    document.getElementById(
+        "marketContainer"
+    );
 
-loadMarketplace();
+    container.innerHTML="";
 
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
 
+        container.innerHTML=`
+
+        <div class="product-card">
+
+            <h3>
+
+                No Products Available
+
+            </h3>
+
+            <br>
+
+            <p>
+
+                There are currently no approved products.
+
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+    result.data.forEach(product=>{
+
+        createProductCard(product);
+
+    });
 
 }
 
@@ -275,39 +465,287 @@ loadMarketplace();
 
 
 
-function goDashboard(){
 
 
 
-if(user.role === "Creator"){
+function createProductCard(product){
 
+    const container =
+    document.getElementById(
+        "marketContainer"
+    );
 
-window.location.href =
-"creator-dashboard.html";
+    container.innerHTML+=`
 
+    <div class="product-card">
+
+        <h3>
+
+            ${product.productName}
+
+        </h3>
+
+        <br>
+
+        <p>
+
+            <strong>Seller:</strong>
+
+            ${product.businessName}
+
+        </p>
+
+        <p>
+
+            <strong>Category:</strong>
+
+            ${product.category}
+
+        </p>
+
+        <p>
+
+            ${product.description}
+
+        </p>
+
+        <br>
+
+        <div class="product-price">
+
+            ${product.price}
+
+            ${product.currency}
+
+        </div>
+
+        <p>
+
+            Stock:
+
+            ${product.stock}
+
+        </p>
+
+        <br>
+
+        <button
+
+        onclick="buyProduct('${product.productId}')">
+
+        Purchase
+
+        </button>
+
+    </div>
+
+    `;
 
 }
 
-else if(user.role === "Seller"){
 
 
-window.location.href =
-"seller-dashboard.html";
 
+
+
+
+
+
+
+async function buyProduct(productId){
+
+    const confirmed =
+
+    confirm(
+
+    "Purchase this product?"
+
+    );
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+    const result =
+    await purchaseProduct({
+
+        buyerId:
+        CURRENT_USER.userId,
+
+        productId:
+        productId
+
+    });
+
+    alert(
+        result.message
+    );
+
+    if(result.success){
+
+        loadMarketplace();
+
+        loadPurchaseHistory();
+
+    }
 
 }
 
-else{
 
 
-window.location.href =
-"member-dashboard.html";
 
+
+
+
+
+
+
+function filterMarketplace(){
+
+    const search =
+
+    document
+    .getElementById(
+        "searchProduct"
+    )
+    .value
+    .toLowerCase();
+
+    const currency =
+
+    document
+    .getElementById(
+        "filterCurrency"
+    )
+    .value;
+
+    getMarketplace()
+
+    .then(result=>{
+
+        const container =
+
+        document.getElementById(
+            "marketContainer"
+        );
+
+        container.innerHTML="";
+
+        if(!result.success){
+
+            return;
+
+        }
+
+        let found=false;
+
+        result.data.forEach(product=>{
+
+            const matchName =
+
+            product.productName
+
+            .toLowerCase()
+
+            .includes(search);
+
+            const matchCurrency =
+
+            currency===""
+
+            ||
+
+            product.currency===currency;
+
+            if(
+
+                matchName
+
+                &&
+
+                matchCurrency
+
+            ){
+
+                found=true;
+
+                createProductCard(product);
+
+            }
+
+        });
+
+        if(!found){
+
+            container.innerHTML=`
+
+            <div class="product-card">
+
+                <h3>
+
+                    No Matching Products
+
+                </h3>
+
+            </div>
+
+            `;
+
+        }
+
+    });
 
 }
 
 
 
+
+
+
+
+
+
+
+document
+.getElementById(
+"searchButton"
+)
+.onclick=
+filterMarketplace;
+
+document
+.getElementById(
+"filterCurrency"
+)
+.onchange=
+filterMarketplace;
+
+document
+.getElementById(
+"searchProduct"
+)
+.onkeyup=
+filterMarketplace;
+async function loadPurchaseHistory(){
+
+    const table =
+    document.getElementById(
+        "purchaseHistory"
+    );
+
+    table.innerHTML = "";
+
+    // Placeholder until transaction endpoint is connected
+    table.innerHTML = `
+    <tr>
+        <td colspan="5">
+            Purchase history will appear here.
+        </td>
+    </tr>
+    `;
+
 }
 
 
@@ -315,13 +753,30 @@ window.location.href =
 
 
 
-loadMarketplace();
+
+async function refreshAfterPurchase(){
+
+    await loadMarketplace();
+
+    await loadPurchaseHistory();
+
+}
 
 
+
+
+
+
+
+window.onload = async function(){
+
+    await loadMarketplace();
+
+    await loadPurchaseHistory();
+
+};
 
 </script>
 
-
 </body>
-
 </html>
