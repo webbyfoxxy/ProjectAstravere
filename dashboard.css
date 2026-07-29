@@ -1,41 +1,21 @@
-/* ==========================================================
-   ROLEPLAY BANK
-   DASHBOARD STYLE
-========================================================== */
+/*******************************************************
+ ROLEPLAY BANK
+ DARK IMPERIAL GOLD THEME
+
+ DASHBOARD STYLE
+
+*******************************************************/
 
 
 
-/* ==========================================================
-   DASHBOARD CONTAINERS
-========================================================== */
+*{
 
+    box-sizing:border-box;
 
-.dashboard-content{
-
-
-    max-width:1400px;
-
-
-}
-
-
-
-.dashboard-content h1{
-
-
-    font-size:32px;
-
-
-    border-bottom:
-
-    1px solid #c9a227;
-
-
-    padding-bottom:15px;
-
-
-    margin-bottom:25px;
-
+    font-family:
+    "Cinzel",
+    "Segoe UI",
+    serif;
 
 }
 
@@ -43,155 +23,34 @@
 
 
 
-
-/* ==========================================================
-   PROFILE SECTION
-========================================================== */
-
-
-.profile-info{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(220px,1fr));
-
-
-    gap:15px;
-
-
-}
-
-
-
-
-
-.profile-item{
-
-
-    background:#111;
-
-
-    padding:15px;
-
-
-    border:
-
-    1px solid #8f7325;
-
-
-    border-radius:10px;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================
-   WALLET
-========================================================== */
-
-
-.wallet-container{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(150px,1fr));
-
-
-    gap:15px;
-
-
-}
-
-
-
-
-
-.wallet-box{
-
-
-    background:#101010;
-
-
-    border:
-
-    1px solid #c9a227;
-
-
-    padding:20px;
-
-
-    text-align:center;
-
-
-    border-radius:10px;
-
-
-}
-
-
-
-
-
-.wallet-box h3{
-
-
-    color:#d4af37;
+body{
 
 
     margin:0;
 
 
-}
+    min-height:100vh;
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle at top,
+
+        #3a2b0a,
+
+        #080808 70%
+
+    );
 
 
 
+    color:#f5e6b3;
 
 
-.wallet-box span{
-
-
-    font-size:22px;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================
-   PRODUCTS
-========================================================== */
-
-
-.product-container{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(250px,1fr));
-
-
-    gap:20px;
+    padding:30px;
 
 
 }
@@ -200,71 +59,68 @@
 
 
 
-.product-card{
 
 
-    background:#111;
+.dashboard{
+
+
+    width:95%;
+
+
+    max-width:1200px;
+
+
+    margin:auto;
+
+
+    background:
+
+
+    rgba(
+
+        10,
+
+        10,
+
+        10,
+
+        .92
+
+    );
+
 
 
     border:
 
-    1px solid #c9a227;
+    2px solid
 
-
-    border-radius:12px;
-
-
-    padding:20px;
-
-
-}
+    #c9a227;
 
 
 
+    border-radius:18px;
 
 
-.product-card h3{
-
-
-    color:#d4af37;
-
-
-}
+    padding:35px;
 
 
 
+    box-shadow:
 
 
-.product-card button{
+    0 0 35px
 
+    rgba(
 
-    margin-top:15px;
+        201,
 
+        162,
 
-}
+        39,
 
+        .35
 
-
-
-
-
-/* ==========================================================
-   AUCTIONS
-========================================================== */
-
-
-.auction-container{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(280px,1fr));
-
-
-    gap:20px;
+    );
 
 
 }
@@ -273,59 +129,36 @@
 
 
 
-.auction-card{
 
 
-    padding:20px;
+h1{
 
 
-    background:#111;
+    text-align:center;
 
 
-    border:
-
-    1px solid #c9a227;
+    color:#ffd700;
 
 
-    border-radius:12px;
+    letter-spacing:3px;
 
 
-}
+    text-shadow:
 
 
+    0 0 15px
 
+    rgba(
 
+        255,
 
-.auction-card .bid{
+        215,
 
+        0,
 
-    font-size:22px;
+        .5
 
-
-    color:#d4af37;
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   INVENTORY
-========================================================== */
-
-
-.inventory-list{
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:10px;
+    );
 
 
 }
@@ -334,116 +167,23 @@
 
 
 
-.inventory-item{
+h2{
 
 
-    display:flex;
+    margin-top:35px;
 
 
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-    padding:15px;
-
-
-    background:#111;
-
-
-    border:
-
-    1px solid #8f7325;
-
-
-    border-radius:8px;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================
-   TABLES
-========================================================== */
-
-
-.table-container{
-
-
-    overflow-x:auto;
-
-
-}
-
-
-
-
-
-table{
-
-
-    width:100%;
-
-
-    border-collapse:collapse;
-
-
-    background:#111;
-
-
-}
-
-
-
-
-
-th{
-
-
-    background:#c9a227;
-
-
-    color:#000;
-
-
-    padding:12px;
-
-
-}
-
-
-
-
-
-td{
-
-
-    padding:12px;
+    color:#ffd700;
 
 
     border-bottom:
 
-    1px solid #333;
+    1px solid
+
+    #8b6f1d;
 
 
-    color:#ddd;
-
-
-}
-
-
-
-
-
-tr:hover{
-
-
-    background:#1d1d1d;
+    padding-bottom:8px;
 
 
 }
@@ -453,61 +193,11 @@ tr:hover{
 
 
 
-/* ==========================================================
-   CREATOR CONTROLS
-========================================================== */
+
+h3{
 
 
-.admin-actions{
-
-
-    display:flex;
-
-
-    gap:10px;
-
-
-    flex-wrap:wrap;
-
-
-}
-
-
-
-
-
-.admin-actions button{
-
-
-    width:auto;
-
-
-    padding:
-
-    10px 20px;
-
-
-}
-
-
-
-
-
-.approval-card{
-
-
-    border-left:
-
-    4px solid #c9a227;
-
-
-    padding:15px;
-
-
-    background:#111;
-
-
-    margin-bottom:15px;
+    color:#ffda55;
 
 
 }
@@ -517,12 +207,95 @@ tr:hover{
 
 
 
-/* ==========================================================
-   NOTIFICATIONS
-========================================================== */
+
+/*
+=========================
+ PROFILE PANEL
+=========================
+*/
 
 
-.notification{
+#profile{
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        #151515,
+
+        #0b0b0b
+
+    );
+
+
+
+    border:
+
+    1px solid
+
+    #b8860b;
+
+
+
+    padding:20px;
+
+
+    border-radius:12px;
+
+
+}
+
+
+
+
+
+
+
+/*
+=========================
+ WALLET
+=========================
+*/
+
+
+#wallet{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(
+
+        auto-fit,
+
+        minmax(
+
+            160px,
+
+            1fr
+
+        )
+
+    );
+
+
+    gap:15px;
+
+
+}
+
+
+
+
+
+
+#wallet p{
 
 
     background:#111;
@@ -530,16 +303,21 @@ tr:hover{
 
     border:
 
-    1px solid #8f7325;
+    1px solid
+
+    #c9a227;
 
 
     padding:15px;
 
 
-    margin-bottom:10px;
+    border-radius:10px;
 
 
-    border-radius:8px;
+    color:#ffd700;
+
+
+    text-align:center;
 
 
 }
@@ -548,12 +326,66 @@ tr:hover{
 
 
 
-.notification.unread{
+
+
+/*
+=========================
+ CARDS
+=========================
+*/
+
+
+.card{
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        #151515,
+
+        #050505
+
+    );
+
 
 
     border:
 
-    2px solid #d4af37;
+    1px solid
+
+    #b8860b;
+
+
+    border-radius:15px;
+
+
+    padding:20px;
+
+
+    margin:15px 0;
+
+
+
+    box-shadow:
+
+
+    0 0 15px
+
+    rgba(
+
+        201,
+
+        162,
+
+        39,
+
+        .15
+
+    );
 
 
 }
@@ -563,15 +395,63 @@ tr:hover{
 
 
 
-/* ==========================================================
-   SEARCH / FILTER
-========================================================== */
+
+.card:hover{
 
 
-.search-box{
+    border-color:#ffd700;
 
 
-    margin-bottom:20px;
+    box-shadow:
+
+
+    0 0 20px
+
+    rgba(
+
+        255,
+
+        215,
+
+        0,
+
+        .35
+
+    );
+
+
+}
+
+
+
+
+
+
+
+/*
+=========================
+ INVENTORY
+=========================
+*/
+
+
+#inventory{
+
+
+    background:#111;
+
+
+    padding:20px;
+
+
+    border-radius:12px;
+
+
+    border:
+
+    1px solid
+
+    #8b6f1d;
 
 
 }
@@ -580,10 +460,80 @@ tr:hover{
 
 
 
-.search-box input{
 
 
-    max-width:400px;
+/*
+=========================
+ BUTTONS
+=========================
+*/
+
+
+button{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #b8860b,
+
+        #ffd700
+
+    );
+
+
+    color:#111;
+
+
+    border:none;
+
+
+    padding:12px 18px;
+
+
+    margin:5px;
+
+
+    border-radius:10px;
+
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+
+
+button:hover{
+
+
+    box-shadow:
+
+
+    0 0 15px
+
+    rgba(
+
+        255,
+
+        215,
+
+        0,
+
+        .7
+
+    );
 
 
 }
@@ -593,28 +543,48 @@ tr:hover{
 
 
 
-/* ==========================================================
-   MOBILE DASHBOARD
-========================================================== */
+
+/*
+=========================
+ TABLE / ADMIN LISTS
+=========================
+*/
 
 
-@media(max-width:800px){
+#users,
+#products,
+#auctions,
+#sellerApplications{
+
+
+    background:#0d0d0d;
+
+
+    padding:15px;
+
+
+    border-radius:12px;
+
+
+    border:
+
+    1px solid
+
+    #8b6f1d;
+
+
+}
 
 
 
-.profile-info,
 
 
-.wallet-container,
 
 
-.product-container,
+textarea{
 
 
-.auction-container{
-
-
-    grid-template-columns:1fr;
+    min-height:100px;
 
 
 }
@@ -622,16 +592,57 @@ tr:hover{
 
 
 
-.inventory-item{
 
 
-    flex-direction:column;
+
+hr{
 
 
-    align-items:flex-start;
+    border:
+
+    0;
+
+
+    border-top:
+
+    1px solid
+
+    #8b6f1d;
+
+
+    margin:20px 0;
 
 
 }
+
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+
+    .dashboard{
+
+
+        padding:20px;
+
+
+    }
+
+
+
+    body{
+
+
+        padding:10px;
+
+
+    }
+
 
 
 }
