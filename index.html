@@ -1,157 +1,508 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Luxemneaux Roleplay Bank</title>
 
-<link rel="stylesheet"
-href="style.css">
+<title>
+Luxemneaux Empire Bank
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
 
-<body>
 
-<div class="form-container">
 
-<div class="card">
+<body class="magic-background">
 
-<div class="logo">
 
-🏛️
 
-<h1>Luxemneaux Roleplay Bank</h1>
+<div class="auth-page">
 
-<p>
-Imperial Banking System
+
+
+<div class="auth-box imperial-card">
+
+
+
+<div class="auth-logo">
+
+👑🏰
+
+</div>
+
+
+
+
+<h1 class="auth-title">
+
+Luxemneaux Empire Bank
+
+</h1>
+
+
+
+
+<p class="subtitle">
+
+⚜️ Imperial Banking System ⚜️
+
 </p>
 
-</div>
 
-<form id="loginForm">
+
+
+<div class="gold-line"></div>
+
+
+
+
 
 <div class="form-group">
 
-<label>Username</label>
+
+<label>
+
+Username
+
+</label>
+
 
 <input
+
 type="text"
+
 id="username"
-required>
+
+placeholder="Enter username"
+
+>
+
 
 </div>
+
+
+
+
 
 <div class="form-group">
 
-<label>Password</label>
+
+<label>
+
+Password
+
+</label>
+
 
 <input
+
 type="password"
+
 id="password"
-required>
+
+placeholder="Enter password"
+
+>
+
 
 </div>
+
+
+
+
 
 <button
-type="submit">
 
-Login
+onclick="loginAccount()"
+
+class="btn"
+
+>
+
+🔐 Enter Kingdom
 
 </button>
 
-</form>
 
-<br>
+
+
+
+<div id="message"></div>
+
+
+
+
+
+<div class="gold-line"></div>
+
+
+
+
+
+<div class="auth-footer">
+
 
 <p>
 
-Don't have an account?
-
-<a href="register.html">
-
-Register Here
-
-</a>
+New citizen?
 
 </p>
 
-</div>
+
+
+<a href="register.html">
+
+📜 Create Account
+
+</a>
+
+
 
 </div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- LOADING -->
+
+<div id="loading"
+
+class="loading"
+
+style="display:none;">
+
+
+<div class="loading-icon">
+
+⚜️
+
+</div>
+
+
+</div>
+
+
+
+
 
 <script src="api.js"></script>
 
+
+
 <script>
 
+
+/* =====================================
+   LOGIN FUNCTION
+===================================== */
+
+
+async function loginAccount(){
+
+
+
+const username =
+
 document
-.getElementById("loginForm")
-.addEventListener(
-"submit",
-async function(e){
+.getElementById(
+"username"
+)
+.value;
 
-e.preventDefault();
 
-const result =
-await loginUser({
 
-username:
-username.value,
+const password =
 
-password:
-password.value
+document
+.getElementById(
+"password"
+)
+.value;
 
-});
 
-if(!result.success){
 
-alert(result.message);
+const message =
+
+document
+.getElementById(
+"message"
+);
+
+
+
+
+
+if(
+!username ||
+!password
+){
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+⚠️ Enter username and password.
+
+</div>
+
+`;
 
 return;
 
+
 }
 
-localStorage.setItem(
 
-"CURRENT_USER",
 
-JSON.stringify(
-result.data
-)
+
+
+message.innerHTML =
+
+`
+
+<div class="alert">
+
+⏳ Checking Imperial Records...
+
+</div>
+
+`;
+
+
+
+
+
+const result =
+
+await login(
+
+username,
+
+password
 
 );
 
-switch(result.data.role){
 
-case "Creator":
 
-window.location=
-"creator-dashboard.html";
 
-break;
 
-case "Seller":
+if(
+result.success
+){
 
-window.location=
-"seller-dashboard.html";
 
-break;
 
-default:
+message.innerHTML =
 
-window.location=
-"member-dashboard.html";
+`
+
+<div class="alert alert-success">
+
+✅ Welcome to Luxemneaux Empire.
+
+</div>
+
+`;
+
+
+
+setTimeout(
+
+()=>{
+
+
+redirectByRole();
+
+
+
+},
+
+1000
+
+);
+
+
 
 }
 
-});
+else{
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+❌ ${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+/* =====================================
+   ENTER KEY LOGIN
+===================================== */
+
+
+document.addEventListener(
+
+"keypress",
+
+function(e){
+
+
+
+if(
+e.key === "Enter"
+){
+
+
+loginAccount();
+
+
+}
+
+
+
+}
+
+
+);
+
+
+
+
+
+
+
+/* =====================================
+   AUTO SESSION CHECK
+===================================== */
+
+
+window.onload = function(){
+
+
+
+const user =
+
+currentUser();
+
+
+
+if(user){
+
+
+
+const loading =
+
+document
+.getElementById(
+"loading"
+);
+
+
+
+loading.style.display =
+"flex";
+
+
+
+setTimeout(
+
+()=>{
+
+
+redirectByRole();
+
+
+},
+
+800
+
+);
+
+
+
+}
+
+
+
+};
+
+
+
+
 
 </script>
 
+
+
+
+
+
+<footer class="footer">
+
+
+<p>
+
+⚜️ Luxemneaux Empire Banking System ⚜️
+
+</p>
+
+
+<p>
+
+🪙 Managing Lumen • Aurel • Virel • Sylem • Bront
+
+</p>
+
+
+</footer>
+
+
+
+
+
 </body>
+
 
 </html>
