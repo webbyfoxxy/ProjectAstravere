@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Roleplay Bank | Register</title>
+<title>Roleplay Bank - Register</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,10 +17,7 @@
 <body>
 
 
-<div class="auth-container">
-
-
-<div class="auth-box">
+<div class="login-container">
 
 
 <h1>
@@ -29,33 +26,76 @@ Create Account
 
 
 <p>
-Join the Aurelic Banking System
+Join the Roleplay Bank
 </p>
 
 
-
-<input
-id="username"
-type="text"
-placeholder="Username">
-
-
-
-<input
-id="password"
-type="password"
-placeholder="Password">
 
 
 
 <input
 id="roleplayName"
 type="text"
-placeholder="Roleplay Name">
+placeholder="Character Name"
+>
 
 
 
-<button onclick="register()">
+
+<input
+id="username"
+type="text"
+placeholder="Username"
+>
+
+
+
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+>
+
+
+
+
+<select id="accountType">
+
+
+<option value="Member">
+Member
+</option>
+
+
+<option value="Creator">
+Creator
+</option>
+
+
+</select>
+
+
+
+
+
+<div id="creatorBox" style="display:none;">
+
+
+<input
+id="creatorKey"
+type="password"
+placeholder="Creator Key"
+>
+
+
+</div>
+
+
+
+
+
+<button onclick="registerAccount()">
 
 Register
 
@@ -63,107 +103,169 @@ Register
 
 
 
-<div class="auth-links">
+
+
+<p id="message"></p>
+
+
+
 
 <a href="index.html">
 
-Already have an account?
+Back to Login
 
 </a>
 
-</div>
-
-
-
-<div id="message"></div>
-
 
 </div>
 
 
-</div>
+
+
 
 
 
 <script src="api.js"></script>
 
 
-
 <script>
 
 
-async function register(){
+
+document
+.getElementById("accountType")
+.addEventListener(
+"change",
+function(){
 
 
-const username =
-document.getElementById("username").value;
+    const box =
+    document.getElementById(
+        "creatorBox"
+    );
 
 
-
-const password =
-document.getElementById("password").value;
+    if(this.value === "Creator"){
 
 
-
-const roleplayName =
-document.getElementById("roleplayName").value;
-
+        box.style.display =
+        "block";
 
 
-const message =
-document.getElementById("message");
+    }
+
+    else{
 
 
-
-message.innerHTML =
-"Creating account...";
-
+        box.style.display =
+        "none";
 
 
-const result =
-await registerUser({
-
-
-username:username,
-
-
-password:password,
-
-
-roleplayName:roleplayName
+    }
 
 
 });
 
 
 
-if(!result.success){
-
-
-message.innerHTML =
-result.message;
-
-
-return;
-
-
-}
 
 
 
-message.innerHTML =
-"Registration successful. Redirecting...";
+
+
+async function registerAccount(){
 
 
 
-setTimeout(()=>{
+    const role =
+    document.getElementById(
+        "accountType"
+    ).value;
 
 
-window.location.href =
-"index.html";
+
+    const data = {
 
 
-},1500);
+        roleplayName:
+        document.getElementById(
+            "roleplayName"
+        ).value,
+
+
+        username:
+        document.getElementById(
+            "username"
+        ).value,
+
+
+        password:
+        document.getElementById(
+            "password"
+        ).value
+
+
+    };
+
+
+
+
+
+
+    let result;
+
+
+
+
+
+    if(role === "Creator"){
+
+
+
+        data.creatorKey =
+        document.getElementById(
+            "creatorKey"
+        ).value;
+
+
+
+        result =
+        await creatorRegister(
+            data
+        );
+
+
+    }
+
+    else{
+
+
+        result =
+        await register(
+
+            data.username,
+
+            data.password,
+
+            data.roleplayName
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+    document.getElementById(
+        "message"
+    ).innerHTML =
+    result.message;
+
+
 
 
 
@@ -172,7 +274,6 @@ window.location.href =
 
 
 </script>
-
 
 
 </body>
