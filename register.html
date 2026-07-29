@@ -555,3 +555,315 @@ return;
 
 
 }
+/* CONTINUATION OF REGISTER SCRIPT */
+
+
+/* =====================================
+   COMPLETE REGISTRATION
+===================================== */
+
+
+async function registerAccount(){
+
+
+
+const username =
+
+document
+.getElementById(
+"username"
+)
+.value;
+
+
+
+const password =
+
+document
+.getElementById(
+"password"
+)
+.value;
+
+
+
+const role =
+
+document
+.getElementById(
+"role"
+)
+.value;
+
+
+
+const roleplayName =
+
+document
+.getElementById(
+"roleplayName"
+)
+.value;
+
+
+
+const kingdomId =
+
+document
+.getElementById(
+"kingdom"
+)
+.value;
+
+
+
+const creatorKey =
+
+document
+.getElementById(
+"creatorKey"
+)
+.value;
+
+
+
+const message =
+
+document
+.getElementById(
+"message"
+);
+
+
+
+
+
+if(
+!username ||
+!password ||
+!roleplayName ||
+!kingdomId
+){
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+⚠️ Please complete all fields.
+
+</div>
+
+`;
+
+return;
+
+
+}
+
+
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert">
+
+⏳ Creating Imperial Records...
+
+</div>
+
+`;
+
+
+
+
+
+let result;
+
+
+
+
+
+if(
+role === "Creator"
+){
+
+
+
+result =
+
+await registerCreator(
+
+username,
+
+password,
+
+roleplayName,
+
+kingdomId,
+
+creatorKey
+
+);
+
+
+
+}
+
+else{
+
+
+
+result =
+
+await register(
+
+username,
+
+password,
+
+roleplayName,
+
+kingdomId
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-success">
+
+✅ Identity created successfully.
+
+</div>
+
+`;
+
+
+
+
+setTimeout(
+
+()=>{
+
+
+window.location.href =
+
+"index.html";
+
+
+},
+
+1200
+
+);
+
+
+
+}
+
+else{
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+❌ ${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+/* =====================================
+   LOAD PAGE
+===================================== */
+
+
+window.onload = function(){
+
+
+
+loadKingdoms();
+
+
+
+};
+
+
+
+
+
+</script>
+
+
+
+
+
+<footer class="footer">
+
+
+<p>
+
+⚜️ Welcome to Luxemneaux Empire ⚜️
+
+</p>
+
+
+
+<p>
+
+👑 Rise from Citizen to Noble
+
+</p>
+
+
+
+</footer>
+
+
+
+</body>
+
+
+</html>
