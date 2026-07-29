@@ -5,231 +5,1275 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Seller Dashboard - Roleplay Bank</title>
+<title>Seller Dashboard | Luxemneaux Roleplay Bank</title>
 
-<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="stylesheet"
+href="sidebar.css">
+
+<link rel="stylesheet"
+href="dashboard.css">
 
 </head>
 
-
 <body>
 
+<div class="dashboard-layout">
 
-<div class="dashboard">
+<!-- ==========================================
+SIDEBAR
+========================================== -->
 
+<aside class="sidebar">
 
-<h1>
-Seller Dashboard
-</h1>
+<div class="sidebar-logo">
 
+🏛️
 
+<h2>
 
+Luxemneaux
 
-<div id="profile">
+</h2>
 
-Loading...
+<p>
+
+Imperial Merchant Guild
+
+</p>
 
 </div>
 
+<div class="sidebar-profile">
 
+<h3
+id="sellerName">
 
+Loading...
 
+</h3>
+
+<p
+id="sellerBusiness">
+
+Business
+
+</p>
+
+<p
+id="sellerKingdom">
+
+Kingdom
+
+</p>
+
+</div>
+
+<ul class="sidebar-menu">
+
+<li>
+
+<a
+href="#dashboard"
+class="active">
+
+🏠 Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="#wallet">
+
+💰 Wallet
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="#business">
+
+🏪 Business
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="#products">
+
+📦 Products
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="#sales">
+
+📈 Sales
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="#auction">
+
+⚔ Auctions
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="marketplace.html">
+
+🛒 Marketplace
+
+</a>
+
+</li>
+
+</ul>
+
+<div class="logout-btn">
+
+<a
+href="#"
+id="logoutBtn">
+
+Logout
+
+</a>
+
+</div>
+
+</aside>
+
+<!-- ==========================================
+CONTENT
+========================================== -->
+
+<main class="dashboard-content">
+
+<header class="dashboard-header">
+
+<div>
+
+<h1>
+
+Seller Dashboard
+
+</h1>
+
+<p>
+
+Manage your imperial business.
+
+</p>
+
+</div>
+
+</header>
+
+<!-- ==========================================
+BUSINESS OVERVIEW
+========================================== -->
+
+<section
+class="card"
+id="dashboard">
 
 <h2>
-Seller Application
+
+Business Overview
+
 </h2>
 
+<br>
 
-<input
-id="shopName"
-placeholder="Shop Name"
->
+<div class="dashboard-grid">
 
+<div>
 
-<textarea
-id="shopDescription"
-placeholder="Shop Description">
-</textarea>
+<strong>
 
+Business Name
 
+</strong>
 
-<button onclick="applyForSeller()">
+<p
+id="businessName">
 
-Apply Seller
+Loading...
 
-</button>
+</p>
 
+</div>
 
+<div>
 
+<strong>
 
+Owner
 
+</strong>
 
+<p
+id="businessOwner">
+
+Loading...
+
+</p>
+
+</div>
+
+<div>
+
+<strong>
+
+Kingdom
+
+</strong>
+
+<p
+id="businessKingdom">
+
+Loading...
+
+</p>
+
+</div>
+
+<div>
+
+<strong>
+
+Seller Status
+
+</strong>
+
+<p
+id="sellerStatus">
+
+Approved
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+SELLER WALLET
+========================================== -->
+
+<section
+class="card"
+id="wallet">
 
 <h2>
+
+Merchant Wallet
+
+</h2>
+
+<br>
+
+<div class="wallet">
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Lumen
+
+</div>
+
+<div
+class="currency-value"
+id="walletLumen">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Aurel
+
+</div>
+
+<div
+class="currency-value"
+id="walletAurel">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Virel
+
+</div>
+
+<div
+class="currency-value"
+id="walletVirel">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Sylem
+
+</div>
+
+<div
+class="currency-value"
+id="walletSylem">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Bront
+
+</div>
+
+<div
+class="currency-value"
+id="walletBront">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+CREATE PRODUCT
+========================================== -->
+
+<section
+class="card"
+id="products">
+
+<h2>
+
 Create Product
+
 </h2>
 
+<br>
 
+<form
+id="productForm">
+
+<div class="form-group">
+
+<label>
+
+Product Name
+
+</label>
 
 <input
+type="text"
 id="productName"
-placeholder="Product Name"
->
+required>
 
+</div>
 
+<div class="form-group">
+
+<label>
+
+Category
+
+</label>
 
 <input
+type="text"
 id="category"
-placeholder="Category"
->
+required>
 
+</div>
 
+<div class="form-group">
+
+<label>
+
+Description
+
+</label>
 
 <textarea
 id="description"
-placeholder="Description">
+rows="4"
+required>
+
 </textarea>
 
+</div>
 
+<div class="dashboard-grid">
 
+<div>
+
+<label>
+
+Price
+
+</label>
 
 <input
+type="number"
 id="price"
-type="number"
-placeholder="Price"
->
+required>
 
+</div>
 
+<div>
 
+<label>
+
+Currency
+
+</label>
+
+<select
+id="currency">
+
+<option>
+
+Lumen
+
+</option>
+
+<option>
+
+Aurel
+
+</option>
+
+<option>
+
+Virel
+
+</option>
+
+<option>
+
+Sylem
+
+</option>
+
+<option>
+
+Bront
+
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+Stock
+
+</label>
 
 <input
-id="stock"
 type="number"
-placeholder="Stock"
->
+id="stock"
+required>
 
+</div>
 
+</div>
 
+<br>
 
-<button onclick="submitProduct()">
+<button>
 
 Submit Product
 
 </button>
 
+</form>
 
+</section>
 
+<br>
+<!-- ==========================================
+MY PRODUCTS
+========================================== -->
 
+<section
+class="card">
 
+<h2>
 
+My Products
 
-<br><br>
+</h2>
 
+<br>
 
+<div class="table-container">
 
-<button onclick="goMarketplace()">
+<table>
 
-Marketplace
+<thead>
 
-</button>
+<tr>
 
+<th>Product</th>
 
+<th>Category</th>
 
+<th>Price</th>
 
-<button onclick="logout()">
+<th>Currency</th>
 
-Logout
+<th>Stock</th>
 
-</button>
+<th>Status</th>
 
+<th>Action</th>
 
+</tr>
 
-<p id="message"></p>
+</thead>
 
+<tbody
+id="productTable">
 
+<tr>
+
+<td colspan="7">
+
+No products available.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 </div>
 
+</section>
 
+<br>
 
+<!-- ==========================================
+SELLER STATISTICS
+========================================== -->
 
+<section
+class="card"
+id="sales">
 
+<h2>
 
+Business Statistics
 
+</h2>
+
+<br>
+
+<div class="dashboard-grid">
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Products
+
+</div>
+
+<div
+class="currency-value"
+id="totalProducts">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Pending
+
+</div>
+
+<div
+class="currency-value"
+id="pendingProducts">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Approved
+
+</div>
+
+<div
+class="currency-value"
+id="approvedProducts">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Revenue
+
+</div>
+
+<div
+class="currency-value"
+id="sellerRevenue">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+CREATE AUCTION
+========================================== -->
+
+<section
+class="card"
+id="auction">
+
+<h2>
+
+Create Auction
+
+</h2>
+
+<br>
+
+<form
+id="auctionForm">
+
+<div class="form-group">
+
+<label>
+
+Item Name
+
+</label>
+
+<input
+type="text"
+id="auctionItem"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Description
+
+</label>
+
+<textarea
+id="auctionDescription"
+rows="4"
+required>
+
+</textarea>
+
+</div>
+
+<div class="dashboard-grid">
+
+<div>
+
+<label>
+
+Starting Price
+
+</label>
+
+<input
+type="number"
+id="auctionPrice"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Currency
+
+</label>
+
+<select
+id="auctionCurrency">
+
+<option>Lumen</option>
+<option>Aurel</option>
+<option>Virel</option>
+<option>Sylem</option>
+<option>Bront</option>
+
+</select>
+
+</div>
+
+</div>
+
+<br>
+
+<button>
+
+Submit Auction
+
+</button>
+
+</form>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+MY AUCTIONS
+========================================== -->
+
+<section
+class="card">
+
+<h2>
+
+My Auctions
+
+</h2>
+
+<br>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Item
+
+</th>
+
+<th>
+
+Current Bid
+
+</th>
+
+<th>
+
+Currency
+
+</th>
+
+<th>
+
+Highest Bidder
+
+</th>
+
+<th>
+
+Status
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="auctionTable">
+
+<tr>
+
+<td colspan="5">
+
+No auctions found.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+RECENT SALES
+========================================== -->
+
+<section
+class="card">
+
+<h2>
+
+Recent Sales
+
+</h2>
+
+<br>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Date
+
+</th>
+
+<th>
+
+Product
+
+</th>
+
+<th>
+
+Buyer
+
+</th>
+
+<th>
+
+Amount
+
+</th>
+
+<th>
+
+Currency
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="salesTable">
+
+<tr>
+
+<td colspan="5">
+
+No sales yet.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<br>
+
+<footer
+style="text-align:center;padding:30px;">
+
+<hr>
+
+<br>
+
+<p>
+
+Luxemneaux Imperial Merchant Guild
+
+</p>
+
+<p>
+
+Manage your business with honor.
+
+</p>
+
+</footer>
+
+</main>
+
+</div>
 
 <script src="api.js"></script>
 
-
 <script>
 
+const CURRENT_USER =
 
-const user =
-getSession();
+JSON.parse(
 
+localStorage.getItem(
 
+"CURRENT_USER"
 
-if(!user){
+)
 
-
-window.location.href =
-"index.html";
-
-
-}
-
-
-
-
-
-
-async function loadSeller(){
-
-
-
-const profile =
-await getProfile(
-user.userId
 );
 
+if(!CURRENT_USER){
 
+location.href="index.html";
 
+}
 
-if(profile.success){
+document
 
+.getElementById(
 
+"logoutBtn"
 
-document.getElementById(
-"profile"
-).innerHTML = `
+)
 
+.onclick=function(){
 
-<h3>
-${profile.data.roleplayName}
-</h3>
+localStorage.removeItem(
 
+"CURRENT_USER"
 
-<p>
-Role:
-${profile.data.role}
-</p>
+);
 
+location.href="index.html";
 
-<p>
-User ID:
-${profile.data.userId}
-</p>
+};
+async function loadProfile(){
 
+    const result =
+    await getProfile(
+        CURRENT_USER.userId
+    );
 
-`;
+    if(!result.success){
 
+        alert(result.message);
+        return;
 
+    }
+
+    const user =
+    result.data;
+
+    document.getElementById(
+        "sellerName"
+    ).textContent =
+    user.roleplayName;
+
+    document.getElementById(
+        "sellerBusiness"
+    ).textContent =
+    user.businessName ||
+    "Imperial Business";
+
+    document.getElementById(
+        "sellerKingdom"
+    ).textContent =
+    user.kingdom;
+
+    document.getElementById(
+        "businessName"
+    ).textContent =
+    user.businessName ||
+    "Imperial Business";
+
+    document.getElementById(
+        "businessOwner"
+    ).textContent =
+    user.roleplayName;
+
+    document.getElementById(
+        "businessKingdom"
+    ).textContent =
+    user.kingdom;
+
+    document.getElementById(
+        "sellerStatus"
+    ).textContent =
+    user.status;
+
+    document.getElementById(
+        "walletLumen"
+    ).textContent =
+    user.wallet.Lumen;
+
+    document.getElementById(
+        "walletAurel"
+    ).textContent =
+    user.wallet.Aurel;
+
+    document.getElementById(
+        "walletVirel"
+    ).textContent =
+    user.wallet.Virel;
+
+    document.getElementById(
+        "walletSylem"
+    ).textContent =
+    user.wallet.Sylem;
+
+    document.getElementById(
+        "walletBront"
+    ).textContent =
+    user.wallet.Bront;
 
 }
 
 
 
+
+
+
+
+
+
+
+async function loadProducts(){
+
+    const result =
+    await getMarketplace();
+
+    const table =
+    document.getElementById(
+        "productTable"
+    );
+
+    table.innerHTML="";
+
+    let total=0;
+    let pending=0;
+    let approved=0;
+
+    if(
+        !result.success
+    ){
+
+        table.innerHTML=
+        `<tr>
+            <td colspan="7">
+                Unable to load products.
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    result.data.forEach(product=>{
+
+        if(
+            product.sellerId !==
+            CURRENT_USER.userId
+        ){
+            return;
+        }
+
+        total++;
+
+        if(
+            product.status==="Approved"
+        ){
+
+            approved++;
+
+        }else{
+
+            pending++;
+
+        }
+
+        table.innerHTML+=`
+
+        <tr>
+
+            <td>
+
+                ${product.productName}
+
+            </td>
+
+            <td>
+
+                ${product.category}
+
+            </td>
+
+            <td>
+
+                ${product.price}
+
+            </td>
+
+            <td>
+
+                ${product.currency}
+
+            </td>
+
+            <td>
+
+                ${product.stock}
+
+            </td>
+
+            <td>
+
+                ${product.status}
+
+            </td>
+
+            <td>
+
+                <button>
+
+                    Edit
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    if(total===0){
+
+        table.innerHTML=
+        `<tr>
+            <td colspan="7">
+                No products submitted.
+            </td>
+        </tr>`;
+
+    }
+
+    document.getElementById(
+        "totalProducts"
+    ).textContent=total;
+
+    document.getElementById(
+        "pendingProducts"
+    ).textContent=pending;
+
+    document.getElementById(
+        "approvedProducts"
+    ).textContent=approved;
+
 }
 
 
@@ -240,30 +1284,160 @@ ${profile.data.userId}
 
 
 
-async function applyForSeller(){
+
+async function loadAuctions(){
+
+    const result =
+    await getAuctions();
+
+    const table =
+    document.getElementById(
+        "auctionTable"
+    );
+
+    table.innerHTML="";
+
+    if(
+        !result.success
+    ){
+
+        table.innerHTML=
+        `<tr>
+            <td colspan="5">
+                Unable to load auctions.
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+    let found=false;
+
+    result.data.forEach(item=>{
+
+        if(
+            item.ownerId !==
+            CURRENT_USER.userId
+        ){
+            return;
+        }
+
+        found=true;
+
+        table.innerHTML+=`
+
+        <tr>
+
+            <td>
+
+                ${item.itemName}
+
+            </td>
+
+            <td>
+
+                ${item.currentBid}
+
+            </td>
+
+            <td>
+
+                ${item.currency}
+
+            </td>
+
+            <td>
+
+                ${item.highestBidder || "-"}
+
+            </td>
+
+            <td>
+
+                Active
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    if(!found){
+
+        table.innerHTML=
+        `<tr>
+            <td colspan="5">
+                No auctions found.
+            </td>
+        </tr>`;
+
+    }
+
+}
 
 
 
-const result =
-await applySeller({
 
 
-userId:
-user.userId,
 
 
-shopName:
+
+
+
 document.getElementById(
-"shopName"
-).value,
+    "productForm"
+).addEventListener(
+"submit",
+async function(e){
 
+    e.preventDefault();
 
-description:
-document.getElementById(
-"shopDescription"
-).value
+    const result =
+    await createProduct({
 
+        sellerId:
+        CURRENT_USER.userId,
 
+        sellerName:
+        CURRENT_USER.roleplayName,
+
+        businessName:
+        document.getElementById(
+            "businessName"
+        ).textContent,
+
+        productName:
+        productName.value,
+
+        category:
+        category.value,
+
+        description:
+        description.value,
+
+        price:
+        Number(price.value),
+
+        currency:
+        currency.value,
+
+        stock:
+        Number(stock.value)
+
+    });
+
+    alert(result.message);
+
+    if(result.success){
+
+        this.reset();
+
+        loadProducts();
+
+    }
 
 });
 
@@ -271,78 +1445,53 @@ document.getElementById(
 
 
 
+
+
+
+
+
 document.getElementById(
-"message"
-).innerHTML =
-result.message;
+    "auctionForm"
+).addEventListener(
+"submit",
+async function(e){
 
+    e.preventDefault();
 
+    const result =
+    await createAuction({
 
-}
+        ownerId:
+        CURRENT_USER.userId,
 
+        ownerName:
+        CURRENT_USER.roleplayName,
 
+        itemName:
+        auctionItem.value,
 
+        description:
+        auctionDescription.value,
 
+        startingPrice:
+        Number(
+            auctionPrice.value
+        ),
 
+        currency:
+        auctionCurrency.value
 
+    });
 
+    alert(result.message);
 
+    if(result.success){
 
-async function submitProduct(){
+        this.reset();
 
+        loadAuctions();
 
-
-const profile =
-await getProfile(
-user.userId
-);
-
-
-
-
-
-const result =
-await createProduct({
-
-
-sellerId:
-user.userId,
-
-
-sellerName:
-profile.data.roleplayName,
-
-
-productName:
-document.getElementById(
-"productName"
-).value,
-
-
-category:
-document.getElementById(
-"category"
-).value,
-
-
-description:
-document.getElementById(
-"description"
-).value,
-
-
-price:
-document.getElementById(
-"price"
-).value,
-
-
-stock:
-document.getElementById(
-"stock"
-).value
-
-
+    }
 
 });
 
@@ -350,42 +1499,23 @@ document.getElementById(
 
 
 
-document.getElementById(
-"message"
-).innerHTML =
-result.message;
-
-
-
-}
 
 
 
 
 
+window.onload=
+async function(){
 
+    await loadProfile();
 
+    await loadProducts();
 
-function goMarketplace(){
+    await loadAuctions();
 
-
-window.location.href =
-"marketplace.html";
-
-
-}
-
-
-
-
-
-
-loadSeller();
-
-
+};
 
 </script>
-
 
 </body>
 
