@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Roleplay Bank | Auctions</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+
+<div class="sidebar">
+
+
+<h2>
+Roleplay Bank
+</h2>
+
+
+
+<a href="member-dashboard.html">
+Dashboard
+</a>
+
+
+<a href="marketplace.html">
+Marketplace
+</a>
+
+
+<a href="auction.html">
+Auctions
+</a>
+
+
+<a href="#">
+Inventory
+</a>
+
+
+<a href="#">
+Transactions
+</a>
+
+
+
+<a href="index.html" onclick="logout()">
+
+Logout
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="dashboard-content">
+
+
+
+<h1>
+Auction Hall
+</h1>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Create Auction
+</h2>
+
+
+
+<input
+id="itemName"
+placeholder="Item Name">
+
+
+
+<input
+id="category"
+placeholder="Category">
+
+
+
+<textarea
+id="description"
+placeholder="Item Description">
+</textarea>
+
+
+
+<input
+id="startingPrice"
+type="number"
+placeholder="Starting Price (Lumen)">
+
+
+
+<input
+id="endDate"
+type="date">
+
+
+
+<button onclick="submitAuction()">
+
+Create Auction
+
+</button>
+
+
+
+<div id="auctionMessage"></div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Active Auctions
+</h2>
+
+
+
+<div id="auctions">
+
+Loading auctions...
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script src="api.js"></script>
+
+
+
+<script>
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem(
+
+"currentUser"
+
+)
+
+);
+
+
+
+if(!user){
+
+
+window.location.href =
+"index.html";
+
+
+}
+
+
+
+
+
+
+async function loadAuctionsPage(){
+
+
+
+const result =
+
+await apiRequest(
+
+"getAuctions"
+
+);
+
+
+
+if(!result.success){
+
+
+return;
+
+
+}
+
+
+
+let html = "";
+
+
+
+result.data.forEach(auction=>{
+
+
+html += `
+
+
+<div class="auction-card">
+
+
+<h2>
+
+${auction.itemName}
+
+</h2>
+
+
+
+<p>
+
+Category:
+
+${auction.category}
+
+</p>
+
+
+
+<p>
+
+Owner:
+
+${auction.ownerName}
+
+</p>
+
+
+
+<p>
+
+Description:
+
+${auction.description}
+
+</p>
+
+
+
+<p>
+
+Current Bid:
+
+${auction.highestBid}
+
+Lumen
+
+</p>
+
+
+
+<p>
+
+End Date:
+
+${auction.endDate}
+
+</p>
+
+
+
+<input
+
+id="bid-${auction.auctionId}"
+
+type="number"
+
+placeholder="Your Bid">
+
+
+
+<button onclick="placeAuctionBid('${auction.auctionId}')">
+
+Bid
+
+</button>
+
+
+
+</div>
+
+
+<hr>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+
+"auctions"
+
+).innerHTML =
+
+
+html ||
+
+"No active auctions.";
+
+}
+
+
+
+
+
+async function submitAuction(){
+
+
+
+const result =
+
+await createAuction({
+
+
+
+userId:user.userId,
+
+
+ownerName:user.roleplayName,
+
+
+itemName:
+
+document.getElementById(
+
+"itemName"
+
+).value,
+
+
+
+category:
+
+document.getElementById(
+
+"category"
+
+).value,
+
+
+
+description:
+
+document.getElementById(
+
+"description"
+
+).value,
+
+
+
+startingPrice:
+
+document.getElementById(
+
+"startingPrice"
+
+).value,
+
+
+
+endDate:
+
+document.getElementById(
+
+"endDate"
+
+).value
+
+
+
+});
+
+
+
+document.getElementById(
+
+"auctionMessage"
+
+).innerHTML =
+
+
+result.message ||
+
+"Auction submitted for approval.";
+
+
+
+}
+
+
+
+
+
+async function placeAuctionBid(id){
+
+
+
+const amount =
+
+document.getElementById(
+
+"bid-" + id
+
+).value;
+
+
+
+
+const result =
+
+await placeBid({
+
+
+
+auctionId:id,
+
+
+userId:user.userId,
+
+
+bidAmount:amount
+
+
+
+});
+
+
+
+alert(
+
+result.message ||
+
+"Bid placed."
+
+);
+
+
+
+loadAuctionsPage();
+
+
+
+}
+
+
+
+
+
+function logout(){
+
+
+localStorage.removeItem(
+
+"currentUser"
+
+);
+
+
+}
+
+
+
+
+loadAuctionsPage();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
