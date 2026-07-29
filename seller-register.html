@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+
+Luxemneaux Merchant Registration
+
+</title>
+
+
+
+<link rel="stylesheet" href="style.css">
+
+
+</head>
+
+
+
+
+<body class="magic-background">
+
+
+
+
+
+<div class="auth-page">
+
+
+
+
+
+<div class="auth-box imperial-card">
+
+
+
+
+
+<div class="auth-logo">
+
+🏪⚜️
+
+</div>
+
+
+
+
+
+<h1 class="auth-title">
+
+Merchant Guild Registration
+
+</h1>
+
+
+
+
+<p class="subtitle">
+
+Create your business within Luxemneaux Empire
+
+</p>
+
+
+
+
+
+
+<div class="gold-line"></div>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     OWNER INFORMATION
+===================================== -->
+
+
+<div class="form-group">
+
+
+<label>
+
+Owner Username
+
+</label>
+
+
+
+<input
+
+id="ownerUsername"
+
+placeholder="Account username"
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Business Name
+
+</label>
+
+
+
+<input
+
+id="businessName"
+
+placeholder="Your shop name"
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Business Category
+
+</label>
+
+
+
+<select id="businessCategory">
+
+
+<option value="">
+
+Select Category
+
+</option>
+
+
+
+<option value="Food">
+
+🍖 Food & Restaurant
+
+</option>
+
+
+
+<option value="Weapon">
+
+⚔️ Weapons & Equipment
+
+</option>
+
+
+
+<option value="Clothing">
+
+👕 Clothing & Fashion
+
+</option>
+
+
+
+<option value="Magic">
+
+🔮 Magic Items
+
+</option>
+
+
+
+<option value="Service">
+
+📜 Services
+
+</option>
+
+
+
+<option value="Other">
+
+🏪 Other
+
+</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     KINGDOM
+===================================== -->
+
+
+<div class="form-group">
+
+
+<label>
+
+Kingdom Location
+
+</label>
+
+
+
+
+<select id="kingdom">
+
+
+<option>
+
+Loading Kingdoms...
+
+</option>
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     BUSINESS DESCRIPTION
+===================================== -->
+
+
+<div class="form-group">
+
+
+<label>
+
+Business Description
+
+</label>
+
+
+
+<textarea
+
+id="businessDescription"
+
+placeholder="Describe your business..."
+
+></textarea>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     CONTACT
+===================================== -->
+
+
+<div class="form-group">
+
+
+<label>
+
+Merchant Contact
+
+</label>
+
+
+
+<input
+
+id="merchantContact"
+
+placeholder="Email or contact information"
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<button
+
+class="btn"
+
+onclick="submitMerchantApplication()"
+
+>
+
+🏪 Submit Application
+
+</button>
+
+
+
+
+
+
+
+<div id="message"></div>
+
+
+
+
+
+
+
+
+
+<div class="auth-footer">
+
+
+Already a merchant?
+
+
+<a href="seller-dashboard.html">
+
+Enter Merchant Hall
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+<!-- =====================================
+     SCRIPT
+===================================== -->
+
+
+<script src="api.js"></script>
+
+
+
+
+<script>
+
+
+
+
+/* =====================================
+   LOAD KINGDOMS
+===================================== */
+
+
+async function loadKingdoms(){
+
+
+
+const result =
+
+await getKingdoms();
+
+
+
+
+
+const select =
+
+document
+.getElementById(
+"kingdom"
+);
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+select.innerHTML = "";
+
+
+
+
+
+result.data.forEach(
+
+kingdom=>{
+
+
+
+select.innerHTML +=
+
+
+
+`
+
+<option value="${kingdom.kingdomId}">
+
+🏰 ${kingdom.kingdomName}
+
+</option>
+
+
+`;
+
+
+
+}
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   SUBMIT MERCHANT APPLICATION
+===================================== */
+
+
+async function submitMerchantApplication(){
+
+
+
+const data = {
+
+
+
+ownerUsername:
+
+document
+.getElementById(
+"ownerUsername"
+)
+.value,
+
+
+
+businessName:
+
+document
+.getElementById(
+"businessName"
+)
+.value,
+
+
+
+category:
+
+document
+.getElementById(
+"businessCategory"
+)
+.value,
+
+
+
+kingdomId:
+
+document
+.getElementById(
+"kingdom"
+)
+.value,
+
+
+
+description:
+
+document
+.getElementById(
+"businessDescription"
+)
+.value,
+
+
+
+contact:
+
+document
+.getElementById(
+"merchantContact"
+)
+.value
+
+
+
+};
+
+
+
+
+
+
+
+const message =
+
+document
+.getElementById(
+"message"
+);
+
+
+
+
+
+
+if(
+
+!data.ownerUsername ||
+
+!data.businessName ||
+
+!data.category ||
+
+!data.kingdomId
+
+){
+
+
+
+message.innerHTML =
+
+
+
+`
+
+<div class="alert alert-error">
+
+⚠️ Complete all required merchant information.
+
+</div>
+
+`;
+
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+
+message.innerHTML =
+
+
+
+`
+
+<div class="alert">
+
+⏳ Sending application to Imperial Council...
+
+</div>
+
+`;
+
+
+
+
+
+
+
+
+
+const result =
+
+await applySeller(
+
+data
+
+);
+
+
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+message.innerHTML =
+
+
+
+`
+
+<div class="alert alert-success">
+
+✅ Merchant application submitted.
+
+<br>
+
+⚜️ Awaiting Creator approval.
+
+</div>
+
+`;
+
+
+
+
+}
+
+
+
+else{
+
+
+
+message.innerHTML =
+
+
+
+`
+
+<div class="alert alert-error">
+
+❌ ${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   INITIALIZE
+===================================== */
+
+
+window.onload = function(){
+
+
+
+loadKingdoms();
+
+
+
+};
+
+
+
+
+
+</script>
+
+
+
+
+
+
+<footer class="footer">
+
+
+<p>
+
+⚜️ Luxemneaux Merchant Guild ⚜️
+
+</p>
+
+
+<p>
+
+🏪 Establish your legacy through commerce
+
+</p>
+
+
+</footer>
+
+
+
+
+
+</body>
+
+
+</html>
+
+</div>
