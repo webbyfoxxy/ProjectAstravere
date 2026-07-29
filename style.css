@@ -1,23 +1,29 @@
+/*******************************************************
+ LUXEMNEAUX ROLEPLAY BANK
+ STYLE.CSS
+
+ PART 1/4
+ DARK IMPERIAL GOLD THEME
+*******************************************************/
+
+
 /* =====================================================
-   LUXEMNEAUX ROLEPLAY BANK
-   IMPERIAL DARK GOLD THEME
+   GLOBAL RESET
 ===================================================== */
 
-
-/* RESET */
 
 *{
 
     margin:0;
+
     padding:0;
 
     box-sizing:border-box;
 
     font-family:
+
     "Segoe UI",
-    Tahoma,
-    Geneva,
-    Verdana,
+    "Trebuchet MS",
     sans-serif;
 
 }
@@ -26,71 +32,181 @@
 
 body{
 
-
-    min-height:100vh;
-
-
     background:
 
     radial-gradient(
         circle at top,
-        #29200b,
-        #050505 70%
+        #241900,
+        #050505 60%
     );
 
 
-    color:#f4e6b2;
+    color:#f5d77a;
+
+
+    min-height:100vh;
 
 
 }
 
+
+
+/* =====================================================
+   ROOT COLORS
+===================================================== */
+
+
+:root{
+
+
+    --gold:
+
+    #d4af37;
+
+
+    --bright-gold:
+
+    #ffe27a;
+
+
+    --dark-gold:
+
+    #8b6914;
+
+
+    --black:
+
+    #070707;
+
+
+    --panel:
+
+    rgba(
+        20,
+        20,
+        20,
+        .95
+    );
+
+
+    --border:
+
+    rgba(
+        212,
+        175,
+        55,
+        .8
+    );
+
+
+    --danger:
+
+    #b22222;
+
+
+    --success:
+
+    #2e8b57;
+
+
+}
 
 
 
 
 
 /* =====================================================
-   GENERAL
+   SCROLLBAR
 ===================================================== */
 
 
-a{
+::-webkit-scrollbar{
 
-    text-decoration:none;
-
-    color:#ffd966;
+    width:10px;
 
 }
 
 
 
-h1,h2,h3,h4{
+::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
 
 
-    color:#ffd700;
+
+::-webkit-scrollbar-thumb{
+
+    background:
+
+    linear-gradient(
+
+        var(--gold),
+
+        var(--dark-gold)
+
+    );
+
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+/* =====================================================
+   LOGO AREA
+===================================================== */
+
+
+.logo{
+
+
+    text-align:center;
+
+
+    font-size:32px;
+
+
+    font-weight:bold;
+
+
+    color:
+
+    var(--bright-gold);
 
 
     text-shadow:
 
-    0 0 12px
 
-    rgba(
-        255,
-        215,
-        0,
-        .35
-    );
+    0 0 10px #d4af37,
+
+
+    0 0 25px #8b6914;
 
 
 }
 
 
 
-p{
+.logo::before{
 
-    color:#d8d8d8;
 
-    line-height:1.6;
+    content:"👑 ";
+
+
+}
+
+
+
+.logo::after{
+
+
+    content:" 🏰";
+
 
 }
 
@@ -98,6 +214,9 @@ p{
 
 
 
+/* =====================================================
+   CONTAINERS
+===================================================== */
 
 
 .container{
@@ -106,13 +225,10 @@ p{
     width:90%;
 
 
-    max-width:1300px;
+    max-width:1200px;
 
 
     margin:auto;
-
-
-    padding:40px;
 
 
 }
@@ -121,39 +237,23 @@ p{
 
 
 
-
-
-
-
-/* =====================================================
-   CARD SYSTEM
-===================================================== */
-
-
 .card{
 
 
     background:
 
 
-    rgba(
-        12,
-        12,
-        12,
-        .95
-    );
+    var(--panel);
 
 
 
     border:
 
-    1px solid
-
-    #c9a227;
+    2px solid var(--border);
 
 
 
-    border-radius:16px;
+    border-radius:15px;
 
 
 
@@ -164,112 +264,61 @@ p{
     box-shadow:
 
 
-    0 0 25px
+    0 0 15px
 
     rgba(
-        201,
-        162,
-        39,
-        .18
+        212,
+        175,
+        55,
+        .25
     );
 
 
-}
 
+    backdrop-filter:
 
+    blur(8px);
 
-
-
-.card:hover{
-
-
-    box-shadow:
-
-
-    0 0 35px
-
-    rgba(
-        255,
-        215,
-        0,
-        .35
-    );
 
 
 }
-
-
-
-
 
 
 
 
 
 /* =====================================================
-   NAVBAR
+   TITLES
 ===================================================== */
 
 
-.navbar{
+.title{
 
 
-    display:flex;
+    color:
 
+    var(--bright-gold);
 
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-
-    padding:20px 40px;
-
-
-
-    background:#080808;
-
-
-
-    border-bottom:
-
-    1px solid
-
-    #c9a227;
-
-
-
-}
-
-
-
-
-
-.navbar .logo{
 
 
     font-size:28px;
 
 
-    font-weight:bold;
 
-
-    color:#ffd700;
-
-
-
-}
+    text-align:center;
 
 
 
+    margin-bottom:20px;
 
 
 
-.navbar a{
+    text-shadow:
 
 
-    margin-left:20px;
+    0 0 10px
+
+    #d4af37;
 
 
 }
@@ -278,132 +327,19 @@ p{
 
 
 
+.subtitle{
 
 
+    color:#ddd;
 
 
-/* =====================================================
-   FORMS
-===================================================== */
+    text-align:center;
 
 
-.form-container{
-
-
-    width:420px;
-
-
-    max-width:90%;
-
-
-    margin:
-
-    70px auto;
-
+    margin-bottom:20px;
 
 
 }
-
-
-
-
-.form-group{
-
-
-    margin-bottom:18px;
-
-
-}
-
-
-
-
-
-label{
-
-
-    display:block;
-
-
-    margin-bottom:8px;
-
-
-    color:#e5c75f;
-
-
-}
-
-
-
-
-
-
-input,
-select,
-textarea{
-
-
-    width:100%;
-
-
-    padding:13px;
-
-
-
-    background:#111;
-
-
-    color:white;
-
-
-    border:
-
-
-    1px solid
-
-    #806000;
-
-
-
-    border-radius:10px;
-
-
-    outline:none;
-
-
-}
-
-
-
-
-
-input:focus,
-select:focus,
-textarea:focus{
-
-
-    border-color:#ffd700;
-
-
-
-    box-shadow:
-
-
-    0 0 12px
-
-    rgba(
-        255,
-        215,
-        0,
-        .4
-    );
-
-
-}
-
-
-
-
 
 
 
@@ -418,12 +354,6 @@ button,
 .btn{
 
 
-    padding:
-
-    12px 25px;
-
-
-
     background:
 
 
@@ -431,15 +361,11 @@ button,
 
         135deg,
 
-        #ffd700,
+        #d4af37,
 
-        #9c7612
+        #8b6914
 
     );
-
-
-
-    color:#111;
 
 
 
@@ -447,7 +373,7 @@ button,
 
 
 
-    border-radius:10px;
+    color:#000;
 
 
 
@@ -455,16 +381,35 @@ button,
 
 
 
+    padding:
+
+    12px 25px;
+
+
+
+    border-radius:10px;
+
+
+
     cursor:pointer;
 
 
 
-    transition:.3s;
+    transition:
+
+    .3s;
+
+
+
+    text-decoration:none;
+
+
+
+    display:inline-block;
+
 
 
 }
-
-
 
 
 
@@ -481,54 +426,406 @@ button:hover,
     box-shadow:
 
 
-    0 0 20px
+    0 0 15px
+
+    #d4af37;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+
+input,
+select,
+textarea{
+
+
+    width:100%;
+
+
+
+    padding:12px;
+
+
+
+    margin:8px 0;
+
+
+
+    background:#111;
+
+
+
+    color:#fff;
+
+
+
+    border:
+
+    1px solid
+
+    var(--dark-gold);
+
+
+
+    border-radius:8px;
+
+
+
+}
+
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+
+    outline:none;
+
+
+    border-color:
+
+    var(--bright-gold);
+
+
+
+    box-shadow:
+
+
+    0 0 10px
 
     rgba(
-        255,
-        215,
-        0,
+        212,
+        175,
+        55,
         .5
     );
 
 
 }
+/*******************************************************
+ LUXEMNEAUX ROLEPLAY BANK
+
+ STYLE.CSS
+
+ PART 2/4
+ DASHBOARD COMPONENTS
+*******************************************************/
 
 
+/* =====================================================
+   DASHBOARD LAYOUT
+===================================================== */
 
 
+.dashboard-layout{
+
+
+    display:flex;
+
+
+    min-height:100vh;
+
+
+}
 
 
 
 
 
 /* =====================================================
-   DASHBOARD GRID
+   SIDEBAR
 ===================================================== */
 
 
-.dashboard-grid{
+.sidebar{
 
 
-    display:grid;
+    width:260px;
 
 
-    grid-template-columns:
+    background:
 
 
-    repeat(
+    linear-gradient(
 
-        auto-fit,
+        180deg,
 
-        minmax(
-            260px,
-            1fr
-        )
+        #120d00,
+
+        #050505
 
     );
 
 
 
-    gap:25px;
+    border-right:
+
+    2px solid
+
+    var(--gold);
+
+
+
+    padding:25px;
+
+
+
+    position:fixed;
+
+
+    height:100vh;
+
+
+}
+
+
+
+
+
+.sidebar-logo{
+
+
+    font-size:24px;
+
+
+    text-align:center;
+
+
+    margin-bottom:30px;
+
+
+    color:
+
+    var(--bright-gold);
+
+
+}
+
+
+
+.sidebar-logo::before{
+
+
+    content:"⚜️ ";
+
+
+}
+
+
+
+
+
+.sidebar-menu{
+
+
+    list-style:none;
+
+
+}
+
+
+
+
+
+.sidebar-menu li{
+
+
+    margin:15px 0;
+
+
+}
+
+
+
+
+
+.sidebar-menu a{
+
+
+    display:block;
+
+
+    padding:12px;
+
+
+    color:#ddd;
+
+
+    text-decoration:none;
+
+
+    border-radius:8px;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.sidebar-menu a:hover{
+
+
+    background:
+
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .15
+
+    );
+
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
+    border-left:
+
+    3px solid
+
+    var(--gold);
+
+
+}
+
+
+
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+
+.main-content{
+
+
+    margin-left:260px;
+
+
+    width:calc(
+
+        100% - 260px
+
+    );
+
+
+    padding:30px;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   TOP HEADER
+===================================================== */
+
+
+.header{
+
+
+    display:flex;
+
+
+    justify-content:
+
+    space-between;
+
+
+
+    align-items:center;
+
+
+
+    background:
+
+
+    var(--panel);
+
+
+
+    padding:20px;
+
+
+
+    border:
+
+    2px solid
+
+    var(--border);
+
+
+
+    border-radius:15px;
+
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.user-badge{
+
+
+    background:
+
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .15
+
+    );
+
+
+
+    border:
+
+    1px solid
+
+    var(--gold);
+
+
+
+    padding:10px 20px;
+
+
+    border-radius:20px;
 
 
 
@@ -538,16 +835,12 @@ button:hover,
 
 
 
-
-
-
-
 /* =====================================================
-   WALLET / CURRENCY
+   GRID SYSTEM
 ===================================================== */
 
 
-.wallet{
+.grid{
 
 
     display:grid;
@@ -561,8 +854,11 @@ button:hover,
         auto-fit,
 
         minmax(
-            150px,
+
+            250px,
+
             1fr
+
         )
 
     );
@@ -572,23 +868,46 @@ button:hover,
     gap:20px;
 
 
+
 }
 
 
 
 
-.currency-card{
+
+/* =====================================================
+   WALLET CARDS
+===================================================== */
 
 
-    background:#111;
+.wallet-card{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #181200,
+
+        #080808
+
+    );
+
 
 
     border:
 
 
-    1px solid
+    2px solid
 
-    #c9a227;
+    var(--gold);
+
+
+
+    border-radius:15px;
 
 
 
@@ -599,7 +918,12 @@ button:hover,
     text-align:center;
 
 
-    border-radius:15px;
+
+    position:relative;
+
+
+
+    overflow:hidden;
 
 
 }
@@ -608,10 +932,61 @@ button:hover,
 
 
 
-.currency-name{
+.wallet-card::before{
 
 
-    color:#ffd700;
+    content:"🪙";
+
+
+    font-size:60px;
+
+
+
+    position:absolute;
+
+
+
+    right:10px;
+
+
+
+    top:5px;
+
+
+
+    opacity:.15;
+
+
+}
+
+
+
+
+
+.wallet-name{
+
+
+    font-size:20px;
+
+
+    color:
+
+    var(--bright-gold);
+
+
+}
+
+
+
+
+
+.wallet-value{
+
+
+    font-size:32px;
+
+
+    margin-top:10px;
 
 
     font-weight:bold;
@@ -621,13 +996,72 @@ button:hover,
 
 
 
-.currency-value{
 
 
-    font-size:30px;
+/* =====================================================
+   STATISTICS CARDS
+===================================================== */
+
+
+.stat-card{
+
+
+    background:
+
+
+    #101010;
+
+
+
+    border:
+
+    1px solid
+
+    var(--dark-gold);
+
+
+
+    padding:20px;
+
+
+
+    border-radius:12px;
+
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.stat-card h3{
+
+
+    color:
+
+    var(--gold);
+
+
+}
+
+
+
+
+
+.stat-card span{
+
+
+    display:block;
 
 
     margin-top:10px;
+
+
+    font-size:30px;
 
 
     color:white;
@@ -639,12 +1073,8 @@ button:hover,
 
 
 
-
-
-
-
 /* =====================================================
-   TABLE
+   TABLES
 ===================================================== */
 
 
@@ -681,10 +1111,17 @@ table{
 th{
 
 
-    background:#17120a;
+    background:
 
 
-    color:#ffd700;
+    #211800;
+
+
+
+    color:
+
+    var(--bright-gold);
+
 
 
     padding:15px;
@@ -694,10 +1131,12 @@ th{
 
 
 
+
+
 td{
 
 
-    padding:13px;
+    padding:12px;
 
 
     border-bottom:
@@ -709,6 +1148,9 @@ td{
 
 
 
+    color:#ddd;
+
+
 }
 
 
@@ -718,75 +1160,67 @@ td{
 tr:hover{
 
 
-    background:#191307;
+    background:
+
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .08
+
+    );
 
 
 }
-
-
-
-
 
 
 
 
 
 /* =====================================================
-   MARKETPLACE
+   MARKETPLACE PRODUCT CARD
 ===================================================== */
-
-
-.product-grid{
-
-
-    display:grid;
-
-
-    grid-template-columns:
-
-
-    repeat(
-
-        auto-fit,
-
-        minmax(
-            250px,
-            1fr
-        )
-
-    );
-
-
-
-    gap:25px;
-
-
-}
-
-
-
 
 
 .product-card{
 
 
-    background:#101010;
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        #151515,
+
+        #080808
+
+    );
+
 
 
     border:
 
 
-    1px solid
+    2px solid
 
-    #c9a227;
+    #6e5410;
+
+
+
+    border-radius:15px;
 
 
 
     padding:20px;
 
 
-    border-radius:15px;
-
 
 }
 
@@ -794,13 +1228,13 @@ tr:hover{
 
 
 
-.product-title{
+.product-card h3{
 
 
-    color:#ffd700;
+    color:
 
+    var(--bright-gold);
 
-    font-size:20px;
 
 
 }
@@ -812,12 +1246,84 @@ tr:hover{
 .product-price{
 
 
-    color:#9cff9c;
+    font-size:25px;
 
 
-    margin:
+    color:
 
-    15px 0;
+    #fff;
+
+
+
+    margin:10px 0;
+
+
+}
+
+
+
+
+
+.product-price::before{
+
+
+    content:"🪙 ";
+
+
+}
+
+
+
+
+
+.stock{
+
+
+    color:#aaa;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   AUCTION CARD
+===================================================== */
+
+
+.auction-card{
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        #241900,
+
+        #080808
+
+    );
+
+
+
+    border:
+
+    2px solid
+
+    var(--gold);
+
+
+
+    border-radius:15px;
+
+
+
+    padding:20px;
 
 
 
@@ -826,6 +1332,310 @@ tr:hover{
 
 
 
+
+.auction-card h3{
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
+}
+
+
+
+
+
+.bid-value{
+
+
+    font-size:30px;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.bid-value::before{
+
+
+    content:"⚔️ ";
+
+
+}
+/*******************************************************
+ LUXEMNEAUX ROLEPLAY BANK
+
+ STYLE.CSS
+
+ PART 3/4
+ AUTH + FORM + SPECIAL PANELS
+*******************************************************/
+
+
+/* =====================================================
+   AUTH PAGE
+===================================================== */
+
+
+.auth-page{
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        #241900,
+
+        #050505 70%
+
+    );
+
+
+}
+
+
+
+
+
+.auth-box{
+
+
+    width:420px;
+
+
+
+    background:
+
+
+    rgba(
+
+        10,
+
+        10,
+
+        10,
+
+        .95
+
+    );
+
+
+
+    border:
+
+    2px solid
+
+    var(--gold);
+
+
+
+    border-radius:20px;
+
+
+
+    padding:35px;
+
+
+
+    box-shadow:
+
+
+    0 0 30px
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .35
+
+    );
+
+
+
+}
+
+
+
+
+
+.auth-logo{
+
+
+    text-align:center;
+
+
+    font-size:45px;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+.auth-title{
+
+
+    text-align:center;
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
+    font-size:30px;
+
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.auth-footer{
+
+
+    margin-top:20px;
+
+
+
+    text-align:center;
+
+
+
+    color:#aaa;
+
+
+}
+
+
+
+
+
+.auth-footer a{
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
+    text-decoration:none;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+
+.form-group{
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+.form-group label{
+
+
+    display:block;
+
+
+
+    color:
+
+    var(--gold);
+
+
+
+    margin-bottom:5px;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   SELECT DROPDOWN
+===================================================== */
+
+
+select{
+
+
+    appearance:none;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+option{
+
+
+    background:#111;
+
+
+    color:white;
+
+
+}
 
 
 
@@ -845,6 +1655,233 @@ tr:hover{
     border-radius:10px;
 
 
+    margin:15px 0;
+
+
+}
+
+
+
+
+
+.alert-success{
+
+
+    background:
+
+
+    rgba(
+
+        46,
+
+        139,
+
+        87,
+
+        .2
+
+    );
+
+
+    border:
+
+    1px solid
+
+    #2e8b57;
+
+
+    color:#90ee90;
+
+
+}
+
+
+
+
+
+.alert-error{
+
+
+    background:
+
+
+    rgba(
+
+        178,
+
+        34,
+
+        34,
+
+        .2
+
+    );
+
+
+    border:
+
+    1px solid
+
+    #b22222;
+
+
+    color:#ff9999;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+
+.badge{
+
+
+    display:inline-block;
+
+
+    padding:
+
+    5px 15px;
+
+
+    border-radius:20px;
+
+
+
+    font-size:13px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+.badge-creator{
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #ffd700,
+
+        #8b6914
+
+    );
+
+
+    color:black;
+
+
+}
+
+
+
+
+
+.badge-seller{
+
+
+    background:
+
+
+    #704214;
+
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.badge-member{
+
+
+    background:
+
+
+    #333;
+
+
+
+    color:#ddd;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   CREATOR PANEL
+===================================================== */
+
+
+.creator-panel{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #1b1300,
+
+        #090909
+
+    );
+
+
+
+    border:
+
+
+    2px solid
+
+    var(--gold);
+
+
+
+    padding:25px;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+.creator-panel h2{
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
     margin-bottom:20px;
 
 
@@ -853,35 +1890,17 @@ tr:hover{
 
 
 
-.success{
+
+.creator-action{
 
 
-    background:#102b14;
+    display:flex;
 
 
-    border:
-
-    1px solid
-
-    #3cff5b;
+    flex-wrap:wrap;
 
 
-}
-
-
-
-
-.error{
-
-
-    background:#2b1010;
-
-
-    border:
-
-    1px solid
-
-    #ff4444;
+    gap:15px;
 
 
 }
@@ -889,29 +1908,44 @@ tr:hover{
 
 
 
+
+.creator-action button{
+
+
+    flex:1;
+
+
+    min-width:180px;
+
+
+}
 
 
 
 
 
 /* =====================================================
-   SIDEBAR SUPPORT
+   ROYAL DECORATION
 ===================================================== */
 
 
-.sidebar{
+.royal-border{
 
 
-    background:#080808;
+    border:
 
 
-    border-right:
+    3px double
+
+    var(--gold);
 
 
-    1px solid
 
-    #c9a227;
+    padding:20px;
 
+
+
+    position:relative;
 
 
 }
@@ -919,52 +1953,373 @@ tr:hover{
 
 
 
-.sidebar a{
+
+.royal-border::before{
+
+
+    content:"⚜️";
+
+
+    position:absolute;
+
+
+    top:-18px;
+
+
+    left:50%;
+
+
+    transform:
+
+    translateX(-50%);
+
+
+
+    background:#050505;
+
+
+    padding:0 15px;
+
+
+    font-size:30px;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
+
+
+.loading{
+
+
+    position:fixed;
+
+
+    inset:0;
+
+
+    background:
+
+
+    rgba(
+
+        0,
+
+        0,
+
+        0,
+
+        .9
+
+    );
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    z-index:9999;
+
+
+}
+
+
+
+
+
+.loading-icon{
+
+
+    font-size:70px;
+
+
+    animation:
+
+
+    pulse 1.5s infinite;
+
+
+}
+
+
+
+
+
+@keyframes pulse{
+
+
+    0%{
+
+
+        transform:
+
+        scale(1);
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+        scale(1.2);
+
+
+    }
+
+
+
+    100%{
+
+
+        transform:
+
+        scale(1);
+
+
+    }
+
+
+}
+
+
+
+
+
+/* =====================================================
+   GLOW EFFECTS
+===================================================== */
+
+
+.gold-glow{
+
+
+    text-shadow:
+
+
+    0 0 5px
+
+    #d4af37,
+
+
+    0 0 20px
+
+    #d4af37;
+
+
+}
+
+
+
+
+
+.card-glow{
+
+
+    box-shadow:
+
+
+    0 0 20px
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .4
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+
+.empty-state{
+
+
+    text-align:center;
+
+
+    padding:40px;
+
+
+    color:#aaa;
+
+
+}
+
+
+
+
+
+.empty-state::before{
+
+
+    content:"📜";
 
 
     display:block;
 
 
-    padding:15px;
+    font-size:50px;
 
 
-    color:#e5c75f;
-
-
-}
-
-
-
-
-
-.sidebar a:hover{
-
-
-    background:#201707;
-
-
-    color:#ffd700;
+    margin-bottom:15px;
 
 
 }
+/*******************************************************
+ LUXEMNEAUX ROLEPLAY BANK
 
+ STYLE.CSS
 
-
-
-
-
-
+ PART 4/4
+ FINAL THEME POLISH
+*******************************************************/
 
 
 /* =====================================================
-   RESPONSIVE
+   RESPONSIVE DESIGN
 ===================================================== */
 
 
-@media(max-width:700px){
+@media(max-width:900px){
 
 
-    .container{
+
+    .sidebar{
+
+
+        position:relative;
+
+
+        width:100%;
+
+
+        height:auto;
+
+
+
+        border-right:none;
+
+
+
+        border-bottom:
+
+        2px solid
+
+        var(--gold);
+
+
+
+    }
+
+
+
+
+
+    .dashboard-layout{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+
+
+    .main-content{
+
+
+        margin-left:0;
+
+
+
+        width:100%;
+
+
+        padding:15px;
+
+
+    }
+
+
+
+
+
+    .header{
+
+
+        flex-direction:column;
+
+
+        gap:15px;
+
+
+        text-align:center;
+
+
+    }
+
+
+
+
+
+    .grid{
+
+
+        grid-template-columns:
+
+        1fr;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+@media(max-width:500px){
+
+
+
+    .auth-box{
+
+
+        width:95%;
+
 
 
         padding:20px;
@@ -974,13 +2329,25 @@ tr:hover{
 
 
 
-    .navbar{
 
 
-        flex-direction:column;
+    .logo{
 
 
-        gap:15px;
+        font-size:24px;
+
+
+    }
+
+
+
+
+
+    button,
+    .btn{
+
+
+        width:100%;
 
 
     }
@@ -988,3 +2355,616 @@ tr:hover{
 
 
 }
+
+
+
+
+
+/* =====================================================
+   NAVIGATION BUTTONS
+===================================================== */
+
+
+.nav-button{
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+    gap:10px;
+
+
+
+    padding:12px;
+
+
+
+    color:#ddd;
+
+
+
+    text-decoration:none;
+
+
+
+    border-radius:10px;
+
+
+
+}
+
+
+
+
+
+.nav-button:hover{
+
+
+    background:
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .15
+
+    );
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+   ICON STYLE
+===================================================== */
+
+
+.icon{
+
+
+    font-size:25px;
+
+
+    margin-right:8px;
+
+
+}
+
+
+
+
+
+.currency-icon{
+
+
+    font-size:35px;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   ROYAL TITLE EFFECT
+===================================================== */
+
+
+.imperial-title{
+
+
+    font-size:38px;
+
+
+
+    font-weight:bold;
+
+
+
+    text-align:center;
+
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
+    letter-spacing:3px;
+
+
+
+    text-shadow:
+
+
+    0 0 5px #d4af37,
+
+
+    0 0 15px #d4af37,
+
+
+    0 0 30px #8b6914;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   DIVIDERS
+===================================================== */
+
+
+.gold-line{
+
+
+    height:2px;
+
+
+
+    width:100%;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        var(--gold),
+
+        transparent
+
+    );
+
+
+
+    margin:25px 0;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   PROFILE PANEL
+===================================================== */
+
+
+.profile-panel{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:20px;
+
+
+
+    background:
+
+
+    #101010;
+
+
+
+    padding:20px;
+
+
+
+    border-radius:15px;
+
+
+
+    border:
+
+    1px solid
+
+    var(--gold);
+
+
+}
+
+
+
+
+
+.profile-avatar{
+
+
+    width:70px;
+
+
+    height:70px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    border-radius:50%;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #d4af37,
+
+        #5a4300
+
+    );
+
+
+
+    font-size:35px;
+
+
+}
+
+
+
+
+
+.profile-avatar::before{
+
+
+    content:"🧙";
+
+
+}
+
+
+
+
+
+/* =====================================================
+   BUTTON VARIANTS
+===================================================== */
+
+
+.btn-danger{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #b22222,
+
+        #5a0000
+
+    );
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.btn-success{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #2e8b57,
+
+        #145228
+
+    );
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.btn-dark{
+
+
+    background:
+
+
+    #111;
+
+
+
+    color:
+
+    var(--bright-gold);
+
+
+
+    border:
+
+    1px solid
+
+    var(--gold);
+
+
+}
+
+
+
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+
+.footer{
+
+
+    text-align:center;
+
+
+    padding:25px;
+
+
+
+    color:#777;
+
+
+
+    margin-top:40px;
+
+
+
+    border-top:
+
+
+    1px solid
+
+    #333;
+
+
+}
+
+
+
+
+
+.footer::before{
+
+
+    content:"⚜️ ";
+
+
+}
+
+
+
+
+
+/* =====================================================
+   PARTICLE BACKGROUND EFFECT
+===================================================== */
+
+
+.magic-background{
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+
+.magic-background::before{
+
+
+    content:"✨ ✨ ✨";
+
+
+    position:absolute;
+
+
+    top:10%;
+
+
+    left:10%;
+
+
+    font-size:40px;
+
+
+    opacity:.15;
+
+
+
+    animation:
+
+
+    floating 8s infinite;
+
+
+}
+
+
+
+
+
+@keyframes floating{
+
+
+    0%{
+
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+        translateY(-30px);
+
+
+    }
+
+
+
+    100%{
+
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+/* =====================================================
+   FINAL ROYAL CARD
+===================================================== */
+
+
+.imperial-card{
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        #1a1200,
+
+        #080808
+
+    );
+
+
+
+    border:
+
+
+    3px double
+
+    var(--gold);
+
+
+
+    border-radius:20px;
+
+
+
+    padding:30px;
+
+
+
+    box-shadow:
+
+
+    inset 0 0 20px
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .15
+
+    ),
+
+    0 0 25px
+
+    rgba(
+
+        212,
+
+        175,
+
+        55,
+
+        .25
+
+    );
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+   END STYLE.CSS
+*******************************************************/
