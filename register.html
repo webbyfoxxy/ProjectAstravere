@@ -1,291 +1,557 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Register | Luxemneaux Roleplay Bank</title>
 
-<link rel="stylesheet"
-href="style.css">
+<title>
+Luxemneaux Empire Registration
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
 
-<body>
 
-<div class="form-container">
+<body class="magic-background">
 
-<div class="card">
 
-<div class="logo">
 
-🏛️
+<div class="auth-page">
 
-<h1>Create Account</h1>
 
-<p>Luxemneaux Imperial Banking</p>
 
-</div>
+<div class="auth-box imperial-card">
 
-<form id="registerForm">
 
-<div class="form-group">
 
-<label>Username</label>
+<div class="auth-logo">
 
-<input
-type="text"
-id="username"
-required>
+👑📜
 
 </div>
 
-<div class="form-group">
 
-<label>Password</label>
 
-<input
-type="password"
-id="password"
-required>
 
-</div>
+<h1 class="auth-title">
 
-<div class="form-group">
+Join Luxemneaux Empire
 
-<label>Roleplay Name</label>
+</h1>
 
-<input
-type="text"
-id="roleplayName"
-required>
 
-</div>
 
-<div class="form-group">
 
-<label>Kingdom</label>
+<p class="subtitle">
 
-<select id="kingdom">
-
-<option value="None">
-None
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-<input
-type="checkbox"
-id="creatorMode">
-
-Register as Creator
-
-</label>
-
-</div>
-
-<div
-class="form-group"
-id="creatorKeyGroup"
-style="display:none;">
-
-<label>Creator Key</label>
-
-<input
-type="password"
-id="creatorKey">
-
-</div>
-
-<button type="submit">
-
-Create Account
-
-</button>
-
-</form>
-
-<br>
-
-<p>
-
-Already have an account?
-
-<a href="index.html">
-
-Login
-
-</a>
+Create your identity in the kingdom
 
 </p>
 
-</div>
+
+
+
+
+<div class="gold-line"></div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Username
+
+</label>
+
+
+<input
+
+id="username"
+
+type="text"
+
+placeholder="Create username"
+
+>
+
 
 </div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Password
+
+</label>
+
+
+<input
+
+id="password"
+
+type="password"
+
+placeholder="Create password"
+
+>
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Role
+
+</label>
+
+
+
+<select id="role"
+
+onchange="toggleCreatorKey()">
+
+
+<option value="Member">
+
+🧑 Member
+
+</option>
+
+
+<option value="Creator">
+
+👑 Creator
+
+</option>
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Character Name
+
+</label>
+
+
+
+<input
+
+id="roleplayName"
+
+type="text"
+
+placeholder="Your kingdom name"
+
+>
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Kingdom
+
+</label>
+
+
+
+<select id="kingdom">
+
+
+<option value="">
+
+Select Kingdom
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div id="creatorKeyBox"
+
+style="display:none;"
+
+class="form-group">
+
+
+
+<label>
+
+🔑 Creator Private Key
+
+</label>
+
+
+
+<input
+
+id="creatorKey"
+
+type="password"
+
+placeholder="Enter creator key"
+
+>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button
+
+class="btn"
+
+onclick="registerAccount()"
+
+>
+
+📜 Create Identity
+
+</button>
+
+
+
+
+
+
+<div id="message"></div>
+
+
+
+
+
+<div class="auth-footer">
+
+
+Already registered?
+
+
+<a href="index.html">
+
+Return Login
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
 
 <script src="api.js"></script>
 
+
+
 <script>
 
-const creatorMode =
-document.getElementById(
-"creatorMode"
-);
 
-const creatorKeyGroup =
-document.getElementById(
-"creatorKeyGroup"
-);
+/* =====================================
+   LOAD KINGDOMS
+===================================== */
 
-creatorMode.addEventListener(
-"change",
-function(){
-
-creatorKeyGroup.style.display =
-this.checked
-?
-"block"
-:
-"none";
-
-});
 
 async function loadKingdoms(){
 
-    try{
 
-        const result =
-        await api(
-            "getKingdoms"
-        );
 
-        if(
-            result.success
-            &&
-            result.data
-        ){
+const result =
 
-            const select =
-            document.getElementById(
-                "kingdom"
-            );
+await getKingdoms();
 
-            select.innerHTML =
-            '<option value="None">None</option>';
 
-            result.data.forEach(
-            kingdom=>{
 
-                const option =
-                document.createElement(
-                    "option"
-                );
 
-                option.value =
-                kingdom.kingdomName;
-
-                option.textContent =
-                kingdom.kingdomName;
-
-                select.appendChild(
-                    option
-                );
-
-            });
-
-        }
-
-    }
-
-    catch(e){
-
-        console.error(e);
-
-    }
-
-}
-
-loadKingdoms();
+const select =
 
 document
 .getElementById(
-"registerForm"
-)
-.addEventListener(
-"submit",
-async function(e){
-
-e.preventDefault();
-
-const data={
-
-username:
-username.value.trim(),
-
-password:
-password.value,
-
-roleplayName:
-roleplayName.value.trim(),
-
-kingdom:
-kingdom.value
-
-};
-
-let result;
-
-if(
-creatorMode.checked
-){
-
-result =
-await registerCreator({
-
-...data,
-
-creatorKey:
-creatorKey.value
-
-});
-
-}
-else{
-
-result =
-await registerMember(
-data
+"kingdom"
 );
 
-}
 
-alert(
-result.message
-);
+
+
 
 if(
 result.success
 ){
 
-window.location =
-"index.html";
+
+
+select.innerHTML =
+
+`
+
+<option value="">
+
+Select Kingdom
+
+</option>
+
+`;
+
+
+
+
+result.data.forEach(
+
+kingdom=>{
+
+
+select.innerHTML +=
+
+
+`
+
+<option value="${kingdom.kingdomId}">
+
+${kingdom.kingdomName}
+
+</option>
+
+
+`;
+
+
 
 }
 
-});
+);
 
-</script>
 
-</body>
 
-</html>
+}
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   CREATOR KEY DISPLAY
+===================================== */
+
+
+function toggleCreatorKey(){
+
+
+
+const role =
+
+document
+.getElementById(
+"role"
+)
+.value;
+
+
+
+
+const box =
+
+document
+.getElementById(
+"creatorKeyBox"
+);
+
+
+
+
+if(
+role === "Creator"
+){
+
+
+box.style.display =
+"block";
+
+
+}
+
+else{
+
+
+box.style.display =
+"none";
+
+
+}
+
+
+
+}
+
+
+
+
+
+/* =====================================
+   REGISTER ACCOUNT
+===================================== */
+
+
+async function registerAccount(){
+
+
+
+const username =
+
+document
+.getElementById(
+"username"
+)
+.value;
+
+
+
+const password =
+
+document
+.getElementById(
+"password"
+)
+.value;
+
+
+
+const role =
+
+document
+.getElementById(
+"role"
+)
+.value;
+
+
+
+const roleplayName =
+
+document
+.getElementById(
+"roleplayName"
+)
+.value;
+
+
+
+const kingdomId =
+
+document
+.getElementById(
+"kingdom"
+)
+.value;
+
+
+
+const message =
+
+document
+.getElementById(
+"message"
+);
+
+
+
+
+if(
+!username ||
+!password ||
+!roleplayName
+){
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+⚠️ Complete all required fields.
+
+</div>
+
+`;
+
+return;
+
+
+}
