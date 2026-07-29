@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Roleplay Bank | Imperial Banking & Marketplace</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Styles -->
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <link rel="stylesheet"
+          href="sidebar.css">
+
+    <link rel="stylesheet"
+          href="dashboard.css">
+
+</head>
+
+<body>
+
+<!-- ==========================================================
+     HEADER
+=========================================================== -->
+
+<header>
+
+    <div class="logo">
+
+        <i class="fa-solid fa-landmark"></i>
+
+        ROLEPLAY BANK
+
+    </div>
+
+    <nav class="landing-nav">
+
+        <a href="#home">Home</a>
+
+        <a href="#marketplace">Marketplace</a>
+
+        <a href="#auctions">Auction Hall</a>
+
+        <a href="#announcements">Announcements</a>
+
+    </nav>
+
+    <div class="flex gap">
+
+        <button
+            class="btn btn-secondary"
+            onclick="window.location='login.html'">
+
+            Login
+
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="window.location='register.html'">
+
+            Register
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ==========================================================
+     HERO
+=========================================================== -->
+
+<section
+    class="section"
+    id="home">
+
+    <div class="container">
+
+        <div class="dashboard-grid">
+
+            <div>
+
+                <h1
+                    class="page-title">
+
+                    Imperial Banking System
+
+                </h1>
+
+                <p
+                    style="max-width:650px; margin-bottom:30px;">
+
+                    Welcome to the official treasury of the realm.
+                    Manage your wealth, trade through trusted merchants,
+                    participate in imperial auctions, and build your
+                    reputation throughout every kingdom and empire.
+
+                </p>
+
+                <div class="flex gap">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="window.location='register.html'">
+
+                        Create Account
+
+                    </button>
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="window.location='login.html'">
+
+                        Login
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="wallet-card">
+
+                    <h2>
+
+                        Current Currencies
+
+                    </h2>
+
+                    <hr>
+
+                    <div class="info-list">
+
+                        <li>
+
+                            <span>Lumen</span>
+
+                            <strong>Primary Currency</strong>
+
+                        </li>
+
+                        <li>
+
+                            <span>Aurel</span>
+
+                            <strong>High Value Coin</strong>
+
+                        </li>
+
+                        <li>
+
+                            <span>Virel</span>
+
+                            <strong>Trade Currency</strong>
+
+                        </li>
+
+                        <li>
+
+                            <span>Sylem</span>
+
+                            <strong>Silver Currency</strong>
+
+                        </li>
+
+                        <li>
+
+                            <span>Bront</span>
+
+                            <strong>Copper Currency</strong>
+
+                        </li>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     FEATURES
+=========================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <h2
+            class="section-title">
+
+            Imperial Services
+
+        </h2>
+
+        <div
+            class="dashboard-grid">
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Wallet
+
+                </h3>
+
+                <p>
+
+                    Hold your Lumen, Aurel,
+                    Virel, Sylem and Bront
+                    safely inside the Imperial
+                    Treasury.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-store"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Marketplace
+
+                </h3>
+
+                <p>
+
+                    Purchase goods from
+                    approved merchants across
+                    every kingdom.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-gavel"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Auction Hall
+
+                </h3>
+
+                <p>
+
+                    Members and Sellers can
+                    create auctions after
+                    Creator approval.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Creator Protection
+
+                </h3>
+
+                <p>
+
+                    Marketplace listings,
+                    seller applications and
+                    auctions are reviewed
+                    before publication.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     MARKETPLACE PREVIEW
+=========================================================== -->
+
+<section
+    class="section"
+    id="marketplace">
+
+    <div class="container">
+
+        <div class="flex-between mb-3">
+
+            <h2
+                class="section-title">
+
+                Marketplace Preview
+
+            </h2>
+
+            <button
+                class="btn btn-secondary">
+
+                View Marketplace
+
+            </button>
+
+        </div>
+
+        <div
+            class="marketplace-preview">
+                      <div class="market-card">
+
+                <span class="market-category">
+
+                    Weapons
+
+                </span>
+
+                <h3 class="market-title">
+
+                    Imperial Steel Sword
+
+                </h3>
+
+                <p class="market-description">
+
+                    A finely crafted longsword forged by an approved
+                    blacksmith. Balanced for both ceremonial use and combat.
+
+                </p>
+
+                <div class="market-details">
+
+                    <div>
+
+                        <small>Seller</small>
+
+                        Imperial Forge
+
+                    </div>
+
+                    <div>
+
+                        <small>Kingdom</small>
+
+                        Luxemneaux Empire
+
+                    </div>
+
+                    <div>
+
+                        <small>Stock</small>
+
+                        18
+
+                    </div>
+
+                    <div>
+
+                        <small>Price</small>
+
+                        <span class="market-price">
+
+                            250 Lumen
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="market-card">
+
+                <span class="market-category">
+
+                    Potions
+
+                </span>
+
+                <h3 class="market-title">
+
+                    Greater Healing Potion
+
+                </h3>
+
+                <p class="market-description">
+
+                    Restores vitality during adventures.
+                    Brewed by certified alchemists.
+
+                </p>
+
+                <div class="market-details">
+
+                    <div>
+
+                        <small>Seller</small>
+
+                        Emerald Alchemy
+
+                    </div>
+
+                    <div>
+
+                        <small>Kingdom</small>
+
+                        None
+
+                    </div>
+
+                    <div>
+
+                        <small>Stock</small>
+
+                        72
+
+                    </div>
+
+                    <div>
+
+                        <small>Price</small>
+
+                        <span class="market-price">
+
+                            75 Lumen
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="market-card">
+
+                <span class="market-category">
+
+                    Furniture
+
+                </span>
+
+                <h3 class="market-title">
+
+                    Oak Royal Desk
+
+                </h3>
+
+                <p class="market-description">
+
+                    Handcrafted by experienced carpenters for noble
+                    residences and government offices.
+
+                </p>
+
+                <div class="market-details">
+
+                    <div>
+
+                        <small>Seller</small>
+
+                        Royal Carpenter Guild
+
+                    </div>
+
+                    <div>
+
+                        <small>Kingdom</small>
+
+                        Luxemneaux Empire
+
+                    </div>
+
+                    <div>
+
+                        <small>Stock</small>
+
+                        4
+
+                    </div>
+
+                    <div>
+
+                        <small>Price</small>
+
+                        <span class="market-price">
+
+                            980 Lumen
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     ANNOUNCEMENTS
+=========================================================== -->
+
+<section
+    class="section"
+    id="announcements">
+
+    <div class="container">
+
+        <h2 class="section-title">
+
+            Imperial Announcements
+
+        </h2>
+
+        <div class="notification-panel">
+
+            <div class="notification">
+
+                <div class="notification-title">
+
+                    Merchant Applications Open
+
+                </div>
+
+                <div class="notification-message">
+
+                    Members may now submit seller applications to open
+                    businesses within the marketplace.
+
+                </div>
+
+                <div class="notification-time">
+
+                    Posted Today
+
+                </div>
+
+            </div>
+
+            <div class="notification">
+
+                <div class="notification-title">
+
+                    Auction Hall Expansion
+
+                </div>
+
+                <div class="notification-message">
+
+                    Approved members and sellers may create auctions
+                    after Creator review.
+
+                </div>
+
+                <div class="notification-time">
+
+                    Posted Yesterday
+
+                </div>
+
+            </div>
+
+            <div class="notification">
+
+                <div class="notification-title">
+
+                    Treasury Notice
+
+                </div>
+
+                <div class="notification-message">
+
+                    Currency adjustments made by Creators are now
+                    recorded permanently inside the transaction ledger.
+
+                </div>
+
+                <div class="notification-time">
+
+                    3 Days Ago
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     IMPERIAL STATISTICS
+=========================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <h2 class="section-title">
+
+            Imperial Statistics
+
+        </h2>
+
+        <div class="dashboard-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+
+                        Registered Members
+
+                    </span>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="stat-value">
+
+                    0
+
+                </div>
+
+                <div class="stat-sub">
+
+                    Waiting for registration
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+
+                        Trusted Sellers
+
+                    </span>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-shop"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="stat-value">
+
+                    0
+
+                </div>
+
+                <div class="stat-sub">
+
+                    Approved businesses
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+
+                        Marketplace Listings
+
+                    </span>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-store"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="stat-value">
+
+                    0
+
+                </div>
+
+                <div class="stat-sub">
+
+                    Active listings
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-title">
+
+                        Live Auctions
+
+                    </span>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-gavel"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="stat-value">
+
+                    0
+
+                </div>
+
+                <div class="stat-sub">
+
+                    Creator approved
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     AUCTION HALL
+=========================================================== -->
+
+<section
+    class="section"
+    id="auctions">
+
+    <div class="container">
+
+        <div class="flex-between mb-3">
+
+            <h2 class="section-title">
+
+                Auction Hall Preview
+
+            </h2>
+
+            <button
+                class="btn btn-secondary">
+
+                View Auctions
+
+            </button>
+
+        </div>
+
+        <div class="auction-grid">
+                      <div class="auction-card">
+
+                <h3>
+
+                    Ancient Dragon Blade
+
+                </h3>
+
+                <p>
+
+                    A legendary sword submitted for auction by an approved
+                    member. Creator approval has been granted.
+
+                </p>
+
+                <div class="auction-info">
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Category
+
+                        </span>
+
+                        <strong>
+
+                            Weapon
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Seller
+
+                        </span>
+
+                        <strong>
+
+                            Imperial Forge
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Current Bid
+
+                        </span>
+
+                        <strong class="current-bid">
+
+                            2,500 Lumen
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Ends In
+
+                        </span>
+
+                        <strong class="ends-in">
+
+                            2 Days
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="auction-card">
+
+                <h3>
+
+                    Royal Sapphire Ring
+
+                </h3>
+
+                <p>
+
+                    A handcrafted noble ring submitted by a trusted jeweler.
+
+                </p>
+
+                <div class="auction-info">
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Category
+
+                        </span>
+
+                        <strong>
+
+                            Jewelry
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Seller
+
+                        </span>
+
+                        <strong>
+
+                            Royal Jewelers
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Current Bid
+
+                        </span>
+
+                        <strong class="current-bid">
+
+                            980 Lumen
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Ends In
+
+                        </span>
+
+                        <strong class="ends-in">
+
+                            5 Days
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="auction-card">
+
+                <h3>
+
+                    Master Alchemist's Journal
+
+                </h3>
+
+                <p>
+
+                    A rare collection of potion formulas available through
+                    the Imperial Auction Hall.
+
+                </p>
+
+                <div class="auction-info">
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Category
+
+                        </span>
+
+                        <strong>
+
+                            Books
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Seller
+
+                        </span>
+
+                        <strong>
+
+                            Emerald Alchemy
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Current Bid
+
+                        </span>
+
+                        <strong class="current-bid">
+
+                            1,450 Lumen
+
+                        </strong>
+
+                    </div>
+
+                    <div class="auction-box">
+
+                        <span>
+
+                            Ends In
+
+                        </span>
+
+                        <strong class="ends-in">
+
+                            1 Day
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     WHY ROLEPLAY BANK
+=========================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <h2 class="section-title">
+
+            Why Choose Roleplay Bank?
+
+        </h2>
+
+        <div class="dashboard-grid">
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-scale-balanced"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Fair Economy
+
+                </h3>
+
+                <p>
+
+                    Every product, seller application, and auction is reviewed
+                    before becoming public, helping maintain a balanced roleplay
+                    economy.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-scroll"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Complete Records
+
+                </h3>
+
+                <p>
+
+                    Every currency transfer, purchase, sale, and auction bid is
+                    permanently recorded in the transaction ledger.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                </div>
+
+                <h3 class="mt-2">
+
+                    Kingdom Administration
+
+                </h3>
+
+                <p>
+
+                    Kingdoms and empires are created exclusively by Creators,
+                    ensuring consistent world-building and preventing duplicate
+                    factions.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     CALL TO ACTION
+=========================================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="wallet-card text-center">
+
+            <h2>
+
+                Begin Your Journey
+
+            </h2>
+
+            <p class="mt-2 mb-3">
+
+                Register your roleplay identity, grow your wealth,
+                establish your business, and compete in the Imperial
+                Auction Hall.
+
+            </p>
+
+            <div class="wallet-actions flex-center">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="window.location='register.html'">
+
+                    Register Now
+
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="window.location='login.html'">
+
+                    Login
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+     FOOTER
+=========================================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="dashboard-grid">
+
+            <div>
+
+                <h3>
+
+                    Roleplay Bank
+
+                </h3>
+
+                <p class="mt-2">
+
+                    The official banking, marketplace,
+                    and auction platform for your roleplay world.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Navigation
+
+                </h3>
+
+                <p class="mt-2">
+
+                    Home
+
+                </p>
+
+                <p>
+
+                    Marketplace
+
+                </p>
+
+                <p>
+
+                    Auction Hall
+
+                </p>
+
+                <p>
+
+                    Login
+
+                </p>
+
+                <p>
+
+                    Register
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Economy
+
+                </h3>
+
+                <p class="mt-2">
+
+                    Lumen
+
+                </p>
+
+                <p>
+
+                    Aurel
+
+                </p>
+
+                <p>
+
+                    Virel
+
+                </p>
+
+                <p>
+
+                    Sylem
+
+                </p>
+
+                <p>
+
+                    Bront
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Administration
+
+                </h3>
+
+                <p class="mt-2">
+
+                    Creator Managed
+
+                </p>
+
+                <p>
+
+                    Kingdom System
+
+                </p>
+
+                <p>
+
+                    Seller Applications
+
+                </p>
+
+                <p>
+
+                    Auction Approval
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="text-center">
+
+            © 2026 Roleplay Bank. All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+<!-- ==========================================================
+     NOTIFICATION MODAL
+=========================================================== -->
+
+<div
+    class="modal hidden"
+    id="notificationModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Notifications
+
+            </h2>
+
+            <button
+                class="btn btn-danger"
+                onclick="closeNotificationModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="notification-panel">
+
+                <div class="notification">
+
+                    <div class="notification-title">
+
+                        Welcome
+
+                    </div>
+
+                    <div class="notification-message">
+
+                        Welcome to Roleplay Bank. Register an account to
+                        participate in the marketplace and auction hall.
+
+                    </div>
+
+                    <div class="notification-time">
+
+                        Just Now
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     CONFIRMATION MODAL
+=========================================================== -->
+
+<div
+    class="modal hidden"
+    id="confirmModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Confirmation
+
+            </h2>
+
+        </div>
+
+        <div class="modal-body">
+
+            <p>
+
+                Are you sure you want to continue?
+
+            </p>
+
+            <div
+                class="wallet-actions">
+
+                <button
+                    class="btn btn-primary"
+                    id="confirmYes">
+
+                    Yes
+
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    id="confirmNo">
+
+                    No
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     LOADING OVERLAY
+=========================================================== -->
+
+<div
+    class="loading-overlay hidden"
+    id="loadingOverlay">
+
+    <div class="loading-box">
+
+        <div class="spinner"></div>
+
+        <p>
+
+            Loading...
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     TOAST NOTIFICATION
+=========================================================== -->
+
+<div
+    id="toastContainer">
+
+</div>
+
+<!-- ==========================================================
+     JAVASCRIPT
+=========================================================== -->
+
+<script src="app.js"></script>
+
+<script>
+
+function closeNotificationModal(){
+
+    document
+        .getElementById("notificationModal")
+        .classList
+        .add("hidden");
+
+}
+
+document
+.getElementById("confirmNo")
+.addEventListener("click",function(){
+
+    document
+        .getElementById("confirmModal")
+        .classList
+        .add("hidden");
+
+});
+
+</script>
+
+</body>
+
+</html>
