@@ -1,8 +1,8 @@
-/* ==========================================================
-   ROLEPLAY BANK
-   DARK GOLDEN FANTASY THEME
-========================================================== */
-
+/*******************************************************
+ ROLEPLAY BANK
+ DARK IMPERIAL GOLD THEME
+ GLOBAL STYLE
+*******************************************************/
 
 
 *{
@@ -10,12 +10,11 @@
     box-sizing:border-box;
 
     font-family:
-    "Georgia",
+    "Cinzel",
+    "Segoe UI",
     serif;
 
 }
-
-
 
 
 
@@ -26,35 +25,17 @@ body{
 
     min-height:100vh;
 
+
     background:
 
-    linear-gradient(
-
-        135deg,
-
-        #080808,
-
-        #161616
-
+    radial-gradient(
+        circle at top,
+        #2b2108,
+        #090909 65%
     );
 
 
-
     color:#f5e6b3;
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   AUTH PAGES
-========================================================== */
-
-
-.auth-container{
 
 
     display:flex;
@@ -63,43 +44,74 @@ body{
 
     align-items:center;
 
-    min-height:100vh;
-
 
 }
 
 
 
 
-.auth-box{
 
 
-    width:380px;
 
-    padding:35px;
+/*
+=========================
+ LOGIN / REGISTER
+=========================
+*/
+
+
+.login-container{
+
+
+    width:420px;
+
+
+    padding:40px;
 
 
     background:
 
-    rgba(15,15,15,0.95);
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(25,25,25,0.95),
+
+        rgba(10,10,10,0.95)
+
+    );
 
 
 
     border:
 
-    2px solid #c9a227;
+    2px solid
+
+    #c9a227;
 
 
 
-    border-radius:15px;
+    border-radius:18px;
 
 
 
     box-shadow:
 
+
     0 0 25px
 
-    rgba(201,162,39,0.35);
+    rgba(
+
+        201,
+
+        162,
+
+        39,
+
+        .35
+
+    );
 
 
 
@@ -112,12 +124,32 @@ body{
 
 
 
-.auth-box h1{
 
 
-    color:#d4af37;
+.login-container h1{
 
-    margin-bottom:10px;
+
+    color:#ffd700;
+
+
+    letter-spacing:2px;
+
+
+    text-shadow:
+
+    0 0 10px
+
+    rgba(
+
+        255,
+
+        215,
+
+        0,
+
+        .5
+
+    );
 
 
 }
@@ -126,13 +158,17 @@ body{
 
 
 
-.auth-box p{
 
 
-    color:#cfcfcf;
+.login-container p{
+
+
+    color:#d6c58a;
 
 
 }
+
+
 
 
 
@@ -146,43 +182,69 @@ select{
     width:100%;
 
 
-    padding:12px;
+    padding:14px;
 
 
-    margin:10px 0;
+    margin:
 
+    10px 0;
 
 
     background:#111;
 
 
-
-    color:#fff;
-
+    color:#f5e6b3;
 
 
     border:
 
-    1px solid #c9a227;
+    1px solid
+
+    #8b6f1d;
 
 
 
     border-radius:8px;
 
 
-}
-
-
-
-
-
-textarea{
-
-
-    min-height:100px;
+    outline:none;
 
 
 }
+
+
+
+
+
+
+input:focus,
+textarea:focus,
+select:focus{
+
+
+    border-color:#ffd700;
+
+
+    box-shadow:
+
+    0 0 8px
+
+    rgba(
+
+        255,
+
+        215,
+
+        0,
+
+        .5
+
+    );
+
+
+}
+
+
 
 
 
@@ -194,197 +256,44 @@ button{
     width:100%;
 
 
-    padding:12px;
+    padding:14px;
 
 
-    margin-top:10px;
+    margin-top:12px;
 
 
 
     background:
 
-    #c9a227;
+
+    linear-gradient(
+
+        135deg,
+
+        #b8860b,
+
+        #ffd700
+
+    );
 
 
 
-    color:#080808;
-
-
-
-    border:none;
-
-
-
-    border-radius:8px;
-
+    color:#161616;
 
 
     font-weight:bold;
 
 
+    border:none;
+
+
+    border-radius:10px;
+
 
     cursor:pointer;
 
 
-}
-
-
-
-
-
-button:hover{
-
-
-    background:#e5c158;
-
-
-}
-
-
-
-
-
-a{
-
-
-    color:#d4af37;
-
-
-
-    text-decoration:none;
-
-
-}
-
-
-
-
-
-a:hover{
-
-
-    color:#fff;
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   DASHBOARD LAYOUT
-========================================================== */
-
-
-.dashboard-layout{
-
-
-    display:flex;
-
-
-    min-height:100vh;
-
-
-}
-
-
-
-
-
-.dashboard-content{
-
-
-    flex:1;
-
-
-    padding:30px;
-
-
-}
-
-
-
-
-
-.dashboard-content h1{
-
-
-    color:#d4af37;
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   SIDEBAR
-========================================================== */
-
-
-.sidebar{
-
-
-    width:260px;
-
-
-    background:#090909;
-
-
-    border-right:
-
-    2px solid #c9a227;
-
-
-
-    padding:20px;
-
-
-
-}
-
-
-
-
-
-.sidebar h2{
-
-
-    text-align:center;
-
-
-    color:#d4af37;
-
-
-
-    margin-bottom:30px;
-
-
-}
-
-
-
-
-
-.sidebar a{
-
-
-    display:block;
-
-
-
-    padding:12px;
-
-
-
-    margin-bottom:8px;
-
-
-
-    border-radius:8px;
-
+    letter-spacing:1px;
 
 
     transition:.3s;
@@ -396,58 +305,32 @@ a:hover{
 
 
 
-.sidebar a:hover{
 
 
-    background:#c9a227;
+button:hover{
 
 
-    color:#000;
+    transform:
 
-
-}
-
-
-
-
-
-/* ==========================================================
-   CARDS
-========================================================== */
-
-
-.card{
-
-
-    background:
-
-    rgba(20,20,20,0.95);
-
-
-
-    border:
-
-    1px solid #c9a227;
-
-
-
-    border-radius:12px;
-
-
-
-    padding:20px;
-
-
-
-    margin-bottom:20px;
-
+    translateY(-2px);
 
 
     box-shadow:
 
+
     0 0 15px
 
-    rgba(201,162,39,0.15);
+    rgba(
+
+        255,
+
+        215,
+
+        0,
+
+        .7
+
+    );
 
 
 }
@@ -456,10 +339,15 @@ a:hover{
 
 
 
-.card h2{
 
 
-    color:#d4af37;
+a{
+
+
+    color:#ffd700;
+
+
+    text-decoration:none;
 
 
 }
@@ -468,148 +356,75 @@ a:hover{
 
 
 
-/* ==========================================================
-   PRODUCT / AUCTION CARDS
-========================================================== */
+
+a:hover{
 
 
-.product-card,
-.auction-card{
+    text-shadow:
+
+    0 0 10px
+
+    gold;
 
 
-    background:#111;
-
-
-
-    border:
-
-    1px solid #8f7325;
+}
 
 
 
-    padding:15px;
 
 
 
-    margin:15px 0;
 
+#message{
+
+
+    color:#ffcc66;
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+
+
+
+/*
+=========================
+ SCROLLBAR
+=========================
+*/
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#080808;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:#b8860b;
 
 
     border-radius:10px;
-
-
-}
-
-
-
-
-
-.product-card h2,
-.auction-card h2{
-
-
-    color:#d4af37;
-
-
-}
-
-
-
-
-
-.product-card p,
-.auction-card p{
-
-
-    color:#ddd;
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   STATUS TEXT
-========================================================== */
-
-
-.success{
-
-
-    color:#7fff7f;
-
-
-}
-
-
-
-
-
-.error{
-
-
-    color:#ff7777;
-
-
-}
-
-
-
-
-
-.warning{
-
-
-    color:#ffd966;
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   MOBILE
-========================================================== */
-
-
-@media(max-width:800px){
-
-
-
-.dashboard-layout{
-
-
-    flex-direction:column;
-
-
-}
-
-
-
-
-.sidebar{
-
-
-    width:100%;
-
-
-}
-
-
-
-
-.dashboard-content{
-
-
-    padding:15px;
-
-
-}
-
 
 
 }
