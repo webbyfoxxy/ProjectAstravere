@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -8,14 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>
 Luxemneaux Empire Registration
 </title>
 
-
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 
@@ -25,7 +21,6 @@ Luxemneaux Empire Registration
 
 
 <div class="auth-page">
-
 
 
 <div class="auth-box imperial-card">
@@ -40,7 +35,6 @@ Luxemneaux Empire Registration
 
 
 
-
 <h1 class="auth-title">
 
 Join Luxemneaux Empire
@@ -49,14 +43,11 @@ Join Luxemneaux Empire
 
 
 
-
 <p class="subtitle">
 
-Create your identity in the kingdom
+Create your identity in Luxemneaux Empire
 
 </p>
-
-
 
 
 
@@ -65,9 +56,7 @@ Create your identity in the kingdom
 
 
 
-
 <div class="form-group">
-
 
 <label>
 
@@ -131,7 +120,9 @@ Role
 
 
 
-<select id="role"
+<select
+
+id="role"
 
 onchange="toggleCreatorKey()">
 
@@ -143,6 +134,7 @@ onchange="toggleCreatorKey()">
 </option>
 
 
+
 <option value="Creator">
 
 👑 Creator
@@ -150,11 +142,13 @@ onchange="toggleCreatorKey()">
 </option>
 
 
+
 </select>
 
 
-
 </div>
+
+
 
 
 
@@ -165,10 +159,9 @@ onchange="toggleCreatorKey()">
 
 <label>
 
-Character Name
+Roleplay Name
 
 </label>
-
 
 
 <input
@@ -177,12 +170,14 @@ id="roleplayName"
 
 type="text"
 
-placeholder="Your kingdom name"
+placeholder="Enter your roleplay name"
 
 >
 
 
 </div>
+
+
 
 
 
@@ -198,16 +193,14 @@ Kingdom
 </label>
 
 
-
 <select id="kingdom">
 
 
 <option value="">
 
-Select Kingdom
+No Kingdom / Select Later
 
 </option>
-
 
 
 </select>
@@ -221,12 +214,13 @@ Select Kingdom
 
 
 
-<div id="creatorKeyBox"
+<div
+
+id="creatorKeyBox"
 
 style="display:none;"
 
 class="form-group">
-
 
 
 <label>
@@ -246,7 +240,6 @@ type="password"
 placeholder="Enter creator key"
 
 >
-
 
 
 </div>
@@ -280,6 +273,7 @@ onclick="registerAccount()"
 
 
 
+
 <div class="auth-footer">
 
 
@@ -293,17 +287,16 @@ Return Login
 </a>
 
 
-
 </div>
 
 
 
 
-
 </div>
 
 
 </div>
+
 
 
 
@@ -311,7 +304,6 @@ Return Login
 
 
 <script src="api.js"></script>
-
 
 
 <script>
@@ -325,7 +317,6 @@ Return Login
 async function loadKingdoms(){
 
 
-
 const result =
 
 await getKingdoms();
@@ -335,33 +326,27 @@ await getKingdoms();
 
 const select =
 
-document
-.getElementById(
+document.getElementById(
 "kingdom"
 );
 
 
 
-
-
-if(
-result.success
-){
-
+if(result.success){
 
 
 select.innerHTML =
+
 
 `
 
 <option value="">
 
-Select Kingdom
+No Kingdom / Select Later
 
 </option>
 
 `;
-
 
 
 
@@ -381,9 +366,7 @@ ${kingdom.kingdomName}
 
 </option>
 
-
 `;
-
 
 
 }
@@ -391,9 +374,7 @@ ${kingdom.kingdomName}
 );
 
 
-
 }
-
 
 
 }
@@ -416,27 +397,21 @@ function toggleCreatorKey(){
 const role =
 
 document
-.getElementById(
-"role"
-)
+.getElementById("role")
 .value;
-
 
 
 
 const box =
 
 document
-.getElementById(
-"creatorKeyBox"
-);
+.getElementById("creatorKeyBox");
 
 
 
 
-if(
-role === "Creator"
-){
+
+if(role === "Creator"){
 
 
 box.style.display =
@@ -455,8 +430,10 @@ box.style.display =
 }
 
 
-
 }
+
+
+
 
 
 
@@ -474,9 +451,7 @@ async function registerAccount(){
 const username =
 
 document
-.getElementById(
-"username"
-)
+.getElementById("username")
 .value;
 
 
@@ -484,9 +459,7 @@ document
 const password =
 
 document
-.getElementById(
-"password"
-)
+.getElementById("password")
 .value;
 
 
@@ -494,9 +467,7 @@ document
 const role =
 
 document
-.getElementById(
-"role"
-)
+.getElementById("role")
 .value;
 
 
@@ -504,9 +475,7 @@ document
 const roleplayName =
 
 document
-.getElementById(
-"roleplayName"
-)
+.getElementById("roleplayName")
 .value;
 
 
@@ -514,105 +483,7 @@ document
 const kingdomId =
 
 document
-.getElementById(
-"kingdom"
-)
-.value;
-
-
-
-const message =
-
-document
-.getElementById(
-"message"
-);
-
-
-
-
-if(
-!username ||
-!password ||
-!roleplayName
-){
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-error">
-
-⚠️ Complete all required fields.
-
-</div>
-
-`;
-
-return;
-
-
-}
-/* CONTINUATION OF REGISTER SCRIPT */
-
-
-/* =====================================
-   COMPLETE REGISTRATION
-===================================== */
-
-
-async function registerAccount(){
-
-
-
-const username =
-
-document
-.getElementById(
-"username"
-)
-.value;
-
-
-
-const password =
-
-document
-.getElementById(
-"password"
-)
-.value;
-
-
-
-const role =
-
-document
-.getElementById(
-"role"
-)
-.value;
-
-
-
-const roleplayName =
-
-document
-.getElementById(
-"roleplayName"
-)
-.value;
-
-
-
-const kingdomId =
-
-document
-.getElementById(
-"kingdom"
-)
+.getElementById("kingdom")
 .value;
 
 
@@ -620,9 +491,7 @@ document
 const creatorKey =
 
 document
-.getElementById(
-"creatorKey"
-)
+.getElementById("creatorKey")
 .value;
 
 
@@ -630,34 +499,37 @@ document
 const message =
 
 document
-.getElementById(
-"message"
-);
+.getElementById("message");
+
 
 
 
 
 
 if(
+
 !username ||
+
 !password ||
-!roleplayName ||
-!kingdomId
+
+!roleplayName
+
 ){
 
 
-
 message.innerHTML =
+
 
 `
 
 <div class="alert alert-error">
 
-⚠️ Please complete all fields.
+⚠️ Complete required fields.
 
 </div>
 
 `;
+
 
 return;
 
@@ -668,7 +540,40 @@ return;
 
 
 
+
+
+
+if(role === "Creator" && !creatorKey){
+
+
 message.innerHTML =
+
+
+`
+
+<div class="alert alert-error">
+
+🔑 Creator Private Key required.
+
+</div>
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+
+message.innerHTML =
+
 
 `
 
@@ -684,16 +589,17 @@ message.innerHTML =
 
 
 
+
+
 let result;
 
 
 
 
 
-if(
-role === "Creator"
-){
 
+
+if(role === "Creator"){
 
 
 result =
@@ -713,11 +619,9 @@ creatorKey
 );
 
 
-
 }
 
 else{
-
 
 
 result =
@@ -735,7 +639,6 @@ kingdomId
 );
 
 
-
 }
 
 
@@ -744,13 +647,12 @@ kingdomId
 
 
 
-if(
-result.success
-){
 
+if(result.success){
 
 
 message.innerHTML =
+
 
 `
 
@@ -764,10 +666,7 @@ message.innerHTML =
 
 
 
-
-setTimeout(
-
-()=>{
+setTimeout(()=>{
 
 
 window.location.href =
@@ -775,11 +674,7 @@ window.location.href =
 "index.html";
 
 
-},
-
-1200
-
-);
+},1200);
 
 
 
@@ -788,8 +683,8 @@ window.location.href =
 else{
 
 
-
 message.innerHTML =
+
 
 `
 
@@ -802,13 +697,12 @@ message.innerHTML =
 `;
 
 
+}
+
 
 }
 
 
-
-
-}
 
 
 
@@ -823,9 +717,7 @@ message.innerHTML =
 window.onload = function(){
 
 
-
 loadKingdoms();
-
 
 
 };
@@ -833,8 +725,9 @@ loadKingdoms();
 
 
 
-
 </script>
+
+
 
 
 
@@ -863,7 +756,7 @@ loadKingdoms();
 
 
 
-</body>
 
+</body>
 
 </html>
