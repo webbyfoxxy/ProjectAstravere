@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Roleplay Bank | Member Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+
+<h2>
+Roleplay Bank
+</h2>
+
+
+<a href="member-dashboard.html">
+Dashboard
+</a>
+
+
+<a href="marketplace.html">
+Marketplace
+</a>
+
+
+<a href="auction.html">
+Auctions
+</a>
+
+
+<a href="#">
+Inventory
+</a>
+
+
+<a href="#">
+Transactions
+</a>
+
+
+<a href="#">
+Notifications
+</a>
+
+
+<a href="index.html" onclick="logout()">
+Logout
+</a>
+
+
+</div>
+
+
+
+
+<!-- CONTENT -->
+
+<div class="dashboard-content">
+
+
+<h1>
+Member Dashboard
+</h1>
+
+
+
+<div id="profileCard"
+class="card">
+
+Loading profile...
+
+</div>
+
+
+
+
+<div class="card">
+
+
+<h2>
+Currency Wallet
+</h2>
+
+
+<div id="wallet">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Inventory
+</h2>
+
+
+<div id="inventory">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Notifications
+</h2>
+
+
+<div id="notifications">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Recent Transactions
+</h2>
+
+
+<div id="transactions">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script src="api.js"></script>
+
+
+
+<script>
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem(
+
+"currentUser"
+
+)
+
+);
+
+
+
+if(!user){
+
+
+window.location.href =
+"index.html";
+
+
+}
+
+
+
+async function loadDashboard(){
+
+
+
+const profile =
+
+await getProfile(
+
+user.userId
+
+);
+
+
+
+if(profile.success){
+
+
+
+document.getElementById(
+
+"profileCard"
+
+).innerHTML = `
+
+
+<h2>
+
+${profile.data.roleplayName}
+
+</h2>
+
+
+<p>
+
+Username:
+${profile.data.username}
+
+</p>
+
+
+<p>
+
+Role:
+${profile.data.role}
+
+</p>
+
+
+<p>
+
+Kingdom:
+${profile.data.kingdom}
+
+</p>
+
+
+`;
+
+
+
+document.getElementById(
+
+"wallet"
+
+).innerHTML = `
+
+
+<p>
+Lumen: ${profile.data.wallet.Lumen}
+</p>
+
+
+<p>
+Aurel: ${profile.data.wallet.Aurel}
+</p>
+
+
+<p>
+Virel: ${profile.data.wallet.Virel}
+</p>
+
+
+<p>
+Sylem: ${profile.data.wallet.Sylem}
+</p>
+
+
+<p>
+Bront: ${profile.data.wallet.Bront}
+</p>
+
+
+`;
+
+
+
+}
+
+
+
+const inventory =
+
+await getInventory(
+
+user.userId
+
+);
+
+
+
+if(inventory.success){
+
+
+
+let html="";
+
+
+
+inventory.data.forEach(item=>{
+
+
+html += `
+
+<p>
+
+${item.itemName}
+
+×
+
+${item.quantity}
+
+(${item.category})
+
+</p>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById(
+
+"inventory"
+
+).innerHTML =
+
+html || "No items.";
+
+
+
+
+
+}
+
+
+
+const notification =
+
+await apiRequest(
+
+"getNotifications",
+
+{
+
+userId:user.userId
+
+}
+
+);
+
+
+
+if(notification.success){
+
+
+
+let html="";
+
+
+
+notification.data.forEach(n=>{
+
+
+html += `
+
+
+<p>
+
+<b>${n.title}</b>
+
+<br>
+
+${n.message}
+
+</p>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById(
+
+"notifications"
+
+).innerHTML =
+
+html || "No notifications.";
+
+
+}
+
+
+
+
+const transactions =
+
+await apiRequest(
+
+"getTransactions",
+
+{
+
+userId:user.userId
+
+}
+
+);
+
+
+
+if(transactions.success){
+
+
+
+let html="";
+
+
+
+transactions.data.forEach(t=>{
+
+
+html += `
+
+
+<p>
+
+${t.type}
+
+-
+
+${t.amount}
+
+${t.currency}
+
+</p>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById(
+
+"transactions"
+
+).innerHTML =
+
+html || "No transactions.";
+
+
+}
+
+
+
+}
+
+
+
+
+function logout(){
+
+
+localStorage.removeItem(
+
+"currentUser"
+
+);
+
+
+}
+
+
+
+
+loadDashboard();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
