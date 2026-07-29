@@ -1,563 +1,700 @@
-/* ==========================================================
-   ROLEPLAY BANK
-   Sidebar Stylesheet
-   Version: 1.0
-========================================================== */
+/* =====================================================
+   LUXEMNEAUX ROLEPLAY BANK
+   SIDEBAR SYSTEM
+===================================================== */
 
-/* ===========================
-   DASHBOARD LAYOUT
-=========================== */
+
+
+/* MAIN DASHBOARD LAYOUT */
 
 .dashboard-layout{
 
+
     display:flex;
+
 
     min-height:100vh;
 
-    background:var(--bg);
+
+    background:#050505;
+
+
 
 }
 
-/* ===========================
+
+
+
+
+
+
+/* =====================================================
    SIDEBAR
-=========================== */
+===================================================== */
+
 
 .sidebar{
 
-    width:280px;
 
-    background:var(--sidebar);
+    width:270px;
 
-    border-right:var(--border);
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    height:100vh;
-
-    overflow-y:auto;
-
-    transition:all .30s ease;
-
-    z-index:1000;
-
-}
-
-/* ===========================
-   LOGO
-=========================== */
-
-.sidebar-logo{
-
-    padding:30px 20px;
-
-    text-align:center;
-
-    border-bottom:var(--border);
-
-}
-
-.sidebar-logo h1{
-
-    font-size:24px;
-
-    color:var(--gold);
-
-    letter-spacing:2px;
-
-    margin-bottom:6px;
-
-}
-
-.sidebar-logo p{
-
-    font-size:12px;
-
-    color:var(--text-muted);
-
-}
-
-/* ===========================
-   NAVIGATION
-=========================== */
-
-.sidebar nav{
-
-    padding:20px 0;
-
-}
-
-.sidebar-title{
-
-    padding:10px 25px;
-
-    color:var(--gold);
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    opacity:.75;
-
-    margin-top:15px;
-
-}
-
-.sidebar-menu{
-
-    list-style:none;
-
-}
-
-.sidebar-menu li{
-
-    margin:5px 12px;
-
-}
-
-.sidebar-menu a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    padding:14px 18px;
-
-    border-radius:10px;
-
-    color:var(--text-light);
-
-    transition:all .25s ease;
-
-    font-size:15px;
-
-    font-weight:500;
-
-}
-
-.sidebar-menu a i{
-
-    width:20px;
-
-    text-align:center;
-
-    color:var(--gold);
-
-    font-size:16px;
-
-}
-
-/* ===========================
-   HOVER
-=========================== */
-
-.sidebar-menu a:hover{
-
-    background:#1b1b1b;
-
-    color:white;
-
-    transform:translateX(5px);
-
-    box-shadow:0 0 10px rgba(212,175,55,.20);
-
-}
-
-.sidebar-menu a:hover i{
-
-    color:var(--gold-light);
-
-}
-
-/* ===========================
-   ACTIVE ITEM
-=========================== */
-
-.sidebar-menu a.active{
-
-    background:rgba(212,175,55,.15);
-
-    color:white;
-
-    border-left:4px solid var(--gold);
-
-}
-
-.sidebar-menu a.active i{
-
-    color:var(--gold-light);
-
-}
-
-/* ===========================
-   SEPARATORS
-=========================== */
-
-.sidebar-divider{
-
-    width:90%;
-
-    margin:18px auto;
-
-    border-top:1px solid rgba(212,175,55,.15);
-
-}
-
-/* ===========================
-   CREATOR MENU
-=========================== */
-
-.creator-section{
-
-    display:none;
-
-}
-
-body.role-creator .creator-section{
-
-    display:block;
-
-}
-
-/* ===========================
-   SELLER MENU
-=========================== */
-
-.seller-section{
-
-    display:none;
-
-}
-
-body.role-seller .seller-section{
-
-    display:block;
-
-}
-
-body.role-creator .seller-section{
-
-    display:block;
-
-}
-
-/* ===========================
-   SIDEBAR FOOTER
-=========================== */
-
-.sidebar-footer{
-
-    margin-top:auto;
-
-    border-top:var(--border);
-
-    padding:20px;
-
-    text-align:center;
-
-    color:var(--text-muted);
-
-    font-size:13px;
-
-}
-
-/* ===========================
-   MAIN CONTENT
-=========================== */
-
-.main-content{
-
-    margin-left:280px;
-
-    width:calc(100% - 280px);
 
     min-height:100vh;
 
-    display:flex;
 
-    flex-direction:column;
+    background:
 
-}
 
-/* ===========================
-   TOP BAR
-=========================== */
+    linear-gradient(
 
-.topbar{
+        180deg,
 
-    height:75px;
+        #0d0d0d,
 
-    background:var(--header);
+        #050505
 
-    border-bottom:var(--border);
+    );
 
-    display:flex;
 
-    justify-content:space-between;
 
-    align-items:center;
+    border-right:
 
-    padding:0 30px;
 
-    position:sticky;
+    2px solid
+
+    #c9a227;
+
+
+
+    padding:25px;
+
+
+
+    position:fixed;
+
+
+    left:0;
+
 
     top:0;
 
-    z-index:900;
+
 
 }
 
-/* ===========================
-   USER INFO
-=========================== */
 
-.user-info{
+
+
+
+
+
+/* LOGO */
+
+
+.sidebar-logo{
+
+
+    text-align:center;
+
+
+    color:#ffd700;
+
+
+    font-size:26px;
+
+
+    font-weight:bold;
+
+
+    margin-bottom:40px;
+
+
+
+    text-shadow:
+
+
+    0 0 15px
+
+    rgba(
+        255,
+        215,
+        0,
+        .5
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* USER DISPLAY */
+
+
+.sidebar-profile{
+
+
+    text-align:center;
+
+
+    padding:20px;
+
+
+    margin-bottom:25px;
+
+
+
+    background:#111;
+
+
+
+    border:
+
+
+    1px solid
+
+    #806000;
+
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+.sidebar-profile h3{
+
+
+    color:#ffd700;
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+.sidebar-profile p{
+
+
+    color:#bbb;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+
+.sidebar-menu{
+
+
+    list-style:none;
+
+
+}
+
+
+
+.sidebar-menu li{
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+
+
+
+
+
+.sidebar-menu a{
+
 
     display:flex;
 
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.user-details{
-
-    text-align:right;
-
-}
-
-.user-details h4{
-
-    color:var(--gold);
-
-    font-size:16px;
-
-    margin-bottom:2px;
-
-}
-
-.user-details small{
-
-    color:var(--text-muted);
-
-}
-
-/* ===========================
-   TOPBAR ACTIONS
-=========================== */
-
-.topbar-actions{
-
-    display:flex;
 
     align-items:center;
 
-    gap:15px;
 
-}
+    gap:12px;
 
-.icon-button{
 
-    width:42px;
 
-    height:42px;
+    padding:14px;
 
-    display:flex;
 
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:50%;
-
-    background:#1a1a1a;
-
-    border:var(--border);
-
-    cursor:pointer;
-
-    transition:all .25s ease;
-
-}
-
-.icon-button i{
-
-    color:var(--gold);
-
-    font-size:16px;
-
-}
-
-.icon-button:hover{
-
-    background:var(--gold);
-
-    transform:translateY(-2px);
-
-}
-
-.icon-button:hover i{
-
-    color:#000;
-
-}
-
-/* ===========================
-   CONTENT AREA
-=========================== */
-
-.content{
-
-    padding:35px;
-
-    flex:1;
-
-}
-
-/* ===========================
-   COLLAPSED SIDEBAR
-=========================== */
-
-.sidebar.collapsed{
-
-    width:85px;
-
-}
-
-.sidebar.collapsed .sidebar-logo p,
-
-.sidebar.collapsed .sidebar-title,
-
-.sidebar.collapsed .sidebar-menu span,
-
-.sidebar.collapsed .sidebar-footer{
-
-    display:none;
-
-}
-
-.sidebar.collapsed + .main-content{
-
-    margin-left:85px;
-
-    width:calc(100% - 85px);
-
-}
-
-.sidebar.collapsed .sidebar-menu a{
-
-    justify-content:center;
-
-    padding:16px;
-
-}
-
-.sidebar.collapsed .sidebar-menu a i{
-
-    margin:0;
-
-    font-size:18px;
-
-}
-
-/* ===========================
-   MOBILE BUTTON
-=========================== */
-
-.sidebar-toggle{
-
-    display:none;
-
-    width:45px;
-
-    height:45px;
-
-    border:var(--border);
-
-    background:#1a1a1a;
-
-    color:var(--gold);
 
     border-radius:10px;
 
-    cursor:pointer;
+
+
+    color:#e5c75f;
+
+
+
+    transition:.3s;
+
+
 
 }
 
-/* ===========================
+
+
+
+
+.sidebar-menu a:hover{
+
+
+    background:
+
+
+    rgba(
+        201,
+        162,
+        39,
+        .15
+    );
+
+
+
+    color:#ffd700;
+
+
+
+    border-left:
+
+
+    3px solid
+
+    #ffd700;
+
+
+
+}
+
+
+
+
+
+
+
+
+.sidebar-menu .active{
+
+
+    background:
+
+
+    rgba(
+        201,
+        162,
+        39,
+        .2
+    );
+
+
+
+    color:#ffd700;
+
+
+
+    border-left:
+
+
+    3px solid
+
+    #ffd700;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+
+.dashboard-content{
+
+
+    margin-left:270px;
+
+
+    width:calc(
+        100% - 270px
+    );
+
+
+
+    padding:35px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   TOP HEADER
+===================================================== */
+
+
+.dashboard-header{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+
+    background:#101010;
+
+
+
+    border:
+
+
+    1px solid
+
+    #c9a227;
+
+
+
+    padding:20px;
+
+
+
+    border-radius:15px;
+
+
+
+    margin-bottom:30px;
+
+
+
+}
+
+
+
+
+
+.dashboard-header h1{
+
+
+    color:#ffd700;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   CURRENCY MINI DISPLAY
+===================================================== */
+
+
+.sidebar-wallet{
+
+
+    margin-top:20px;
+
+
+}
+
+
+
+.sidebar-wallet div{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    padding:10px;
+
+
+    background:#111;
+
+
+
+    margin-bottom:8px;
+
+
+    border-radius:8px;
+
+
+    border:
+
+
+    1px solid
+
+    #5c4500;
+
+
+
+}
+
+
+
+.sidebar-wallet span:first-child{
+
+
+    color:#d4af37;
+
+
+}
+
+
+
+
+
+.sidebar-wallet span:last-child{
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   LOGOUT BUTTON
+===================================================== */
+
+
+.logout-btn{
+
+
+    margin-top:30px;
+
+
+    width:100%;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.logout-btn a{
+
+
+    display:block;
+
+
+    padding:13px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #8b0000,
+
+        #420000
+
+    );
+
+
+
+    color:white;
+
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+
+
+
+
+
+.logout-btn a:hover{
+
+
+    box-shadow:
+
+
+    0 0 15px
+
+    rgba(
+        255,
+        0,
+        0,
+        .5
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================================
    MOBILE
-=========================== */
+===================================================== */
 
-@media(max-width:1000px){
 
-    .sidebar{
+@media(max-width:900px){
 
-        left:-300px;
 
-    }
 
-    .sidebar.active{
+.sidebar{
 
-        left:0;
 
-    }
+    width:220px;
 
-    .main-content{
-
-        margin-left:0;
-
-        width:100%;
-
-    }
-
-    .sidebar-toggle{
-
-        display:flex;
-
-        justify-content:center;
-
-        align-items:center;
-
-    }
 
 }
 
-@media(max-width:768px){
 
-    .content{
 
-        padding:20px;
 
-    }
+.dashboard-content{
 
-    .topbar{
 
-        padding:0 15px;
+    margin-left:220px;
 
-    }
 
-    .user-details{
+    width:calc(
+        100% - 220px
+    );
 
-        display:none;
-
-    }
 
 }
 
-@media(max-width:500px){
 
-    .sidebar{
 
-        width:100%;
+}
 
-    }
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+
+.dashboard-layout{
+
+
+    display:block;
+
+
+}
+
+
+
+
+.sidebar{
+
+
+    position:relative;
+
+
+    width:100%;
+
+
+    min-height:auto;
+
+
+}
+
+
+
+
+.dashboard-content{
+
+
+    margin-left:0;
+
+
+    width:100%;
+
+
+    padding:20px;
+
+
+}
+
+
 
 }
