@@ -1,71 +1,107 @@
 /*******************************************************
- LUXEMNEAUX ROLEPLAY BANK
+ * LUXEMNEAUX ROLEPLAY BANK
+ *
+ * api.js
+ *
+ * PART 1/5
+ * CORE API CONNECTION
+ *******************************************************/
 
- FRONTEND API CONNECTOR
 
-*******************************************************/
+/*
+    GOOGLE APPS SCRIPT WEB APP URL
+
+    Replace this with your deployed
+    Apps Script Web App URL
+*/
 
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyHR5hZLyCrHazVyaEHiU3CGAbbkdANjRpkiErqaQbXT0OdG3JC221INd4HZCTt0rGM/exec";
+
+"https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 
 
 
 
 
-/*******************************************************
- MAIN API FUNCTION
-*******************************************************/
+/* =====================================================
+   UNIVERSAL REQUEST FUNCTION
+===================================================== */
 
 
-async function api(action,data={}){
-
+async function apiRequest(
+    action,
+    data = {}
+){
 
     try{
 
 
+        const payload = {
+
+
+            action:
+            action,
+
+
+            ...data
+
+
+        };
+
+
+
         const response =
-        await fetch(API_URL,{
+        await fetch(
+
+            API_URL,
+
+            {
+
+                method:
+                "POST",
 
 
-            method:"POST",
+                headers:
+                {
+
+                    "Content-Type":
+                    "text/plain"
+
+                },
 
 
-            headers:{
+                body:
+                JSON.stringify(payload)
 
+            }
 
-                "Content-Type":
-                "text/plain;charset=utf-8"
-
-
-            },
-
-
-            body:JSON.stringify({
-
-
-                action:action,
-
-
-                data:data
-
-
-            })
-
-
-
-        });
+        );
 
 
 
+        const result =
+        await response.json();
 
 
-        return await response.json();
+
+        if(
+            !result.success
+        ){
+
+            console.error(
+                result.message
+            );
+
+        }
+
+
+
+        return result;
 
 
 
     }
-
 
     catch(error){
 
@@ -84,12 +120,10 @@ async function api(action,data={}){
 
 
             message:
-            "Unable to connect server."
-
+            "Server connection failed."
 
 
         };
-
 
 
     }
@@ -101,22 +135,42 @@ async function api(action,data={}){
 
 
 
+/* =====================================================
+   AUTHENTICATION
+===================================================== */
 
 
-
-/*******************************************************
- AUTH
-*******************************************************/
-
-
-async function registerMember(data){
+/*
+    REGISTER MEMBER
+*/
 
 
-    return await api(
+async function register(
+    username,
+    password,
+    roleplayName,
+    kingdomId
+){
+
+
+    return apiRequest(
 
         "register",
 
-        data
+        {
+
+            username,
+
+            password,
+
+            roleplayName,
+
+            kingdomId,
+
+            role:
+            "Member"
+
+        }
 
     );
 
@@ -127,32 +181,43 @@ async function registerMember(data){
 
 
 
-async function loginUser(data){
+/*
+    REGISTER CREATOR
+*/
 
 
-    return await api(
-
-        "login",
-
-        data
-
-    );
-
-
-}
+async function registerCreator(
+    username,
+    password,
+    roleplayName,
+    kingdomId,
+    creatorKey
+){
 
 
-
-
-
-async function registerCreator(data){
-
-
-    return await api(
+    return apiRequest(
 
         "registerCreator",
 
-        data
+        {
+
+
+            username,
+
+
+            password,
+
+
+            roleplayName,
+
+
+            kingdomId,
+
+
+            creatorKey
+
+
+        }
 
     );
 
@@ -163,115 +228,682 @@ async function registerCreator(data){
 
 
 
+/*
+    LOGIN
+*/
+
+
+async function login(
+    username,
+    password
+){
+
+
+    const result =
+
+    await apiRequest(
+
+        "login",
+
+        {
+
+            username,
+
+            password
+
+        }
+
+    );
 
 
 
-/*******************************************************
- PROFILE
-*******************************************************/
+    if(
+        result.success
+    ){
 
 
-async function getProfile(userId){
+        localStorage.setItem(
+
+            "currentUser",
+
+            JSON.stringify(
+                result.data
+            )
+
+        );
 
 
-    return await api(
+    }
+
+
+
+    return result;
+
+
+}
+
+
+
+
+
+/*
+    LOGOUT
+*/
+
+
+function logout(){
+
+
+    localStorage.removeItem(
+        "currentUser"
+    );
+
+
+    window.location.href =
+    "index.html";
+
+
+}
+
+
+
+
+
+/*
+    CURRENT USER
+*/
+
+
+function currentUser(){
+
+
+    const user =
+
+    localStorage.getItem(
+        "currentUser"
+    );
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return JSON.parse(
+        user
+    );
+
+
+}
+
+
+
+
+
+/*
+    PROFILE
+*/
+
+
+async function getProfile(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
 
         "getProfile",
 
         {
 
-            userId:userId
+            userId:
+            user.userId
+
+        }
+
+    );
+
+
+}
+/*******************************************************
+ * LUXEMNEAUX ROLEPLAY BANK
+ *
+ * api.js
+ *
+ * PART 2/5
+ * WALLET FUNCTIONS
+ *******************************************************/
+
+
+/* =====================================================
+   GET WALLET
+===================================================== */
+
+
+async function getWallet(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user){
+
+        return {
+
+            success:false,
+
+            message:
+            "Not logged in."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "getWallet",
+
+        {
+
+            userId:
+            user.userId
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   TRANSFER CURRENCY
+===================================================== */
+
+
+async function transferMoney(
+
+    receiverId,
+
+    currency,
+
+    amount
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user){
+
+        return {
+
+            success:false,
+
+            message:
+            "Not logged in."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "transfer",
+
+        {
+
+
+            senderId:
+            user.userId,
+
+
+            receiverId:
+
+
+            receiverId,
+
+
+            currency:
+
+
+            currency,
+
+
+            amount:
+
+
+            amount
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   CREATOR ADD CURRENCY
+===================================================== */
+
+
+async function addCurrency(
+
+    userId,
+
+    currency,
+
+    amount
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "addCurrency",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            userId,
+
+
+            currency,
+
+
+            amount
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   CREATOR REMOVE CURRENCY
+===================================================== */
+
+
+async function removeCurrency(
+
+    userId,
+
+    currency,
+
+    amount
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "removeCurrency",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            userId,
+
+
+            currency,
+
+
+            amount
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   TRANSACTION HISTORY
+===================================================== */
+
+
+async function getTransactions(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
+
+        "getTransactions",
+
+        {
+
+            userId:
+            user.userId
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   FORMAT WALLET DISPLAY
+===================================================== */
+
+
+function formatWallet(wallet){
+
+
+    if(!wallet)
+        return {
+
+            Lumen:0,
+
+            Aurel:0,
+
+            Virel:0,
+
+            Sylem:0,
+
+            Bront:0
+
+        };
+
+
+
+    return {
+
+
+        Lumen:
+
+        Number(wallet.Lumen)
+        ||0,
+
+
+
+        Aurel:
+
+        Number(wallet.Aurel)
+        ||0,
+
+
+
+        Virel:
+
+        Number(wallet.Virel)
+        ||0,
+
+
+
+        Sylem:
+
+        Number(wallet.Sylem)
+        ||0,
+
+
+
+        Bront:
+
+        Number(wallet.Bront)
+        ||0
+
+
+    };
+
+
+}
+
+
+
+
+
+/* =====================================================
+   UPDATE WALLET DISPLAY
+===================================================== */
+
+
+async function loadWalletUI(){
+
+
+    const result =
+    await getWallet();
+
+
+
+    if(
+        !result ||
+        !result.success
+    )
+        return;
+
+
+
+    const wallet =
+    formatWallet(
+        result.data
+    );
+
+
+
+    const elements = {
+
+
+        Lumen:
+        document.getElementById(
+            "lumenBalance"
+        ),
+
+
+        Aurel:
+        document.getElementById(
+            "aurelBalance"
+        ),
+
+
+        Virel:
+        document.getElementById(
+            "virelBalance"
+        ),
+
+
+        Sylem:
+        document.getElementById(
+            "sylemBalance"
+        ),
+
+
+        Bront:
+        document.getElementById(
+            "brontBalance"
+        )
+
+    };
+
+
+
+    Object.keys(elements)
+    .forEach(currency=>{
+
+
+        if(
+            elements[currency]
+        ){
+
+            elements[currency]
+            .innerText =
+
+            wallet[currency];
+
 
         }
 
 
-    );
+    });
 
 
 }
-
-
-
-
-
-
-
-
 /*******************************************************
- CURRENCY
-*******************************************************/
+ * LUXEMNEAUX ROLEPLAY BANK
+ *
+ * api.js
+ *
+ * PART 3/5
+ * SELLER + MARKETPLACE FUNCTIONS
+ *******************************************************/
 
 
-async function addCurrency(data){
+/* =====================================================
+   SELLER APPLICATION
+===================================================== */
 
 
-    return await api(
+async function applySeller(
 
-        "addCurrency",
+    businessName,
 
-        data
+    description
 
-    );
-
-
-}
+){
 
 
-
-
-
-async function removeCurrency(data){
-
-
-    return await api(
-
-        "removeCurrency",
-
-        data
-
-    );
-
-
-}
+    const user =
+    currentUser();
 
 
 
+    if(!user){
 
+        return {
 
-async function transferCurrency(data){
+            success:false,
 
+            message:
+            "Not logged in."
 
-    return await api(
+        };
 
-        "transferCurrency",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
-
-
-
-
-
-/*******************************************************
- SELLER
-*******************************************************/
-
-
-async function applySeller(data){
-
-
-    return await api(
+    return apiRequest(
 
         "applySeller",
 
-        data
+        {
+
+
+            userId:
+            user.userId,
+
+
+            businessName,
+
+
+            description
+
+
+        }
 
     );
 
@@ -280,14 +912,21 @@ async function applySeller(data){
 
 
 
+
+
+/* =====================================================
+   GET SELLER APPLICATIONS
+===================================================== */
 
 
 async function getSellerApplications(){
 
 
-    return await api(
+    return apiRequest(
 
-        "getSellerApplications"
+        "getSellerApplications",
+
+        {}
 
     );
 
@@ -298,120 +937,54 @@ async function getSellerApplications(){
 
 
 
-async function approveSeller(data){
+/* =====================================================
+   APPROVE SELLER
+===================================================== */
 
 
-    return await api(
+async function approveSeller(
+
+    applicationId
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
 
         "approveSeller",
 
-        data
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/*******************************************************
- PRODUCTS
-*******************************************************/
-
-
-async function createProduct(data){
-
-
-    return await api(
-
-        "createProduct",
-
-        data
-
-    );
-
-
-}
-
-
-
-
-
-async function approveProduct(data){
-
-
-    return await api(
-
-        "approveProduct",
-
-        data
-
-    );
-
-
-}
-
-
-
-
-
-async function getMarketplace(){
-
-
-    return await api(
-
-        "getMarketplace"
-
-    );
-
-
-}
-
-
-
-
-
-async function purchaseProduct(data){
-
-
-    return await api(
-
-        "purchaseProduct",
-
-        data
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/*******************************************************
- INVENTORY
-*******************************************************/
-
-
-async function getInventory(userId){
-
-
-    return await api(
-
-        "getInventory",
-
         {
 
-            userId:userId
+
+            creatorId:
+            user.userId,
+
+
+            applicationId
+
 
         }
 
@@ -424,22 +997,499 @@ async function getInventory(userId){
 
 
 
+/* =====================================================
+   CREATE PRODUCT
+===================================================== */
+
+
+async function createProduct(productData){
+
+
+    const user =
+    currentUser();
 
 
 
+    if(!user){
+
+        return {
+
+            success:false,
+
+            message:
+            "Not logged in."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "createProduct",
+
+        {
+
+
+            sellerId:
+            user.userId,
+
+
+            productName:
+            productData.productName,
+
+
+            category:
+            productData.category,
+
+
+            description:
+            productData.description,
+
+
+            price:
+            productData.price,
+
+
+            currency:
+            productData.currency,
+
+
+            stock:
+            productData.stock
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   GET MARKETPLACE PRODUCTS
+===================================================== */
+
+
+async function getProducts(){
+
+
+    return apiRequest(
+
+        "getProducts",
+
+        {}
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   APPROVE PRODUCT
+===================================================== */
+
+
+async function approveProduct(
+
+    productId
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "approveProduct",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            productId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   BUY PRODUCT
+===================================================== */
+
+
+async function purchaseProduct(
+
+    productId
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user){
+
+        return {
+
+            success:false,
+
+            message:
+            "Not logged in."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "purchaseProduct",
+
+        {
+
+
+            buyerId:
+            user.userId,
+
+
+            productId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   SELLER PRODUCT LIST
+===================================================== */
+
+
+async function getSellerProducts(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
+
+        "getSellerProducts",
+
+        {
+
+
+            sellerId:
+            user.userId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   UPDATE STOCK
+===================================================== */
+
+
+async function updateStock(
+
+    productId,
+
+    amount
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
+
+        "updateStock",
+
+        {
+
+
+            sellerId:
+            user.userId,
+
+
+            productId,
+
+
+            amount
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   DELETE PRODUCT
+===================================================== */
+
+
+async function deleteProduct(
+
+    productId
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
+
+        "deleteProduct",
+
+        {
+
+
+            userId:
+            user.userId,
+
+
+            productId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   INVENTORY
+===================================================== */
+
+
+async function getInventory(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
+
+        "getInventory",
+
+        {
+
+
+            userId:
+            user.userId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   SEARCH PRODUCTS
+===================================================== */
+
+
+async function searchProducts(
+
+    keyword
+
+){
+
+
+    return apiRequest(
+
+        "searchProducts",
+
+        {
+
+            keyword
+
+        }
+
+    );
+
+
+}
 /*******************************************************
- AUCTION
-*******************************************************/
+ * LUXEMNEAUX ROLEPLAY BANK
+ *
+ * api.js
+ *
+ * PART 4/5
+ * AUCTION FUNCTIONS
+ *******************************************************/
 
 
-async function createAuction(data){
+/* =====================================================
+   CREATE AUCTION
+===================================================== */
 
 
-    return await api(
+async function createAuction(
+
+    auctionData
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user){
+
+        return {
+
+            success:false,
+
+            message:
+            "Not logged in."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
 
         "createAuction",
 
-        data
+        {
+
+
+            sellerId:
+            user.userId,
+
+
+            itemName:
+            auctionData.itemName,
+
+
+            description:
+            auctionData.description,
+
+
+            startingPrice:
+            auctionData.startingPrice,
+
+
+            currency:
+            auctionData.currency,
+
+
+            endTime:
+            auctionData.endTime
+
+
+        }
 
     );
 
@@ -450,30 +1500,19 @@ async function createAuction(data){
 
 
 
-async function approveAuction(data){
-
-
-    return await api(
-
-        "approveAuction",
-
-        data
-
-    );
-
-
-}
-
-
-
+/* =====================================================
+   GET AUCTIONS
+===================================================== */
 
 
 async function getAuctions(){
 
 
-    return await api(
+    return apiRequest(
 
-        "getAuctions"
+        "getAuctions",
+
+        {}
 
     );
 
@@ -484,14 +1523,118 @@ async function getAuctions(){
 
 
 
-async function placeBid(data){
+/* =====================================================
+   APPROVE AUCTION
+===================================================== */
 
 
-    return await api(
+async function approveAuction(
+
+    auctionId
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "approveAuction",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            auctionId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   PLACE BID
+===================================================== */
+
+
+async function placeBid(
+
+    auctionId,
+
+    amount
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user){
+
+        return {
+
+            success:false,
+
+            message:
+            "Not logged in."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
 
         "placeBid",
 
-        data
+        {
+
+
+            bidderId:
+            user.userId,
+
+
+            auctionId,
+
+
+            amount
+
+
+        }
 
     );
 
@@ -502,56 +1645,394 @@ async function placeBid(data){
 
 
 
+/* =====================================================
+   CLOSE AUCTION
+===================================================== */
+
+
+async function closeAuction(
+
+    auctionId
+
+){
+
+
+    const user =
+    currentUser();
 
 
 
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "closeAuction",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            auctionId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   GET BIDS
+===================================================== */
+
+
+async function getBids(
+
+    auctionId
+
+){
+
+
+    return apiRequest(
+
+        "getBids",
+
+        {
+
+
+            auctionId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   SEARCH AUCTIONS
+===================================================== */
+
+
+async function searchAuctions(
+
+    keyword
+
+){
+
+
+    return apiRequest(
+
+        "searchAuctions",
+
+        {
+
+
+            keyword
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   GET AUCTION HISTORY
+===================================================== */
+
+
+async function getAuctionHistory(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user)
+        return null;
+
+
+
+    return apiRequest(
+
+        "getPurchaseHistory",
+
+        {
+
+
+            userId:
+            user.userId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   AUCTION TIMER HELPER
+===================================================== */
+
+
+function auctionCountdown(
+
+    endTime,
+
+    elementId
+
+){
+
+
+    const target =
+    new Date(
+        endTime
+    )
+    .getTime();
+
+
+
+    const timer =
+    setInterval(()=>{
+
+
+        const now =
+        new Date()
+        .getTime();
+
+
+
+        const distance =
+        target - now;
+
+
+
+        const element =
+        document.getElementById(
+            elementId
+        );
+
+
+
+        if(
+            distance <= 0
+        ){
+
+
+            clearInterval(
+                timer
+            );
+
+
+            if(element){
+
+                element.innerText =
+                "Auction Ended";
+
+            }
+
+
+            return;
+
+
+        }
+
+
+
+        const days =
+        Math.floor(
+            distance /
+            (1000*60*60*24)
+        );
+
+
+
+        const hours =
+        Math.floor(
+
+            (
+                distance %
+                (1000*60*60*24)
+
+            )
+
+            /
+
+            (1000*60*60)
+
+        );
+
+
+
+        const minutes =
+        Math.floor(
+
+            (
+                distance %
+                (1000*60*60)
+
+            )
+
+            /
+
+            (1000*60)
+
+        );
+
+
+
+        const seconds =
+        Math.floor(
+
+            (
+                distance %
+                (1000*60)
+
+            )
+
+            /
+
+            1000
+
+        );
+
+
+
+        if(element){
+
+            element.innerText =
+
+            days +
+            "d " +
+
+            hours +
+            "h " +
+
+            minutes +
+            "m " +
+
+            seconds +
+            "s";
+
+
+        }
+
+
+
+    },1000);
+
+
+}
 /*******************************************************
- CREATOR
-*******************************************************/
+ * LUXEMNEAUX ROLEPLAY BANK
+ *
+ * api.js
+ *
+ * PART 5/5
+ * CREATOR + SYSTEM FUNCTIONS
+ *******************************************************/
 
 
-async function getAllUsers(){
+/* =====================================================
+   CREATE KINGDOM
+===================================================== */
 
 
-    return await api(
+async function createKingdom(
 
-        "getAllUsers"
+    kingdomData
 
-    );
-
-
-}
+){
 
 
-
-
-
-async function updateUserStatus(data){
-
-
-    return await api(
-
-        "updateUserStatus",
-
-        data
-
-    );
-
-
-}
+    const user =
+    currentUser();
 
 
 
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
 
 
-async function createKingdom(data){
 
-
-    return await api(
+    return apiRequest(
 
         "createKingdom",
 
-        data
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            kingdomName:
+            kingdomData.kingdomName,
+
+
+            ruler:
+            kingdomData.ruler,
+
+
+            description:
+            kingdomData.description
+
+
+        }
 
     );
 
@@ -562,14 +2043,19 @@ async function createKingdom(data){
 
 
 
-async function createAnnouncement(data){
+/* =====================================================
+   GET KINGDOMS
+===================================================== */
 
 
-    return await api(
+async function getKingdoms(){
 
-        "createAnnouncement",
 
-        data
+    return apiRequest(
+
+        "getKingdoms",
+
+        {}
 
     );
 
@@ -578,16 +2064,495 @@ async function createAnnouncement(data){
 
 
 
+
+
+/* =====================================================
+   CREATE ANNOUNCEMENT
+===================================================== */
+
+
+async function createAnnouncement(
+
+    title,
+
+    content
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "announcement",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            title,
+
+
+            content
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   GET ANNOUNCEMENTS
+===================================================== */
 
 
 async function getAnnouncements(){
 
 
-    return await api(
+    return apiRequest(
 
-        "getAnnouncements"
+        "getAnnouncements",
+
+        {}
 
     );
 
 
 }
+
+
+
+
+
+/* =====================================================
+   CHANGE USER STATUS
+===================================================== */
+
+
+async function updateUserStatus(
+
+    userId,
+
+    status
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "updateUserStatus",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            userId,
+
+
+            status
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   DELETE USER
+===================================================== */
+
+
+async function deleteUser(
+
+    userId
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "deleteUser",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            userId
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   RESET SYSTEM TABLE
+===================================================== */
+
+
+async function clearTable(
+
+    table
+
+){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user ||
+        user.role !== "Creator"
+    ){
+
+        return {
+
+            success:false,
+
+            message:
+            "Creator access required."
+
+        };
+
+    }
+
+
+
+    return apiRequest(
+
+        "clearTable",
+
+        {
+
+
+            creatorId:
+            user.userId,
+
+
+            table
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   CREATOR DASHBOARD DATA
+===================================================== */
+
+
+async function getDashboardStats(){
+
+
+    return apiRequest(
+
+        "getDashboardStats",
+
+        {}
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   GET LOGS
+===================================================== */
+
+
+async function getLogs(){
+
+
+    return apiRequest(
+
+        "getLogs",
+
+        {}
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   HEALTH CHECK
+===================================================== */
+
+
+async function healthCheck(){
+
+
+    return apiRequest(
+
+        "healthCheck",
+
+        {}
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   SYSTEM INFO
+===================================================== */
+
+
+async function getSystemInfo(){
+
+
+    return apiRequest(
+
+        "getSystemInfo",
+
+        {}
+
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   AUTO LOAD USER SESSION
+===================================================== */
+
+
+function loadSession(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(
+        !user
+    ){
+
+        return false;
+
+    }
+
+
+
+    return true;
+
+
+}
+
+
+
+
+
+/* =====================================================
+   ROLE REDIRECT
+===================================================== */
+
+
+function redirectByRole(){
+
+
+    const user =
+    currentUser();
+
+
+
+    if(!user){
+
+        window.location.href =
+        "index.html";
+
+        return;
+
+    }
+
+
+
+    switch(
+        user.role
+    ){
+
+
+        case "Creator":
+
+
+            window.location.href =
+            "creator-dashboard.html";
+
+
+            break;
+
+
+
+        case "Seller":
+
+
+            window.location.href =
+            "seller-dashboard.html";
+
+
+            break;
+
+
+
+        default:
+
+
+            window.location.href =
+            "member-dashboard.html";
+
+
+    }
+
+
+}
+
+
+
+
+
+/* =====================================================
+   NOTIFICATION HELPER
+===================================================== */
+
+
+function showMessage(
+
+    message
+
+){
+
+
+    alert(
+        message
+    );
+
+
+}
+
+
+
+
+
+/* =====================================================
+   END api.js
+===================================================== */
