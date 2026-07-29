@@ -5,203 +5,1030 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Member Dashboard - Roleplay Bank</title>
+<title>Member Dashboard | Luxemneaux Roleplay Bank</title>
 
-<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="stylesheet"
+href="sidebar.css">
+
+<link rel="stylesheet"
+href="dashboard.css">
 
 </head>
 
-
 <body>
 
+<div class="dashboard-layout">
 
-<div class="dashboard">
+<!-- ==========================================
+SIDEBAR
+========================================== -->
 
+<aside class="sidebar">
 
-<h1>
-Member Dashboard
-</h1>
+<div class="sidebar-logo">
 
+🏛️
 
+<h2>Luxemneaux</h2>
 
-<div id="profile">
-
-
-Loading profile...
-
+<p>Imperial Bank</p>
 
 </div>
 
+<div class="sidebar-profile">
 
-
-
-
-<h2>
-Wallet
-</h2>
-
-
-<div id="wallet">
-
+<h3 id="profileName">
 
 Loading...
 
+</h3>
+
+<p id="profileRole">
+
+Member
+
+</p>
+
+<p id="profileKingdom">
+
+Kingdom
+
+</p>
 
 </div>
 
+<nav>
 
+<ul class="sidebar-menu">
 
+<li>
 
+<a
+href="#dashboard"
+class="active">
 
+🏠 Dashboard
 
-<h2>
-Inventory
-</h2>
+</a>
 
+</li>
 
-<div id="inventory">
+<li>
 
+<a
+href="#wallet">
 
-Loading...
+💰 Wallet
 
+</a>
 
-</div>
+</li>
 
+<li>
 
+<a
+href="#transfer">
 
+💸 Transfer
 
+</a>
 
+</li>
 
-<h2>
-Transfer Currency
-</h2>
+<li>
 
+<a
+href="#inventory">
 
+📦 Inventory
 
-<input
-id="receiverId"
-placeholder="Receiver ID"
->
+</a>
 
+</li>
 
+<li>
 
-<select id="currency">
+<a
+href="marketplace.html">
 
+🛒 Marketplace
 
-<option>
-Lumen
-</option>
+</a>
 
+</li>
 
-<option>
-Aurel
-</option>
+<li>
 
+<a
+href="auction.html">
 
-<option>
-Virel
-</option>
+⚔ Auctions
 
+</a>
 
-<option>
-Sylem
-</option>
+</li>
 
+<li>
 
-<option>
-Bront
-</option>
+<a
+href="#transactions">
 
+📜 Transactions
 
-</select>
+</a>
 
+</li>
 
+<li>
 
+<a
+href="#announcements">
 
-<input
-id="amount"
-type="number"
-placeholder="Amount"
->
+📢 Announcements
 
+</a>
 
+</li>
 
+</ul>
 
-<button onclick="sendMoney()">
+</nav>
 
-Send
+<div class="logout-btn">
 
-</button>
-
-
-
-
-
-<br><br>
-
-
-
-<button onclick="openMarketplace()">
-
-Marketplace
-
-</button>
-
-
-
-
-<button onclick="openAuction()">
-
-Auctions
-
-</button>
-
-
-
-
-
-<button onclick="logout()">
+<a
+href="#"
+id="logoutBtn">
 
 Logout
 
-</button>
-
-
-
-<p id="message"></p>
-
-
+</a>
 
 </div>
 
+</aside>
 
+<!-- ==========================================
+CONTENT
+========================================== -->
 
+<main class="dashboard-content">
 
+<header class="dashboard-header">
 
+<div>
 
+<h1>
 
+Imperial Banking Dashboard
+
+</h1>
+
+<p>
+
+Welcome back to the Luxemneaux Empire
+
+</p>
+
+</div>
+
+</header>
+
+<!-- ==========================================
+PROFILE
+========================================== -->
+
+<section
+class="card"
+id="dashboard">
+
+<h2>
+
+Character Profile
+
+</h2>
+
+<br>
+
+<div class="dashboard-grid">
+
+<div>
+
+<strong>Username</strong>
+
+<p id="usernameText">
+
+Loading...
+
+</p>
+
+</div>
+
+<div>
+
+<strong>Roleplay Name</strong>
+
+<p id="roleplayText">
+
+Loading...
+
+</p>
+
+</div>
+
+<div>
+
+<strong>Role</strong>
+
+<p id="roleText">
+
+Loading...
+
+</p>
+
+</div>
+
+<div>
+
+<strong>Kingdom</strong>
+
+<p id="kingdomText">
+
+Loading...
+
+</p>
+
+</div>
+
+<div>
+
+<strong>Status</strong>
+
+<p id="statusText">
+
+Loading...
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+WALLET
+========================================== -->
+
+<section
+class="card"
+id="wallet">
+
+<h2>
+
+Imperial Wallet
+
+</h2>
+
+<br>
+
+<div class="wallet">
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Lumen
+
+</div>
+
+<div
+class="currency-value"
+id="walletLumen">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Aurel
+
+</div>
+
+<div
+class="currency-value"
+id="walletAurel">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Virel
+
+</div>
+
+<div
+class="currency-value"
+id="walletVirel">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Sylem
+
+</div>
+
+<div
+class="currency-value"
+id="walletSylem">
+
+0
+
+</div>
+
+</div>
+
+<div class="currency-card">
+
+<div class="currency-name">
+
+Bront
+
+</div>
+
+<div
+class="currency-value"
+id="walletBront">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+TRANSFER
+========================================== -->
+
+<section
+class="card"
+id="transfer">
+
+<h2>
+
+Transfer Currency
+
+</h2>
+
+<br>
+
+<form id="transferForm">
+
+<div class="form-group">
+
+<label>
+
+Receiver User ID
+
+</label>
+
+<input
+type="text"
+id="receiverId"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Currency
+
+</label>
+
+<select id="currency">
+
+<option>
+
+Lumen
+
+</option>
+
+<option>
+
+Aurel
+
+</option>
+
+<option>
+
+Virel
+
+</option>
+
+<option>
+
+Sylem
+
+</option>
+
+<option>
+
+Bront
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Amount
+
+</label>
+
+<input
+type="number"
+id="amount"
+required>
+
+</div>
+
+<button>
+
+Transfer
+
+</button>
+
+</form>
+
+</section>
+
+<br>
+<!-- ==========================================
+QUICK ACTIONS
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Quick Actions
+
+</h2>
+
+<br>
+
+<div class="dashboard-grid">
+
+<div class="card">
+
+<h3>
+
+🛒 Marketplace
+
+</h3>
+
+<br>
+
+<p>
+
+Purchase items from approved imperial merchants.
+
+</p>
+
+<br>
+
+<a
+class="btn"
+href="marketplace.html">
+
+Open Marketplace
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+⚔ Imperial Auctions
+
+</h3>
+
+<br>
+
+<p>
+
+Compete against other nobles and merchants.
+
+</p>
+
+<br>
+
+<a
+class="btn"
+href="auction.html">
+
+View Auctions
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+📦 Inventory
+
+</h3>
+
+<br>
+
+<p>
+
+View every purchased item.
+
+</p>
+
+<br>
+
+<button
+id="refreshInventory">
+
+Refresh Inventory
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+📢 Empire News
+
+</h3>
+
+<br>
+
+<p>
+
+Latest announcements from the Creator.
+
+</p>
+
+<br>
+
+<button
+id="refreshAnnouncements">
+
+Refresh News
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+INVENTORY
+========================================== -->
+
+<section
+class="card"
+id="inventory">
+
+<h2>
+
+Inventory
+
+</h2>
+
+<br>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Item
+
+</th>
+
+<th>
+
+Quantity
+
+</th>
+
+<th>
+
+Date
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="inventoryTable">
+
+<tr>
+
+<td
+colspan="3">
+
+No items.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+TRANSACTIONS
+========================================== -->
+
+<section
+class="card"
+id="transactions">
+
+<h2>
+
+Recent Transactions
+
+</h2>
+
+<br>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Date
+
+</th>
+
+<th>
+
+Type
+
+</th>
+
+<th>
+
+Currency
+
+</th>
+
+<th>
+
+Amount
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="transactionTable">
+
+<tr>
+
+<td
+colspan="4">
+
+No transactions.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+ANNOUNCEMENTS
+========================================== -->
+
+<section
+class="card"
+id="announcements">
+
+<h2>
+
+Imperial Announcements
+
+</h2>
+
+<br>
+
+<div
+id="announcementContainer">
+
+<div class="card">
+
+<h3>
+
+No Announcements
+
+</h3>
+
+<p>
+
+Nothing has been posted.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+MARKETPLACE PREVIEW
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Marketplace Preview
+
+</h2>
+
+<br>
+
+<div
+class="product-grid"
+id="marketPreview">
+
+<div class="product-card">
+
+<h3>
+
+Loading...
+
+</h3>
+
+</div>
+
+</div>
+
+<br>
+
+<a
+class="btn"
+href="marketplace.html">
+
+Open Full Marketplace
+
+</a>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+AUCTION PREVIEW
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Imperial Auctions
+
+</h2>
+
+<br>
+
+<div
+class="product-grid"
+id="auctionPreview">
+
+<div class="product-card">
+
+<h3>
+
+Loading...
+
+</h3>
+
+</div>
+
+</div>
+
+<br>
+
+<a
+class="btn"
+href="auction.html">
+
+Open Auction Hall
+
+</a>
+
+</section>
+
+<br>
+
+<footer
+style="text-align:center;padding:30px;">
+
+<hr>
+
+<br>
+
+<p>
+
+Luxemneaux Imperial Banking System
+
+</p>
+
+<p>
+
+All Imperial Currency Protected
+
+</p>
+
+</footer>
+
+</main>
+
+</div>
 
 <script src="api.js"></script>
 
-
-
 <script>
 
+const CURRENT_USER =
 
+JSON.parse(
 
-const user =
-getSession();
+localStorage.getItem(
 
+"CURRENT_USER"
 
+)
 
-if(!user){
+);
 
+if(!CURRENT_USER){
 
-window.location.href =
-"index.html";
+location.href="index.html";
 
+}
+
+document
+
+.getElementById(
+
+"logoutBtn"
+
+)
+
+.onclick=function(){
+
+localStorage.removeItem(
+
+"CURRENT_USER"
+
+);
+
+location.href="index.html";
+
+};
+async function loadProfile(){
+
+    const result =
+    await getProfile(
+        CURRENT_USER.userId
+    );
+
+    if(!result.success){
+
+        alert(result.message);
+        return;
+
+    }
+
+    const user =
+    result.data;
+
+    document.getElementById("profileName").textContent =
+    user.roleplayName;
+
+    document.getElementById("profileRole").textContent =
+    user.role;
+
+    document.getElementById("profileKingdom").textContent =
+    user.kingdom;
+
+    document.getElementById("usernameText").textContent =
+    user.username;
+
+    document.getElementById("roleplayText").textContent =
+    user.roleplayName;
+
+    document.getElementById("roleText").textContent =
+    user.role;
+
+    document.getElementById("kingdomText").textContent =
+    user.kingdom;
+
+    document.getElementById("statusText").textContent =
+    user.status;
+
+    document.getElementById("walletLumen").textContent =
+    user.wallet.Lumen;
+
+    document.getElementById("walletAurel").textContent =
+    user.wallet.Aurel;
+
+    document.getElementById("walletVirel").textContent =
+    user.wallet.Virel;
+
+    document.getElementById("walletSylem").textContent =
+    user.wallet.Sylem;
+
+    document.getElementById("walletBront").textContent =
+    user.wallet.Bront;
 
 }
 
@@ -211,90 +1038,58 @@ window.location.href =
 
 
 
-async function loadDashboard(){
+async function loadInventory(){
 
+    const result =
+    await getInventory(
+        CURRENT_USER.userId
+    );
 
+    const table =
+    document.getElementById(
+        "inventoryTable"
+    );
 
-const profile =
-await getProfile(
-user.userId
-);
+    table.innerHTML="";
 
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
 
+        table.innerHTML=
 
+        `<tr>
 
+            <td colspan="3">
 
-if(profile.success){
+                Inventory Empty
 
+            </td>
 
+        </tr>`;
 
-document.getElementById(
-"profile"
-).innerHTML = `
+        return;
 
+    }
 
-<h3>
-${profile.data.roleplayName}
-</h3>
+    result.data.forEach(item=>{
 
+        table.innerHTML+=`
 
-<p>
-Username:
-${profile.data.username}
-</p>
+        <tr>
 
+            <td>${item.itemName}</td>
 
-<p>
-Role:
-${profile.data.role}
-</p>
+            <td>${item.quantity}</td>
 
+            <td>${item.date}</td>
 
-<p>
-Kingdom:
-${profile.data.kingdom || "None"}
-</p>
+        </tr>
 
+        `;
 
-`;
-
-
-
-
-
-document.getElementById(
-"wallet"
-).innerHTML = `
-
-
-<p>Lumen:
-${profile.data.wallet.Lumen}
-</p>
-
-
-<p>Aurel:
-${profile.data.wallet.Aurel}
-</p>
-
-
-<p>Virel:
-${profile.data.wallet.Virel}
-</p>
-
-
-<p>Sylem:
-${profile.data.wallet.Sylem}
-</p>
-
-
-<p>Bront:
-${profile.data.wallet.Bront}
-</p>
-
-
-`;
-
-
+    });
 
 }
 
@@ -303,151 +1098,325 @@ ${profile.data.wallet.Bront}
 
 
 
-const items =
-await loadInventory(
-user.userId
-);
+
+
+async function loadAnnouncements(){
+
+    const result =
+    await getAnnouncements();
+
+    const container =
+    document.getElementById(
+        "announcementContainer"
+    );
+
+    container.innerHTML="";
+
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
+
+        container.innerHTML=
+
+        `<div class="card">
+
+            No announcements.
+
+        </div>`;
+
+        return;
+
+    }
+
+    result.data.forEach(post=>{
+
+        container.innerHTML+=`
+
+        <div class="card">
+
+            <h3>${post.title}</h3>
+
+            <br>
+
+            <p>${post.message}</p>
+
+            <br>
+
+            <small>${post.date}</small>
+
+        </div>
+
+        <br>
+
+        `;
+
+    });
+
+}
 
 
 
 
 
-if(items.success){
 
 
 
-let html="";
+async function loadMarketplacePreview(){
+
+    const result =
+    await getMarketplace();
+
+    const preview =
+    document.getElementById(
+        "marketPreview"
+    );
+
+    preview.innerHTML="";
+
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
+
+        preview.innerHTML=
+
+        `<div class="product-card">
+
+            No Products
+
+        </div>`;
+
+        return;
+
+    }
+
+    result.data
+    .slice(0,4)
+    .forEach(product=>{
+
+        preview.innerHTML+=`
+
+        <div class="product-card">
+
+            <h3>
+
+                ${product.productName}
+
+            </h3>
+
+            <br>
+
+            <p>
+
+                ${product.businessName}
+
+            </p>
+
+            <br>
+
+            <div class="product-price">
+
+                ${product.price}
+                ${product.currency}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
 
 
 
-items.data.forEach(item=>{
 
 
-html += `
-
-<p>
-${item.itemName}
--
-Quantity:
-${item.quantity}
-</p>
 
 
-`;
 
+async function loadAuctionPreview(){
+
+    const result =
+    await getAuctions();
+
+    const preview =
+    document.getElementById(
+        "auctionPreview"
+    );
+
+    preview.innerHTML="";
+
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
+
+        preview.innerHTML=
+
+        `<div class="product-card">
+
+            No Auctions
+
+        </div>`;
+
+        return;
+
+    }
+
+    result.data
+    .slice(0,4)
+    .forEach(item=>{
+
+        preview.innerHTML+=`
+
+        <div class="product-card">
+
+            <h3>
+
+                ${item.itemName}
+
+            </h3>
+
+            <br>
+
+            <p>
+
+                Current Bid
+
+            </p>
+
+            <div class="product-price">
+
+                ${item.currentBid}
+
+                ${item.currency}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+
+
+
+
+
+
+document
+
+.getElementById(
+
+"transferForm"
+
+)
+
+.addEventListener(
+
+"submit",
+
+async function(e){
+
+    e.preventDefault();
+
+    const result =
+    await transferCurrency({
+
+        senderId:
+        CURRENT_USER.userId,
+
+        receiverId:
+        receiverId.value,
+
+        currency:
+        currency.value,
+
+        amount:
+        Number(amount.value)
+
+    });
+
+    alert(
+        result.message
+    );
+
+    if(result.success){
+
+        amount.value="";
+
+        receiverId.value="";
+
+        loadProfile();
+
+    }
 
 });
 
 
 
-document.getElementById(
-"inventory"
-).innerHTML =
-html || "Empty";
 
 
-}
 
 
 
-}
+document
 
+.getElementById(
 
+"refreshInventory"
 
+)
 
+.onclick=
+loadInventory;
 
 
 
 
-async function sendMoney(){
 
 
+document
 
-const result =
-await transferMoney({
+.getElementById(
 
+"refreshAnnouncements"
 
-senderId:
-user.userId,
+)
 
+.onclick=
+loadAnnouncements;
 
-receiverId:
-document.getElementById(
-"receiverId"
-).value,
 
 
-currency:
-document.getElementById(
-"currency"
-).value,
 
 
-amount:
-document.getElementById(
-"amount"
-).value
 
 
 
-});
+window.onload=
+async function(){
 
+    await loadProfile();
 
+    await loadInventory();
 
+    await loadAnnouncements();
 
+    await loadMarketplacePreview();
 
-document.getElementById(
-"message"
-).innerHTML =
-result.message;
+    await loadAuctionPreview();
 
-
-
-
-loadDashboard();
-
-
-}
-
-
-
-
-
-
-
-
-function openMarketplace(){
-
-
-window.location.href =
-"marketplace.html";
-
-
-}
-
-
-
-
-function openAuction(){
-
-
-window.location.href =
-"auction.html";
-
-
-}
-
-
-
-
-
-
-loadDashboard();
-
-
+};
 
 </script>
-
 
 </body>
 
