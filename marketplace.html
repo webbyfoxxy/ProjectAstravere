@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Roleplay Bank | Marketplace</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+
+<div class="sidebar">
+
+
+<h2>
+Roleplay Bank
+</h2>
+
+
+
+<a href="member-dashboard.html">
+Dashboard
+</a>
+
+
+<a href="marketplace.html">
+Marketplace
+</a>
+
+
+<a href="auction.html">
+Auctions
+</a>
+
+
+<a href="#">
+Inventory
+</a>
+
+
+
+<a href="index.html" onclick="logout()">
+Logout
+</a>
+
+
+
+</div>
+
+
+
+
+
+<div class="dashboard-content">
+
+
+
+<h1>
+Marketplace
+</h1>
+
+
+
+
+<div class="card">
+
+
+<h2>
+Available Products
+</h2>
+
+
+<div id="products">
+
+Loading marketplace...
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script src="api.js"></script>
+
+
+
+<script>
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem(
+
+"currentUser"
+
+)
+
+);
+
+
+
+if(!user){
+
+
+window.location.href =
+"index.html";
+
+
+}
+
+
+
+
+async function loadMarketplace(){
+
+
+
+const result =
+
+await loadMarketplace();
+
+
+
+}
+
+
+
+
+
+async function displayProducts(){
+
+
+
+const result =
+
+await apiRequest(
+
+"getMarketplace"
+
+);
+
+
+
+if(!result.success){
+
+
+document.getElementById(
+
+"products"
+
+).innerHTML =
+
+"Unable to load marketplace.";
+
+
+return;
+
+
+}
+
+
+
+
+
+let html = "";
+
+
+
+result.data.forEach(product=>{
+
+
+html += `
+
+
+<div class="product-card">
+
+
+<h2>
+
+${product.productName}
+
+</h2>
+
+
+
+<p>
+
+Category:
+
+${product.category}
+
+</p>
+
+
+
+<p>
+
+Seller:
+
+${product.sellerName}
+
+</p>
+
+
+
+<p>
+
+Price:
+
+${product.price}
+
+Lumen
+
+</p>
+
+
+
+<p>
+
+Stock:
+
+${product.stock}
+
+</p>
+
+
+
+<p>
+
+${product.description}
+
+</p>
+
+
+
+<button onclick="buy('${product.productId}')">
+
+Purchase
+
+</button>
+
+
+</div>
+
+
+<hr>
+
+
+`;
+
+
+
+});
+
+
+
+
+
+document.getElementById(
+
+"products"
+
+).innerHTML =
+
+
+html || "No products available.";
+
+
+
+
+
+}
+
+
+
+
+
+async function buy(productId){
+
+
+
+const result =
+
+await buyProduct({
+
+
+productId:productId,
+
+
+userId:user.userId
+
+
+});
+
+
+
+alert(
+
+result.message ||
+
+"Purchase completed."
+
+);
+
+
+
+displayProducts();
+
+
+
+}
+
+
+
+
+
+function logout(){
+
+
+localStorage.removeItem(
+
+"currentUser"
+
+);
+
+
+}
+
+
+
+
+displayProducts();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
