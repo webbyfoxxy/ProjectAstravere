@@ -1,3 +1,11 @@
+/*******************************************************
+ LUXEMNEAUX ROLEPLAY BANK
+
+ FRONTEND API CONNECTOR
+
+*******************************************************/
+
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyHR5hZLyCrHazVyaEHiU3CGAbbkdANjRpkiErqaQbXT0OdG3JC221INd4HZCTt0rGM/exec";
 
@@ -6,8 +14,9 @@ const API_URL =
 
 
 /*******************************************************
- BASIC API CALL
+ MAIN API FUNCTION
 *******************************************************/
+
 
 async function api(action,data={}){
 
@@ -18,43 +27,53 @@ async function api(action,data={}){
         const response =
         await fetch(API_URL,{
 
+
             method:"POST",
+
 
             headers:{
 
+
                 "Content-Type":
-                "text/plain"
+                "text/plain;charset=utf-8"
+
 
             },
 
+
             body:JSON.stringify({
+
 
                 action:action,
 
+
                 data:data
 
+
             })
+
+
 
         });
 
 
 
 
-        const result =
-        await response.json();
 
-
-
-
-        return result;
+        return await response.json();
 
 
 
     }
+
+
     catch(error){
 
 
-        console.error(error);
+        console.error(
+            "API ERROR:",
+            error
+        );
 
 
 
@@ -63,15 +82,17 @@ async function api(action,data={}){
 
             success:false,
 
+
             message:
             "Unable to connect server."
+
 
 
         };
 
 
-    }
 
+    }
 
 
 }
@@ -90,32 +111,51 @@ async function api(action,data={}){
 
 async function registerMember(data){
 
+
     return await api(
+
         "register",
+
         data
+
     );
+
 
 }
 
 
 
-async function login(data){
+
+
+async function loginUser(data){
+
 
     return await api(
+
         "login",
+
         data
+
     );
 
+
 }
+
+
 
 
 
 async function registerCreator(data){
 
+
     return await api(
+
         "registerCreator",
+
         data
+
     );
+
 
 }
 
@@ -133,15 +173,20 @@ async function registerCreator(data){
 
 async function getProfile(userId){
 
+
     return await api(
 
         "getProfile",
 
         {
+
             userId:userId
+
         }
 
+
     );
+
 
 }
 
@@ -159,6 +204,7 @@ async function getProfile(userId){
 
 async function addCurrency(data){
 
+
     return await api(
 
         "addCurrency",
@@ -167,11 +213,15 @@ async function addCurrency(data){
 
     );
 
+
 }
 
 
 
+
+
 async function removeCurrency(data){
+
 
     return await api(
 
@@ -181,11 +231,15 @@ async function removeCurrency(data){
 
     );
 
+
 }
 
 
 
+
+
 async function transferCurrency(data){
+
 
     return await api(
 
@@ -194,6 +248,7 @@ async function transferCurrency(data){
         data
 
     );
+
 
 }
 
@@ -211,6 +266,7 @@ async function transferCurrency(data){
 
 async function applySeller(data){
 
+
     return await api(
 
         "applySeller",
@@ -219,11 +275,15 @@ async function applySeller(data){
 
     );
 
+
 }
 
 
 
+
+
 async function getSellerApplications(){
+
 
     return await api(
 
@@ -231,11 +291,15 @@ async function getSellerApplications(){
 
     );
 
+
 }
 
 
 
+
+
 async function approveSeller(data){
+
 
     return await api(
 
@@ -244,6 +308,7 @@ async function approveSeller(data){
         data
 
     );
+
 
 }
 
@@ -261,6 +326,7 @@ async function approveSeller(data){
 
 async function createProduct(data){
 
+
     return await api(
 
         "createProduct",
@@ -269,11 +335,15 @@ async function createProduct(data){
 
     );
 
+
 }
 
 
 
+
+
 async function approveProduct(data){
+
 
     return await api(
 
@@ -283,11 +353,15 @@ async function approveProduct(data){
 
     );
 
+
 }
 
 
 
+
+
 async function getMarketplace(){
+
 
     return await api(
 
@@ -295,11 +369,15 @@ async function getMarketplace(){
 
     );
 
+
 }
 
 
 
+
+
 async function purchaseProduct(data){
+
 
     return await api(
 
@@ -308,6 +386,7 @@ async function purchaseProduct(data){
         data
 
     );
+
 
 }
 
@@ -325,6 +404,7 @@ async function purchaseProduct(data){
 
 async function getInventory(userId){
 
+
     return await api(
 
         "getInventory",
@@ -337,6 +417,7 @@ async function getInventory(userId){
 
     );
 
+
 }
 
 
@@ -347,11 +428,12 @@ async function getInventory(userId){
 
 
 /*******************************************************
- AUCTIONS
+ AUCTION
 *******************************************************/
 
 
 async function createAuction(data){
+
 
     return await api(
 
@@ -361,11 +443,15 @@ async function createAuction(data){
 
     );
 
+
 }
 
 
 
+
+
 async function approveAuction(data){
+
 
     return await api(
 
@@ -375,11 +461,15 @@ async function approveAuction(data){
 
     );
 
+
 }
 
 
 
+
+
 async function getAuctions(){
+
 
     return await api(
 
@@ -387,11 +477,15 @@ async function getAuctions(){
 
     );
 
+
 }
 
 
 
+
+
 async function placeBid(data){
+
 
     return await api(
 
@@ -400,6 +494,7 @@ async function placeBid(data){
         data
 
     );
+
 
 }
 
@@ -417,17 +512,22 @@ async function placeBid(data){
 
 async function getAllUsers(){
 
+
     return await api(
 
         "getAllUsers"
 
     );
 
+
 }
 
 
 
+
+
 async function updateUserStatus(data){
+
 
     return await api(
 
@@ -437,11 +537,15 @@ async function updateUserStatus(data){
 
     );
 
+
 }
 
 
 
+
+
 async function createKingdom(data){
+
 
     return await api(
 
@@ -451,11 +555,15 @@ async function createKingdom(data){
 
     );
 
+
 }
 
 
 
+
+
 async function createAnnouncement(data){
+
 
     return await api(
 
@@ -465,16 +573,21 @@ async function createAnnouncement(data){
 
     );
 
+
 }
 
 
 
+
+
 async function getAnnouncements(){
+
 
     return await api(
 
         "getAnnouncements"
 
     );
+
 
 }
