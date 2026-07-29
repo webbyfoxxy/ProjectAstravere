@@ -5,302 +5,439 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Auction - Roleplay Bank</title>
+<title>Imperial Auction Hall | Luxemneaux Bank</title>
 
-<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="stylesheet"
+href="sidebar.css">
+
+<link rel="stylesheet"
+href="dashboard.css">
 
 </head>
 
-
 <body>
 
+<div class="dashboard-layout">
 
-<div class="dashboard">
+<!-- ==========================================
+SIDEBAR
+========================================== -->
 
+<aside class="sidebar">
 
-<h1>
-Adonia Auction Hall
-</h1>
+<div class="sidebar-logo">
 
+🏛️
+
+<h2>
+
+Imperial Auction Hall
+
+</h2>
 
 <p>
-Bid on rare items from other members
+
+Bid Across The Empire
+
 </p>
 
-
-
-
-
-<div id="auctions">
-
-Loading auctions...
-
 </div>
 
+<div class="sidebar-profile">
 
+<h3
+id="playerName">
 
-
-
-<button onclick="goDashboard()">
-
-Back Dashboard
-
-</button>
-
-
-
-
-<button onclick="logout()">
-
-Logout
-
-</button>
-
-
-
-
-<p id="message"></p>
-
-
-
-</div>
-
-
-
-
-
-
-
-<script src="api.js"></script>
-
-
-
-<script>
-
-
-const user =
-getSession();
-
-
-
-
-if(!user){
-
-
-window.location.href =
-"index.html";
-
-
-}
-
-
-
-
-
-
-
-
-async function loadAuctions(){
-
-
-
-const result =
-await getAuctions();
-
-
-
-
-let html = "";
-
-
-
-
-
-if(result.success){
-
-
-
-result.data.forEach(item=>{
-
-
-
-html += `
-
-
-<div class="card">
-
-
-<h3>
-
-${item[3]}
+Loading...
 
 </h3>
 
+<p
+id="playerKingdom">
 
-
-<p>
-
-Owner:
-${item[2]}
+Kingdom
 
 </p>
-
-
-
-<p>
-
-Category:
-${item[4]}
-
-</p>
-
-
-
-<p>
-
-Description:
-${item[5]}
-
-</p>
-
-
-
-<p>
-
-Starting Price:
-${item[6]}
-Lumen
-
-</p>
-
-
-
-<p>
-
-Current Bid:
-${item[7]}
-Lumen
-
-</p>
-
-
-
-<p>
-
-Highest Bidder:
-${item[8] || "None"}
-
-</p>
-
-
-
-
-<input
-
-id="bid-${item[0]}"
-
-type="number"
-
-placeholder="Enter bid amount"
-
->
-
-
-
-<button onclick="placeBid('${item[0]}')">
-
-Bid
-
-</button>
-
-
 
 </div>
 
+<ul class="sidebar-menu">
+
+<li>
+
+<a
+href="member-dashboard.html">
+
+🏠 Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="marketplace.html">
+
+🛒 Marketplace
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="auction.html"
+class="active">
+
+⚔ Auction Hall
+
+</a>
+
+</li>
+
+</ul>
+
+<div class="logout-btn">
+
+<a
+href="#"
+id="logoutBtn">
+
+Logout
+
+</a>
+
+</div>
+
+</aside>
+
+<!-- ==========================================
+CONTENT
+========================================== -->
+
+<main class="dashboard-content">
+
+<header class="dashboard-header">
+
+<div>
+
+<h1>
+
+Imperial Auction Hall
+
+</h1>
+
+<p>
+
+Compete against merchants and nobles for rare items.
+
+</p>
+
+</div>
+
+</header>
+
+<!-- ==========================================
+SEARCH
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Search Auctions
+
+</h2>
+
+<br>
+
+<div class="dashboard-grid">
+
+<div>
+
+<input
+type="text"
+id="searchAuction"
+placeholder="Search auction item...">
+
+</div>
+
+<div>
+
+<select
+id="auctionCurrencyFilter">
+
+<option value="">
+
+All Currencies
+
+</option>
+
+<option>Lumen</option>
+
+<option>Aurel</option>
+
+<option>Virel</option>
+
+<option>Sylem</option>
+
+<option>Bront</option>
+
+</select>
+
+</div>
+
+<div>
+
+<button
+id="searchAuctionButton">
+
+Search
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+LIVE AUCTIONS
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+Live Auctions
+
+</h2>
+
+<br>
+
+<div
+class="product-grid"
+id="auctionContainer">
+
+<div class="product-card">
+
+<h3>
+
+Loading Auctions...
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- ==========================================
+MY BIDS
+========================================== -->
+
+<section class="card">
+
+<h2>
+
+My Active Bids
+
+</h2>
+
+<br>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Item
+
+</th>
+
+<th>
+
+My Bid
+
+</th>
+
+<th>
+
+Highest Bid
+
+</th>
+
+<th>
+
+Currency
+
+</th>
+
+<th>
+
+Status
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="myBidTable">
+
+<tr>
+
+<td colspan="5">
+
+No active bids.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<br>
+
+<footer
+style="text-align:center;padding:30px;">
 
 <hr>
 
+<br>
 
-`;
+<p>
 
+Luxemneaux Imperial Auction Hall
 
+</p>
 
-});
+<p>
 
+Every bid is recorded by the Imperial Bank.
 
+</p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="api.js"></script>
+
+<script>
+
+const CURRENT_USER =
+JSON.parse(
+localStorage.getItem(
+"CURRENT_USER"
+)
+);
+
+if(!CURRENT_USER){
+
+location.href="index.html";
 
 }
-
-
-
-
 
 document.getElementById(
-"auctions"
-).innerHTML =
-html || "No auctions available.";
+"logoutBtn"
+).onclick=function(){
 
+localStorage.removeItem(
+"CURRENT_USER"
+);
 
+location.href="index.html";
 
-}
-
-
-
-
-
-
-
-
-
-async function placeBid(auctionId){
-
-
-
-const amount =
-document.getElementById(
-"bid-" + auctionId
-).value;
-
-
-
-
-
-
-const result =
-await bidAuction({
-
-
-
-auctionId:auctionId,
-
-
-userId:user.userId,
-
-
-amount:amount
-
-
-
-});
-
-
-
-
+};
 
 document.getElementById(
-"message"
-).innerHTML =
-result.message;
+"playerName"
+).textContent =
+CURRENT_USER.roleplayName;
 
+document.getElementById(
+"playerKingdom"
+).textContent =
+CURRENT_USER.kingdom;
+async function loadAuctions(){
 
+    const result =
+    await getAuctions();
 
+    const container =
+    document.getElementById(
+        "auctionContainer"
+    );
 
+    container.innerHTML="";
 
-loadAuctions();
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
 
+        container.innerHTML=`
 
+        <div class="product-card">
+
+            <h3>
+
+                No Active Auctions
+
+            </h3>
+
+            <br>
+
+            <p>
+
+                There are currently no active auctions.
+
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+    result.data.forEach(auction=>{
+
+        createAuctionCard(
+            auction
+        );
+
+    });
 
 }
 
@@ -312,39 +449,395 @@ loadAuctions();
 
 
 
-function goDashboard(){
 
+function createAuctionCard(auction){
 
+    const container =
+    document.getElementById(
+        "auctionContainer"
+    );
 
-if(user.role === "Creator"){
+    container.innerHTML+=`
 
+    <div class="product-card">
 
-window.location.href =
-"creator-dashboard.html";
+        <h3>
 
+            ${auction.itemName}
+
+        </h3>
+
+        <br>
+
+        <p>
+
+            <strong>Seller:</strong>
+
+            ${auction.ownerName}
+
+        </p>
+
+        <p>
+
+            ${auction.description}
+
+        </p>
+
+        <br>
+
+        <p>
+
+            Starting Bid
+
+        </p>
+
+        <div class="product-price">
+
+            ${auction.startingPrice}
+
+            ${auction.currency}
+
+        </div>
+
+        <p>
+
+            Highest Bid
+
+        </p>
+
+        <div class="product-price">
+
+            ${auction.currentBid}
+
+            ${auction.currency}
+
+        </div>
+
+        <br>
+
+        <input
+        type="number"
+        id="bid_${auction.auctionId}"
+        placeholder="Enter bid">
+
+        <br><br>
+
+        <button
+        onclick="placeBidAction('${auction.auctionId}')">
+
+        Place Bid
+
+        </button>
+
+    </div>
+
+    `;
 
 }
 
-else if(user.role === "Seller"){
 
 
-window.location.href =
-"seller-dashboard.html";
 
+
+
+
+
+
+
+async function placeBidAction(auctionId){
+
+    const input =
+
+    document.getElementById(
+
+        "bid_"+auctionId
+
+    );
+
+    const amount =
+
+    Number(input.value);
+
+    if(
+
+        amount<=0
+
+    ){
+
+        alert(
+
+            "Enter a valid bid."
+
+        );
+
+        return;
+
+    }
+
+    const result =
+
+    await placeBid({
+
+        auctionId:
+
+        auctionId,
+
+        bidderId:
+
+        CURRENT_USER.userId,
+
+        bidderName:
+
+        CURRENT_USER.roleplayName,
+
+        bid:
+
+        amount
+
+    });
+
+    alert(
+
+        result.message
+
+    );
+
+    if(
+
+        result.success
+
+    ){
+
+        input.value="";
+
+        loadAuctions();
+
+        loadMyBids();
+
+    }
 
 }
 
-else{
 
 
-window.location.href =
-"member-dashboard.html";
 
+
+
+
+
+
+
+function filterAuctions(){
+
+    const keyword =
+
+    document
+    .getElementById(
+        "searchAuction"
+    )
+    .value
+    .toLowerCase();
+
+    const currency =
+
+    document
+    .getElementById(
+        "auctionCurrencyFilter"
+    )
+    .value;
+
+    getAuctions()
+
+    .then(result=>{
+
+        if(
+
+            !result.success
+
+        ){
+
+            return;
+
+        }
+
+        const container =
+
+        document.getElementById(
+
+            "auctionContainer"
+
+        );
+
+        container.innerHTML="";
+
+        let found=false;
+
+        result.data.forEach(item=>{
+
+            const nameMatch=
+
+            item.itemName
+
+            .toLowerCase()
+
+            .includes(keyword);
+
+            const currencyMatch=
+
+            currency===""
+
+            ||
+
+            item.currency===currency;
+
+            if(
+
+                nameMatch
+
+                &&
+
+                currencyMatch
+
+            ){
+
+                found=true;
+
+                createAuctionCard(item);
+
+            }
+
+        });
+
+        if(!found){
+
+            container.innerHTML=`
+
+            <div class="product-card">
+
+                <h3>
+
+                    No Matching Auctions
+
+                </h3>
+
+            </div>
+
+            `;
+
+        }
+
+    });
 
 }
 
 
 
+
+
+
+
+
+
+
+document
+.getElementById(
+"searchAuctionButton"
+)
+.onclick=
+filterAuctions;
+
+document
+.getElementById(
+"auctionCurrencyFilter"
+)
+.onchange=
+filterAuctions;
+
+document
+.getElementById(
+"searchAuction"
+)
+.onkeyup=
+filterAuctions;
+async function loadMyBids(){
+
+    const result =
+    await getMyBids(
+        CURRENT_USER.userId
+    );
+
+    const table =
+    document.getElementById(
+        "myBidTable"
+    );
+
+    table.innerHTML="";
+
+    if(
+        !result.success ||
+        result.data.length===0
+    ){
+
+        table.innerHTML=`
+
+        <tr>
+
+            <td colspan="5">
+
+                No Active Bids
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    result.data.forEach(bid=>{
+
+        table.innerHTML+=`
+
+        <tr>
+
+            <td>
+
+                ${bid.itemName}
+
+            </td>
+
+            <td>
+
+                ${bid.myBid}
+
+            </td>
+
+            <td>
+
+                ${bid.currentBid}
+
+            </td>
+
+            <td>
+
+                ${bid.currency}
+
+            </td>
+
+            <td>
+
+                ${bid.status || "Active"}
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
 }
 
 
@@ -352,12 +845,54 @@ window.location.href =
 
 
 
-loadAuctions();
 
 
+
+
+async function refreshAuctionHall(){
+
+    await loadAuctions();
+
+    await loadMyBids();
+
+}
+
+
+
+
+
+
+
+
+
+
+setInterval(
+
+refreshAuctionHall,
+
+30000
+
+);
+
+
+
+
+
+
+
+
+
+
+window.onload =
+async function(){
+
+    await loadAuctions();
+
+    await loadMyBids();
+
+};
 
 </script>
-
 
 </body>
 
