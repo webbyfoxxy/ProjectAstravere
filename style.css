@@ -1,0 +1,642 @@
+/* ==========================================================
+   ROLEPLAY BANK
+   Global Stylesheet
+   Version: 1.0
+   Theme: Imperial Dark Gold
+========================================================== */
+
+/* ===========================
+   GOOGLE FONTS
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===========================
+   CSS VARIABLES
+=========================== */
+
+:root{
+
+    /* Background */
+
+    --bg:#0b0b0b;
+    --bg-secondary:#131313;
+    --card:#1b1b1b;
+    --sidebar:#101010;
+    --header:#141414;
+
+    /* Gold */
+
+    --gold:#d4af37;
+    --gold-light:#f7d774;
+    --gold-dark:#8b6a15;
+
+    /* Text */
+
+    --text:#ffffff;
+    --text-light:#d4d4d4;
+    --text-muted:#8c8c8c;
+
+    /* Status */
+
+    --success:#2e8b57;
+    --danger:#b22222;
+    --warning:#d4af37;
+    --info:#4682b4;
+
+    /* Border */
+
+    --border:1px solid var(--gold);
+
+    /* Radius */
+
+    --radius:12px;
+
+    /* Shadow */
+
+    --shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+    --gold-glow:
+        0 0 15px rgba(212,175,55,.35);
+
+    /* Animation */
+
+    --transition:.25s ease;
+
+}
+
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:'Poppins',sans-serif;
+
+    min-height:100vh;
+
+    line-height:1.6;
+
+}
+
+/* ===========================
+   TYPOGRAPHY
+=========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    font-family:'Cinzel',serif;
+
+    color:var(--gold);
+
+    font-weight:700;
+
+}
+
+p{
+
+    color:var(--text-light);
+
+}
+
+small{
+
+    color:var(--text-muted);
+
+}
+
+a{
+
+    color:var(--gold);
+
+    text-decoration:none;
+
+    transition:var(--transition);
+
+}
+
+a:hover{
+
+    color:var(--gold-light);
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#080808;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--gold);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--gold-light);
+
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.container{
+
+    width:95%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+}
+
+.section{
+
+    padding:50px 0;
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header{
+
+    background:var(--header);
+
+    border-bottom:var(--border);
+
+    padding:18px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-family:'Cinzel',serif;
+
+    color:var(--gold);
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.btn{
+
+    padding:12px 24px;
+
+    border-radius:var(--radius);
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+.btn-primary{
+
+    background:var(--gold);
+
+    color:#000;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--gold-light);
+
+    box-shadow:var(--gold-glow);
+
+    transform:translateY(-2px);
+
+}
+
+.btn-secondary{
+
+    background:transparent;
+
+    color:var(--gold);
+
+    border:var(--border);
+
+}
+
+.btn-secondary:hover{
+
+    background:var(--gold);
+
+    color:#000;
+
+}
+
+.btn-danger{
+
+    background:var(--danger);
+
+    color:white;
+
+}
+
+.btn-danger:hover{
+
+    opacity:.9;
+
+}
+
+.btn-success{
+
+    background:var(--success);
+
+    color:white;
+
+}
+
+.btn-success:hover{
+
+    opacity:.9;
+
+}
+
+/* ===========================
+   INPUTS
+=========================== */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    background:var(--bg-secondary);
+
+    border:var(--border);
+
+    color:white;
+
+    border-radius:var(--radius);
+
+    font-family:'Poppins',sans-serif;
+
+    outline:none;
+
+    transition:var(--transition);
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    box-shadow:var(--gold-glow);
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--gold);
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   CARDS
+=========================== */
+
+.card{
+
+    background:var(--card);
+
+    border:var(--border);
+
+    border-radius:var(--radius);
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--gold-glow);
+
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:var(--card);
+
+    border:var(--border);
+
+}
+
+thead{
+
+    background:#191919;
+
+}
+
+thead th{
+
+    color:var(--gold);
+
+    padding:16px;
+
+    text-align:left;
+
+}
+
+tbody td{
+
+    padding:14px;
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+}
+
+tbody tr{
+
+    transition:var(--transition);
+
+}
+
+tbody tr:hover{
+
+    background:#232323;
+
+}
+
+/* ===========================
+   BADGES
+=========================== */
+
+.badge{
+
+    padding:5px 12px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.badge-success{
+
+    background:var(--success);
+
+}
+
+.badge-danger{
+
+    background:var(--danger);
+
+}
+
+.badge-warning{
+
+    background:var(--warning);
+
+    color:black;
+
+}
+
+.badge-info{
+
+    background:var(--info);
+
+}
+
+/* ===========================
+   FLEX
+=========================== */
+
+.flex{
+
+    display:flex;
+
+}
+
+.flex-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.flex-center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.gap{
+
+    gap:20px;
+
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.grid{
+
+    display:grid;
+
+    gap:25px;
+
+}
+
+.grid-2{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.grid-3{
+
+    grid-template-columns:repeat(3,1fr);
+
+}
+
+.grid-4{
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+/* ===========================
+   PAGE TITLE
+=========================== */
+
+.page-title{
+
+    font-size:34px;
+
+    margin-bottom:25px;
+
+}
+
+/* ===========================
+   SECTIONS
+=========================== */
+
+.section-title{
+
+    margin-bottom:20px;
+
+    border-left:4px solid var(--gold);
+
+    padding-left:12px;
+
+}
+
+/* ===========================
+   HR
+=========================== */
+
+hr{
+
+    border:none;
+
+    border-top:1px solid rgba(212,175,55,.25);
+
+    margin:30px 0;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+    margin-top:50px;
+
+    border-top:var(--border);
+
+    padding:20px;
+
+    text-align:center;
+
+    color:var(--text-muted);
+
+    background:#101010;
+
+}
+
+/* ===========================
+   UTILITIES
+=========================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.mt-1{margin-top:10px;}
+.mt-2{margin-top:20px;}
+.mt-3{margin-top:30px;}
+.mt-4{margin-top:40px;}
+
+.mb-1{margin-bottom:10px;}
+.mb-2{margin-bottom:20px;}
+.mb-3{margin-bottom:30px;}
+.mb-4{margin-bottom:40px;}
+
+.w-100{
+
+    width:100%;
+
+}
