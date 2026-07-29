@@ -1,152 +1,80 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
 
-<title>Seller Dashboard | Luxemneaux Roleplay Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="style.css">
 
-<link rel="stylesheet"
-href="sidebar.css">
+<title>
 
-<link rel="stylesheet"
-href="dashboard.css">
+Luxemneaux Merchant Hall
+
+</title>
+
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
 
+
+
 <body>
+
+
+
+
 
 <div class="dashboard-layout">
 
-<!-- ==========================================
-SIDEBAR
-========================================== -->
+
+
+
+
+<!-- =====================================
+     SIDEBAR
+===================================== -->
+
 
 <aside class="sidebar">
 
+
 <div class="sidebar-logo">
-
-🏛️
-
-<h2>
 
 Luxemneaux
 
-</h2>
-
-<p>
-
-Imperial Merchant Guild
-
-</p>
-
 </div>
 
-<div class="sidebar-profile">
 
-<h3
-id="sellerName">
-
-Loading...
-
-</h3>
-
-<p
-id="sellerBusiness">
-
-Business
-
-</p>
-
-<p
-id="sellerKingdom">
-
-Kingdom
-
-</p>
-
-</div>
 
 <ul class="sidebar-menu">
 
+
+
 <li>
 
-<a
-href="#dashboard"
-class="active">
+<a href="seller-dashboard.html">
 
-🏠 Dashboard
+🏪 Merchant Hall
 
 </a>
 
 </li>
 
-<li>
 
-<a
-href="#wallet">
 
-💰 Wallet
-
-</a>
-
-</li>
 
 <li>
 
-<a
-href="#business">
-
-🏪 Business
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#products">
-
-📦 Products
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#sales">
-
-📈 Sales
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="#auction">
-
-⚔ Auctions
-
-</a>
-
-</li>
-
-<li>
-
-<a
-href="marketplace.html">
+<a href="marketplace.html">
 
 🛒 Marketplace
 
@@ -154,274 +82,193 @@ href="marketplace.html">
 
 </li>
 
-</ul>
 
-<div class="logout-btn">
 
-<a
-href="#"
-id="logoutBtn">
 
-Logout
+<li>
+
+<a href="#" onclick="logout()">
+
+🚪 Logout
 
 </a>
 
-</div>
+</li>
+
+
+
+</ul>
+
 
 </aside>
 
-<!-- ==========================================
-CONTENT
-========================================== -->
 
-<main class="dashboard-content">
 
-<header class="dashboard-header">
 
-<div>
 
-<h1>
 
-Seller Dashboard
+
+
+<!-- =====================================
+     MAIN CONTENT
+===================================== -->
+
+
+<main class="main-content">
+
+
+
+
+
+<header class="header">
+
+
+<h1 class="imperial-title">
+
+🏪 Merchant Dashboard
 
 </h1>
 
-<p>
 
-Manage your imperial business.
 
-</p>
+
+<div class="user-badge"
+
+id="sellerName">
+
+Merchant
 
 </div>
+
+
 
 </header>
 
-<!-- ==========================================
-BUSINESS OVERVIEW
-========================================== -->
 
-<section
-class="card"
-id="dashboard">
 
-<h2>
 
-Business Overview
+
+
+
+
+<!-- =====================================
+     BUSINESS PROFILE
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📜 Business Profile
 
 </h2>
 
-<br>
 
-<div class="dashboard-grid">
+
+
+<div class="profile-panel">
+
+
+<div class="profile-avatar">
+
+</div>
+
+
 
 <div>
 
-<strong>
 
-Business Name
-
-</strong>
-
-<p
-id="businessName">
+<h3 id="businessName">
 
 Loading...
 
-</p>
+</h3>
 
-</div>
 
-<div>
 
-<strong>
 
-Owner
+<p>
 
-</strong>
+⚜️ Owner:
 
-<p
-id="businessOwner">
+<span id="ownerName">
 
-Loading...
+-
+
+</span>
 
 </p>
 
-</div>
 
-<div>
 
-<strong>
 
-Kingdom
+<p>
 
-</strong>
+🏰 Kingdom:
 
-<p
-id="businessKingdom">
+<span id="sellerKingdom">
 
-Loading...
+-
+
+</span>
 
 </p>
 
-</div>
 
-<div>
 
-<strong>
 
-Seller Status
+<p>
 
-</strong>
+⭐ Status:
 
-<p
-id="sellerStatus">
+<span id="sellerStatus">
 
-Approved
+Active
+
+</span>
 
 </p>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 </section>
 
-<br>
 
-<!-- ==========================================
-SELLER WALLET
-========================================== -->
 
-<section
-class="card"
-id="wallet">
 
-<h2>
 
-Merchant Wallet
 
-</h2>
 
-<br>
 
-<div class="wallet">
+<!-- =====================================
+     CREATE PRODUCT
+===================================== -->
 
-<div class="currency-card">
 
-<div class="currency-name">
+<section class="card">
 
-Lumen
 
-</div>
+<h2 class="title">
 
-<div
-class="currency-value"
-id="walletLumen">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Aurel
-
-</div>
-
-<div
-class="currency-value"
-id="walletAurel">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Virel
-
-</div>
-
-<div
-class="currency-value"
-id="walletVirel">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Sylem
-
-</div>
-
-<div
-class="currency-value"
-id="walletSylem">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Bront
-
-</div>
-
-<div
-class="currency-value"
-id="walletBront">
-
-0
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-CREATE PRODUCT
-========================================== -->
-
-<section
-class="card"
-id="products">
-
-<h2>
-
-Create Product
+📦 Add New Product
 
 </h2>
 
-<br>
 
-<form
-id="productForm">
+
 
 <div class="form-group">
+
 
 <label>
 
@@ -429,14 +276,25 @@ Product Name
 
 </label>
 
+
 <input
-type="text"
+
 id="productName"
-required>
+
+placeholder="Item name"
+
+>
+
 
 </div>
 
+
+
+
+
+
 <div class="form-group">
+
 
 <label>
 
@@ -444,14 +302,25 @@ Category
 
 </label>
 
+
 <input
-type="text"
-id="category"
-required>
+
+id="productCategory"
+
+placeholder="Weapon, Food, Service..."
+
+>
+
 
 </div>
 
+
+
+
+
+
 <div class="form-group">
+
 
 <label>
 
@@ -459,18 +328,26 @@ Description
 
 </label>
 
-<textarea
-id="description"
-rows="4"
-required>
 
-</textarea>
+<textarea
+
+id="productDescription"
+
+placeholder="Describe your item"
+
+></textarea>
+
 
 </div>
 
-<div class="dashboard-grid">
 
-<div>
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
@@ -478,14 +355,26 @@ Price
 
 </label>
 
+
 <input
+
 type="number"
-id="price"
-required>
+
+id="productPrice"
+
+placeholder="Price"
+
+>
+
 
 </div>
 
-<div>
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
@@ -493,44 +382,59 @@ Currency
 
 </label>
 
-<select
-id="currency">
 
-<option>
 
-Lumen
+<select id="productCurrency">
 
-</option>
 
-<option>
+<option value="Lumen">
 
-Aurel
+✨ Lumen
 
 </option>
 
-<option>
 
-Virel
+<option value="Aurel">
 
-</option>
-
-<option>
-
-Sylem
+🏆 Aurel
 
 </option>
 
-<option>
 
-Bront
+<option value="Virel">
+
+💎 Virel
 
 </option>
+
+
+<option value="Sylem">
+
+🔷 Sylem
+
+</option>
+
+
+<option value="Bront">
+
+🟤 Bront
+
+</option>
+
+
 
 </select>
 
+
 </div>
 
-<div>
+
+
+
+
+
+<div class="form-group">
+
 
 <label>
 
@@ -538,401 +442,177 @@ Stock
 
 </label>
 
+
 <input
+
 type="number"
-id="stock"
-required>
+
+id="productStock"
+
+placeholder="Available quantity"
+
+>
+
 
 </div>
 
-</div>
 
-<br>
 
-<button>
 
-Submit Product
+
+
+
+<button
+
+class="btn"
+
+onclick="addProduct()"
+
+>
+
+📜 Register Product
 
 </button>
 
-</form>
+
+
+
+<div id="productMessage"></div>
+
+
+
 
 </section>
+<!-- =====================================
+     MERCHANT STATISTICS
+===================================== -->
 
-<br>
-<!-- ==========================================
-MY PRODUCTS
-========================================== -->
 
-<section
-class="card">
+<section class="card">
 
-<h2>
 
-My Products
+<h2 class="title">
+
+📊 Merchant Statistics
 
 </h2>
 
-<br>
+
+
+
+<div class="grid">
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+📦 Products
+
+</h3>
+
+
+<span id="productCount">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+🪙 Earnings
+
+</h3>
+
+
+<span id="sellerEarnings">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<h3>
+
+🛒 Sales
+
+</h3>
+
+
+<span id="salesCount">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     INVENTORY
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📦 Merchant Inventory
+
+</h2>
+
+
+
 
 <div class="table-container">
 
-<table>
-
-<thead>
-
-<tr>
-
-<th>Product</th>
-
-<th>Category</th>
-
-<th>Price</th>
-
-<th>Currency</th>
-
-<th>Stock</th>
-
-<th>Status</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="productTable">
-
-<tr>
-
-<td colspan="7">
-
-No products available.
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-SELLER STATISTICS
-========================================== -->
-
-<section
-class="card"
-id="sales">
-
-<h2>
-
-Business Statistics
-
-</h2>
-
-<br>
-
-<div class="dashboard-grid">
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Products
-
-</div>
-
-<div
-class="currency-value"
-id="totalProducts">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Pending
-
-</div>
-
-<div
-class="currency-value"
-id="pendingProducts">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Approved
-
-</div>
-
-<div
-class="currency-value"
-id="approvedProducts">
-
-0
-
-</div>
-
-</div>
-
-<div class="currency-card">
-
-<div class="currency-name">
-
-Revenue
-
-</div>
-
-<div
-class="currency-value"
-id="sellerRevenue">
-
-0
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-CREATE AUCTION
-========================================== -->
-
-<section
-class="card"
-id="auction">
-
-<h2>
-
-Create Auction
-
-</h2>
-
-<br>
-
-<form
-id="auctionForm">
-
-<div class="form-group">
-
-<label>
-
-Item Name
-
-</label>
-
-<input
-type="text"
-id="auctionItem"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Description
-
-</label>
-
-<textarea
-id="auctionDescription"
-rows="4"
-required>
-
-</textarea>
-
-</div>
-
-<div class="dashboard-grid">
-
-<div>
-
-<label>
-
-Starting Price
-
-</label>
-
-<input
-type="number"
-id="auctionPrice"
-required>
-
-</div>
-
-<div>
-
-<label>
-
-Currency
-
-</label>
-
-<select
-id="auctionCurrency">
-
-<option>Lumen</option>
-<option>Aurel</option>
-<option>Virel</option>
-<option>Sylem</option>
-<option>Bront</option>
-
-</select>
-
-</div>
-
-</div>
-
-<br>
-
-<button>
-
-Submit Auction
-
-</button>
-
-</form>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-MY AUCTIONS
-========================================== -->
-
-<section
-class="card">
-
-<h2>
-
-My Auctions
-
-</h2>
-
-<br>
-
-<div class="table-container">
 
 <table>
 
-<thead>
-
-<tr>
-
-<th>
-
-Item
-
-</th>
-
-<th>
-
-Current Bid
-
-</th>
-
-<th>
-
-Currency
-
-</th>
-
-<th>
-
-Highest Bidder
-
-</th>
-
-<th>
-
-Status
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="auctionTable">
-
-<tr>
-
-<td colspan="5">
-
-No auctions found.
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<br>
-
-<!-- ==========================================
-RECENT SALES
-========================================== -->
-
-<section
-class="card">
-
-<h2>
-
-Recent Sales
-
-</h2>
-
-<br>
-
-<div class="table-container">
-
-<table>
 
 <thead>
 
+
 <tr>
 
-<th>
-
-Date
-
-</th>
 
 <th>
 
@@ -940,11 +620,222 @@ Product
 
 </th>
 
+
+<th>
+
+Price
+
+</th>
+
+
+<th>
+
+Stock
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Actions
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="inventoryTable">
+
+
+<tr>
+
+
+<td colspan="5">
+
+Loading inventory...
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================
+     ADD STOCK PANEL
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📈 Update Inventory
+
+</h2>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Product ID
+
+</label>
+
+
+<input
+
+id="stockProductId"
+
+placeholder="Product ID"
+
+>
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Stock Change
+
+</label>
+
+
+<input
+
+type="number"
+
+id="stockAmount"
+
+placeholder="Example: +10 or -5"
+
+>
+
+
+</div>
+
+
+
+
+
+
+<button
+
+class="btn"
+
+onclick="updateProductStock()"
+
+>
+
+📦 Update Stock
+
+</button>
+
+
+
+
+<div id="stockMessage"></div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- =====================================
+     SALES HISTORY
+===================================== -->
+
+
+<section class="card">
+
+
+<h2 class="title">
+
+📜 Merchant Sales Records
+
+</h2>
+
+
+
+
+<div class="table-container">
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
 <th>
 
 Buyer
 
 </th>
+
+
+<th>
+
+Item
+
+</th>
+
 
 <th>
 
@@ -952,571 +843,744 @@ Amount
 
 </th>
 
+
 <th>
 
 Currency
 
 </th>
 
+
+<th>
+
+Date
+
+</th>
+
+
 </tr>
+
 
 </thead>
 
-<tbody
-id="salesTable">
+
+
+<tbody id="salesTable">
+
+
+<tr>
+
+
+<td colspan="5">
+
+No sales records.
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+
+</section>
+<!-- =====================================
+     SELLER SCRIPT
+===================================== -->
+
+
+<script src="api.js"></script>
+
+
+
+<script>
+
+
+/* =====================================
+   LOAD SELLER DASHBOARD
+===================================== */
+
+
+async function loadSellerDashboard(){
+
+
+
+const user =
+
+currentUser();
+
+
+
+
+
+if(!user){
+
+
+window.location.href =
+
+"index.html";
+
+
+return;
+
+
+}
+
+
+
+
+
+document
+.getElementById(
+"sellerName"
+)
+.innerText =
+
+
+user.username;
+
+
+
+
+
+document
+.getElementById(
+"ownerName"
+)
+.innerText =
+
+
+user.roleplayName;
+
+
+
+
+
+
+await loadInventory();
+
+
+
+
+}
+
+
+
+
+
+/* =====================================
+   ADD PRODUCT
+===================================== */
+
+
+async function addProduct(){
+
+
+
+const data = {
+
+
+
+productName:
+
+document
+.getElementById(
+"productName"
+)
+.value,
+
+
+
+category:
+
+document
+.getElementById(
+"productCategory"
+)
+.value,
+
+
+
+description:
+
+document
+.getElementById(
+"productDescription"
+)
+.value,
+
+
+
+price:
+
+document
+.getElementById(
+"productPrice"
+)
+.value,
+
+
+
+currency:
+
+document
+.getElementById(
+"productCurrency"
+)
+.value,
+
+
+
+stock:
+
+document
+.getElementById(
+"productStock"
+)
+.value
+
+
+
+};
+
+
+
+
+
+
+
+const message =
+
+document
+.getElementById(
+"productMessage"
+);
+
+
+
+
+
+const result =
+
+await createProduct(
+
+data
+
+);
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-success">
+
+✅ Product registered.
+
+</div>
+
+`;
+
+
+
+loadInventory();
+
+
+
+}
+
+else{
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+❌ ${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   LOAD INVENTORY
+===================================== */
+
+
+async function loadInventory(){
+
+
+
+const result =
+
+await getSellerProducts();
+
+
+
+
+
+const table =
+
+document
+.getElementById(
+"inventoryTable"
+);
+
+
+
+
+
+if(
+!result ||
+!result.success
+){
+
+
+
+table.innerHTML =
+
+`
 
 <tr>
 
 <td colspan="5">
 
-No sales yet.
+No products found.
 
 </td>
 
 </tr>
 
-</tbody>
+`;
 
-</table>
+return;
 
-</div>
-
-</section>
-
-<br>
-
-<footer
-style="text-align:center;padding:30px;">
-
-<hr>
-
-<br>
-
-<p>
-
-Luxemneaux Imperial Merchant Guild
-
-</p>
-
-<p>
-
-Manage your business with honor.
-
-</p>
-
-</footer>
-
-</main>
-
-</div>
-
-<script src="api.js"></script>
-
-<script>
-
-const CURRENT_USER =
-
-JSON.parse(
-
-localStorage.getItem(
-
-"CURRENT_USER"
-
-)
-
-);
-
-if(!CURRENT_USER){
-
-location.href="index.html";
 
 }
+
+
+
+
+
+table.innerHTML = "";
+
+
+
+
 
 document
-
 .getElementById(
-
-"logoutBtn"
-
+"productCount"
 )
+.innerText =
 
-.onclick=function(){
 
-localStorage.removeItem(
+result.data.length;
 
-"CURRENT_USER"
+
+
+
+
+
+result.data.forEach(
+
+product=>{
+
+
+
+
+
+table.innerHTML +=
+
+
+
+`
+
+<tr>
+
+
+
+<td>
+
+${product.productName}
+
+</td>
+
+
+
+
+<td>
+
+${product.price}
+
+${product.currency}
+
+</td>
+
+
+
+
+<td>
+
+${product.stock}
+
+</td>
+
+
+
+
+<td>
+
+${product.status}
+
+</td>
+
+
+
+
+<td>
+
+
+<button
+
+class="btn-dark"
+
+onclick="removeProduct('${product.productId}')"
+
+>
+
+🗑️ Delete
+
+</button>
+
+
+
+</td>
+
+
+
+
+</tr>
+
+
+`;
+
+
+
+
+}
 
 );
 
-location.href="index.html";
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   UPDATE STOCK
+===================================== */
+
+
+async function updateProductStock(){
+
+
+
+const productId =
+
+document
+.getElementById(
+"stockProductId"
+)
+.value;
+
+
+
+const amount =
+
+document
+.getElementById(
+"stockAmount"
+)
+.value;
+
+
+
+
+
+const message =
+
+document
+.getElementById(
+"stockMessage"
+);
+
+
+
+
+
+
+const result =
+
+await updateStock(
+
+productId,
+
+amount
+
+);
+
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-success">
+
+✅ Stock updated.
+
+</div>
+
+`;
+
+
+
+loadInventory();
+
+
+
+}
+
+else{
+
+
+
+message.innerHTML =
+
+`
+
+<div class="alert alert-error">
+
+❌ ${result.message}
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   DELETE PRODUCT
+===================================== */
+
+
+async function removeProduct(
+
+productId
+
+){
+
+
+
+if(
+!confirm(
+"Delete this product?"
+)
+
+)
+return;
+
+
+
+
+
+
+const result =
+
+await deleteProduct(
+
+productId
+
+);
+
+
+
+
+
+
+if(
+result.success
+){
+
+
+
+alert(
+
+"🗑️ Product removed."
+
+);
+
+
+
+loadInventory();
+
+
+
+}
+
+else{
+
+
+alert(
+
+"❌ " +
+
+result.message
+
+);
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   START
+===================================== */
+
+
+window.onload = function(){
+
+
+
+loadSellerDashboard();
+
+
 
 };
-async function loadProfile(){
 
-    const result =
-    await getProfile(
-        CURRENT_USER.userId
-    );
 
-    if(!result.success){
 
-        alert(result.message);
-        return;
 
-    }
-
-    const user =
-    result.data;
-
-    document.getElementById(
-        "sellerName"
-    ).textContent =
-    user.roleplayName;
-
-    document.getElementById(
-        "sellerBusiness"
-    ).textContent =
-    user.businessName ||
-    "Imperial Business";
-
-    document.getElementById(
-        "sellerKingdom"
-    ).textContent =
-    user.kingdom;
-
-    document.getElementById(
-        "businessName"
-    ).textContent =
-    user.businessName ||
-    "Imperial Business";
-
-    document.getElementById(
-        "businessOwner"
-    ).textContent =
-    user.roleplayName;
-
-    document.getElementById(
-        "businessKingdom"
-    ).textContent =
-    user.kingdom;
-
-    document.getElementById(
-        "sellerStatus"
-    ).textContent =
-    user.status;
-
-    document.getElementById(
-        "walletLumen"
-    ).textContent =
-    user.wallet.Lumen;
-
-    document.getElementById(
-        "walletAurel"
-    ).textContent =
-    user.wallet.Aurel;
-
-    document.getElementById(
-        "walletVirel"
-    ).textContent =
-    user.wallet.Virel;
-
-    document.getElementById(
-        "walletSylem"
-    ).textContent =
-    user.wallet.Sylem;
-
-    document.getElementById(
-        "walletBront"
-    ).textContent =
-    user.wallet.Bront;
-
-}
-
-
-
-
-
-
-
-
-
-
-async function loadProducts(){
-
-    const result =
-    await getMarketplace();
-
-    const table =
-    document.getElementById(
-        "productTable"
-    );
-
-    table.innerHTML="";
-
-    let total=0;
-    let pending=0;
-    let approved=0;
-
-    if(
-        !result.success
-    ){
-
-        table.innerHTML=
-        `<tr>
-            <td colspan="7">
-                Unable to load products.
-            </td>
-        </tr>`;
-
-        return;
-
-    }
-
-    result.data.forEach(product=>{
-
-        if(
-            product.sellerId !==
-            CURRENT_USER.userId
-        ){
-            return;
-        }
-
-        total++;
-
-        if(
-            product.status==="Approved"
-        ){
-
-            approved++;
-
-        }else{
-
-            pending++;
-
-        }
-
-        table.innerHTML+=`
-
-        <tr>
-
-            <td>
-
-                ${product.productName}
-
-            </td>
-
-            <td>
-
-                ${product.category}
-
-            </td>
-
-            <td>
-
-                ${product.price}
-
-            </td>
-
-            <td>
-
-                ${product.currency}
-
-            </td>
-
-            <td>
-
-                ${product.stock}
-
-            </td>
-
-            <td>
-
-                ${product.status}
-
-            </td>
-
-            <td>
-
-                <button>
-
-                    Edit
-
-                </button>
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-    if(total===0){
-
-        table.innerHTML=
-        `<tr>
-            <td colspan="7">
-                No products submitted.
-            </td>
-        </tr>`;
-
-    }
-
-    document.getElementById(
-        "totalProducts"
-    ).textContent=total;
-
-    document.getElementById(
-        "pendingProducts"
-    ).textContent=pending;
-
-    document.getElementById(
-        "approvedProducts"
-    ).textContent=approved;
-
-}
-
-
-
-
-
-
-
-
-
-
-async function loadAuctions(){
-
-    const result =
-    await getAuctions();
-
-    const table =
-    document.getElementById(
-        "auctionTable"
-    );
-
-    table.innerHTML="";
-
-    if(
-        !result.success
-    ){
-
-        table.innerHTML=
-        `<tr>
-            <td colspan="5">
-                Unable to load auctions.
-            </td>
-        </tr>`;
-
-        return;
-
-    }
-
-    let found=false;
-
-    result.data.forEach(item=>{
-
-        if(
-            item.ownerId !==
-            CURRENT_USER.userId
-        ){
-            return;
-        }
-
-        found=true;
-
-        table.innerHTML+=`
-
-        <tr>
-
-            <td>
-
-                ${item.itemName}
-
-            </td>
-
-            <td>
-
-                ${item.currentBid}
-
-            </td>
-
-            <td>
-
-                ${item.currency}
-
-            </td>
-
-            <td>
-
-                ${item.highestBidder || "-"}
-
-            </td>
-
-            <td>
-
-                Active
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-    if(!found){
-
-        table.innerHTML=
-        `<tr>
-            <td colspan="5">
-                No auctions found.
-            </td>
-        </tr>`;
-
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-document.getElementById(
-    "productForm"
-).addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-    const result =
-    await createProduct({
-
-        sellerId:
-        CURRENT_USER.userId,
-
-        sellerName:
-        CURRENT_USER.roleplayName,
-
-        businessName:
-        document.getElementById(
-            "businessName"
-        ).textContent,
-
-        productName:
-        productName.value,
-
-        category:
-        category.value,
-
-        description:
-        description.value,
-
-        price:
-        Number(price.value),
-
-        currency:
-        currency.value,
-
-        stock:
-        Number(stock.value)
-
-    });
-
-    alert(result.message);
-
-    if(result.success){
-
-        this.reset();
-
-        loadProducts();
-
-    }
-
-});
-
-
-
-
-
-
-
-
-
-
-document.getElementById(
-    "auctionForm"
-).addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-    const result =
-    await createAuction({
-
-        ownerId:
-        CURRENT_USER.userId,
-
-        ownerName:
-        CURRENT_USER.roleplayName,
-
-        itemName:
-        auctionItem.value,
-
-        description:
-        auctionDescription.value,
-
-        startingPrice:
-        Number(
-            auctionPrice.value
-        ),
-
-        currency:
-        auctionCurrency.value
-
-    });
-
-    alert(result.message);
-
-    if(result.success){
-
-        this.reset();
-
-        loadAuctions();
-
-    }
-
-});
-
-
-
-
-
-
-
-
-
-
-window.onload=
-async function(){
-
-    await loadProfile();
-
-    await loadProducts();
-
-    await loadAuctions();
-
-};
 
 </script>
 
+
+
+
+
+
+<footer class="footer">
+
+
+<p>
+
+⚜️ Luxemneaux Merchant Guild ⚜️
+
+</p>
+
+
+<p>
+
+🏪 Build your empire through trade
+
+</p>
+
+
+</footer>
+
+
+
+
+
+</main>
+
+
+</div>
+
+
+
+
 </body>
+
 
 </html>
