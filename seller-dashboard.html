@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Roleplay Bank | Seller Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+
+<div class="sidebar">
+
+
+<h2>
+Roleplay Bank
+</h2>
+
+
+<a href="seller-dashboard.html">
+Dashboard
+</a>
+
+
+<a href="marketplace.html">
+Marketplace
+</a>
+
+
+<a href="auction.html">
+Auctions
+</a>
+
+
+<a href="#">
+Inventory
+</a>
+
+
+<a href="#">
+Transactions
+</a>
+
+
+<a href="index.html" onclick="logout()">
+Logout
+</a>
+
+
+</div>
+
+
+
+
+<div class="dashboard-content">
+
+
+<h1>
+Seller Dashboard
+</h1>
+
+
+
+
+<div class="card">
+
+
+<h2>
+Create Product
+</h2>
+
+
+
+<input
+id="productName"
+placeholder="Product Name">
+
+
+
+<input
+id="category"
+placeholder="Category">
+
+
+
+<textarea
+id="description"
+placeholder="Product Description">
+</textarea>
+
+
+
+<input
+id="price"
+type="number"
+placeholder="Price">
+
+
+
+<input
+id="stock"
+type="number"
+placeholder="Stock Quantity">
+
+
+
+<input
+id="tax"
+type="number"
+placeholder="Tax">
+
+
+
+<button onclick="createNewProduct()">
+
+Submit Product
+
+</button>
+
+
+
+<div id="productMessage"></div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+My Products
+</h2>
+
+
+<div id="products">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Inventory
+</h2>
+
+
+<div id="inventory">
+
+Loading...
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script src="api.js"></script>
+
+
+<script>
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem(
+
+"currentUser"
+
+)
+
+);
+
+
+
+if(!user){
+
+
+window.location.href =
+"index.html";
+
+
+}
+
+
+
+
+
+async function loadSellerDashboard(){
+
+
+
+const result =
+
+await apiRequest(
+
+"sellerDashboard",
+
+{
+
+userId:user.userId
+
+}
+
+);
+
+
+
+if(!result.success){
+
+return;
+
+}
+
+
+
+
+let productHTML = "";
+
+
+
+result.data.products.forEach(product=>{
+
+
+productHTML += `
+
+
+<div class="product-card">
+
+
+<h3>
+
+${product.name}
+
+</h3>
+
+
+<p>
+
+Category:
+
+${product.category}
+
+</p>
+
+
+<p>
+
+Price:
+
+${product.price}
+
+</p>
+
+
+<p>
+
+Stock:
+
+${product.stock}
+
+</p>
+
+
+<p>
+
+Status:
+
+${product.status}
+
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+
+"products"
+
+).innerHTML =
+
+productHTML ||
+
+"No products yet.";
+
+
+
+
+
+
+let inventoryHTML = "";
+
+
+
+result.data.inventory.forEach(item=>{
+
+
+inventoryHTML += `
+
+
+<p>
+
+${item.itemName}
+
+x
+
+${item.quantity}
+
+(${item.category})
+
+</p>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+
+"inventory"
+
+).innerHTML =
+
+inventoryHTML ||
+
+"No inventory items.";
+
+
+
+
+
+}
+
+
+
+
+async function createNewProduct(){
+
+
+
+const result =
+
+await createProduct({
+
+
+
+sellerId:user.userId,
+
+
+sellerName:user.roleplayName,
+
+
+productName:
+
+document.getElementById(
+
+"productName"
+
+).value,
+
+
+
+category:
+
+document.getElementById(
+
+"category"
+
+).value,
+
+
+
+description:
+
+document.getElementById(
+
+"description"
+
+).value,
+
+
+
+price:
+
+document.getElementById(
+
+"price"
+
+).value,
+
+
+
+stock:
+
+document.getElementById(
+
+"stock"
+
+).value,
+
+
+
+tax:
+
+document.getElementById(
+
+"tax"
+
+).value
+
+
+
+});
+
+
+
+document.getElementById(
+
+"productMessage"
+
+).innerHTML =
+
+
+result.message ||
+
+"Product submitted.";
+
+
+
+loadSellerDashboard();
+
+
+
+}
+
+
+
+
+
+function logout(){
+
+
+localStorage.removeItem(
+
+"currentUser"
+
+);
+
+
+}
+
+
+
+
+loadSellerDashboard();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
