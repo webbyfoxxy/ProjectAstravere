@@ -1,64 +1,42 @@
-/*******************************************************
- ROLEPLAY BANK
- FRONTEND API CONNECTOR
-
- Connects:
- HTML
-  |
-  ↓
- api.js
-  |
-  ↓
- Google Apps Script Web App
-
-*******************************************************/
-
-
-const API_URL = 
+const API_URL =
 "https://script.google.com/macros/s/AKfycbyHR5hZLyCrHazVyaEHiU3CGAbbkdANjRpkiErqaQbXT0OdG3JC221INd4HZCTt0rGM/exec";
 
 
 
 
 
+/*******************************************************
+ BASIC API CALL
+*******************************************************/
 
-/*
-========================================================
- SEND REQUEST
-========================================================
-*/
-
-
-async function apiRequest(action, data = {}){
+async function api(action,data={}){
 
 
     try{
 
 
-        const response = await fetch(
-            API_URL,
-            {
+        const response =
+        await fetch(API_URL,{
 
-                method:"POST",
+            method:"POST",
 
-                headers:{
+            headers:{
 
-                    "Content-Type":
-                    "text/plain;charset=utf-8"
+                "Content-Type":
+                "text/plain"
 
-                },
+            },
 
+            body:JSON.stringify({
 
-                body:JSON.stringify({
+                action:action,
 
-                    action:action,
+                data:data
 
-                    data:data
+            })
 
-                })
+        });
 
-            }
-        );
 
 
 
@@ -67,19 +45,17 @@ async function apiRequest(action, data = {}){
 
 
 
+
         return result;
 
 
 
     }
-
     catch(error){
 
 
-        console.error(
-            "API ERROR:",
-            error
-        );
+        console.error(error);
+
 
 
         return {
@@ -87,10 +63,8 @@ async function apiRequest(action, data = {}){
 
             success:false,
 
-
             message:
             "Unable to connect server."
-
 
 
         };
@@ -99,6 +73,7 @@ async function apiRequest(action, data = {}){
     }
 
 
+
 }
 
 
@@ -108,88 +83,39 @@ async function apiRequest(action, data = {}){
 
 
 
-
-/*
-========================================================
+/*******************************************************
  AUTH
-========================================================
-*/
+*******************************************************/
 
 
-async function register(
-    username,
-    password,
-    roleplayName
-){
+async function registerMember(data){
 
-
-    return await apiRequest(
-
+    return await api(
         "register",
-
-        {
-
-            username,
-
-            password,
-
-            roleplayName
-
-        }
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-async function login(
-    username,
-    password
-){
-
-
-    return await apiRequest(
-
-        "login",
-
-        {
-
-            username,
-
-            password
-
-        }
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-async function creatorRegister(data){
-
-
-    return await apiRequest(
-
-        "creatorRegister",
-
         data
-
     );
 
+}
+
+
+
+async function login(data){
+
+    return await api(
+        "login",
+        data
+    );
+
+}
+
+
+
+async function registerCreator(data){
+
+    return await api(
+        "registerCreator",
+        data
+    );
 
 }
 
@@ -200,30 +126,23 @@ async function creatorRegister(data){
 
 
 
-
-/*
-========================================================
+/*******************************************************
  PROFILE
-========================================================
-*/
+*******************************************************/
 
 
 async function getProfile(userId){
 
-
-    return await apiRequest(
+    return await api(
 
         "getProfile",
 
         {
-
-            userId
-
+            userId:userId
         }
 
     );
 
-
 }
 
 
@@ -233,34 +152,14 @@ async function getProfile(userId){
 
 
 
-
-/*
-========================================================
- WALLET
-========================================================
-*/
+/*******************************************************
+ CURRENCY
+*******************************************************/
 
 
-async function transferMoney(data){
+async function addCurrency(data){
 
-
-    return await apiRequest(
-
-        "transferCurrency",
-
-        data
-
-    );
-
-
-}
-
-
-
-async function addMoney(data){
-
-
-    return await apiRequest(
+    return await api(
 
         "addCurrency",
 
@@ -268,76 +167,101 @@ async function addMoney(data){
 
     );
 
-
 }
 
 
 
+async function removeCurrency(data){
 
+    return await api(
 
-
-
-
-/*
-========================================================
- INVENTORY
-========================================================
-*/
-
-
-async function loadInventory(userId){
-
-
-    return await apiRequest(
-
-        "getInventory",
-
-        {
-
-            userId
-
-        }
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-========================================================
- SELLER
-========================================================
-*/
-
-
-async function applySeller(data){
-
-
-    return await apiRequest(
-
-        "submitSellerApplication",
+        "removeCurrency",
 
         data
 
     );
 
+}
+
+
+
+async function transferCurrency(data){
+
+    return await api(
+
+        "transferCurrency",
+
+        data
+
+    );
 
 }
 
 
 
+
+
+
+
+
+/*******************************************************
+ SELLER
+*******************************************************/
+
+
+async function applySeller(data){
+
+    return await api(
+
+        "applySeller",
+
+        data
+
+    );
+
+}
+
+
+
+async function getSellerApplications(){
+
+    return await api(
+
+        "getSellerApplications"
+
+    );
+
+}
+
+
+
+async function approveSeller(data){
+
+    return await api(
+
+        "approveSeller",
+
+        data
+
+    );
+
+}
+
+
+
+
+
+
+
+
+/*******************************************************
+ PRODUCTS
+*******************************************************/
+
+
 async function createProduct(data){
 
-
-    return await apiRequest(
+    return await api(
 
         "createProduct",
 
@@ -345,6 +269,19 @@ async function createProduct(data){
 
     );
 
+}
+
+
+
+async function approveProduct(data){
+
+    return await api(
+
+        "approveProduct",
+
+        data
+
+    );
 
 }
 
@@ -352,22 +289,19 @@ async function createProduct(data){
 
 async function getMarketplace(){
 
-
-    return await apiRequest(
+    return await api(
 
         "getMarketplace"
 
     );
 
-
 }
 
 
 
-async function buyProduct(data){
+async function purchaseProduct(data){
 
-
-    return await apiRequest(
+    return await api(
 
         "purchaseProduct",
 
@@ -375,6 +309,33 @@ async function buyProduct(data){
 
     );
 
+}
+
+
+
+
+
+
+
+
+/*******************************************************
+ INVENTORY
+*******************************************************/
+
+
+async function getInventory(userId){
+
+    return await api(
+
+        "getInventory",
+
+        {
+
+            userId:userId
+
+        }
+
+    );
 
 }
 
@@ -385,18 +346,14 @@ async function buyProduct(data){
 
 
 
-
-/*
-========================================================
- AUCTION
-========================================================
-*/
+/*******************************************************
+ AUCTIONS
+*******************************************************/
 
 
 async function createAuction(data){
 
-
-    return await apiRequest(
+    return await api(
 
         "createAuction",
 
@@ -404,6 +361,19 @@ async function createAuction(data){
 
     );
 
+}
+
+
+
+async function approveAuction(data){
+
+    return await api(
+
+        "approveAuction",
+
+        data
+
+    );
 
 }
 
@@ -411,22 +381,19 @@ async function createAuction(data){
 
 async function getAuctions(){
 
-
-    return await apiRequest(
+    return await api(
 
         "getAuctions"
 
     );
 
-
 }
 
 
 
-async function bidAuction(data){
+async function placeBid(data){
 
-
-    return await apiRequest(
+    return await api(
 
         "placeBid",
 
@@ -434,7 +401,6 @@ async function bidAuction(data){
 
     );
 
-
 }
 
 
@@ -444,23 +410,32 @@ async function bidAuction(data){
 
 
 
-
-/*
-========================================================
+/*******************************************************
  CREATOR
-========================================================
-*/
+*******************************************************/
 
 
-async function getUsers(){
+async function getAllUsers(){
 
+    return await api(
 
-    return await apiRequest(
-
-        "getUsers"
+        "getAllUsers"
 
     );
 
+}
+
+
+
+async function updateUserStatus(data){
+
+    return await api(
+
+        "updateUserStatus",
+
+        data
+
+    );
 
 }
 
@@ -468,8 +443,7 @@ async function getUsers(){
 
 async function createKingdom(data){
 
-
-    return await apiRequest(
+    return await api(
 
         "createKingdom",
 
@@ -477,15 +451,13 @@ async function createKingdom(data){
 
     );
 
-
 }
 
 
 
-async function announce(data){
+async function createAnnouncement(data){
 
-
-    return await apiRequest(
+    return await api(
 
         "createAnnouncement",
 
@@ -493,74 +465,16 @@ async function announce(data){
 
     );
 
-
 }
 
 
 
+async function getAnnouncements(){
 
+    return await api(
 
-
-
-
-
-/*
-========================================================
- SESSION STORAGE
-========================================================
-*/
-
-
-function saveSession(user){
-
-
-    localStorage.setItem(
-
-        "currentUser",
-
-        JSON.stringify(user)
+        "getAnnouncements"
 
     );
-
-
-}
-
-
-
-
-
-function getSession(){
-
-
-    return JSON.parse(
-
-        localStorage.getItem(
-
-            "currentUser"
-
-        )
-
-    );
-
-
-}
-
-
-
-
-
-function logout(){
-
-
-    localStorage.removeItem(
-
-        "currentUser"
-
-    );
-
-
-    window.location.href =
-    "index.html";
-
 
 }
