@@ -1,7 +1,92 @@
-<!DOCTYPE html><html><head><title>System Registration</title><link rel="stylesheet" href="style.css"></head>
-<body class="auth-page"><div class="auth-box" style="width:450px;"><div class="auth-logo">⚜️</div><h1 class="imperial-title">REGISTER</h1><div class="gold-line"></div><div class="form-group"><label>Select Account Type</label><select id="accType" onchange="toggleFields()"><option value="Member">Member Account</option><option value="Creator">Creator Account</option><option value="Treasury">Treasury Account</option><option value="Inventory">Inventory Account</option></select></div><div id="dynamicFields"></div><div class="form-group" id="keyField" style="display:none;"><input type="text" id="authKey" placeholder="Required Key"></div><button onclick="submitRegistration()">Register Account</button><div class="auth-footer"><a href="index.html">Already have an account? Login</a></div></div>
-<script src="api.js"></script><script>
-function toggleFields(){const t=document.getElementById('accType').value,f=document.getElementById('dynamicFields'),k=document.getElementById('keyField'),kInput=document.getElementById('authKey');if(t==="Member"||t==="Creator"){f.innerHTML=`<div class="form-group"><input type="text" id="username" placeholder="Username"></div><div class="form-group"><input type="password" id="password" placeholder="Password"></div><div class="form-group"><input type="text" id="roleplayName" placeholder="Roleplay Name"></div><div class="form-group"><input type="text" id="kingdomId" placeholder="Kingdom ID (Optional)"></div>`;k.style.display=(t==="Creator")?'block':'none';kInput.placeholder="Creator Key";}else{f.innerHTML=`<div class="form-group"><input type="text" id="accName" placeholder="Account Name (e.g., Royal Vault)"></div><div class="form-group"><input type="text" id="accDesc" placeholder="Description"></div>`;k.style.display='block';kInput.placeholder=(t==="Treasury")?"Treasury Key":"Inventory Key";}}
-async function submitRegistration(){const t=document.getElementById('accType').value,k=document.getElementById('authKey')?document.getElementById('authKey').value:"";if(t==="Member"||t==="Creator"){const u=document.getElementById('username').value,p=document.getElementById('password').value,rp=document.getElementById('roleplayName').value,kId=document.getElementById('kingdomId').value||"";if(!u||!p||!rp){alert("Please fill all fields.");return;}const r=(t==="Member")?await register(u,p,rp,kId):await registerCreator(u,p,rp,kId,k);if(r.success){alert(r.message);window.location.href="index.html";}else alert(r.message);}else{const n=document.getElementById('accName').value,d=document.getElementById('accDesc').value;if(!n||!k){alert("Account Name and Key are required.");return;}const r=(t==="Treasury")?await registerTreasury(n,d,k):await registerInventoryAccount(n,d,k);if(r.success){alert(r.message);window.location.href="index.html";}else alert(r.message);}}
-toggleFields();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-box" style="width: 450px;">
+        <div class="auth-logo">⚜️</div>
+        <h1 class="imperial-title">REGISTER</h1>
+        <div class="gold-line"></div>
+        <div class="form-group">
+            <label>Select Account Type</label>
+            <select id="accType" onchange="toggleFields()">
+                <option value="Member">Member Account</option>
+                <option value="Creator">Creator Account</option>
+                <option value="Treasury">Treasury Account</option>
+                <option value="Inventory">Inventory Account</option>
+            </select>
+        </div>
+        <div id="dynamicFields"></div>
+        <div class="form-group" id="keyField" style="display:none;">
+            <input type="text" id="authKey" placeholder="Required Key">
+        </div>
+        <button onclick="submitRegistration()" style="width:100%;">Register Account</button>
+        <div class="auth-footer"><a href="index.html">Already have an account? Login</a></div>
+    </div>
+    <script src="api.js"></script>
+    <script>
+        function toggleFields() {
+            const type = document.getElementById('accType').value;
+            const fields = document.getElementById('dynamicFields');
+            const keyField = document.getElementById('keyField');
+            const keyInput = document.getElementById('authKey');
+            
+            if (type === "Member" || type === "Creator") {
+                fields.innerHTML = `
+                    <div class="form-group"><input type="text" id="username" placeholder="Username"></div>
+                    <div class="form-group"><input type="password" id="password" placeholder="Password"></div>
+                    <div class="form-group"><input type="text" id="roleplayName" placeholder="Roleplay Name"></div>
+                    <div class="form-group"><input type="text" id="kingdomId" placeholder="Kingdom ID (Optional)"></div>
+                `;
+                keyField.style.display = (type === "Creator") ? 'block' : 'none';
+                keyInput.placeholder = "Creator Key";
+            } else {
+                fields.innerHTML = `
+                    <div class="form-group"><input type="text" id="accName" placeholder="Account Name (e.g., Royal Vault)"></div>
+                    <div class="form-group"><input type="text" id="accDesc" placeholder="Description"></div>
+                `;
+                keyField.style.display = 'block';
+                keyInput.placeholder = (type === "Treasury") ? "Treasury Key" : "Inventory Key";
+            }
+        }
+
+        async function submitRegistration() {
+            const type = document.getElementById('accType').value;
+            const key = document.getElementById('authKey') ? document.getElementById('authKey').value : "";
+
+            if (type === "Member" || type === "Creator") {
+                const u = document.getElementById('username').value;
+                const p = document.getElementById('password').value;
+                const rp = document.getElementById('roleplayName').value;
+                const kId = document.getElementById('kingdomId').value || "";
+                if (!u || !p || !rp) { alert("Please fill all fields."); return; }
+
+                const res = (type === "Member") ? await register(u, p, rp, kId) : await registerCreator(u, p, rp, kId, key);
+                handleResponse(res);
+            } else {
+                const name = document.getElementById('accName').value;
+                const desc = document.getElementById('accDesc').value;
+                if (!name || !key) { alert("Account Name and Key are required."); return; }
+
+                const res = (type === "Treasury") ? await registerTreasury(name, desc, key) : await registerInventoryAccount(name, desc, key);
+                handleResponse(res);
+            }
+        }
+
+        function handleResponse(res) {
+            if (res.success) {
+                alert(res.message);
+                window.location.href = "index.html";
+            } else {
+                alert(res.message);
+            }
+        }
+
+        toggleFields();
+    </script>
+</body>
+</html>
