@@ -1,1277 +1,150 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-Luxemneaux Member Dashboard
-</title>
-
-
-<link rel="stylesheet" href="style.css">
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
-
-
 <body>
-
-
-
-<div class="dashboard-layout">
-
-
-
-
-
-<!-- =====================================
-     SIDEBAR
-===================================== -->
-
-
-<aside class="sidebar">
-
-
-<div class="sidebar-logo">
-
-Luxemneaux
-
-</div>
-
-
-
-<ul class="sidebar-menu">
-
-
-<li>
-
-<a href="member-dashboard.html">
-
-🏰 Dashboard
-
-</a>
-
-</li>
-
-
-
-<li>
-
-<a href="marketplace.html">
-
-🛒 Marketplace
-
-</a>
-
-</li>
-
-
-
-<li>
-
-<a href="#" onclick="logout()">
-
-🚪 Logout
-
-</a>
-
-</li>
-
-
-
-</ul>
-
-
-
-</aside>
-
-
-
-
-
-
-<!-- =====================================
-     MAIN CONTENT
-===================================== -->
-
-
-<main class="main-content">
-
-
-
-
-
-<header class="header">
-
-
-<div>
-
-
-<h1 class="imperial-title">
-
-👑 Member Hall
-
-</h1>
-
-
-</div>
-
-
-
-
-<div class="user-badge"
-
-id="usernameDisplay">
-
-Citizen
-
-</div>
-
-
-
-</header>
-
-
-
-
-
-
-<!-- PROFILE -->
-
-
-<section class="card">
-
-
-<h2 class="title">
-
-📜 Character Profile
-
-</h2>
-
-
-
-<div class="profile-panel">
-
-
-<div class="profile-avatar">
-
-</div>
-
-
-
-<div>
-
-
-<h3 id="characterName">
-
-Loading...
-
-</h3>
-
-
-
-<p>
-
-🏰 Kingdom:
-
-<span id="kingdomName">
-
--
-
-</span>
-
-</p>
-
-
-
-<p>
-
-⚜️ Rank:
-
-<span id="userRole">
-
-Member
-
-</span>
-
-</p>
-
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- WALLET -->
-
-
-<section class="card">
-
-
-<h2 class="title">
-
-🪙 Imperial Treasury
-
-</h2>
-
-
-
-
-<div class="grid">
-
-
-
-<div class="wallet-card">
-
-
-<div class="wallet-name">
-
-✨ Lumen
-
-</div>
-
-
-<div
-
-class="wallet-value"
-
-id="lumenBalance">
-
-0
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="wallet-card">
-
-
-<div class="wallet-name">
-
-🏆 Aurel
-
-</div>
-
-
-<div
-
-class="wallet-value"
-
-id="aurelBalance">
-
-0
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="wallet-card">
-
-
-<div class="wallet-name">
-
-💎 Virel
-
-</div>
-
-
-<div
-
-class="wallet-value"
-
-id="virelBalance">
-
-0
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="wallet-card">
-
-
-<div class="wallet-name">
-
-🔷 Sylem
-
-</div>
-
-
-<div
-
-class="wallet-value"
-
-id="sylemBalance">
-
-0
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="wallet-card">
-
-
-<div class="wallet-name">
-
-🟤 Bront
-
-</div>
-
-
-<div
-
-class="wallet-value"
-
-id="brontBalance">
-
-0
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-<!-- =====================================
-     TRANSFER MONEY
-===================================== -->
-
-
-<section class="card">
-
-
-<h2 class="title">
-
-💸 Send Currency
-
-</h2>
-
-
-
-<div class="form-group">
-
-
-<label>
-
-Receiver User ID
-
-</label>
-
-
-<input
-
-id="receiverId"
-
-placeholder="Enter receiver ID"
-
->
-
-
-</div>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-Currency
-
-</label>
-
-
-<select id="transferCurrency">
-
-
-<option value="Lumen">
-
-✨ Lumen
-
-</option>
-
-
-<option value="Aurel">
-
-🏆 Aurel
-
-</option>
-
-
-<option value="Virel">
-
-💎 Virel
-
-</option>
-
-
-<option value="Sylem">
-
-🔷 Sylem
-
-</option>
-
-
-<option value="Bront">
-
-🟤 Bront
-
-</option>
-
-
-</select>
-
-
-</div>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-Amount
-
-</label>
-
-
-<input
-
-type="number"
-
-id="transferAmount"
-
-placeholder="Amount to send"
-
->
-
-
-</div>
-
-
-
-
-
-<button
-
-class="btn"
-
-onclick="sendMoney()"
-
->
-
-💰 Transfer
-
-</button>
-
-
-
-
-<div id="transferMessage"></div>
-
-
-
-</section>
-
-
-
-
-
-
-
-<!-- =====================================
-     TRANSACTIONS
-===================================== -->
-
-
-<section class="card">
-
-
-<h2 class="title">
-
-📜 Transaction History
-
-</h2>
-
-
-
-
-<div class="table-container">
-
-
-<table>
-
-
-
-<thead>
-
-
-<tr>
-
-
-<th>
-
-Type
-
-</th>
-
-
-<th>
-
-Amount
-
-</th>
-
-
-<th>
-
-Currency
-
-</th>
-
-
-<th>
-
-Description
-
-</th>
-
-
-</tr>
-
-
-</thead>
-
-
-
-
-<tbody id="transactionTable">
-
-
-<tr>
-
-<td colspan="4">
-
-Loading records...
-
-</td>
-
-
-</tr>
-
-
-</tbody>
-
-
-
-</table>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- =====================================
-     QUICK ACCESS
-===================================== -->
-
-
-<section class="card">
-
-
-<h2 class="title">
-
-🏰 Kingdom Services
-
-</h2>
-
-
-
-
-<div class="grid">
-
-
-
-
-
-<div class="product-card">
-
-
-<h3>
-
-🛒 Marketplace
-
-</h3>
-
-
-<p>
-
-Purchase goods from merchants.
-
-</p>
-
-
-
-<a
-
-href="marketplace.html"
-
-class="btn"
-
->
-
-Enter Market
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="auction-card">
-
-
-<h3>
-
-⚔️ Imperial Auctions
-
-</h3>
-
-
-<p>
-
-Bid on rare treasures.
-
-</p>
-
-
-<button
-
-onclick="openAuctions()"
-
->
-
-View Auctions
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="product-card">
-
-
-<h3>
-
-🏰 Kingdom
-
-</h3>
-
-
-<p>
-
-View your kingdom information.
-
-</p>
-
-
-<button
-
-onclick="loadKingdomInfo()"
-
->
-
-Inspect
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-</section>
-<!-- =====================================
-     DASHBOARD SCRIPT
-===================================== -->
-
-
-<script src="api.js"></script>
-
-
-
-<script>
-
-
-/* =====================================
-   LOAD MEMBER DATA
-===================================== */
-
-
-async function loadMemberDashboard(){
-
-
-
-const user =
-
-currentUser();
-
-
-
-
-
-if(!user){
-
-
-window.location.href =
-
-"index.html";
-
-
-return;
-
-
-}
-
-
-
-
-
-
-
-document
-.getElementById(
-"usernameDisplay"
-)
-.innerText =
-
-
-user.username;
-
-
-
-
-
-document
-.getElementById(
-"characterName"
-)
-.innerText =
-
-
-user.roleplayName;
-
-
-
-
-
-document
-.getElementById(
-"userRole"
-)
-.innerText =
-
-
-user.role;
-
-
-
-
-
-
-await loadWalletUI();
-
-
-
-await loadTransactions();
-
-
-
-
-
-}
-
-
-
-
-
-/* =====================================
-   SEND MONEY
-===================================== */
-
-
-async function sendMoney(){
-
-
-
-const receiverId =
-
-document
-.getElementById(
-"receiverId"
-)
-.value;
-
-
-
-
-const currency =
-
-document
-.getElementById(
-"transferCurrency"
-)
-.value;
-
-
-
-
-const amount =
-
-document
-.getElementById(
-"transferAmount"
-)
-.value;
-
-
-
-
-
-const message =
-
-document
-.getElementById(
-"transferMessage"
-);
-
-
-
-
-
-if(
-!receiverId ||
-!amount
-){
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-error">
-
-⚠️ Complete transfer details.
-
-</div>
-
-`;
-
-return;
-
-
-}
-
-
-
-
-
-
-
-const result =
-
-await transferMoney(
-
-receiverId,
-
-currency,
-
-amount
-
-);
-
-
-
-
-
-if(
-result.success
-){
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-success">
-
-✅ Transfer completed.
-
-</div>
-
-`;
-
-
-
-loadWalletUI();
-
-
-
-loadTransactions();
-
-
-
-}
-
-else{
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-error">
-
-❌ ${result.message}
-
-</div>
-
-`;
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   TRANSACTIONS DISPLAY
-===================================== */
-
-
-async function loadTransactions(){
-
-
-
-const result =
-
-await getTransactions();
-
-
-
-
-
-const table =
-
-document
-.getElementById(
-"transactionTable"
-);
-
-
-
-
-
-if(
-!result ||
-!result.success
-){
-
-
-table.innerHTML =
-
-`
-
-<tr>
-
-<td colspan="4">
-
-No records found.
-
-</td>
-
-</tr>
-
-`;
-
-
-return;
-
-
-}
-
-
-
-
-
-
-
-table.innerHTML = "";
-
-
-
-
-
-result.data
-.forEach(
-
-transaction=>{
-
-
-
-table.innerHTML +=
-
-
-`
-
-<tr>
-
-
-<td>
-
-${transaction.type}
-
-</td>
-
-
-
-<td>
-
-${transaction.amount}
-
-</td>
-
-
-
-<td>
-
-${transaction.currency}
-
-</td>
-
-
-
-<td>
-
-${transaction.description}
-
-</td>
-
-
-
-</tr>
-
-
-`;
-
-
-
-}
-
-);
-
-
-
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   AUCTION PAGE
-===================================== */
-
-
-function openAuctions(){
-
-
-
-window.location.href =
-
-"marketplace.html#auction";
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   KINGDOM INFO
-===================================== */
-
-
-async function loadKingdomInfo(){
-
-
-
-const result =
-
-await getKingdoms();
-
-
-
-
-
-if(
-result.success
-){
-
-
-
-alert(
-
-"🏰 Kingdom records available in Imperial Archive."
-
-);
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   START DASHBOARD
-===================================== */
-
-
-window.onload = function(){
-
-
-
-loadMemberDashboard();
-
-
-
-};
-
-
-
-</script>
-
-
-
-
-
-</main>
-
-
-
-</div>
-
-
-
-
-
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <div class="sidebar-logo">Luxemneaux</div>
+            <ul class="sidebar-menu">
+                <li><a onclick="showSection('wallet')">🪙 Wallet</a></li>
+                <li><a onclick="showSection('market')">🛒 Marketplace</a></li>
+                <li><a onclick="showSection('auctions')">⚔️ Auctions</a></li>
+                <li><a onclick="showSection('inventory')">🎒 Inventory</a></li>
+                <li><a href="seller-register.html">🏪 Become Seller</a></li>
+                <li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1 id="welcomeMsg">Welcome, Member</h1>
+                <div class="user-badge badge-member" id="userBadge">Member</div>
+            </div>
+
+            <div id="wallet" class="card section">
+                <h2 class="title">Your Royal Wallet</h2>
+                <div class="grid" id="walletGrid"></div>
+            </div>
+
+            <div id="market" class="card section" style="display:none;">
+                <h2 class="title">Marketplace</h2>
+                <div class="grid" id="productGrid"></div>
+            </div>
+
+            <div id="auctions" class="card section" style="display:none;">
+                <h2 class="title">Auction House</h2>
+                <div class="grid" id="auctionGrid"></div>
+            </div>
+
+            <div id="inventory" class="card section" style="display:none;">
+                <h2 class="title">Your Inventory</h2>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Item ID</th><th>Qty</th><th>Acquired</th></tr></thead>
+                        <tbody id="inventoryBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        const user = currentUser();
+        if (!user) window.location.href = "index.html";
+        document.getElementById('welcomeMsg').innerText = `Welcome, ${user.roleplayName}`;
+        document.getElementById('userBadge').innerText = user.role;
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            if (id === 'wallet') loadWallet();
+            if (id === 'market') loadMarket();
+            if (id === 'auctions') loadAuctions();
+            if (id === 'inventory') loadInventory();
+        }
+
+        async function loadWallet() {
+            const res = await getWallet();
+            if (res.success) {
+                const w = res.data;
+                document.getElementById('walletGrid').innerHTML = `
+                    <div class="wallet-card"><div class="wallet-name">Lumen</div><div class="wallet-value">${w.Lumen}</div></div>
+                    <div class="wallet-card"><div class="wallet-name">Aurel</div><div class="wallet-value">${w.Aurel}</div></div>
+                    <div class="wallet-card"><div class="wallet-name">Virel</div><div class="wallet-value">${w.Virel}</div></div>
+                    <div class="wallet-card"><div class="wallet-name">Sylem</div><div class="wallet-value">${w.Sylem}</div></div>
+                    <div class="wallet-card"><div class="wallet-name">Bront</div><div class="wallet-value">${w.Bront}</div></div>
+                `;
+            }
+        }
+
+        async function loadMarket() {
+            const res = await getProducts();
+            const grid = document.getElementById('productGrid');
+            if (res.success && res.data.length > 0) {
+                grid.innerHTML = res.data.map(p => `
+                    <div class="product-card">
+                        <h3>${p.productName}</h3>
+                        <p>${p.description}</p>
+                        <div class="product-price">${p.price} ${p.currency}</div>
+                        <p class="stock">In Stock: ${p.stock}</p>
+                        <button onclick="buyItem('${p.productId}')">Purchase</button>
+                    </div>
+                `).join('');
+            } else { grid.innerHTML = `<div class="empty-state">No items in marketplace.</div>`; }
+        }
+
+        async function buyItem(id) {
+            if (confirm("Purchase this item?")) {
+                const res = await purchaseProduct(id);
+                alert(res.message);
+                loadMarket(); loadWallet();
+            }
+        }
+
+        async function loadAuctions() {
+            const res = await getAuctions();
+            const grid = document.getElementById('auctionGrid');
+            if (res.success && res.data.length > 0) {
+                grid.innerHTML = res.data.map(a => `
+                    <div class="auction-card">
+                        <h3>${a.itemName}</h3>
+                        <p>${a.description}</p>
+                        <div class="bid-value">${a.currentBid} ${a.currency}</div>
+                        <p>Highest Bidder: ${a.highestBidderId || 'None'}</p>
+                        ${a.status === 'Active' ? `
+                            <input type="number" id="bid-${a.auctionId}" placeholder="Enter higher bid">
+                            <button onclick="placeBid('${a.auctionId}', ${a.currentBid})">Place Bid</button>
+                        ` : `<p style="color:#b22222; font-weight:bold;">${a.status}</p>`}
+                    </div>
+                `).join('');
+            } else { grid.innerHTML = `<div class="empty-state">No active auctions.</div>`; }
+        }
+
+        async function placeBid(id, currentBid) {
+            const amount = document.getElementById(`bid-${id}`).value;
+            if (Number(amount) <= Number(currentBid)) { alert("Bid must be higher!"); return; }
+            const res = await placeBid(id, Number(amount));
+            alert(res.message);
+            loadAuctions(); loadWallet();
+        }
+
+        async function loadInventory() {
+            const res = await getInventory();
+            const body = document.getElementById('inventoryBody');
+            if (res.success && res.data.length > 0) {
+                body.innerHTML = res.data.map(i => `<tr><td>${i.productId}</td><td>${i.quantity}</td><td>${new Date(i.acquiredAt).toLocaleDateString()}</td></tr>`).join('');
+            } else { body.innerHTML = `<tr><td colspan="3" class="empty-state">Your inventory is empty.</td></tr>`; }
+        }
+
+        showSection('wallet');
+    </script>
 </body>
-
-
 </html>
