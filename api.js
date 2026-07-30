@@ -12,12 +12,20 @@ async function apiRequest(action, data = {}) {
 /* AUTH & ACCOUNTS */
 async function register(u, p, rp, k) { return apiRequest("register", {username:u,password:p,roleplayName:rp,kingdomId:k,role:"Member"}); }
 async function registerCreator(u, p, rp, k, key) { return apiRequest("registerCreator", {username:u,password:p,roleplayName:rp,kingdomId:k,creatorKey:key}); }
-async function registerTreasury(n, d, k) { return apiRequest("registerTreasury", {treasuryName:n, description:d, creatorKey:k}); }
-async function registerInventoryAccount(n, d, k) { return apiRequest("registerInventoryAccount", {accountName:n, description:d, creatorKey:k}); }
+async function registerTreasury(n, d, k, p) { return apiRequest("registerTreasury", {treasuryName:n, description:d, creatorKey:k, password:p}); }
+async function registerInventoryAccount(n, d, k, p) { return apiRequest("registerInventoryAccount", {accountName:n, description:d, creatorKey:k, password:p}); }
 async function login(u, p) { const r = await apiRequest("login", {username:u,password:p}); if(r.success) localStorage.setItem("currentUser", JSON.stringify(r.data)); return r; }
 function logout() { localStorage.removeItem("currentUser"); window.location.href = "index.html"; }
 function currentUser() { return localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser")) : null; }
-function redirectByRole() { const u = currentUser(); if(!u) window.location.href="index.html"; else if(u.role==="Creator") window.location.href="creator-dashboard.html"; else if(u.role==="Seller") window.location.href="seller-dashboard.html"; else window.location.href="member-dashboard.html"; }
+function redirectByRole() { 
+    const u = currentUser(); 
+    if(!u) window.location.href="index.html"; 
+    else if(u.role==="Creator") window.location.href="creator-dashboard.html"; 
+    else if(u.role==="Seller") window.location.href="seller-dashboard.html"; 
+    else if(u.role==="Treasury") window.location.href="treasury-dashboard.html"; 
+    else if(u.role==="Inventory") window.location.href="inventory-dashboard.html"; 
+    else window.location.href="member-dashboard.html"; 
+}
 
 /* WALLET & TRANSFERS */
 async function getWallet() { const u=currentUser(); return u ? apiRequest("getWallet",{userId:u.userId}) : {success:false}; }
