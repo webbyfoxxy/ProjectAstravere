@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Application</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="auth-page">
-    <div class="auth-box">
-        <div class="auth-logo">🏪</div>
-        <h1 class="auth-title">Become a Seller</h1>
-        <div class="form-group"><input type="text" id="businessName" placeholder="Business Name"></div>
-        <div class="form-group"><textarea id="description" placeholder="Describe your business..."></textarea></div>
-        <button onclick="apply()" style="width:100%;">Submit Application</button>
-        <div class="auth-footer"><a href="member-dashboard.html">Back to Dashboard</a></div>
-    </div>
-    <script src="api.js"></script>
-    <script>
-        const user = currentUser();
-        if (!user) window.location.href = "index.html";
-
-        async function apply() {
-            const bn = document.getElementById('businessName').value;
-            const desc = document.getElementById('description').value;
-            const res = await applySeller(bn, desc);
-            if (res.success) { alert("Application submitted! A Creator will review it."); window.location.href = "member-dashboard.html"; }
-            else alert(res.message);
-        }
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html><head><title>Seller Application</title><link rel="stylesheet" href="style.css"></head>
+<body class="auth-page"><div class="auth-box"><div class="auth-logo">🏪</div><h1 class="auth-title">Become a Seller</h1><div class="form-group"><input type="text" id="businessName" placeholder="Business Name"></div><div class="form-group"><textarea id="description" placeholder="Describe your business..."></textarea></div><button onclick="apply()">Submit Application</button><div class="auth-footer"><a href="member-dashboard.html">Back to Dashboard</a></div></div>
+<script src="api.js"></script><script>const user=currentUser();if(!user)window.location.href="index.html";async function apply(){const bn=document.getElementById('businessName').value,desc=document.getElementById('description').value;const r=await applySeller(bn,desc);if(r.success){alert("Application submitted!");window.location.href="member-dashboard.html";}else alert(r.message);}</script>
+</body></html>
