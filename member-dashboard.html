@@ -1,150 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="sidebar.css">
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-    <div class="dashboard-layout">
-        <div class="sidebar">
-            <div class="sidebar-logo">Luxemneaux</div>
-            <ul class="sidebar-menu">
-                <li><a onclick="showSection('wallet')">🪙 Wallet</a></li>
-                <li><a onclick="showSection('market')">🛒 Marketplace</a></li>
-                <li><a onclick="showSection('auctions')">⚔️ Auctions</a></li>
-                <li><a onclick="showSection('inventory')">🎒 Inventory</a></li>
-                <li><a href="seller-register.html">🏪 Become Seller</a></li>
-                <li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li>
-            </ul>
-        </div>
-
-        <div class="main-content">
-            <div class="header">
-                <h1 id="welcomeMsg">Welcome, Member</h1>
-                <div class="user-badge badge-member" id="userBadge">Member</div>
-            </div>
-
-            <div id="wallet" class="card section">
-                <h2 class="title">Your Royal Wallet</h2>
-                <div class="grid" id="walletGrid"></div>
-            </div>
-
-            <div id="market" class="card section" style="display:none;">
-                <h2 class="title">Marketplace</h2>
-                <div class="grid" id="productGrid"></div>
-            </div>
-
-            <div id="auctions" class="card section" style="display:none;">
-                <h2 class="title">Auction House</h2>
-                <div class="grid" id="auctionGrid"></div>
-            </div>
-
-            <div id="inventory" class="card section" style="display:none;">
-                <h2 class="title">Your Inventory</h2>
-                <div class="table-container">
-                    <table>
-                        <thead><tr><th>Item ID</th><th>Qty</th><th>Acquired</th></tr></thead>
-                        <tbody id="inventoryBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="api.js"></script>
-    <script>
-        const user = currentUser();
-        if (!user) window.location.href = "index.html";
-        document.getElementById('welcomeMsg').innerText = `Welcome, ${user.roleplayName}`;
-        document.getElementById('userBadge').innerText = user.role;
-
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-            if (id === 'wallet') loadWallet();
-            if (id === 'market') loadMarket();
-            if (id === 'auctions') loadAuctions();
-            if (id === 'inventory') loadInventory();
-        }
-
-        async function loadWallet() {
-            const res = await getWallet();
-            if (res.success) {
-                const w = res.data;
-                document.getElementById('walletGrid').innerHTML = `
-                    <div class="wallet-card"><div class="wallet-name">Lumen</div><div class="wallet-value">${w.Lumen}</div></div>
-                    <div class="wallet-card"><div class="wallet-name">Aurel</div><div class="wallet-value">${w.Aurel}</div></div>
-                    <div class="wallet-card"><div class="wallet-name">Virel</div><div class="wallet-value">${w.Virel}</div></div>
-                    <div class="wallet-card"><div class="wallet-name">Sylem</div><div class="wallet-value">${w.Sylem}</div></div>
-                    <div class="wallet-card"><div class="wallet-name">Bront</div><div class="wallet-value">${w.Bront}</div></div>
-                `;
-            }
-        }
-
-        async function loadMarket() {
-            const res = await getProducts();
-            const grid = document.getElementById('productGrid');
-            if (res.success && res.data.length > 0) {
-                grid.innerHTML = res.data.map(p => `
-                    <div class="product-card">
-                        <h3>${p.productName}</h3>
-                        <p>${p.description}</p>
-                        <div class="product-price">${p.price} ${p.currency}</div>
-                        <p class="stock">In Stock: ${p.stock}</p>
-                        <button onclick="buyItem('${p.productId}')">Purchase</button>
-                    </div>
-                `).join('');
-            } else { grid.innerHTML = `<div class="empty-state">No items in marketplace.</div>`; }
-        }
-
-        async function buyItem(id) {
-            if (confirm("Purchase this item?")) {
-                const res = await purchaseProduct(id);
-                alert(res.message);
-                loadMarket(); loadWallet();
-            }
-        }
-
-        async function loadAuctions() {
-            const res = await getAuctions();
-            const grid = document.getElementById('auctionGrid');
-            if (res.success && res.data.length > 0) {
-                grid.innerHTML = res.data.map(a => `
-                    <div class="auction-card">
-                        <h3>${a.itemName}</h3>
-                        <p>${a.description}</p>
-                        <div class="bid-value">${a.currentBid} ${a.currency}</div>
-                        <p>Highest Bidder: ${a.highestBidderId || 'None'}</p>
-                        ${a.status === 'Active' ? `
-                            <input type="number" id="bid-${a.auctionId}" placeholder="Enter higher bid">
-                            <button onclick="placeBid('${a.auctionId}', ${a.currentBid})">Place Bid</button>
-                        ` : `<p style="color:#b22222; font-weight:bold;">${a.status}</p>`}
-                    </div>
-                `).join('');
-            } else { grid.innerHTML = `<div class="empty-state">No active auctions.</div>`; }
-        }
-
-        async function placeBid(id, currentBid) {
-            const amount = document.getElementById(`bid-${id}`).value;
-            if (Number(amount) <= Number(currentBid)) { alert("Bid must be higher!"); return; }
-            const res = await placeBid(id, Number(amount));
-            alert(res.message);
-            loadAuctions(); loadWallet();
-        }
-
-        async function loadInventory() {
-            const res = await getInventory();
-            const body = document.getElementById('inventoryBody');
-            if (res.success && res.data.length > 0) {
-                body.innerHTML = res.data.map(i => `<tr><td>${i.productId}</td><td>${i.quantity}</td><td>${new Date(i.acquiredAt).toLocaleDateString()}</td></tr>`).join('');
-            } else { body.innerHTML = `<tr><td colspan="3" class="empty-state">Your inventory is empty.</td></tr>`; }
-        }
-
-        showSection('wallet');
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html><head><title>Member Dashboard</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="sidebar.css"><link rel="stylesheet" href="dashboard.css"></head>
+<body><div class="dashboard-layout"><div class="sidebar"><div class="sidebar-logo">Luxemneaux</div><ul class="sidebar-menu"><li><a onclick="showSection('announce')">📜 Announcements</a></li><li><a onclick="showSection('wallet')">🪙 Wallet</a></li><li><a onclick="showSection('market')">🛒 Marketplace</a></li><li><a onclick="showSection('auctions')">⚔️ Auctions</a></li><li><a onclick="showSection('inventory')">🎒 Inventory</a></li><li><a onclick="showSection('sell')">💰 Sell to Sellers</a></li><li><a href="seller-register.html">🏪 Become Seller</a></li><li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li></ul></div>
+<div class="main-content"><div class="header"><h1 id="welcomeMsg">Welcome, Member</h1><div class="user-badge badge-member" id="userBadge">Member</div></div>
+<div id="announce" class="card section"><h2 class="title">Royal Announcements</h2><div id="announceBody"></div></div>
+<div id="wallet" class="card section" style="display:none;"><h2 class="title">Your Royal Wallet</h2><div class="grid" id="walletGrid"></div></div>
+<div id="market" class="card section" style="display:none;"><h2 class="title">Marketplace</h2><div class="grid" id="productGrid"></div></div>
+<div id="auctions" class="card section" style="display:none;"><h2 class="title">Auction House</h2><div class="grid" id="auctionGrid"></div></div>
+<div id="inventory" class="card section" style="display:none;"><h2 class="title">Your Inventory</h2><div class="table-container"><table><thead><tr><th>Item ID</th><th>Qty</th><th>Acquired</th></tr></thead><tbody id="inventoryBody"></tbody></table></div></div>
+<div id="sell" class="card section" style="display:none;"><h2 class="title">Sell Item to Sellers</h2><p class="subtitle">List an item from your inventory for sellers to buy.</p><div class="form-group"><select id="sellInvId"><option value="">Select Inventory Item...</option></select></div><div class="form-group"><select id="sellCur"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select></div><div class="form-group"><input type="number" id="sellPrice" placeholder="Price"></div><button onclick="listItem()">List for Sale</button></div>
+</div></div>
+<script src="api.js"></script><script>
+const user=currentUser();if(!user)window.location.href="index.html";document.getElementById('welcomeMsg').innerText=`Welcome, ${user.roleplayName}`;document.getElementById('userBadge').innerText=user.role;
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.style.display='none');document.getElementById(id).style.display='block';if(id==='announce')loadAnnouncements();if(id==='wallet')loadWallet();if(id==='market')loadMarket();if(id==='auctions')loadAuctions();if(id==='inventory')loadInventory();if(id==='sell')loadSell();}
+async function loadAnnouncements(){const r=await getAnnouncements();const b=document.getElementById('announceBody');if(r.success&&r.data.length>0){b.innerHTML=r.data.map(a=>`<div class="announcement"><h3>${a.title}</h3><small>${new Date(a.createdAt).toLocaleString()}</small><p style="margin-top:10px;">${a.content}</p></div>`).join('');}else{b.innerHTML=`<div class="empty-state">No announcements.</div>`;}}
+async function loadWallet(){const r=await getWallet();if(r.success){const w=r.data;document.getElementById('walletGrid').innerHTML=`<div class="wallet-card"><div class="wallet-name">Lumen</div><div class="wallet-value">${w.Lumen}</div></div><div class="wallet-card"><div class="wallet-name">Aurel</div><div class="wallet-value">${w.Aurel}</div></div><div class="wallet-card"><div class="wallet-name">Virel</div><div class="wallet-value">${w.Virel}</div></div><div class="wallet-card"><div class="wallet-name">Sylem</div><div class="wallet-value">${w.Sylem}</div></div><div class="wallet-card"><div class="wallet-name">Bront</div><div class="wallet-value">${w.Bront}</div></div>`;}}
+async function loadMarket(){const r=await getProducts();const g=document.getElementById('productGrid');if(r.success&&r.data.length>0){g.innerHTML=r.data.map(p=>`<div class="product-card"><h3>${p.productName}</h3><p>Category: ${p.category}</p><p>${p.description}</p><div class="product-price">${p.price} ${p.currency}</div><p class="stock">In Stock: ${p.stock}</p><button onclick="buyItem('${p.productId}')">Purchase</button></div>`).join('');}else{g.innerHTML=`<div class="empty-state">No items in marketplace.</div>`;}}
+async function buyItem(id){if(confirm("Purchase this item?")){const r=await purchaseProduct(id);alert(r.message);loadMarket();loadWallet();}}
+async function loadAuctions(){const r=await getAuctions();const g=document.getElementById('auctionGrid');if(r.success&&r.data.length>0){g.innerHTML=r.data.map(a=>`<div class="auction-card"><h3>${a.itemName}</h3><p>${a.description}</p><div class="bid-value">${a.currentBid} ${a.currency}</div><p>Highest Bidder: ${a.highestBidderId||'None'}</p>${a.status==='Active'?`<input type="number" id="bid-${a.auctionId}" placeholder="Enter higher bid"><button onclick="placeBid('${a.auctionId}', ${a.currentBid})">Place Bid</button>`:`<p style="color:#b22222; font-weight:bold;">${a.status}</p>`}</div>`).join('');}else{g.innerHTML=`<div class="empty-state">No active auctions.</div>`;}}
+async function placeBid(id,cb){const amt=document.getElementById(`bid-${id}`).value;if(Number(amt)<=Number(cb)){alert("Bid must be higher!");return;}const r=await placeBid(id,Number(amt));alert(r.message);loadAuctions();loadWallet();}
+async function loadInventory(){const r=await getInventory();const b=document.getElementById('inventoryBody');if(r.success&&r.data.length>0){b.innerHTML=r.data.map(i=>`<tr><td>${i.productId}</td><td>${i.quantity}</td><td>${new Date(i.acquiredAt).toLocaleDateString()}</td></tr>`).join('');}else{b.innerHTML=`<tr><td colspan="3" class="empty-state">Your inventory is empty.</td></tr>`;}}
+async function loadSell(){const r=await getInventory();const s=document.getElementById('sellInvId');if(r.success&&r.data.length>0){s.innerHTML='<option value="">Select Inventory Item...</option>'+r.data.map(i=>`<option value="${i.inventoryId}">${i.productId}</option>`).join('');}else{s.innerHTML='<option value="">No items to sell</option>';}}
+async function listItem(){const invId=document.getElementById('sellInvId').value,cur=document.getElementById('sellCur').value,pr=document.getElementById('sellPrice').value;if(!invId||!pr){alert("Select item and set price.");return;}const r=await listMemberItem(invId,Number(pr),cur);alert(r.message);if(r.success){loadInventory();loadSell();}}
+showSection('announce');
+</script></body></html>
