@@ -1,169 +1,46 @@
-/*******************************************************
- * LUXEMNEAUX ROLEPLAY BANK
- * api.js
- * COMPLETE VERSION
- *******************************************************/
-
 const API_URL = "https://script.google.com/macros/s/AKfycbyHR5hZLyCrHazVyaEHiU3CGAbbkdANjRpkiErqaQbXT0OdG3JC221INd4HZCTt0rGM/exec";
-
 async function apiRequest(action, data = {}) {
     try {
-        const payload = { action, ...data };
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "text/plain" },
-            body: JSON.stringify(payload)
-        });
+        const response = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ action, ...data }) });
         const result = await response.json();
         if (!result.success) console.error(result.message);
         return result;
-    } catch (error) {
-        console.error("API ERROR:", error);
-        return { success: false, message: "Server connection failed." };
-    }
+    } catch (error) { return { success: false, message: "Server connection failed." }; }
 }
-
-/* --- AUTH --- */
-async function register(username, password, roleplayName, kingdomId) {
-    return apiRequest("register", { username, password, roleplayName, kingdomId, role: "Member" });
-}
-async function registerCreator(username, password, roleplayName, kingdomId, creatorKey) {
-    return apiRequest("registerCreator", { username, password, roleplayName, kingdomId, creatorKey });
-}
-async function login(username, password) {
-    const result = await apiRequest("login", { username, password });
-    if (result.success) localStorage.setItem("currentUser", JSON.stringify(result.data));
-    return result;
-}
-function logout() {
-    localStorage.removeItem("currentUser");
-    window.location.href = "index.html";
-}
-function currentUser() {
-    const user = localStorage.getItem("currentUser");
-    return user ? JSON.parse(user) : null;
-}
-function redirectByRole() {
-    const user = currentUser();
-    if (!user) { window.location.href = "index.html"; return; }
-    switch (user.role) {
-        case "Creator": window.location.href = "creator-dashboard.html"; break;
-        case "Seller": window.location.href = "seller-dashboard.html"; break;
-        default: window.location.href = "member-dashboard.html";
-    }
-}
-
-/* --- WALLET --- */
-async function getWallet() {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("getWallet", { userId: user.userId });
-}
-async function transferMoney(receiverId, currency, amount) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("transfer", { senderId: user.userId, receiverId, currency, amount });
-}
-async function addCurrency(userId, currency, amount) {
-    const user = currentUser();
-    if (!user || user.role !== "Creator") return { success: false, message: "Creator access required." };
-    return apiRequest("addCurrency", { creatorId: user.userId, userId, currency, amount });
-}
-async function getTransactions() {
-    const user = currentUser();
-    if (!user) return null;
-    return apiRequest("getTransactions", { userId: user.userId });
-}
-
-/* --- TREASURY & LOANS --- */
-async function registerTreasury(treasuryName, description, creatorKey) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("registerTreasury", { creatorId: user.userId, treasuryName, description, creatorKey });
-}
-async function treasuryTransfer(treasuryId, receiverId, currency, amount) {
-    return apiRequest("treasuryTransfer", { treasuryId, receiverId, currency, amount });
-}
-async function processLoan(treasuryId, userId, currency, amount) {
-    return apiRequest("processLoan", { treasuryId, userId, currency, amount });
-}
-async function repayLoan(loanId) {
-    const user = currentUser();
-    return apiRequest("repayLoan", { userId: user.userId, loanId });
-}
-
-/* --- CENTRAL INVENTORY ACCOUNT --- */
-async function registerInventoryAccount(accountName, description, creatorKey) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("registerInventoryAccount", { creatorId: user.userId, accountName, description, creatorKey });
-}
-async function distributeItem(inventoryAccountId, productId, quantity, targetUserId = "") {
-    return apiRequest("distributeItem", { inventoryAccountId, productId, quantity, targetUserId });
-}
-
-/* --- SELLER & MARKETPLACE --- */
-async function applySeller(businessName, description) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("applySeller", { userId: user.userId, businessName, description });
-}
-async function approveSeller(applicationId) {
-    const user = currentUser();
-    if (!user || user.role !== "Creator") return { success: false, message: "Creator access required." };
-    return apiRequest("approveSeller", { creatorId: user.userId, applicationId });
-}
-async function createProduct(productData) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("createProduct", { sellerId: user.userId, ...productData });
-}
-async function getProducts() { return apiRequest("getProducts", {}); }
-async function approveProduct(productId) {
-    const user = currentUser();
-    if (!user || user.role !== "Creator") return { success: false, message: "Creator access required." };
-    return apiRequest("approveProduct", { creatorId: user.userId, productId });
-}
-async function purchaseProduct(productId) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("purchaseProduct", { buyerId: user.userId, productId });
-}
-async function getInventory() {
-    const user = currentUser();
-    if (!user) return null;
-    return apiRequest("getInventory", { userId: user.userId });
-}
-
-/* --- AUCTIONS --- */
-async function createAuction(auctionData) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("createAuction", { sellerId: user.userId, ...auctionData });
-}
-async function getAuctions() { return apiRequest("getAuctions", {}); }
-async function approveAuction(auctionId) {
-    const user = currentUser();
-    if (!user || user.role !== "Creator") return { success: false, message: "Creator access required." };
-    return apiRequest("approveAuction", { creatorId: user.userId, auctionId });
-}
-async function placeBid(auctionId, amount) {
-    const user = currentUser();
-    if (!user) return { success: false, message: "Not logged in." };
-    return apiRequest("placeBid", { bidderId: user.userId, auctionId, amount });
-}
-async function closeAuction(auctionId) {
-    const user = currentUser();
-    if (!user || user.role !== "Creator") return { success: false, message: "Creator access required." };
-    return apiRequest("closeAuction", { creatorId: user.userId, auctionId });
-}
-
-/* --- CREATOR & SYSTEM --- */
-async function createKingdom(kingdomData) {
-    const user = currentUser();
-    if (!user || user.role !== "Creator") return { success: false, message: "Creator access required." };
-    return apiRequest("createKingdom", { creatorId: user.userId, ...kingdomData });
-}
-async function getKingdoms() { return apiRequest("getKingdoms", {}); }
-async function getDashboardStats() { return apiRequest("getDashboardStats", {}); }
+async function register(u, p, rp, k) { return apiRequest("register", {username:u,password:p,roleplayName:rp,kingdomId:k,role:"Member"}); }
+async function registerCreator(u, p, rp, k, key) { return apiRequest("registerCreator", {username:u,password:p,roleplayName:rp,kingdomId:k,creatorKey:key}); }
+async function login(u, p) { const r = await apiRequest("login", {username:u,password:p}); if(r.success) localStorage.setItem("currentUser", JSON.stringify(r.data)); return r; }
+function logout() { localStorage.removeItem("currentUser"); window.location.href = "index.html"; }
+function currentUser() { return localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser")) : null; }
+function redirectByRole() { const u = currentUser(); if(!u) window.location.href="index.html"; else if(u.role==="Creator") window.location.href="creator-dashboard.html"; else if(u.role==="Seller") window.location.href="seller-dashboard.html"; else window.location.href="member-dashboard.html"; }
+async function getWallet() { const u=currentUser(); return u ? apiRequest("getWallet",{userId:u.userId}) : {success:false}; }
+async function transferMoney(r, c, a) { const u=currentUser(); return u ? apiRequest("transfer",{senderId:u.userId,receiverId:r,currency:c,amount:a}) : {success:false}; }
+async function getTransactions() { const u=currentUser(); return u ? apiRequest("getTransactions",{userId:u.userId}) : {success:false}; }
+async function registerTreasury(n, d, k) { return apiRequest("registerTreasury", {treasuryName:n,description:d,creatorKey:k}); }
+async function treasuryTransfer(t, r, c, a) { return apiRequest("treasuryTransfer", {treasuryId:t,receiverId:r,currency:c,amount:a}); }
+async function processLoan(t, u, c, a) { return apiRequest("processLoan", {treasuryId:t,userId:u,currency:c,amount:a}); }
+async function getTreasuries() { return apiRequest("getTreasuries", {}); }
+async function getLoans() { return apiRequest("getLoans", {}); }
+async function registerInventoryAccount(n, d, k) { return apiRequest("registerInventoryAccount", {accountName:n,description:d,creatorKey:k}); }
+async function distributeItem(a, p, q, t="") { return apiRequest("distributeItem", {inventoryAccountId:a,productId:p,quantity:q,targetUserId:t}); }
+async function getInventoryAccounts() { return apiRequest("getInventoryAccounts", {}); }
+async function applySeller(b, d) { const u=currentUser(); return u ? apiRequest("applySeller",{userId:u.userId,businessName:b,description:d}) : {success:false}; }
 async function getSellerApplications() { return apiRequest("getSellerApplications", {}); }
+async function approveSeller(id) { return apiRequest("approveSeller", {applicationId:id}); }
+async function createProduct(d) { const u=currentUser(); return u ? apiRequest("createProduct",{sellerId:u.userId,...d}) : {success:false}; }
+async function getProducts() { return apiRequest("getProducts", {}); }
+async function getAllProducts() { return apiRequest("getAllProducts", {}); }
+async function approveProduct(id) { return apiRequest("approveProduct", {productId:id}); }
+async function purchaseProduct(id) { const u=currentUser(); return u ? apiRequest("purchaseProduct",{buyerId:u.userId,productId:id}) : {success:false}; }
+async function getInventory() { const u=currentUser(); return u ? apiRequest("getInventory",{userId:u.userId}) : {success:false}; }
+async function createAuction(d) { const u=currentUser(); return u ? apiRequest("createAuction",{sellerId:u.userId,...d}) : {success:false}; }
+async function getAuctions() { return apiRequest("getAuctions", {}); }
+async function approveAuction(id) { return apiRequest("approveAuction", {auctionId:id}); }
+async function placeBid(id, a) { const u=currentUser(); return u ? apiRequest("placeBid",{bidderId:u.userId,auctionId:id,amount:a}) : {success:false}; }
+async function closeAuction(id) { return apiRequest("closeAuction", {auctionId:id}); }
+async function getDashboardStats() { return apiRequest("getDashboardStats", {}); }
+async function createAnnouncement(t, c) { const u=currentUser(); return apiRequest("createAnnouncement", {userId:u.userId,title:t,content:c,creatorKey:"LuxemneauxCreator2026"}); }
+async function getAnnouncements() { return apiRequest("getAnnouncements", {}); }
+async function listMemberItem(invId, p, c) { const u=currentUser(); return apiRequest("listMemberItem", {userId:u.userId,inventoryId:invId,price:p,currency:c}); }
+async function getMemberMarket() { return apiRequest("getMemberMarket", {}); }
+async function buyMemberItem(id) { const u=currentUser(); return apiRequest("buyMemberItem", {buyerId:u.userId,listingId:id}); }
