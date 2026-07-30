@@ -1,508 +1,82 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-Luxemneaux Empire Bank
-</title>
-
-
-<link rel="stylesheet" href="style.css">
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxemneaux Roleplay Bank</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
-
-<body class="magic-background">
-
-
-
-<div class="auth-page">
-
-
-
-<div class="auth-box imperial-card">
-
-
-
-<div class="auth-logo">
-
-👑🏰
-
-</div>
-
-
-
-
-<h1 class="auth-title">
-
-Luxemneaux Empire Bank
-
-</h1>
-
-
-
-
-<p class="subtitle">
-
-⚜️ Imperial Banking System ⚜️
-
-</p>
-
-
-
-
-<div class="gold-line"></div>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-Username
-
-</label>
-
-
-<input
-
-type="text"
-
-id="username"
-
-placeholder="Enter username"
-
->
-
-
-</div>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-Password
-
-</label>
-
-
-<input
-
-type="password"
-
-id="password"
-
-placeholder="Enter password"
-
->
-
-
-</div>
-
-
-
-
-
-<button
-
-onclick="loginAccount()"
-
-class="btn"
-
->
-
-🔐 Enter Kingdom
-
-</button>
-
-
-
-
-
-<div id="message"></div>
-
-
-
-
-
-<div class="gold-line"></div>
-
-
-
-
-
-<div class="auth-footer">
-
-
-<p>
-
-New citizen?
-
-</p>
-
-
-
-<a href="register.html">
-
-📜 Create Account
-
-</a>
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- LOADING -->
-
-<div id="loading"
-
-class="loading"
-
-style="display:none;">
-
-
-<div class="loading-icon">
-
-⚜️
-
-</div>
-
-
-</div>
-
-
-
-
-
-<script src="api.js"></script>
-
-
-
-<script>
-
-
-/* =====================================
-   LOGIN FUNCTION
-===================================== */
-
-
-async function loginAccount(){
-
-
-
-const username =
-
-document
-.getElementById(
-"username"
-)
-.value;
-
-
-
-const password =
-
-document
-.getElementById(
-"password"
-)
-.value;
-
-
-
-const message =
-
-document
-.getElementById(
-"message"
-);
-
-
-
-
-
-if(
-!username ||
-!password
-){
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-error">
-
-⚠️ Enter username and password.
-
-</div>
-
-`;
-
-return;
-
-
-}
-
-
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert">
-
-⏳ Checking Imperial Records...
-
-</div>
-
-`;
-
-
-
-
-
-const result =
-
-await login(
-
-username,
-
-password
-
-);
-
-
-
-
-
-if(
-result.success
-){
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-success">
-
-✅ Welcome to Luxemneaux Empire.
-
-</div>
-
-`;
-
-
-
-setTimeout(
-
-()=>{
-
-
-redirectByRole();
-
-
-
-},
-
-1000
-
-);
-
-
-
-}
-
-else{
-
-
-
-message.innerHTML =
-
-`
-
-<div class="alert alert-error">
-
-❌ ${result.message}
-
-</div>
-
-`;
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-/* =====================================
-   ENTER KEY LOGIN
-===================================== */
-
-
-document.addEventListener(
-
-"keypress",
-
-function(e){
-
-
-
-if(
-e.key === "Enter"
-){
-
-
-loginAccount();
-
-
-}
-
-
-
-}
-
-
-);
-
-
-
-
-
-
-
-/* =====================================
-   AUTO SESSION CHECK
-===================================== */
-
-
-window.onload = function(){
-
-
-
-const user =
-
-currentUser();
-
-
-
-if(user){
-
-
-
-const loading =
-
-document
-.getElementById(
-"loading"
-);
-
-
-
-loading.style.display =
-"flex";
-
-
-
-setTimeout(
-
-()=>{
-
-
-redirectByRole();
-
-
-},
-
-800
-
-);
-
-
-
-}
-
-
-
-};
-
-
-
-
-
-</script>
-
-
-
-
-
-
-<footer class="footer">
-
-
-<p>
-
-⚜️ Luxemneaux Empire Banking System ⚜️
-
-</p>
-
-
-<p>
-
-🪙 Managing Lumen • Aurel • Virel • Sylem • Bront
-
-</p>
-
-
-</footer>
-
-
-
-
-
+<body class="auth-page">
+    <div class="auth-box">
+        <div class="auth-logo">👑</div>
+        <h1 class="imperial-title">LUXEMNEAUX</h1>
+        <p class="subtitle">Royal Treasury & Marketplace</p>
+        <div class="gold-line"></div>
+        
+        <div id="authForm">
+            <h2 class="title" id="formTitle">Login</h2>
+            <div class="form-group"><input type="text" id="username" placeholder="Username"></div>
+            <div class="form-group"><input type="password" id="password" placeholder="Password"></div>
+
+            <div id="registerFields" style="display:none;">
+                <div class="form-group"><input type="text" id="roleplayName" placeholder="Roleplay Name"></div>
+                <div class="form-group"><input type="text" id="kingdomId" placeholder="Kingdom ID (Optional)"></div>
+                <div class="form-group" id="creatorKeyField" style="display:none;"><input type="text" id="creatorKey" placeholder="Creator Key"></div>
+            </div>
+
+            <button onclick="handleAuth()" style="width:100%; margin-top:10px;">Enter the Realm</button>
+            <div class="auth-footer">
+                <a onclick="toggleForm('member')" id="toggleLink">New here? Register as Member</a><br>
+                <a onclick="toggleForm('creator')" id="creatorLink" style="font-size:12px; margin-top:5px; display:none;">Have a Creator Key? Register as Creator</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        let currentMode = 'login';
+        function toggleForm(mode) {
+            currentMode = mode;
+            const regFields = document.getElementById('registerFields');
+            const creatorField = document.getElementById('creatorKeyField');
+            const creatorLink = document.getElementById('creatorLink');
+            const title = document.getElementById('formTitle');
+            const link = document.getElementById('toggleLink');
+
+            if (mode === 'login') {
+                regFields.style.display = 'none'; creatorField.style.display = 'none'; creatorLink.style.display = 'none';
+                title.innerText = "Login"; link.innerText = "New here? Register as Member";
+                link.setAttribute('onclick', "toggleForm('member')");
+            } else if (mode === 'member') {
+                regFields.style.display = 'block'; creatorField.style.display = 'none'; creatorLink.style.display = 'block';
+                title.innerText = "Member Registration"; link.innerText = "Already have an account? Login";
+                link.setAttribute('onclick', "toggleForm('login')");
+            } else if (mode === 'creator') {
+                regFields.style.display = 'block'; creatorField.style.display = 'block'; creatorLink.style.display = 'none';
+                title.innerText = "Creator Registration"; link.innerText = "Already have an account? Login";
+                link.setAttribute('onclick', "toggleForm('login')");
+            }
+        }
+
+        async function handleAuth() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            if (currentMode === 'login') {
+                const res = await login(u, p);
+                if (res.success) redirectByRole(); else alert(res.message);
+            } else {
+                const rp = document.getElementById('roleplayName').value;
+                const k = document.getElementById('kingdomId').value || "";
+                if (currentMode === 'member') {
+                    const res = await register(u, p, rp, k);
+                    if (res.success) { alert("Registered! Please login."); toggleForm('login'); } else alert(res.message);
+                } else if (currentMode === 'creator') {
+                    const key = document.getElementById('creatorKey').value;
+                    const res = await registerCreator(u, p, rp, k, key);
+                    if (res.success) { alert("Creator Registered! Please login."); toggleForm('login'); } else alert(res.message);
+                }
+            }
+        }
+    </script>
 </body>
-
-
 </html>
