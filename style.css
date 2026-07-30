@@ -1,40 +1,37 @@
-/* LUXEMNEAUX ROLEPLAY BANK - STYLE.CSS */
-
-* { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI","Trebuchet MS",sans-serif; }
-body { background:radial-gradient(circle at top,#241900,#050505 60%); color:#f5d77a; min-height:100vh; }
-:root { --gold:#d4af37; --bright-gold:#ffe27a; --dark-gold:#8b6914; --black:#070707; --panel:rgba(20,20,20,.95); --border:rgba(212,175,55,.8); --danger:#b22222; --success:#2e8b57; }
-::-webkit-scrollbar { width:10px; } ::-webkit-scrollbar-track { background:#111; } ::-webkit-scrollbar-thumb { background:linear-gradient(var(--gold),var(--dark-gold)); border-radius:10px; }
-.logo { text-align:center; font-size:32px; font-weight:bold; color:var(--bright-gold); text-shadow:0 0 10px #d4af37,0 0 25px #8b6914; }
-.logo::before { content:"👑 "; } .logo::after { content:" 🏰"; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI",sans-serif; }
+body { background:radial-gradient(circle at top,#241900,#050505 60%); color:#f5d77a; min-height:100vh; overflow-x:hidden; }
+:root { --gold:#d4af37; --bright-gold:#ffe27a; --dark-gold:#8b6914; --panel:rgba(20,20,20,.95); --border:rgba(212,175,55,.8); --danger:#b22222; --success:#2e8b57; }
+::-webkit-scrollbar { width:10px; } ::-webkit-scrollbar-track { background:#111; } ::-webkit-scrollbar-thumb { background:var(--dark-gold); border-radius:10px; }
 .container { width:90%; max-width:1200px; margin:auto; }
-.card { background:var(--panel); border:2px solid var(--border); border-radius:15px; padding:25px; box-shadow:0 0 15px rgba(212,175,55,.25); backdrop-filter:blur(8px); margin-bottom: 20px; }
+.card { background:var(--panel); border:2px solid var(--border); border-radius:15px; padding:25px; box-shadow:0 0 15px rgba(212,175,55,.25); margin-bottom:20px; animation: fadeIn 0.5s ease-in-out; }
 .title { color:var(--bright-gold); font-size:28px; text-align:center; margin-bottom:20px; text-shadow:0 0 10px #d4af37; }
 .subtitle { color:#ddd; text-align:center; margin-bottom:20px; }
-button, .btn { background:linear-gradient(135deg,#d4af37,#8b6914); border:none; color:#000; font-weight:bold; padding:12px 25px; border-radius:10px; cursor:pointer; transition:.3s; text-decoration:none; display:inline-block; text-align:center; }
+button, .btn { background:linear-gradient(135deg,#d4af37,#8b6914); border:none; color:#000; font-weight:bold; padding:12px 25px; border-radius:10px; cursor:pointer; transition:.3s; display:inline-block; text-align:center; width:100%; }
 button:hover, .btn:hover { transform:translateY(-3px); box-shadow:0 0 15px #d4af37; }
 input, select, textarea { width:100%; padding:12px; margin:8px 0; background:#111; color:#fff; border:1px solid var(--dark-gold); border-radius:8px; }
-input:focus, select:focus, textarea:focus { outline:none; border-color:var(--bright-gold); box-shadow:0 0 10px rgba(212,175,55,.5); }
-.auth-page { min-height:100vh; display:flex; justify-content:center; align-items:center; background:radial-gradient(circle,#241900,#050505 70%); }
-.auth-box { width:420px; background:rgba(10,10,10,.95); border:2px solid var(--gold); border-radius:20px; padding:35px; box-shadow:0 0 30px rgba(212,175,55,.35); }
-.auth-logo { text-align:center; font-size:45px; margin-bottom:15px; }
-.auth-title { text-align:center; color:var(--bright-gold); font-size:30px; margin-bottom:25px; }
+.auth-page { min-height:100vh; display:flex; justify-content:center; align-items:center; }
+.auth-box { width:420px; background:rgba(10,10,10,.95); border:2px solid var(--gold); border-radius:20px; padding:35px; box-shadow:0 0 30px rgba(212,175,55,.35); animation: zoomIn 0.6s ease; }
+.auth-logo { text-align:center; font-size:45px; margin-bottom:15px; animation: float 3s ease-in-out infinite; }
+.auth-title { text-align:center; color:var(--bright-gold); font-size:30px; margin-bottom:25px; animation: glowPulse 3s infinite; }
 .auth-footer { margin-top:20px; text-align:center; color:#aaa; }
 .auth-footer a { color:var(--bright-gold); text-decoration:none; cursor:pointer; }
 .form-group { margin-bottom:15px; } .form-group label { display:block; color:var(--gold); margin-bottom:5px; }
-select { appearance:none; cursor:pointer; } option { background:#111; color:white; }
-.alert { padding:15px; border-radius:10px; margin:15px 0; }
-.alert-success { background:rgba(46,139,87,.2); border:1px solid #2e8b57; color:#90ee90; }
-.alert-error { background:rgba(178,34,34,.2); border:1px solid #b22222; color:#ff9999; }
 .badge { display:inline-block; padding:5px 15px; border-radius:20px; font-size:13px; font-weight:bold; }
 .badge-creator { background:linear-gradient(135deg,#ffd700,#8b6914); color:black; }
 .badge-seller { background:#704214; color:white; }
 .badge-member { background:#333; color:#ddd; }
-.royal-border { border:3px double var(--gold); padding:20px; position:relative; }
-.royal-border::before { content:"⚜️"; position:absolute; top:-18px; left:50%; transform:translateX(-50%); background:#050505; padding:0 15px; font-size:30px; }
 .gold-line { height:2px; width:100%; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:25px 0; }
-.imperial-title { font-size:38px; font-weight:bold; text-align:center; color:var(--bright-gold); letter-spacing:3px; text-shadow:0 0 5px #d4af37,0 0 15px #d4af37,0 0 30px #8b6914; }
-.btn-danger { background:linear-gradient(135deg,#b22222,#5a0000); color:white; }
+.imperial-title { font-size:38px; font-weight:bold; text-align:center; color:var(--bright-gold); letter-spacing:3px; animation: glowPulse 3s infinite; }
 .btn-success { background:linear-gradient(135deg,#2e8b57,#145228); color:white; }
-.btn-dark { background:#111; color:var(--bright-gold); border:1px solid var(--gold); }
+.btn-dark { background:#111; color:var(--bright-gold); border:1px solid var(--gold); width:auto; }
 .empty-state { text-align:center; padding:40px; color:#aaa; }
 .empty-state::before { content:"📜"; display:block; font-size:50px; margin-bottom:15px; }
+.announcement { background:linear-gradient(135deg,#1a1500,#0a0a0a); border-left:5px solid var(--gold); padding:15px; border-radius:8px; margin-bottom:15px; animation: slideIn 0.5s ease; }
+.announcement h3 { color:var(--bright-gold); margin-bottom:5px; }
+.announcement small { color:#888; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes glowPulse { 0%, 100% { text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37; } 50% { text-shadow: 0 0 15px #ffe27a, 0 0 25px #d4af37; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
