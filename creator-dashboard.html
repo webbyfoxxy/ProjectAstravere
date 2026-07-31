@@ -1,27 +1,253 @@
-<!DOCTYPE html><html><head><title>Creator Dashboard</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="sidebar.css"><link rel="stylesheet" href="dashboard.css"></head>
-<body><div class="dashboard-layout"><div class="sidebar"><div class="sidebar-logo">Creator Panel</div><ul class="sidebar-menu"><li><a onclick="showSection('stats')">📊 Overview</a></li><li><a onclick="showSection('users')">👥 All Users</a></li><li><a onclick="showSection('announce')">📜 Announcements</a></li><li><a onclick="showSection('accounts')">🏦 System Accounts</a></li><li><a onclick="showSection('activity')">📜 System Activity</a></li><li><a onclick="showSection('approvals')">✅ Approvals</a></li><li><a onclick="showSection('addGlobal')">🌐 Add Global Item</a></li><li><a href="treasury.html">⚙️ Treasury Manage</a></li><li><a href="inventory.html">🎒 Inventory Manage</a></li><li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li></ul></div>
-<div class="main-content"><div class="header"><h1>Creator Dashboard</h1><div class="user-badge badge-creator">👑 Creator</div></div>
-<div id="stats" class="card section"><h2 class="title">System Statistics</h2><div class="grid" id="statsGrid"></div></div>
-<div id="users" class="card section" style="display:none;"><h2 class="title">All System Users</h2><div class="table-container"><table><thead><tr><th>User ID</th><th>Username</th><th>Role</th><th>Status</th></tr></thead><tbody id="usersBody"></tbody></table></div></div>
-<div id="announce" class="card section" style="display:none;"><h2 class="title">Post Announcement</h2><div class="form-group"><input type="text" id="annTitle" placeholder="Title"></div><div class="form-group"><textarea id="annContent" placeholder="Content"></textarea></div><button onclick="postAnnouncement()">Post to All Users</button><div class="gold-line"></div><div id="annList"></div></div>
-<div id="accounts" class="section" style="display:none;"><div class="card treasury-panel"><div class="panel-header"><h2>🏦 Active Treasury Accounts</h2></div><div class="table-container"><table><thead><tr><th>Treasury ID</th><th>Name</th><th>Lumen</th><th>Aurel</th><th>Virel</th><th>Sylem</th><th>Bront</th></tr></thead><tbody id="treasuryBody"></tbody></table></div></div><div class="card inventory-panel"><div class="panel-header"><h2>🎒 Active Inventory Accounts</h2></div><div class="table-container"><table><thead><tr><th>Account ID</th><th>Account Name</th><th>Description</th></tr></thead><tbody id="invAccBody"></tbody></table></div></div></div>
-<div id="activity" class="section" style="display:none;"><div class="card"><div class="panel-header"><h2>📜 Active Loans</h2></div><div class="table-container"><table><thead><tr><th>Loan ID</th><th>Treasury ID</th><th>User ID</th><th>Amount</th><th>Currency</th><th>Status</th></tr></thead><tbody id="loanBody"></tbody></table></div></div></div>
-<div id="approvals" class="card section" style="display:none;"><h2 class="title">Pending Approvals</h2><button onclick="loadApprovals()" class="btn-dark" style="margin-bottom:20px; width:auto;">Refresh Lists</button><h3 class="subtitle">Seller Applications</h3><div id="sellerApps" class="grid"></div><h3 class="subtitle" style="margin-top:30px;">Pending Products</h3><div id="productApps" class="grid"></div><h3 class="subtitle" style="margin-top:30px;">Pending Auctions</h3><div id="auctionApps" class="grid"></div></div>
-<div id="addGlobal" class="card section" style="display:none;"><h2 class="title">Add Global Item Template</h2><p class="subtitle">Creates an item that can be distributed via Inventory Hub.</p><div class="form-group"><input type="text" id="gName" placeholder="Item Name"></div><div class="form-group"><select id="gCat"><option value="Food">Food</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Accessories">Accessories</option><option value="Materials">Materials</option><option value="Others">Others</option><option value="Event Items">Event Items</option></select></div><div class="form-group"><textarea id="gDesc" placeholder="Description"></textarea></div><div class="form-group"><input type="number" id="gStock" placeholder="Stock (e.g., 9999)" value="9999"></div><button onclick="createGlobalItem()">Create Item</button></div>
-</div></div>
-<script src="api.js"></script><script>
-const user=currentUser();if(!user||user.role!=='Creator')window.location.href="index.html";
-function showSection(id){document.querySelectorAll('.section').forEach(s=>s.style.display='none');document.getElementById(id).style.display='block';if(id==='stats')loadStats();if(id==='users')loadUsers();if(id==='announce')loadAnnouncements();if(id==='accounts')loadAccounts();if(id==='activity')loadActivity();if(id==='approvals')loadApprovals();}
-async function loadStats(){const r=await getDashboardStats();if(r.success){const d=r.data;document.getElementById('statsGrid').innerHTML=`<div class="stat-card"><h3>Users</h3><span>${d.users}</span></div><div class="stat-card"><h3>Products</h3><span>${d.products}</span></div><div class="stat-card"><h3>Auctions</h3><span>${d.auctions}</span></div><div class="stat-card"><h3>Treasuries</h3><span>${d.treasuryAccounts}</span></div><div class="stat-card"><h3>Inv. Accounts</h3><span>${d.inventoryAccounts}</span></div>`;}}
-async function loadUsers(){const r=await getAllUsers();const b=document.getElementById('usersBody');if(r.success&&r.data.length>0){b.innerHTML=r.data.map(u=>`<tr><td>${u.userId}</td><td>${u.username}</td><td><span class="badge ${u.role==='Creator'?'badge-creator':u.role==='Seller'?'badge-seller':'badge-member'}">${u.role}</span></td><td>${u.status}</td></tr>`).join('');}else{b.innerHTML=`<tr><td colspan="4" class="empty-state">No users found.</td></tr>`;}}
-async function postAnnouncement(){const t=document.getElementById('annTitle').value,c=document.getElementById('annContent').value;if(!t||!c)return alert("Fill all fields.");const r=await createAnnouncement(t,c);alert(r.message);if(r.success){document.getElementById('annTitle').value="";document.getElementById('annContent').value="";loadAnnouncements();}}
-async function loadAnnouncements(){const r=await getAnnouncements();const b=document.getElementById('annList');if(r.success&&r.data.length>0){b.innerHTML=r.data.map(a=>`<div class="announcement"><h3>${a.title}</h3><small>${new Date(a.createdAt).toLocaleString()}</small><p style="margin-top:10px;">${a.content}</p></div>`).join('');}else{b.innerHTML=`<div class="empty-state">No announcements.</div>`;}}
-async function loadAccounts(){const t=await getTreasuries(),tb=document.getElementById('treasuryBody');if(t.success&&t.data.length>0){tb.innerHTML=t.data.map(x=>`<tr><td>${x.treasuryId}</td><td>${x.treasuryName}</td><td>${x.Lumen}</td><td>${x.Aurel}</td><td>${x.Virel}</td><td>${x.Sylem}</td><td>${x.Bront}</td></tr>`).join('');}else{tb.innerHTML=`<tr><td colspan="7" class="empty-state">No treasuries registered.</td></tr>`;}const i=await getInventoryAccounts(),ib=document.getElementById('invAccBody');if(i.success&&i.data.length>0){ib.innerHTML=i.data.map(x=>`<tr><td>${x.inventoryAccountId}</td><td>${x.accountName}</td><td>${x.description}</td></tr>`).join('');}else{ib.innerHTML=`<tr><td colspan="3" class="empty-state">No inventory accounts registered.</td></tr>`;}}
-async function loadActivity(){const l=await getLoans(),lb=document.getElementById('loanBody');if(l.success&&l.data.length>0){lb.innerHTML=l.data.map(x=>`<tr><td>${x.loanId}</td><td>${x.treasuryId}</td><td>${x.userId}</td><td>${x.amount}</td><td>${x.currency}</td><td><span class="badge ${x.status==='Active'?'badge-creator':'badge-member'}">${x.status}</span></td></tr>`).join('');}else{lb.innerHTML=`<tr><td colspan="6" class="empty-state">No loan activity yet.</td></tr>`;}}
-async function loadApprovals(){const s=await getSellerApplications(),sd=document.getElementById('sellerApps');if(s.success){sd.innerHTML=s.data.filter(a=>a.status==="Pending").map(a=>`<div class="product-card"><h3>${a.businessName}</h3><p>${a.description}</p><button class="btn-success" onclick="approveSellerApp('${a.applicationId}')">Approve Seller</button></div>`).join('')||'<p class="empty-state">No pending sellers</p>';}const p=await getAllProducts(),pd=document.getElementById('productApps');if(p.success){pd.innerHTML=p.data.filter(x=>x.status==="Pending").map(x=>`<div class="product-card"><h3>${x.productName}</h3><p>Price: ${x.price} ${x.currency}</p><p>Stock: ${x.stock}</p><button class="btn-success" onclick="approveProd('${x.productId}')">Approve Product</button></div>`).join('')||'<p class="empty-state">No pending products</p>';}const a=await getAuctions(),ad=document.getElementById('auctionApps');if(a.success){ad.innerHTML=a.data.filter(x=>x.status==="Pending").map(x=>`<div class="auction-card"><h3>${x.itemName}</h3><p>Start Price: ${x.startingPrice} ${x.currency}</p><button class="btn-success" onclick="approveAuc('${x.auctionId}')">Approve Auction</button></div>`).join('')||'<p class="empty-state">No pending auctions</p>';}}
-async function approveSellerApp(id){const r=await approveSeller(id);alert(r.message);loadApprovals();}
-async function approveProd(id){const r=await approveProduct(id);alert(r.message);loadApprovals();}
-async function approveAuc(id){const r=await approveAuction(id);alert(r.message);loadApprovals();}
-async function createGlobalItem(){const r=await createProduct({productName:gName.value,category:gCat.value,description:gDesc.value,price:0,currency:"Lumen",stock:Number(gStock.value)});alert(r.message);if(r.success){gName.value="";gDesc.value="";}}
-showSection('stats');
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <div class="sidebar-logo">Creator Panel</div>
+            <ul class="sidebar-menu">
+                <li><a onclick="showSection('stats')">📊 Overview</a></li>
+                <li><a onclick="showSection('users')">👥 All Users</a></li>
+                <li><a onclick="showSection('announce')">📜 Announcements</a></li>
+                <li><a onclick="showSection('addMoney')">💸 Add Money</a></li>
+                <li><a onclick="showSection('accounts')">🏦 System Accounts</a></li>
+                <li><a onclick="showSection('activity')">📜 System Activity</a></li>
+                <li><a onclick="showSection('approvals')">✅ Approvals</a></li>
+                <li><a onclick="showSection('addGlobal')">🌐 Add Global Item</a></li>
+                <li><a href="treasury.html">⚙️ Treasury Manage</a></li>
+                <li><a href="inventory.html">🎒 Inventory Manage</a></li>
+                <li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header"><h1>Creator Dashboard</h1><div class="user-badge badge-creator">👑 Creator</div></div>
+
+            <div id="stats" class="card section"><h2 class="title">System Statistics</h2><div class="grid" id="statsGrid"></div></div>
+
+            <div id="users" class="card section" style="display:none;">
+                <h2 class="title">All System Users</h2>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>User ID</th><th>Username</th><th>Role</th><th>Status</th></tr></thead>
+                        <tbody id="usersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="announce" class="card section" style="display:none;">
+                <h2 class="title">Post Announcement</h2>
+                <div class="form-group"><input type="text" id="annTitle" placeholder="Title"></div>
+                <div class="form-group"><textarea id="annContent" placeholder="Content"></textarea></div>
+                <button onclick="postAnnouncement()">Post to All Users</button>
+                <div class="gold-line"></div>
+                <div id="annList"></div>
+            </div>
+
+            <div id="addMoney" class="card section" style="display:none;">
+                <h2 class="title">Add Money to User</h2>
+                <p class="subtitle">Inject funds into any account without deduction.</p>
+                <div class="form-group"><input type="text" id="addMoneyUser" placeholder="Receiver Username"></div>
+                <div class="form-group">
+                    <select id="addMoneyCur">
+                        <option value="Lumen">Lumen</option>
+                        <option value="Aurel">Aurel</option>
+                        <option value="Virel">Virel</option>
+                        <option value="Sylem">Sylem</option>
+                        <option value="Bront">Bront</option>
+                    </select>
+                </div>
+                <div class="form-group"><input type="number" id="addMoneyAmt" placeholder="Amount"></div>
+                <button onclick="executeAddMoney()">Add Funds</button>
+            </div>
+
+            <div id="accounts" class="section" style="display:none;">
+                <div class="card treasury-panel">
+                    <div class="panel-header"><h2>🏦 Active Treasury Accounts</h2></div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Treasury ID</th><th>Name</th><th>Lumen</th><th>Aurel</th><th>Virel</th><th>Sylem</th><th>Bront</th></tr></thead>
+                            <tbody id="treasuryBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card inventory-panel">
+                    <div class="panel-header"><h2>🎒 Active Inventory Accounts</h2></div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Account ID</th><th>Account Name</th><th>Description</th></tr></thead>
+                            <tbody id="invAccBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="activity" class="section" style="display:none;">
+                <div class="card">
+                    <div class="panel-header"><h2>📜 Active Loans</h2></div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Loan ID</th><th>Treasury ID</th><th>User ID</th><th>Amount</th><th>Currency</th><th>Status</th></tr></thead>
+                            <tbody id="loanBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="approvals" class="card section" style="display:none;">
+                <h2 class="title">Pending Approvals</h2>
+                <button onclick="loadApprovals()" class="btn-dark" style="margin-bottom:20px; width:auto;">Refresh Lists</button>
+                <h3 class="subtitle">Seller Applications</h3>
+                <div id="sellerApps" class="grid"></div>
+                <h3 class="subtitle" style="margin-top:30px;">Pending Products</h3>
+                <div id="productApps" class="grid"></div>
+                <h3 class="subtitle" style="margin-top:30px;">Pending Auctions</h3>
+                <div id="auctionApps" class="grid"></div>
+            </div>
+
+            <div id="addGlobal" class="card section" style="display:none;">
+                <h2 class="title">Add Global Item Template</h2>
+                <p class="subtitle">Creates an item that can be distributed via Inventory Hub. Hidden from Marketplace.</p>
+                <div class="form-group"><input type="text" id="gName" placeholder="Item Name"></div>
+                <div class="form-group">
+                    <select id="gCat">
+                        <option value="Food">Food</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option>
+                        <option value="Accessories">Accessories</option><option value="Materials">Materials</option>
+                        <option value="Others">Others</option><option value="Event Items">Event Items</option>
+                    </select>
+                </div>
+                <div class="form-group"><textarea id="gDesc" placeholder="Description"></textarea></div>
+                <div class="form-group"><input type="number" id="gStock" placeholder="Stock (e.g., 9999)" value="9999"></div>
+                <button onclick="createGlobalItem()">Create Item</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        const user = currentUser();
+        if (!user || user.role !== 'Creator') window.location.href = "index.html";
+        
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            if (id === 'stats') loadStats();
+            if (id === 'users') loadUsers();
+            if (id === 'announce') loadAnnouncements();
+            if (id === 'accounts') loadAccounts();
+            if (id === 'activity') loadActivity();
+            if (id === 'approvals') loadApprovals();
+        }
+
+        async function loadStats() {
+            const r = await getDashboardStats();
+            if (r.success) {
+                const d = r.data;
+                document.getElementById('statsGrid').innerHTML = `
+                    <div class="stat-card"><h3>Users</h3><span>${d.users}</span></div>
+                    <div class="stat-card"><h3>Products</h3><span>${d.products}</span></div>
+                    <div class="stat-card"><h3>Auctions</h3><span>${d.auctions}</span></div>
+                    <div class="stat-card"><h3>Treasuries</h3><span>${d.treasuryAccounts}</span></div>
+                    <div class="stat-card"><h3>Inv. Accounts</h3><span>${d.inventoryAccounts}</span></div>
+                `;
+            }
+        }
+
+        async function loadUsers() {
+            const r = await getAllUsers();
+            const b = document.getElementById('usersBody');
+            if (r.success && r.data.length > 0) {
+                b.innerHTML = r.data.map(u => `<tr><td>${u.userId}</td><td>${u.username}</td><td><span class="badge ${u.role==='Creator'?'badge-creator':u.role==='Seller'?'badge-seller':'badge-member'}">${u.role}</span></td><td>${u.status}</td></tr>`).join('');
+            } else {
+                b.innerHTML = `<tr><td colspan="4" class="empty-state">No users found.</td></tr>`;
+            }
+        }
+
+        async function postAnnouncement() {
+            const t = document.getElementById('annTitle').value, c = document.getElementById('annContent').value;
+            if (!t || !c) return alert("Fill all fields.");
+            const r = await createAnnouncement(t, c);
+            alert(r.message);
+            if (r.success) {
+                document.getElementById('annTitle').value = "";
+                document.getElementById('annContent').value = "";
+                loadAnnouncements();
+            }
+        }
+
+        async function loadAnnouncements() {
+            const r = await getAnnouncements();
+            const b = document.getElementById('annList');
+            if (r.success && r.data.length > 0) {
+                b.innerHTML = r.data.map(a => `<div class="announcement"><h3>${a.title}</h3><small>${new Date(a.createdAt).toLocaleString()}</small><p style="margin-top:10px;">${a.content}</p></div>`).join('');
+            } else {
+                b.innerHTML = `<div class="empty-state">No announcements.</div>`;
+            }
+        }
+
+        async function executeAddMoney() {
+            const rUser = document.getElementById('addMoneyUser').value;
+            const cur = document.getElementById('addMoneyCur').value;
+            const amt = Number(document.getElementById('addMoneyAmt').value);
+            if (!rUser || amt <= 0) { alert("Invalid data."); return; }
+            const r = await addCurrency(rUser, cur, amt);
+            alert(r.message);
+            if (r.success) {
+                document.getElementById('addMoneyUser').value = "";
+                document.getElementById('addMoneyAmt').value = "";
+            }
+        }
+
+        async function loadAccounts() {
+            const t = await getTreasuries(), tb = document.getElementById('treasuryBody');
+            if (t.success && t.data.length > 0) {
+                tb.innerHTML = t.data.map(x => `<tr><td>${x.treasuryId}</td><td>${x.treasuryName}</td><td>${x.Lumen}</td><td>${x.Aurel}</td><td>${x.Virel}</td><td>${x.Sylem}</td><td>${x.Bront}</td></tr>`).join('');
+            } else { tb.innerHTML = `<tr><td colspan="7" class="empty-state">No treasuries registered.</td></tr>`; }
+            const i = await getInventoryAccounts(), ib = document.getElementById('invAccBody');
+            if (i.success && i.data.length > 0) {
+                ib.innerHTML = i.data.map(x => `<tr><td>${x.inventoryAccountId}</td><td>${x.accountName}</td><td>${x.description}</td></tr>`).join('');
+            } else { ib.innerHTML = `<tr><td colspan="3" class="empty-state">No inventory accounts registered.</td></tr>`; }
+        }
+
+        async function loadActivity() {
+            const l = await getLoans(), lb = document.getElementById('loanBody');
+            if (l.success && l.data.length > 0) {
+                lb.innerHTML = l.data.map(x => `<tr><td>${x.loanId}</td><td>${x.treasuryId}</td><td>${x.userId}</td><td>${x.amount}</td><td>${x.currency}</td><td><span class="badge ${x.status==='Active'?'badge-creator':'badge-member'}">${x.status}</span></td></tr>`).join('');
+            } else { lb.innerHTML = `<tr><td colspan="6" class="empty-state">No loan activity yet.</td></tr>`; }
+        }
+
+        async function loadApprovals() {
+            const s = await getSellerApplications(), sd = document.getElementById('sellerApps');
+            if (s.success) {
+                sd.innerHTML = s.data.filter(a => a.status === "Pending").map(a => `<div class="product-card"><h3>${a.businessName}</h3><p>${a.description}</p><button class="btn-success" onclick="approveSellerApp('${a.applicationId}')">Approve Seller</button></div>`).join('') || '<p class="empty-state">No pending sellers</p>';
+            }
+            const p = await getAllProducts(), pd = document.getElementById('productApps');
+            if (p.success) {
+                pd.innerHTML = p.data.filter(x => x.status === "Pending").map(x => `<div class="product-card"><h3>${x.productName}</h3><p>Price: ${x.price} ${x.currency}</p><p>Stock: ${x.stock}</p><button class="btn-success" onclick="approveProd('${x.productId}')">Approve Product</button></div>`).join('') || '<p class="empty-state">No pending products</p>';
+            }
+            const a = await getAuctions(), ad = document.getElementById('auctionApps');
+            if (a.success) {
+                ad.innerHTML = a.data.filter(x => x.status === "Pending").map(x => `<div class="auction-card"><h3>${x.itemName}</h3><p>Start Price: ${x.startingPrice} ${x.currency}</p><button class="btn-success" onclick="approveAuc('${x.auctionId}')">Approve Auction</button></div>`).join('') || '<p class="empty-state">No pending auctions</p>';
+            }
+        }
+
+        async function approveSellerApp(id) { const r = await approveSeller(id); alert(r.message); loadApprovals(); }
+        async function approveProd(id) { const r = await approveProduct(id); alert(r.message); loadApprovals(); }
+        async function approveAuc(id) { const r = await approveAuction(id); alert(r.message); loadApprovals(); }
+        
+        async function createGlobalItem() {
+            const r = await createProduct({productName: gName.value, category: gCat.value, description: gDesc.value, price: 0, currency: "Lumen", stock: Number(gStock.value)});
+            alert(r.message);
+            if (r.success) { gName.value = ""; gDesc.value = ""; }
+        }
+
+        showSection('stats');
+    </script>
+</body>
+</html>
