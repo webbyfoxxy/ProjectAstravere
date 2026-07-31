@@ -25,6 +25,7 @@ function redirectByRole() {
 }
 async function getWallet() { const u=currentUser(); return u ? apiRequest("getWallet",{userId:u.userId}) : {success:false}; }
 async function transferMoney(r, c, a) { const u=currentUser(); return u ? apiRequest("transfer",{senderId:u.userId,receiverUsername:r,currency:c,amount:a}) : {success:false}; }
+async function addCurrency(r, c, a) { return apiRequest("addCurrency", {receiverUsername:r,currency:c,amount:a}); }
 async function exchangeCurrency(f, t, a) { const u=currentUser(); return u ? apiRequest("exchangeCurrency",{userId:u.userId,fromCurrency:f,toCurrency:t,amount:a}) : {success:false}; }
 async function getTransactions() { const u=currentUser(); return u ? apiRequest("getTransactions",{userId:u.userId}) : {success:false}; }
 async function treasuryTransfer(t, r, c, a) { return apiRequest("treasuryTransfer", {treasuryId:t,receiverUsername:r,currency:c,amount:a}); }
@@ -44,7 +45,7 @@ async function purchaseProduct(id) { const u=currentUser(); return u ? apiReques
 async function getInventory() { const u=currentUser(); return u ? apiRequest("getInventory",{userId:u.userId}) : {success:false}; }
 async function listMemberItem(invId, p, c) { const u=currentUser(); return apiRequest("listMemberItem", {userId:u.userId,inventoryId:invId,price:p,currency:c}); }
 async function getMemberMarket() { return apiRequest("getMemberMarket", {}); }
-async function buyMemberItem(id) { const u=currentUser(); return apiRequest("buyMemberItem", {buyerId:u.userId,listingId:id}); }
+async function buyMemberItem(id) { const u=currentUser(); return u ? apiRequest("buyMemberItem",{buyerId:u.userId,listingId:id}) : {success:false}; }
 async function createAuction(d) { const u=currentUser(); return u ? apiRequest("createAuction",{sellerId:u.userId,...d}) : {success:false}; }
 async function getAuctions() { return apiRequest("getAuctions", {}); }
 async function approveAuction(id) { return apiRequest("approveAuction", {auctionId:id}); }
