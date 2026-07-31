@@ -1,129 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treasury Management</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="sidebar.css">
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-    <div class="dashboard-layout">
-        <div class="sidebar">
-            <div class="sidebar-logo">Treasury</div>
-            <ul class="sidebar-menu">
-                <li><a href="creator-dashboard.html">📊 Main Dashboard</a></li>
-                <li><a href="treasury.html">🏦 Treasury</a></li>
-                <li><a href="inventory.html">🎒 Inventory Hub</a></li>
-                <li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li>
-            </ul>
-        </div>
-        <div class="main-content">
-            <div class="header"><h1>Treasury & Loan System</h1><div class="user-badge badge-creator">👑 Creator</div></div>
-            
-            <div class="card section treasury-panel">
-                <div class="panel-header"><h2>Register New Treasury</h2></div>
-                <p style="margin-bottom:15px; color:#aaa;">Requires Treasury Key.</p>
-                <div class="form-group"><input type="text" id="tName" placeholder="Treasury Name (e.g., Royal Vault)"></div>
-                <div class="form-group"><input type="text" id="tDesc" placeholder="Description"></div>
-                <div class="form-group"><input type="text" id="tKey" placeholder="Treasury Key"></div>
-                <div class="form-group"><input type="password" id="tPass" placeholder="Treasury Password"></div>
-                <button class="btn-success" onclick="createTreasury()">Create Treasury</button>
-            </div>
-            
-            <div class="card section">
-                <h2 class="title">Active Treasury Accounts</h2>
-                <div class="table-container">
-                    <table>
-                        <thead><tr><th>ID</th><th>Name</th><th>Lumen</th><th>Aurel</th><th>Virel</th><th>Sylem</th><th>Bront</th></tr></thead>
-                        <tbody id="treasuryBody"></tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="action-grid">
-                <div class="card section mini-form">
-                    <h3>Fund User (Transfer)</h3>
-                    <input type="text" id="tId" placeholder="Treasury ID (Copy from table)">
-                    <input type="text" id="tReceiver" placeholder="Receiver Username">
-                    <select id="tCurrency"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select>
-                    <input type="number" id="tAmount" placeholder="Amount">
-                    <button onclick="executeTreasuryTransfer()">Transfer Funds</button>
-                </div>
-                <div class="card section mini-form">
-                    <h3>Issue Loan</h3>
-                    <input type="text" id="lTId" placeholder="Treasury ID">
-                    <input type="text" id="lUser" placeholder="Receiver Username">
-                    <select id="lCurrency"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select>
-                    <input type="number" id="lAmount" placeholder="Loan Amount">
-                    <button onclick="issueLoan()">Issue Loan</button>
-                </div>
-            </div>
-            
-            <div class="card section">
-                <h2 class="title">Active Loans</h2>
-                <div class="table-container">
-                    <table>
-                        <thead><tr><th>Loan ID</th><th>User ID</th><th>Amount</th><th>Currency</th><th>Status</th></tr></thead>
-                        <tbody id="loanBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script src="api.js"></script>
-    <script>
-        const user = currentUser();
-        if (!user || user.role !== 'Creator') window.location.href = "index.html";
-        
-        async function createTreasury() {
-            const r = await registerTreasury(tName.value, tDesc.value, tKey.value, tPass.value);
-            alert(r.message);
-            if (r.success) {
-                tName.value = ""; tDesc.value = ""; tKey.value = ""; tPass.value = "";
-                loadTreasuries();
-            }
-        }
-        
-        async function executeTreasuryTransfer() {
-            const r = await treasuryTransfer(tId.value, tReceiver.value, tCurrency.value, Number(tAmount.value));
-            alert(r.message);
-            if (r.success) {
-                tId.value = ""; tReceiver.value = ""; tAmount.value = "";
-                loadTreasuries();
-            }
-        }
-        
-        async function issueLoan() {
-            const r = await processLoan(lTId.value, lUser.value, lCurrency.value, Number(lAmount.value));
-            alert(r.message);
-            if (r.success) {
-                lTId.value = ""; lUser.value = ""; lAmount.value = "";
-                loadTreasuries(); loadLoans();
-            }
-        }
-        
-        async function loadTreasuries() {
-            const r = await getTreasuries(), b = document.getElementById('treasuryBody');
-            if (r.success && r.data.length > 0) {
-                b.innerHTML = r.data.map(t => `<tr><td>${t.treasuryId}</td><td>${t.treasuryName}</td><td>${t.Lumen}</td><td>${t.Aurel}</td><td>${t.Virel}</td><td>${t.Sylem}</td><td>${t.Bront}</td></tr>`).join('');
-            } else {
-                b.innerHTML = `<tr><td colspan="7" class="empty-state">No treasuries registered.</td></tr>`;
-            }
-        }
-        
-        async function loadLoans() {
-            const r = await getLoans(), b = document.getElementById('loanBody');
-            if (r.success && r.data.length > 0) {
-                b.innerHTML = r.data.map(l => `<tr><td>${l.loanId}</td><td>${l.userId}</td><td>${l.amount}</td><td>${l.currency}</td><td><span class="badge ${l.status === 'Active' ? 'badge-creator' : 'badge-member'}">${l.status}</span></td></tr>`).join('');
-            } else {
-                b.innerHTML = `<tr><td colspan="5" class="empty-state">No active loans.</td></tr>`;
-            }
-        }
-        
-        loadTreasuries(); loadLoans();
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html><head><title>Treasury Management</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="sidebar.css"><link rel="stylesheet" href="dashboard.css"></head>
+<body><div class="dashboard-layout"><div class="sidebar"><div class="sidebar-logo">Treasury</div><ul class="sidebar-menu"><li><a href="creator-dashboard.html">📊 Main Dashboard</a></li><li><a href="treasury.html">🏦 Treasury</a></li><li><a href="inventory.html">🎒 Inventory Hub</a></li><li><a onclick="logout()" style="color:#b22222;">🚪 Logout</a></li></ul></div>
+<div class="main-content"><div class="header"><h1>Treasury & Loan System</h1><div class="user-badge badge-creator">👑 Creator</div></div>
+<div class="card section treasury-panel"><div class="panel-header"><h2>Register New Treasury</h2></div><p style="margin-bottom:15px; color:#aaa;">Requires Treasury Key.</p><div class="form-group"><input type="text" id="tName" placeholder="Treasury Name (e.g., Royal Vault)"></div><div class="form-group"><input type="text" id="tDesc" placeholder="Description"></div><div class="form-group"><input type="text" id="tKey" placeholder="Treasury Key"></div><div class="form-group"><input type="password" id="tPass" placeholder="Treasury Password"></div><button class="btn-success" onclick="createTreasury()">Create Treasury</button></div>
+<div class="card section"><h2 class="title">Active Treasury Accounts</h2><div class="table-container"><table><thead><tr><th>ID</th><th>Name</th><th>Lumen</th><th>Aurel</th><th>Virel</th><th>Sylem</th><th>Bront</th></tr></thead><tbody id="treasuryBody"></tbody></table></div></div>
+<div class="action-grid"><div class="card section mini-form"><h3>Fund User (Transfer)</h3><input type="text" id="tId" placeholder="Treasury ID (Copy from table)"><input type="text" id="tReceiver" placeholder="Receiver Username"><select id="tCurrency"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select><input type="number" id="tAmount" placeholder="Amount"><button onclick="executeTreasuryTransfer()">Transfer Funds</button></div><div class="card section mini-form"><h3>Issue Loan</h3><input type="text" id="lTId" placeholder="Treasury ID"><input type="text" id="lUser" placeholder="Receiver Username"><select id="lCurrency"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select><input type="number" id="lAmount" placeholder="Loan Amount"><button onclick="issueLoan()">Issue Loan</button></div></div>
+<div class="card section"><h2 class="title">Active Loans</h2><div class="table-container"><table><thead><tr><th>Loan ID</th><th>User ID</th><th>Amount</th><th>Currency</th><th>Status</th></tr></thead><tbody id="loanBody"></tbody></table></div></div>
+</div></div>
+<script src="api.js"></script><script>
+const user=currentUser();if(!user||user.role!=='Creator')window.location.href="index.html";
+async function createTreasury(){const r=await registerTreasury(tName.value,tDesc.value,tKey.value,tPass.value);alert(r.message);if(r.success){tName.value="";tDesc.value="";tKey.value="";tPass.value="";loadTreasuries();}}
+async function executeTreasuryTransfer(){const r=await treasuryTransfer(tId.value,tReceiver.value,tCurrency.value,Number(tAmount.value));alert(r.message);if(r.success){tId.value="";tReceiver.value="";tAmount.value="";loadTreasuries();}}
+async function issueLoan(){const r=await processLoan(lTId.value,lUser.value,lCurrency.value,Number(lAmount.value));alert(r.message);if(r.success){lTId.value="";lUser.value="";lAmount.value="";loadTreasuries();loadLoans();}}
+async function loadTreasuries(){const r=await getTreasuries(),b=document.getElementById('treasuryBody');if(r.success&&r.data.length>0){b.innerHTML=r.data.map(t=>`<tr><td>${t.treasuryId}</td><td>${t.treasuryName}</td><td>${t.Lumen}</td><td>${t.Aurel}</td><td>${t.Virel}</td><td>${t.Sylem}</td><td>${t.Bront}</td></tr>`).join('');}else{b.innerHTML=`<tr><td colspan="7" class="empty-state">No treasuries registered.</td></tr>`;}}
+async function loadLoans(){const r=await getLoans(),b=document.getElementById('loanBody');if(r.success&&r.data.length>0){b.innerHTML=r.data.map(l=>`<tr><td>${l.loanId}</td><td>${l.userId}</td><td>${l.amount}</td><td>${l.currency}</td><td><span class="badge ${l.status==='Active'?'badge-creator':'badge-member'}">${l.status}</span></td></tr>`).join('');}else{b.innerHTML=`<tr><td colspan="5" class="empty-state">No active loans.</td></tr>`;}}
+loadTreasuries();loadLoans();
+</script></body></html>
