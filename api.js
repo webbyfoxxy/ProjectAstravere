@@ -7,6 +7,19 @@ async function apiRequest(action, data = {}) {
         return result;
     } catch (error) { return { success: false, message: "Server connection failed." }; }
 }
+
+/* THEME SWITCHER */
+function setTheme(theme) {
+    document.body.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+    const select = document.getElementById('themeSelect');
+    if(select) select.value = theme;
+}
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark-gold';
+    setTheme(savedTheme);
+}
+
 async function register(u, p, rp, k) { return apiRequest("register", {username:u,password:p,roleplayName:rp,kingdomId:k,role:"Member"}); }
 async function registerCreator(u, p, rp, k, key) { return apiRequest("registerCreator", {username:u,password:p,roleplayName:rp,kingdomId:k,creatorKey:key}); }
 async function registerTreasury(n, d, k, p) { return apiRequest("registerTreasury", {treasuryName:n, description:d, creatorKey:k, password:p}); }
@@ -23,19 +36,6 @@ function redirectByRole() {
     else if(u.role==="Inventory") window.location.href="inventory-dashboard.html"; 
     else window.location.href="member-dashboard.html"; 
 }
-
-/* THEME SWITCHER */
-function setTheme(theme) {
-    document.body.dataset.theme = theme;
-    localStorage.setItem('theme', theme);
-    const select = document.getElementById('themeSelect');
-    if(select) select.value = theme;
-}
-function loadTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'dark-gold';
-    setTheme(savedTheme);
-}
-
 async function getWallet() { const u=currentUser(); return u ? apiRequest("getWallet",{userId:u.userId}) : {success:false}; }
 async function transferMoney(r, c, a) { const u=currentUser(); return u ? apiRequest("transfer",{senderId:u.userId,receiverUsername:r,currency:c,amount:a}) : {success:false}; }
 async function addCurrency(r, c, a) { return apiRequest("addCurrency", {receiverUsername:r,currency:c,amount:a}); }
