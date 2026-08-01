@@ -36,7 +36,10 @@
     <script src="api.js"></script>
     <script>
         window.onload = loadTheme;
-        const user = currentUser(); if (!user || user.role !== 'Inventory') window.location.href = "index.html";
+        const user = currentUser(); 
+        if (!user || user.role !== 'Inventory') {
+            logout();
+        }
         document.getElementById('welcomeMsg').innerText = `Welcome, ${user.username}`;
         function showSection(id) { document.querySelectorAll('.section').forEach(s => s.style.display = 'none'); document.getElementById(id).style.display = 'block'; if (id === 'distribute') loadProducts(); }
         function toggleTargetUser() { const val = document.getElementById('dTargetType').value; document.getElementById('dTargetUser').style.display = val === 'specific' ? 'block' : 'none'; }
