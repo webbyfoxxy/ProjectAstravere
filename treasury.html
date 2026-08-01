@@ -88,7 +88,9 @@
     <script>
         window.onload = loadTheme;
         const user = currentUser();
-        if (!user || user.role !== 'Creator') window.location.href = "index.html";
+        if (!user || user.role !== 'Creator') {
+            logout();
+        }
         
         async function createTreasury() {
             const r = await registerTreasury(tName.value, tDesc.value, tKey.value, tPass.value);
