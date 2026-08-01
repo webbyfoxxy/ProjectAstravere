@@ -29,12 +29,14 @@ function logout() { localStorage.removeItem("currentUser"); window.location.href
 function currentUser() { return localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser")) : null; }
 function redirectByRole() { 
     const u = currentUser(); 
-    if(!u) window.location.href="index.html"; 
-    else if(u.role==="Creator") window.location.href="creator-dashboard.html"; 
-    else if(u.role==="Seller") window.location.href="seller-dashboard.html"; 
-    else if(u.role==="Treasury") window.location.href="treasury-dashboard.html"; 
-    else if(u.role==="Inventory") window.location.href="inventory-dashboard.html"; 
-    else window.location.href="member-dashboard.html"; 
+    if(!u) { window.location.href="index.html"; return; } 
+    switch(u.role) {
+        case "Creator": window.location.href="creator-dashboard.html"; break;
+        case "Seller": window.location.href="seller-dashboard.html"; break;
+        case "Treasury": window.location.href="treasury-dashboard.html"; break;
+        case "Inventory": window.location.href="inventory-dashboard.html"; break;
+        default: window.location.href="member-dashboard.html";
+    }
 }
 async function getWallet() { const u=currentUser(); return u ? apiRequest("getWallet",{userId:u.userId}) : {success:false}; }
 async function transferMoney(r, c, a) { const u=currentUser(); return u ? apiRequest("transfer",{senderId:u.userId,receiverUsername:r,currency:c,amount:a}) : {success:false}; }
