@@ -52,7 +52,10 @@
     <script src="api.js"></script>
     <script>
         window.onload = loadTheme;
-        const user = currentUser(); if (!user || user.role !== 'Creator') window.location.href = "index.html";
+        const user = currentUser(); 
+        if (!user || user.role !== 'Creator') {
+            logout(); // Forces logout if not Creator
+        }
         function showSection(id) { document.querySelectorAll('.section').forEach(s => s.style.display = 'none'); document.getElementById(id).style.display = 'block'; if (id === 'stats') loadStats(); if (id === 'users') loadUsers(); if (id === 'announce') loadAnnouncements(); if (id === 'accounts') loadAccounts(); if (id === 'activity') loadActivity(); if (id === 'approvals') loadApprovals(); }
         async function loadStats() { const r = await getDashboardStats(); if (r.success) { const d = r.data; document.getElementById('statsGrid').innerHTML = `<div class="stat-card"><h3>Users</h3><span>${d.users}</span></div><div class="stat-card"><h3>Products</h3><span>${d.products}</span></div><div class="stat-card"><h3>Auctions</h3><span>${d.auctions}</span></div><div class="stat-card"><h3>Treasuries</h3><span>${d.treasuryAccounts}</span></div><div class="stat-card"><h3>Inv. Accounts</h3><span>${d.inventoryAccounts}</span></div>`; } }
         async function loadUsers() { const r = await getAllUsers(); const b = document.getElementById('usersBody'); if (r.success && r.data.length > 0) { b.innerHTML = r.data.map(u => `<tr><td>${u.userId}</td><td>${u.username}</td><td><span class="badge ${u.role === 'Creator' ? 'badge-creator' : u.role === 'Seller' ? 'badge-seller' : 'badge-member'}">${u.role}</span></td><td>${u.status === 'Suspended' ? '<span class="badge badge-suspended">Suspended</span>' : u.status}</td><td>${u.role !== 'Creator' ? `<button class="btn-danger" style="width:auto; padding:5px 10px; font-size:12px;" onclick="toggleSuspend('${u.userId}', '${u.status}')">${u.status === 'Suspended' ? 'Unsuspend' : 'Suspend'}</button>` : ''}</td></tr>`).join(''); } else { b.innerHTML = `<tr><td colspan="5" class="empty-state">No users found.</td></tr>`; } }
