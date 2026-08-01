@@ -80,7 +80,9 @@
     <script>
         window.onload = loadTheme;
         const user = currentUser();
-        if (!user || user.role !== 'Creator') window.location.href = "index.html";
+        if (!user || user.role !== 'Creator') {
+            logout();
+        }
         
         function toggleTargetUser() {
             const v = document.getElementById('dTargetType').value;
