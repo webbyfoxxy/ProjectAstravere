@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Luxemneaux Bank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styling for the About Us page */
+        .about-container { max-width: 800px; margin: 40px auto; padding: 40px; }
+        .about-section { margin-bottom: 25px; text-align: justify; }
+        .about-section h3 { 
+            color: var(--bright-gold); 
+            font-family: 'Cinzel', serif; 
+            margin-bottom: 10px; 
+            margin-top: 25px; 
+            border-bottom: 1px solid var(--dark-gold); 
+            padding-bottom: 5px; 
+            display: inline-block;
+        }
+        .about-section p { 
+            line-height: 1.8; 
+            color: var(--text-color); 
+            opacity: 0.9; 
+            margin-bottom: 15px; 
+        }
+        .about-list { 
+            list-style: none; 
+            padding-left: 0; 
+        }
+        .about-list li { 
+            padding: 6px 0; 
+            padding-left: 25px; 
+            position: relative; 
+            color: var(--text-color); 
+            opacity: 0.9; 
+            line-height: 1.6;
+        }
+        .about-list li::before { 
+            content: "⚜️"; 
+            position: absolute; 
+            left: 0; 
+            color: var(--gold); 
+            font-size: 14px; 
+            top: 7px;
+        }
+        .about-images { 
+            display: flex; 
+            gap: 40px; 
+            justify-content: center; 
+            align-items: center; 
+            margin-top: 50px; 
+            flex-wrap: wrap; 
+        }
+        .about-img { 
+            max-width: 220px; 
+            height: auto; 
+            border-radius: 10px; 
+            transition: transform 0.3s; 
+            filter: drop-shadow(0 0 10px var(--sidebar-hover));
+        }
+        .about-img:hover { 
+            transform: scale(1.05); 
+            filter: drop-shadow(0 0 15px var(--gold));
+        }
+        .tagline { 
+            text-align: center; 
+            font-family: 'Cinzel', serif; 
+            color: var(--gold); 
+            font-size: 18px; 
+            margin-top: 40px; 
+            letter-spacing: 1px; 
+        }
+        .tagline p:last-child { 
+            font-size: 14px; 
+            color: var(--text-color); 
+            opacity: 0.8; 
+            margin-top: 5px; 
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+        }
+        .official-box { 
+            border: 1px solid var(--border); 
+            padding: 20px; 
+            border-radius: 10px; 
+            background: rgba(0,0,0,0.2); 
+            margin-top: 30px; 
+        }
+        .official-box h3 { margin-top: 0 !important; }
+    </style>
+</head>
+<body>
+    <div class="container about-container card">
+        <div class="auth-logo" style="animation: float 3s ease-in-out infinite;">⚜️</div>
+        <h1 class="imperial-title">About the Website</h1>
+        <p class="subtitle">Official Digital Portal of the Luxemneaux Empire</p>
+        <div class="gold-line"></div>
+        
+        <div class="about-section">
+            <p>Welcome to the official online portal of the Luxemneaux Empire, developed in collaboration with the Concordia Engineering & Expansionary Enterprise Reserve (C.E.E.E.R.) to provide citizens, organizations, researchers, and visitors with a centralized platform for Imperial information, public services, and national initiatives.</p>
+            <p>This website serves as the Empire's primary digital gateway, offering access to official announcements, government institutions, research publications, economic programs, cultural archives, and public resources that reflect the Empire's commitment to progress, transparency, and unity.</p>
+        </div>
+
+        <div class="about-section">
+            <h3>A Partnership for Progress</h3>
+            <p>This platform is the result of a strategic collaboration between the Imperial Government of the Luxemneaux Empire and C.E.E.E.R., combining governmental leadership with scientific innovation and technological expertise.</p>
+            <p>Together, we strive to create a secure and accessible digital environment that supports the Empire's continued growth while preserving its history, values, and vision for the future.</p>
+        </div>
+
+        <div class="about-section">
+            <h3>What You'll Find Here</h3>
+            <p>The Official Luxemneaux Empire website provides access to:</p>
+            <ul class="about-list">
+                <li>Imperial Government announcements and public notices</li>
+                <li>National laws, regulations, and administrative information</li>
+                <li>Official ministries, agencies, and institutions</li>
+                <li>Research and technological developments from C.E.E.E.R.</li>
+                <li>Economic and commercial initiatives</li>
+                <li>Educational and historical archives</li>
+                <li>Public services and digital resources</li>
+                <li>National projects and infrastructure updates</li>
+                <li>Information for citizens, businesses, and visitors</li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h3>About the Luxemneaux Empire</h3>
+            <p>The Luxemneaux Empire stands as a sovereign nation dedicated to excellence in governance, innovation, education, and sustainable development. Guided by principles of justice, unity, and knowledge, the Empire continually invests in its people, institutions, and future through responsible leadership and forward-thinking initiatives.</p>
+        </div>
+
+        <div class="about-section">
+            <h3>Our Commitment</h3>
+            <p>The Luxemneaux Empire is committed to:</p>
+            <ul class="about-list">
+                <li>Delivering reliable and transparent public information</li>
+                <li>Advancing innovation through technology</li>
+                <li>Supporting economic and scientific development</li>
+                <li>Preserving Imperial heritage and culture</li>
+                <li>Providing accessible digital public services</li>
+                <li>Building a connected and informed society</li>
+            </ul>
+        </div>
+
+        <div class="about-section official-box">
+            <h3>Official Statement</h3>
+            <p style="margin-bottom: 0;">The Official Website of the Luxemneaux Empire is recognized as the Empire's central digital information platform. All published content, notices, and institutional information are presented under the authority of the Imperial Government or its authorized collaborating institutions.</p>
+        </div>
+
+        <div class="tagline">
+            <p>Luxemneaux Empire</p>
+            <p>United by Heritage. Driven by Innovation. Committed to the Future.</p>
+        </div>
+
+        <div class="gold-line" style="margin-top: 40px;"></div>
+
+        <!-- Images at the bottom -->
+        <div class="about-images">
+            <img src="Luxemneaux_Logo.png" alt="Luxemneaux Logo" class="about-img">
+            <img src="C.E.E.E.R_Logo.png" alt="C.E.E.E.R Logo" class="about-img">
+        </div>
+
+        <div class="auth-footer" style="margin-top: 40px;">
+            <a href="index.html">⬅️ Back to Login</a>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        // Load the user's saved theme
+        window.onload = loadTheme;
+    </script>
+</body>
+</html>
+</html>
