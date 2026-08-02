@@ -18,7 +18,9 @@
             <ul class="sidebar-menu">
                 <li><a onclick="showSection('announce')">📜 Announcements</a></li>
                 <li><a onclick="showSection('add')">➕ Add Product</a></li>
+                <li><a onclick="showSection('myProducts')">📦 My Products</a></li>
                 <li><a onclick="showSection('auc')">⚔️ Start Auction</a></li>
+                <li><a onclick="showSection('inventory')">🎒 My Inventory</a></li>
                 <li><a onclick="showSection('wallet')">🪙 My Wallet</a></li>
                 <li><a onclick="showSection('transfer')">💸 Transfer Funds</a></li>
                 <li><a onclick="showSection('memberMarket')">🛒 Buy from Members</a></li>
@@ -36,11 +38,44 @@
         <div class="main-content">
             <div class="header"><h1>Welcome, Seller</h1><div class="user-badge badge-seller">🏪 Seller</div></div>
             <div id="loanWarning" class="alert-error" style="display:none;"></div>
+            
             <div id="announce" class="card section"><h2 class="title">Royal Announcements</h2><div id="announceBody"></div></div>
-            <div id="add" class="card section" style="display:none;"><h2 class="title">Create Product</h2><div class="form-group"><input type="text" id="pName" placeholder="Product Name"></div><div class="form-group"><select id="pCat"><option value="Food">Food</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Accessories">Accessories</option><option value="Materials">Materials</option><option value="Others">Others</option><option value="Event Items">Event Items</option></select></div><div class="form-group"><textarea id="pDesc" placeholder="Description"></textarea></div><div class="form-group"><input type="number" id="pPrice" placeholder="Price"></div><div class="form-group"><select id="pCur"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select></div><div class="form-group"><input type="number" id="pStock" placeholder="Stock"></div><button onclick="createProd()">Submit Product</button></div>
-            <div id="auc" class="card section" style="display:none;"><h2 class="title">Create Auction</h2><div class="form-group"><input type="text" id="aName" placeholder="Item Name"></div><div class="form-group"><textarea id="aDesc" placeholder="Description"></textarea></div><div class="form-group"><input type="number" id="aStart" placeholder="Starting Price"></div><div class="form-group"><select id="aCur"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select></div><div class="form-group"><input type="datetime-local" id="aEnd"></div><button onclick="createAuc()">Submit Auction</button></div>
+            
+            <div id="add" class="card section" style="display:none;">
+                <h2 class="title">Create Product</h2>
+                <div class="form-group"><input type="text" id="pName" placeholder="Product Name"></div>
+                <div class="form-group"><select id="pCat"><option value="Food">Food</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Accessories">Accessories</option><option value="Materials">Materials</option><option value="Others">Others</option><option value="Event Items">Event Items</option></select></div>
+                <div class="form-group"><textarea id="pDesc" placeholder="Description"></textarea></div>
+                <div class="form-group"><input type="number" id="pPrice" placeholder="Price"></div>
+                <div class="form-group"><select id="pCur"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select></div>
+                <div class="form-group"><input type="number" id="pStock" placeholder="Stock"></div>
+                <button onclick="createProd()">Submit Product</button>
+            </div>
+
+            <div id="myProducts" class="card section" style="display:none;">
+                <h2 class="title">My Listed Products</h2>
+                <div class="grid" id="sellerProductGrid"></div>
+            </div>
+
+            <div id="auc" class="card section" style="display:none;">
+                <h2 class="title">Create Auction</h2>
+                <div class="form-group"><input type="text" id="aName" placeholder="Item Name"></div>
+                <div class="form-group"><textarea id="aDesc" placeholder="Description"></textarea></div>
+                <div class="form-group"><input type="number" id="aStart" placeholder="Starting Price"></div>
+                <div class="form-group"><select id="aCur"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select></div>
+                <div class="form-group"><input type="datetime-local" id="aEnd"></div>
+                <button onclick="createAuc()">Submit Auction</button>
+            </div>
+
+            <div id="inventory" class="card section" style="display:none;">
+                <h2 class="title">Your Inventory</h2>
+                <div class="table-container"><table><thead><tr><th>Item Name</th><th>Category</th><th>Qty</th><th>Acquired</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
+            </div>
+
             <div id="wallet" class="card section" style="display:none;"><h2 class="title">Your Royal Wallet</h2><div class="grid" id="walletGrid"></div></div>
+            
             <div id="transfer" class="card section" style="display:none;"><h2 class="title">Transfer Currency</h2><p class="subtitle">Send your earnings to another user.</p><div class="form-group"><input type="text" id="trReceiver" placeholder="Receiver Username"></div><div class="form-group"><select id="trCurrency"><option value="Lumen">Lumen</option><option value="Aurel">Aurel</option><option value="Virel">Virel</option><option value="Sylem">Sylem</option><option value="Bront">Bront</option></select></div><div class="form-group"><input type="number" id="trAmount" placeholder="Amount to Send"></div><button onclick="executeTransfer()">Send Funds</button></div>
+            
             <div id="memberMarket" class="card section" style="display:none;"><h2 class="title">Member Marketplace</h2><p class="subtitle">Buy items listed by members.</p><div class="grid" id="memberMarketGrid"></div></div>
         </div>
     </div>
@@ -48,15 +83,74 @@
     <script>
         window.onload = loadTheme;
         const user = currentUser(); if (!user || user.role === "Member") window.location.href = "index.html";
-        function showSection(id) { document.querySelectorAll('.section').forEach(s => s.style.display = 'none'); document.getElementById(id).style.display = 'block'; if (id === 'announce') loadAnnouncements(); if (id === 'wallet') loadWallet(); if (id === 'memberMarket') loadMemberMarket(); }
+        
+        function showSection(id) { 
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none'); 
+            document.getElementById(id).style.display = 'block'; 
+            if (id === 'announce') loadAnnouncements(); 
+            if (id === 'wallet') loadWallet(); 
+            if (id === 'memberMarket') loadMemberMarket(); 
+            if (id === 'inventory') loadInventory(); 
+            if (id === 'myProducts') loadSellerProducts(); 
+        }
+        
         async function checkLoans() { const r = await getUserLoans(); const div = document.getElementById('loanWarning'); if (r.success && r.data.length > 0) { div.style.display = 'block'; div.innerHTML = `⚠️ <b>Loan Warning:</b> You have an outstanding loan of <b>${r.data[0].amount} ${r.data[0].currency}</b>. Asset-for-Debt Swap can be done if ever.`; } else { div.style.display = 'none'; } }
+        
         async function loadAnnouncements() { const r = await getAnnouncements(); const b = document.getElementById('announceBody'); if (r.success && r.data.length > 0) { b.innerHTML = r.data.map(a => `<div class="announcement"><h3>${a.title}</h3><small>${new Date(a.createdAt).toLocaleString()}</small><p style="margin-top:10px;">${a.content}</p></div>`).join(''); } else { b.innerHTML = `<div class="empty-state">No announcements.</div>`; } }
+        
         async function createProd() { const r = await createProduct({ productName: pName.value, category: pCat.value, description: pDesc.value, price: Number(pPrice.value), currency: pCur.value, stock: Number(pStock.value) }); alert(r.message); if (r.success) { pName.value = ""; pDesc.value = ""; pPrice.value = ""; pStock.value = ""; } }
+        
         async function createAuc() { const r = await createAuction({ itemName: aName.value, description: aDesc.value, startingPrice: Number(aStart.value), currency: aCur.value, endTime: new Date(aEnd.value).toISOString() }); alert(r.message); if (r.success) { aName.value = ""; aDesc.value = ""; aStart.value = ""; aEnd.value = ""; } }
+        
         async function loadWallet() { const r = await getWallet(); if (r.success) { const w = r.data; document.getElementById('walletGrid').innerHTML = `<div class="wallet-card"><div class="wallet-name">Lumen</div><div class="wallet-value">${w.Lumen}</div></div><div class="wallet-card"><div class="wallet-name">Aurel</div><div class="wallet-value">${w.Aurel}</div></div><div class="wallet-card"><div class="wallet-name">Virel</div><div class="wallet-value">${w.Virel}</div></div><div class="wallet-card"><div class="wallet-name">Sylem</div><div class="wallet-value">${w.Sylem}</div></div><div class="wallet-card"><div class="wallet-name">Bront</div><div class="wallet-value">${w.Bront}</div></div>`; } }
+        
         async function executeTransfer() { const rId = document.getElementById('trReceiver').value, cur = document.getElementById('trCurrency').value, amt = Number(document.getElementById('trAmount').value); if (!rId || amt <= 0) { alert("Please enter a valid Username and Amount."); return; } if (confirm(`Are you sure you want to send ${amt} ${cur} to ${rId}?`)) { const r = await transferMoney(rId, cur, amt); alert(r.message); if (r.success) { document.getElementById('trReceiver').value = ""; document.getElementById('trAmount').value = ""; loadWallet(); } } }
-        async function loadMemberMarket() { const r = await getMemberMarket(); const g = document.getElementById('memberMarketGrid'); if (r.success && r.data.length > 0) { g.innerHTML = r.data.map(m => `<div class="product-card"><h3>${m.productName}</h3><div class="product-price">${m.price} ${m.currency}</div><button onclick="buyMemberItem('${m.listingId}')">Buy from Member</button></div>`).join(''); } else { g.innerHTML = `<div class="empty-state">No items listed by members.</div>`; } }
-        async function buyMemberItem(id) { if (confirm("Purchase this item?")) { const r = await buyMemberItem(id); alert(r.message); loadMemberMarket(); loadWallet(); } }
+        
+        async function loadMemberMarket() { const r = await getMemberMarket(); const g = document.getElementById('memberMarketGrid'); if (r.success && r.data.length > 0) { g.innerHTML = r.data.map(m => `<div class="product-card"><h3>${m.productName}</h3><div class="product-price">${m.price} ${m.currency}</div><button onclick="executeBuyMemberItem('${m.listingId}')">Buy from Member</button></div>`).join(''); } else { g.innerHTML = `<div class="empty-state">No items listed by members.</div>`; } }
+        
+        // FIX: Renamed function to prevent collision with api.js buyMemberItem
+        async function executeBuyMemberItem(id) { 
+            if (confirm("Purchase this item?")) { 
+                const r = await buyMemberItem(id); 
+                alert(r.message); 
+                loadMemberMarket(); 
+                loadWallet(); 
+            } 
+        }
+
+        async function loadInventory() { 
+            const r = await getInventory(); 
+            const b = document.getElementById('inventoryBody'); 
+            if (r.success && r.data.length > 0) { 
+                b.innerHTML = r.data.map(i => `<tr><td>${i.productName}</td><td>${i.category}</td><td>${i.quantity}</td><td>${new Date(i.acquiredAt).toLocaleDateString()}</td></tr>`).join(''); 
+            } else { 
+                b.innerHTML = `<tr><td colspan="4" class="empty-state">Your inventory is empty.</td></tr>`; 
+            } 
+        }
+
+        async function loadSellerProducts() { 
+            const r = await getAllProducts(); 
+            const g = document.getElementById('sellerProductGrid'); 
+            if (r.success && r.data.length > 0) { 
+                const myProds = r.data.filter(p => p.sellerId === user.userId); 
+                if(myProds.length > 0) { 
+                    g.innerHTML = myProds.map(p => `
+                        <div class="product-card">
+                            <h3>${p.productName}</h3>
+                            <p>Category: ${p.category}</p>
+                            <div class="product-price">${p.price} ${p.currency}</div>
+                            <p class="stock">Stock: ${p.stock}</p>
+                            <p>Status: <span class="badge ${p.status === 'Approved' ? 'badge-creator' : 'badge-suspended'}">${p.status}</span></p>
+                        </div>
+                    `).join(''); 
+                } else { 
+                    g.innerHTML = `<div class="empty-state">You have not listed any products.</div>`; 
+                } 
+            } else { 
+                g.innerHTML = `<div class="empty-state">You have not listed any products.</div>`; 
+            } 
+        }
+
         checkLoans();
     </script>
 </body>
